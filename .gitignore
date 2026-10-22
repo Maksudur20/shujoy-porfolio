@@ -1,0 +1,11 @@
+# Node modules
+node_modules/
+package-lock.json
+
+# Local heavy video folder (all videos are now hosted on Cloudinary CDN)
+video/
+
+# Helper upload scripts
+upload_to_cloudinary.js
+compress_and_upload.js
+cloudinary_urls.json

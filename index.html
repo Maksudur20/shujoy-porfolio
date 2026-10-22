@@ -1,0 +1,4087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Farhan Shujoy | Video Editor & Motion Designer</title>
+  <meta name="description" content="Portfolio of Farhan Shujoy - Video Editor & Motion Designer. Specialized in high-impact video editing, 3D motion graphics, and commercial storytelling." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Lenis Momentum Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #07080c;
+      --bg-surface: #0f1118;
+      --bg-card: rgba(20, 24, 36, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 158, 0, 0.4);
+      --primary: #ff9e00;
+      --accent-purple: #ff7a00;
+      --accent-amber: #ff9e00;
+      --accent-emerald: #10b981;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --glow-orange: rgba(255, 158, 0, 0.35);
+      --glow-cyan: rgba(255, 120, 0, 0.25);
+      --glow-purple: rgba(255, 80, 0, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Ambient Background Glows */
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(120px);
+      opacity: 0.65;
+    }
+    .glow-amber {
+      top: -100px;
+      left: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 158, 0, 0.16) 0%, transparent 70%);
+    }
+    .glow-indigo {
+      top: 50px;
+      right: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(255, 110, 0, 0.15) 0%, transparent 70%);
+    }
+    .glow-cyan {
+      bottom: 20%;
+      left: 30%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 158, 0, 0.12) 0%, transparent 70%);
+    }
+
+    /* Header / Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.1rem 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(7, 8, 12, 0.78);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 12px var(--accent-amber);
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.2); }
+    }
+    .brand-logo .title-text {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.5px;
+    }
+    .brand-logo .title-text span {
+      color: var(--accent-amber);
+    }
+    .brand-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.3px;
+      padding: 0.2rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.3);
+      color: var(--accent-amber);
+      font-weight: 600;
+      margin-left: 0.5rem;
+      white-space: nowrap;
+      min-height: 25px;
+      line-height: 1.2;
+    }
+    .typewriter-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--accent-amber);
+      font-weight: 300;
+      animation: cursorBlink 0.8s infinite;
+    }
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    nav {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.25s, transform 0.2s;
+      position: relative;
+    }
+    nav a:hover, nav a.active {
+      color: #fff;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-amber);
+      transition: width 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn-collaborate {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff9e00 0%, #ff6b00 100%);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.4);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .btn-collaborate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(255, 158, 0, 0.65);
+    }
+
+    /* Main Container */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 6.5rem 7% 4.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding-top: 9.5rem;
+      padding-bottom: 5rem;
+      position: relative;
+    }
+
+    .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 4.6rem;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      text-transform: uppercase;
+      max-width: 950px;
+      margin-bottom: 1.4rem;
+    }
+    .hero-title .title-motion {
+      color: #fff;
+      text-shadow: 0 0 35px rgba(255, 255, 255, 0.25);
+    }
+    .hero-title .title-life {
+      background: linear-gradient(120deg, #ffc000 0%, #ff9e00 35%, #ff6b00 70%, #ff4500 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 50px rgba(255, 110, 0, 0.5);
+    }
+
+    /* Decorative Orange Fluted Acoustic Visualizer (Hero Accents - Borderless & Breathing) */
+    .hero-fluted-panel {
+      position: absolute;
+      width: 290px;
+      height: 450px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      overflow: visible;
+      z-index: 0;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 0) 74%);
+      mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 22%, rgba(0, 0, 0, 0) 74%);
+    }
+    .panel-left {
+      left: 3%;
+      top: 10%;
+      animation: breatheInOutLeft 5.5s ease-in-out infinite;
+    }
+    .panel-right {
+      right: 3%;
+      top: 20%;
+      animation: breatheInOutRight 5.5s ease-in-out infinite 1.4s;
+    }
+
+    @keyframes breatheInOutLeft {
+      0%, 100% {
+        opacity: 0.1;
+        transform: translateY(0) scale(0.96);
+      }
+      50% {
+        opacity: 0.92;
+        transform: translateY(-8px) scale(1.02);
+      }
+    }
+
+    @keyframes breatheInOutRight {
+      0%, 100% {
+        opacity: 0.1;
+        transform: translateY(0) scale(0.96);
+      }
+      50% {
+        opacity: 0.92;
+        transform: translateY(8px) scale(1.02);
+      }
+    }
+
+    .fluted-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      width: 100%;
+      height: 100%;
+      padding: 10px 0;
+      gap: 4px;
+      background: transparent;
+      position: relative;
+    }
+
+    .fluted-container::before {
+      content: '';
+      position: absolute;
+      inset: 15% 5%;
+      background: radial-gradient(ellipse at center, rgba(255, 140, 0, 0.38) 0%, transparent 70%);
+      filter: blur(22px);
+      z-index: 0;
+    }
+
+    .fluted-slat {
+      flex: 1;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 110, 0, 0.05) 0%,
+        rgba(255, 140, 0, 0.6) 20%,
+        rgba(255, 215, 95, 0.98) 50%,
+        rgba(255, 130, 0, 0.6) 80%,
+        rgba(255, 80, 0, 0.05) 100%
+      );
+      box-shadow: 0 0 8px rgba(255, 140, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .fluted-slat::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: linear-gradient(
+        90deg,
+        rgba(25, 6, 0, 0.55) 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 65%,
+        rgba(25, 6, 0, 0.55) 100%
+      );
+    }
+
+    .panel-glow-overlay {
+      display: none;
+    }
+
+    @media (max-width: 1150px) {
+      .hero-fluted-panel {
+        width: 220px;
+        height: 360px;
+      }
+      .panel-left { left: 1.5%; }
+      .panel-right { right: 1.5%; }
+    }
+    @media (max-width: 850px) {
+      .hero-fluted-panel {
+        display: none;
+      }
+    }
+
+    @media (max-width: 1150px) {
+      .hero-fluted-panel {
+        opacity: 0.5;
+        transform: scale(0.85);
+      }
+      .panel-left { left: 2%; }
+      .panel-right { right: 2%; }
+    }
+    @media (max-width: 850px) {
+      .hero-fluted-panel {
+        display: none;
+      }
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 2.2rem;
+      font-weight: 400;
+    }
+    .hero-subtitle strong {
+      color: #fff;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-play-reel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.9rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff9e00, #ff6b00);
+      color: #050508;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.5);
+      transition: all 0.25s;
+    }
+    .btn-play-reel:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 35px rgba(255, 158, 0, 0.8);
+    }
+    .btn-play-reel svg {
+      width: 18px;
+      height: 18px;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Video Editor Timeline Bar Mockup (Figma concept 2 & 3) */
+    .timeline-bar-mockup {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(15, 17, 24, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      margin-top: 1rem;
+    }
+    .timecode {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.9rem;
+      color: var(--accent-amber);
+      background: rgba(255, 158, 0, 0.08);
+      padding: 0.3rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 158, 0, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .timecode .rec-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 8px #ef4444;
+      animation: pulseDot 1.2s infinite;
+    }
+    .timeline-tracks {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 12px;
+    }
+    .track-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      width: 20px;
+      font-family: 'Space Grotesk', monospace;
+    }
+    .track-clip {
+      height: 100%;
+      border-radius: 3px;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .clip-v1 {
+      background: linear-gradient(90deg, #ff9e00 0%, #ff6b00 45%, #ffb703 100%);
+      opacity: 0.85;
+    }
+    .clip-v2 {
+      background: linear-gradient(90deg, #ff6b00 0%, #ff9e00 50%, #ffc107 100%);
+      opacity: 0.8;
+    }
+    .audio-meter {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 26px;
+    }
+    .meter-bar {
+      width: 4px;
+      background: #10b981;
+      border-radius: 2px;
+      animation: audioBounce 1s infinite ease-in-out alternate;
+    }
+    .meter-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .meter-bar:nth-child(2) { height: 75%; animation-delay: 0.3s; }
+    .meter-bar:nth-child(3) { height: 100%; animation-delay: 0.2s; }
+    .meter-bar:nth-child(4) { height: 60%; animation-delay: 0.4s; }
+    .meter-bar:nth-child(5) { height: 85%; animation-delay: 0.15s; }
+    @keyframes audioBounce {
+      0% { height: 25%; }
+      100% { height: 100%; }
+    }
+
+    /* Section Headings */
+    .section-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+    .section-head .section-pill {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-amber);
+      background: rgba(255, 158, 0, 0.1);
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 158, 0, 0.25);
+      margin-bottom: 0.8rem;
+    }
+    .section-head h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+      margin-bottom: 0.7rem;
+    }
+    .section-head p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* FEATURED WORKS: AUTO-PLAYING VIDEO CAROUSEL                   */
+    /* ------------------------------------------------------------- */
+    .carousel-section {
+      padding-top: 5rem;
+    }
+    .carousel-container {
+      position: relative;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .carousel-controls-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding: 0 0.5rem;
+    }
+    .carousel-status {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+    .carousel-status .current-num {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .auto-play-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: var(--accent-emerald);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+    }
+    .auto-play-indicator .pulse-ring {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 8px var(--accent-emerald);
+    }
+
+    .carousel-arrows {
+      display: flex;
+      gap: 0.6rem;
+    }
+    .carousel-nav-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.25s;
+    }
+    .carousel-nav-btn:hover {
+      background: var(--accent-amber);
+      color: #000;
+      border-color: var(--accent-amber);
+      transform: scale(1.08);
+      box-shadow: 0 0 15px rgba(255, 158, 0, 0.4);
+    }
+
+    /* Carousel Track Wrapper */
+    .carousel-viewport {
+      position: relative;
+      overflow: hidden;
+      padding: 1.5rem 0 2rem;
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .carousel-track {
+      display: flex;
+      align-items: center;
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+      will-change: transform;
+    }
+
+    /* ============================================================ */
+    /* BEFORE & AFTER TRANSFORMATION SHOWCASE SECTION               */
+    /* ============================================================ */
+    .before-after-section {
+      padding: 6.5rem 7% 5rem;
+      position: relative;
+      background: radial-gradient(circle at 50% 15%, rgba(255, 158, 0, 0.06), transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    .ba-player-container {
+      max-width: 1080px;
+      margin: 0 auto 3rem;
+      position: relative;
+    }
+    .ba-ambient-glow {
+      position: absolute;
+      inset: 10% 8%;
+      background: radial-gradient(circle, rgba(255, 158, 0, 0.28) 0%, rgba(255, 100, 0, 0.12) 50%, transparent 75%);
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+      animation: baGlowPulse 5s ease-in-out infinite alternate;
+    }
+    @keyframes baGlowPulse {
+      0% { opacity: 0.6; transform: scale(0.97); }
+      100% { opacity: 1; transform: scale(1.03); }
+    }
+    .ba-player-window {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 158, 0, 0.35);
+      border-radius: 22px;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(255, 158, 0, 0.18);
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ba-player-window:hover {
+      border-color: rgba(255, 158, 0, 0.55);
+      box-shadow: 0 30px 85px rgba(0, 0, 0, 0.9), 0 0 45px rgba(255, 158, 0, 0.28);
+    }
+    .ba-window-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 1.4rem;
+      background: rgba(15, 17, 24, 0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .ba-window-dots {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .ba-window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .ba-window-dots span:nth-child(1) { background: #ef4444; }
+    .ba-window-dots span:nth-child(2) { background: #f59e0b; }
+    .ba-window-dots span:nth-child(3) { background: #10b981; }
+    .ba-window-title {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .ba-badge-pill {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.3);
+      color: var(--accent-amber);
+      font-weight: 700;
+    }
+    .ba-sound-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
+    }
+    .ba-sound-btn:hover, .ba-sound-btn.is-unmuted {
+      background: var(--accent-amber);
+      color: #000;
+      border-color: var(--accent-amber);
+    }
+    .ba-video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .ba-video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+    .ba-timeline-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      z-index: 5;
+    }
+    .ba-timeline-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+      transition: width 0.1s linear;
+    }
+    .ba-center-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(255, 158, 0, 0.9);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 30px rgba(255, 158, 0, 0.6);
+      z-index: 4;
+    }
+    .ba-video-frame.is-paused .ba-center-play {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .ba-grid-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .ba-card-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .ba-card-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 158, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .ba-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .ba-card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .ba-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    @media (max-width: 900px) {
+      .ba-grid-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .ba-grid-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Carousel Card Base */
+    .video-card {
+      margin: 0 1.1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.45s ease, opacity 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+      opacity: 0.45;
+      transform: scale(0.9);
+      flex-shrink: 0;
+    }
+
+    /* Landscape Mode Cards (16:9 Widescreen) */
+    .video-card.is-landscape {
+      flex: 0 0 640px;
+      max-width: 85vw;
+    }
+    .video-card.is-landscape .video-frame {
+      width: 100%;
+      height: 360px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    /* Portrait Mode Cards (9:16 Vertical Reel) */
+    .video-card.is-portrait {
+      flex: 0 0 275px;
+      max-width: 80vw;
+    }
+    .video-card.is-portrait .video-frame {
+      width: 100%;
+      height: 488px;
+      aspect-ratio: 9 / 16;
+      background: #000;
+    }
+
+    @media (max-width: 768px) {
+      .video-card.is-landscape {
+        flex: 0 0 86vw;
+      }
+      .video-card.is-landscape .video-frame {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
+      .video-card.is-portrait {
+        flex: 0 0 76vw;
+        max-width: 275px;
+      }
+      .video-card.is-portrait .video-frame {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 9 / 16;
+      }
+    }
+
+    /* Active Video Card (In Focus) */
+    .video-card.active {
+      opacity: 1;
+      transform: scale(1);
+      border: 2px solid var(--accent-amber);
+      box-shadow: 0 0 35px var(--glow-orange), 0 20px 60px rgba(0, 0, 0, 0.8);
+      z-index: 10;
+    }
+
+    /* Video Frame */
+    .video-frame {
+      position: relative;
+      width: 100%;
+      background: #000;
+      overflow: hidden;
+    }
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #000;
+    }
+
+    /* Video Player Controls Overlay */
+    .video-overlay-controls {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 45%, rgba(0,0,0,0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.2rem;
+      pointer-events: none;
+    }
+    .video-card.active:hover .video-overlay-controls,
+    .video-card.active.is-paused .video-overlay-controls {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .video-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      color: #fff;
+    }
+
+    .sound-toggle-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+    .sound-toggle-btn:hover, .sound-toggle-btn.is-unmuted {
+      background: var(--accent-amber) !important;
+      color: #000 !important;
+      border-color: var(--accent-amber) !important;
+      box-shadow: 0 0 16px rgba(255, 158, 0, 0.5) !important;
+    }
+
+    /* Floating Home / Back to Top Button (Aligned directly beneath "Let's collaborate" at right: 7%) */
+    .floating-home-btn {
+      position: fixed;
+      bottom: 2.2rem;
+      right: 7%;
+      z-index: 998;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(14, 16, 23, 0.88);
+      border: 1px solid rgba(255, 158, 0, 0.45);
+      color: var(--accent-amber);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 158, 0, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(22px) scale(0.9);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.25s,
+                  color 0.25s,
+                  border-color 0.25s,
+                  box-shadow 0.25s;
+    }
+    .floating-home-btn.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      animation: floatGlowPulse 3s infinite ease-in-out;
+    }
+    @keyframes floatGlowPulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 158, 0, 0.25); }
+      50% { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 158, 0, 0.5); }
+    }
+    .floating-home-btn:hover {
+      background: var(--accent-amber);
+      color: #000;
+      border-color: var(--accent-amber);
+      transform: translateY(-4px) scale(1.08);
+      box-shadow: 0 10px 30px rgba(255, 158, 0, 0.55), 0 0 25px rgba(255, 158, 0, 0.45);
+      animation: none;
+    }
+    .floating-home-btn svg {
+      width: 22px;
+      height: 22px;
+      transition: transform 0.25s ease;
+    }
+    .floating-home-btn:hover svg {
+      transform: translateY(-2px);
+    }
+    @media (max-width: 768px) {
+      .floating-home-btn {
+        bottom: 1.5rem;
+        right: 5%;
+        width: 44px;
+        height: 44px;
+      }
+      .floating-home-btn svg {
+        width: 19px;
+        height: 19px;
+      }
+    }
+
+    .center-play-trigger {
+      align-self: center;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: rgba(255, 158, 0, 0.9);
+      color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.5rem;
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.6);
+      transition: transform 0.2s, background 0.2s;
+    }
+    .center-play-trigger:hover {
+      transform: scale(1.12);
+      background: #ffb703;
+    }
+
+    .bottom-timeline-scrub {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .video-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+    }
+    .video-progress-fill {
+      height: 100%;
+      background: var(--accent-amber);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px var(--accent-amber);
+    }
+
+    /* Card Metadata */
+    .video-card-info {
+      padding: 1.2rem 1.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(15, 17, 24, 0.95);
+      border-top: 1px solid var(--border);
+    }
+    .video-card-info h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+    .video-card-info span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--accent-amber);
+    }
+
+    /* Carousel Pagination Dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+    .dot-pill {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .dot-pill.active {
+      width: 32px;
+      background: var(--accent-amber);
+      box-shadow: 0 0 12px var(--accent-amber);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* EXPERIENCE SECTION (Farhan's exact LinkedIn journey)          */
+    /* ------------------------------------------------------------- */
+    .experience-section {
+      padding-top: 6rem;
+    }
+    .experience-timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      position: relative;
+    }
+    .experience-timeline::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      bottom: 20px;
+      left: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-amber) 0%, rgba(255, 158, 0, 0.4) 50%, rgba(255, 255, 255, 0.05) 100%);
+    }
+
+    .exp-card {
+      display: flex;
+      gap: 1.6rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.8rem;
+      position: relative;
+      backdrop-filter: blur(14px);
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .exp-card:hover {
+      transform: translateX(6px);
+      border-color: rgba(255, 158, 0, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    .exp-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: #191c28;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .exp-icon-box img,
+    .exp-icon-box .fallback-letter {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .exp-content {
+      flex: 1;
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .exp-role {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .exp-company {
+      font-size: 1rem;
+      color: var(--accent-amber);
+      font-weight: 600;
+      margin-top: 0.1rem;
+    }
+    .exp-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+    }
+    .exp-meta {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .exp-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .exp-skills-pill {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .exp-skills-pill span {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+    }
+
+    /* ------------------------------------------------------------- */
+    /* SOFTWARE & TOOLKIT SECTION (Figma Badges Ae, Pr, C4D, Blender)*/
+    /* ------------------------------------------------------------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+    }
+
+    .software-card {
+      background: linear-gradient(165deg, rgba(20, 24, 38, 0.85) 0%, rgba(12, 15, 23, 0.92) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 2rem 1.6rem;
+      text-align: center;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.4s ease;
+      position: relative;
+      overflow: visible;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      /* Clean neutral shadow at rest - orange shadow only on hover */
+      box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+    .software-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 165, 0, 0.55);
+      border-bottom: 2px solid #ff9e00;
+      /* Downward 3D orange drop shadow blooms smoothly on the hovered card */
+      box-shadow:
+        0 16px 30px rgba(0, 0, 0, 0.75),
+        0 24px 45px -4px rgba(255, 140, 0, 0.35),
+        0 38px 68px -8px rgba(255, 100, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    .software-logo-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      margin: 0 auto 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+    }
+    .software-card:hover .software-logo-badge {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.65), 0 14px 24px -3px rgba(255, 120, 0, 0.35);
+    }
+    .badge-ae {
+      background: linear-gradient(135deg, #1b0a33, #351368);
+      border: 2px solid #9999ff;
+      color: #9999ff;
+    }
+    .badge-pr {
+      background: linear-gradient(135deg, #280a33, #541169);
+      border: 2px solid #ea77ff;
+      color: #ea77ff;
+    }
+    .badge-c4d {
+      background: linear-gradient(135deg, #2a1400, #592e00);
+      border: 2px solid #ff9e00;
+      color: #ff9e00;
+    }
+    .badge-blender {
+      background: linear-gradient(135deg, #331f05, #7a4608);
+      border: 2px solid #ff9e00;
+      color: #ff9e00;
+    }
+    .badge-davinci {
+      background: linear-gradient(135deg, #092e20, #146b49);
+      border: 2px solid #10b981;
+      color: #10b981;
+    }
+
+    .software-card h4 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+    .software-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Core Disciplines Tags */
+    .skills-tags-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .discipline-tag {
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+    .discipline-tag:hover {
+      background: rgba(255, 158, 0, 0.1);
+      border-color: rgba(255, 158, 0, 0.4);
+      color: var(--accent-amber);
+      transform: translateY(-2px);
+    }
+
+    /* ------------------------------------------------------------- */
+    /* CONTACT SECTION & FOOTER                                      */
+    /* ------------------------------------------------------------- */
+    .contact-section {
+      padding-bottom: 7rem;
+    }
+    .contact-card-main {
+      max-width: 820px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, rgba(20, 24, 36, 0.9), rgba(12, 14, 22, 0.95));
+      border: 1px solid rgba(255, 158, 0, 0.25);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 50px rgba(255, 158, 0, 0.15);
+      backdrop-filter: blur(20px);
+    }
+    .contact-card-main h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      color: #fff;
+    }
+    .contact-card-main h2 span {
+      background: linear-gradient(90deg, #ffc000, #ff6b00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .contact-card-main p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-links-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .link-email {
+      background: linear-gradient(135deg, #ff9e00, #ff6b00);
+      color: #000;
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.4);
+    }
+    .link-email:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 35px rgba(255, 158, 0, 0.7);
+    }
+    .link-linkedin {
+      background: rgba(0, 119, 181, 0.15);
+      border: 1px solid rgba(0, 119, 181, 0.4);
+      color: #38bdf8;
+    }
+    .link-linkedin:hover {
+      background: rgba(0, 119, 181, 0.3);
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .btn-copy-email {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+    .btn-copy-email:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 7%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      background: #050609;
+      position: relative;
+      z-index: 10;
+    }
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      text-align: center;
+      width: 100%;
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover {
+      color: var(--accent-amber);
+    }
+
+    /* Toast Notification */
+    .toast-notice {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #10b981;
+      color: #000;
+      font-weight: 700;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 9999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .toast-notice.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-title { font-size: 3.2rem; }
+      .video-card { flex: 0 0 88vw; margin: 0 0.5rem; }
+      .video-frame { height: 260px; }
+      nav { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.5rem; }
+      .timeline-bar-mockup { display: none; }
+      .contact-card-main { padding: 2.2rem 1.5rem; }
+      .contact-card-main h2 { font-size: 2.1rem; }
+    }
+
+    /* ============================================================ */
+    /* ULTRA-PREMIUM DYNAMIC SCROLL ANIMATIONS (BIDIRECTIONAL)      */
+    /* ============================================================ */
+    .reveal {
+      opacity: 0;
+      will-change: transform, opacity;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      backface-visibility: hidden;
+    }
+
+    /* Directional Offsets */
+    .reveal-up {
+      transform: translate3d(0, 48px, 0);
+    }
+    .reveal-down {
+      transform: translate3d(0, -42px, 0);
+    }
+    .reveal-left {
+      transform: translate3d(60px, 0, 0);
+    }
+    .reveal-right {
+      transform: translate3d(-60px, 0, 0);
+    }
+    .reveal-scale {
+      transform: scale(0.92) translate3d(0, 32px, 0);
+    }
+
+    /* Stagger Delays when entering view */
+    .delay-1 { transition-delay: 0.08s; }
+    .delay-2 { transition-delay: 0.16s; }
+    .delay-3 { transition-delay: 0.24s; }
+    .delay-4 { transition-delay: 0.32s; }
+    .delay-5 { transition-delay: 0.40s; }
+    .delay-6 { transition-delay: 0.48s; }
+
+    /* REVEALED IN-VIEW STATE */
+    .reveal.in-view {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Instant reset of delay for immediate smooth exit when leaving view */
+    .reveal:not(.in-view) {
+      transition-delay: 0s !important;
+    }
+
+    /* Interactive hover states when in-view */
+    .exp-card.reveal.in-view:hover {
+      transform: translate3d(6px, -3px, 0) !important;
+      border-color: rgba(255, 158, 0, 0.45);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+    }
+    .software-card.reveal.in-view {
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+    }
+    .software-card.reveal.in-view:hover {
+      transform: translate3d(0, -8px, 0) scale(1.02) !important;
+      border-color: rgba(255, 165, 0, 0.55) !important;
+      border-bottom: 2px solid #ff9e00 !important;
+      box-shadow:
+        0 16px 30px rgba(0, 0, 0, 0.75),
+        0 24px 45px -4px rgba(255, 140, 0, 0.35),
+        0 38px 68px -8px rgba(255, 100, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+    }
+    .discipline-tag.reveal.in-view:hover {
+      transform: translate3d(0, -3px, 0) !important;
+      border-color: rgba(255, 158, 0, 0.45);
+      color: #fff;
+    }
+    .contact-pill-link.reveal.in-view:hover {
+      transform: translate3d(0, -3px, 0) !important;
+    }
+
+    /* Text display helpers for inline spans */
+    .title-motion.reveal,
+    .title-life.reveal {
+      display: inline-block;
+    }
+
+    /* Header Staged (Hidden initially, slides down after 2s with hero, or when scrolling back up to top) */
+    header {
+      transform: translate3d(0, -100%, 0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  background 0.3s ease;
+    }
+    header.is-entered {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ============================================================ */
+    /* HERO SPLIT LAYOUT & 2-SECOND ENTRANCE ANIMATION SYSTEM       */
+    /* ============================================================ */
+    .hero-section {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 7.8rem;
+      padding-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section.hero-scrolled-away {
+      pointer-events: none;
+    }
+
+    /* 2-Second Cinematic Loading Cue with Typewriter Effect */
+    .hero-load-cue {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      background: rgba(15, 17, 24, 0.88);
+      border: 1px solid rgba(255, 158, 0, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 0 35px rgba(255, 158, 0, 0.25);
+      z-index: 30;
+      color: #f8fafc;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-family: 'Space Grotesk', monospace;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-load-cue.cue-fade-out {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.92);
+      pointer-events: none;
+    }
+    .cue-spinner {
+      width: 17px;
+      height: 17px;
+      border: 2px solid rgba(255, 158, 0, 0.2);
+      border-top-color: #ff9e00;
+      border-radius: 50%;
+      animation: cueSpin 0.75s linear infinite;
+    }
+    @keyframes cueSpin {
+      to { transform: rotate(360deg); }
+    }
+    .cue-typewriter-text {
+      display: inline-block;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: #fff;
+      font-family: 'Space Grotesk', monospace;
+      min-width: 65px;
+    }
+    .cue-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--accent-amber);
+      font-weight: 600;
+      animation: cueCursorBlink 0.65s infinite;
+    }
+    @keyframes cueCursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Split Grid */
+    .hero-split-container {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+      width: 100%;
+      max-width: 1360px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Left Part Initial Staging (Before 2s or when scrolled away) */
+    .hero-left-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      opacity: 0;
+      transform: translate3d(-90px, 0, 0);
+      will-change: transform, opacity;
+      pointer-events: none;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Right Part Initial Staging (Before 2s or when scrolled away) */
+    .hero-right-carousel {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      opacity: 0;
+      transform: translate3d(90px, 0, 0) scale(0.94);
+      will-change: transform, opacity;
+      pointer-events: none;
+      perspective: 1400px;
+      -webkit-perspective: 1400px;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Triggered at 2 seconds or on scroll back to top */
+    .hero-left-content.is-entered {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      pointer-events: auto;
+    }
+    .hero-right-carousel.is-entered {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* Left Hero Content Elements */
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      background: rgba(255, 158, 0, 0.1);
+      border: 1px solid rgba(255, 158, 0, 0.28);
+      color: var(--accent-amber);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .pulse-beacon {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 10px var(--accent-amber);
+      animation: pulseDot 1.8s infinite;
+    }
+
+    .hero-left-content .hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.6rem, 3.8vw, 4.1rem);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: -1.2px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+    .hero-left-content .hero-subtitle {
+      max-width: 540px;
+      color: var(--text-muted);
+      font-size: 1.12rem;
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+    .hero-left-content .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1.1rem;
+      margin-bottom: 2.2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Micro-Highlights Row */
+    .hero-highlights-row {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      width: 100%;
+      max-width: 540px;
+    }
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    .highlight-item .h-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-amber);
+      box-shadow: 0 0 8px var(--accent-amber);
+    }
+
+    /* ============================================================ */
+    /* 3D EXPENSIVE SAAS CAROUSEL STACK (AFTER EFFECTS STYLE)        */
+    /* ============================================================ */
+    .saas-carousel-ambient-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(255, 140, 0, 0.38) 0%, rgba(255, 80, 0, 0.16) 50%, transparent 75%);
+      filter: blur(60px);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+      animation: ambientPulse 5s ease-in-out infinite alternate;
+    }
+    @keyframes ambientPulse {
+      0% { opacity: 0.65; transform: translate(-50%, -50%) scale(0.95); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    /* 3D Stage */
+    .saas-3d-stage {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      z-index: 2;
+    }
+
+    /* 3D Card */
+    .saas-card {
+      position: absolute;
+      width: 270px;
+      height: 480px;
+      border-radius: 26px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      will-change: transform, opacity, filter;
+      transition: transform 0.68s cubic-bezier(0.2, 0.9, 0.3, 1),
+                  opacity 0.68s cubic-bezier(0.2, 0.9, 0.3, 1),
+                  filter 0.68s cubic-bezier(0.2, 0.9, 0.3, 1),
+                  box-shadow 0.68s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .saas-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      overflow: hidden;
+      background: #090a10;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.85),
+                  0 0 35px rgba(255, 140, 0, 0.15);
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    /* Edge highlight border */
+    .saas-card-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 26px;
+      padding: 1px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 158, 0, 0.32) 30%, transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 8;
+    }
+
+    /* Top Notch Pill with Sound Toggle (Clean top-right placement) */
+    .saas-card-notch {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 9;
+      pointer-events: auto;
+    }
+    .notch-pill {
+      display: none !important;
+    }
+    .saas-card-meta {
+      display: none !important;
+    }
+    .hero-sound-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(7, 8, 12, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s;
+    }
+    .hero-sound-btn:hover {
+      background: var(--accent-amber);
+      color: #000;
+      border-color: var(--accent-amber);
+      transform: scale(1.08);
+      box-shadow: 0 0 16px rgba(255, 158, 0, 0.6);
+    }
+    .hero-sound-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+    .hero-sound-btn .icon-unmute {
+      display: none;
+    }
+    .hero-sound-btn.is-unmuted .icon-mute {
+      display: none;
+    }
+    .hero-sound-btn.is-unmuted .icon-unmute {
+      display: block;
+    }
+
+    /* Video inside Card */
+    .saas-card-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      background: #000;
+    }
+
+    /* Bottom Metadata Overlay */
+    .saas-card-meta {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2.2rem 1.2rem 1.1rem;
+      background: linear-gradient(0deg, rgba(7, 8, 12, 0.96) 0%, rgba(7, 8, 12, 0.65) 60%, transparent 100%);
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: left;
+    }
+    .saas-card-meta .meta-tag {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--accent-amber);
+    }
+    .saas-card-meta .meta-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Progress timeline line */
+    .saas-card-timeline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.15);
+      z-index: 7;
+    }
+    .saas-timeline-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff9e00, #ff5500);
+      transition: width 0.1s linear;
+    }
+
+    /* Darkening overlay for inactive cards */
+    .saas-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 26px;
+      background: rgba(7, 8, 14, 0.45);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 8;
+    }
+
+    /* 3D Positions relative to active card (Identical to After Effects SaaS tutorial) */
+    .saas-card.is-active {
+      transform: translate3d(0, 0, 75px) rotateY(0deg) scale(1);
+      z-index: 10;
+      opacity: 1;
+      filter: brightness(1) drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85));
+    }
+    .saas-card.is-active::after {
+      opacity: 0;
+    }
+    .saas-card.is-active .saas-card-inner {
+      border-color: rgba(255, 158, 0, 0.45);
+      box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9),
+                  0 0 45px rgba(255, 158, 0, 0.3);
+    }
+
+    .saas-card.is-right {
+      transform: translate3d(115px, 0, -45px) rotateY(-22deg) scale(0.86);
+      z-index: 5;
+      opacity: 0.65;
+      filter: brightness(0.65);
+    }
+    .saas-card.is-right:hover {
+      opacity: 0.88;
+      filter: brightness(0.85);
+      transform: translate3d(120px, 0, -35px) rotateY(-20deg) scale(0.88);
+    }
+
+    .saas-card.is-left {
+      transform: translate3d(-115px, 0, -45px) rotateY(22deg) scale(0.86);
+      z-index: 5;
+      opacity: 0.65;
+      filter: brightness(0.65);
+    }
+    .saas-card.is-left:hover {
+      opacity: 0.88;
+      filter: brightness(0.85);
+      transform: translate3d(-120px, 0, -35px) rotateY(20deg) scale(0.88);
+    }
+
+    /* Navigation row (Arrows & Dots) */
+    .saas-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.3rem;
+      margin-top: 1.3rem;
+      z-index: 12;
+      position: relative;
+    }
+    .saas-arrow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(15, 17, 24, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s;
+    }
+    .saas-arrow-btn:hover {
+      background: rgba(255, 158, 0, 0.18);
+      border-color: rgba(255, 158, 0, 0.6);
+      color: var(--accent-amber);
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.4);
+    }
+    .saas-arrow-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .saas-dots-container {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 17, 24, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+    }
+    .saas-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.25);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .saas-dot.active {
+      width: 24px;
+      background: linear-gradient(90deg, #ff9e00, #ff6b00);
+      box-shadow: 0 0 10px rgba(255, 158, 0, 0.6);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1080px) {
+      .hero-section {
+        padding-top: 7rem;
+        padding-bottom: 3.5rem;
+      }
+      .hero-split-container {
+        grid-template-columns: 1fr;
+        gap: 3.2rem;
+      }
+      .hero-left-content {
+        align-items: center;
+        text-align: center;
+      }
+      .hero-left-content .hero-title,
+      .hero-left-content .hero-subtitle {
+        text-align: center;
+      }
+      .hero-left-content .hero-cta-group,
+      .hero-highlights-row {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .saas-3d-stage {
+        height: 420px;
+      }
+      .saas-card {
+        width: 230px;
+        height: 390px;
+      }
+      .saas-card.is-right {
+        transform: translate3d(80px, 0, -35px) rotateY(-18deg) scale(0.86);
+      }
+      .saas-card.is-left {
+        transform: translate3d(-80px, 0, -35px) rotateY(18deg) scale(0.86);
+      }
+    }
+
+    /* Fluted Panel Wrappers in Hero */
+    .hero-fluted-wrap {
+      position: absolute;
+      width: 290px;
+      height: 450px;
+      z-index: 0;
+      pointer-events: none;
+      animation: heroFlutedFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    @keyframes heroFlutedFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    .hero-fluted-wrap.panel-left {
+      left: 3%;
+      top: 10%;
+    }
+    .hero-fluted-wrap.panel-right {
+      right: 3%;
+      top: 20%;
+    }
+    .hero-fluted-wrap .hero-fluted-panel {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-fluted-panel.breathe-left {
+      animation: breatheInOutLeft 5.5s ease-in-out infinite;
+    }
+    .hero-fluted-panel.breathe-right {
+      animation: breatheInOutRight 5.5s ease-in-out infinite 1.4s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      header {
+        animation: none !important;
+      }
+    }
+
+    /* ============================================================ */
+    /* LENIS MOMENTUM SMOOTH SCROLLING BASE STYLES                  */
+    /* ============================================================ */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-smooth iframe {
+      pointer-events: none;
+    }
+
+    /* ============================================================ */
+    /* CUSTOM CINEMATIC CURSOR                                      */
+    /* ============================================================ */
+    @media (hover: hover) and (pointer: fine) {
+      body {
+        cursor: none; /* Hide default cursor on desktop */
+      }
+      a, button, input, textarea, select, [role="button"], .video-frame, .dot-pill, .sound-toggle-btn, .center-play-trigger {
+        cursor: none !important;
+      }
+    }
+
+    .custom-cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      background: var(--accent-amber);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.2s ease,
+                  opacity 0.25s ease;
+      box-shadow: 0 0 10px var(--accent-amber);
+      opacity: 0;
+    }
+
+    .custom-cursor-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid rgba(255, 158, 0, 0.5);
+      background: rgba(255, 158, 0, 0.04);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.25s ease,
+                  background-color 0.25s ease,
+                  border-radius 0.25s ease,
+                  box-shadow 0.25s ease,
+                  opacity 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+      opacity: 0;
+    }
+
+    .custom-cursor-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #000;
+      opacity: 0;
+      transform: scale(0.6);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* Hovering interactive links & buttons */
+    .custom-cursor-follower.is-hovering {
+      width: 52px;
+      height: 52px;
+      border-color: rgba(255, 158, 0, 0.9);
+      background: rgba(255, 158, 0, 0.16);
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.4);
+    }
+    .custom-cursor-dot.is-hovering {
+      width: 5px;
+      height: 5px;
+      background: #fff;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    /* Hovering Video Reel or Carousel Media (Clean Focus Ring without REEL text) */
+    .custom-cursor-follower.is-video-hover {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 158, 0, 0.2);
+      border: 2px solid #ff9e00;
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.55);
+    }
+    .custom-cursor-follower.is-video-hover .custom-cursor-text,
+    .custom-cursor-text {
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    .custom-cursor-dot.is-video-hover {
+      opacity: 1;
+      background: #ff9e00;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+
+    /* Clean Featured Works Cards (Volume button only, clean video frame) */
+    .carousel-track .center-play-trigger {
+      display: none !important;
+    }
+    .carousel-track .video-badge {
+      display: none !important;
+    }
+    .carousel-track .video-card-info {
+      display: none !important;
+    }
+    .carousel-track .top-controls {
+      justify-content: flex-end !important;
+    }
+    .carousel-track .video-overlay-controls {
+      opacity: 1 !important;
+      pointer-events: none !important;
+      background: transparent !important;
+    }
+    .carousel-track .sound-toggle-btn {
+      pointer-events: auto !important;
+    }
+    .carousel-track .bottom-timeline-scrub {
+      pointer-events: auto !important;
+    }
+    .carousel-track .video-card.is-landscape {
+      flex: 0 0 640px !important;
+      max-width: 85vw;
+    }
+    .carousel-track .video-card.is-landscape .video-frame {
+      width: 100%;
+      height: 360px !important;
+      aspect-ratio: 16 / 9;
+    }
+    .carousel-track .video-card.is-portrait {
+      flex: 0 0 275px !important;
+      max-width: 80vw;
+    }
+    .carousel-track .video-card.is-portrait .video-frame {
+      width: 100%;
+      height: 488px !important;
+      aspect-ratio: 9 / 16;
+    }
+    .carousel-track .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain !important;
+      background: #000;
+    }
+    .carousel-track .video-card {
+      cursor: default;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-track .video-card.is-landscape {
+        flex: 0 0 86vw !important;
+      }
+      .carousel-track .video-card.is-landscape .video-frame {
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+      }
+      .carousel-track .video-card.is-portrait {
+        flex: 0 0 76vw !important;
+        max-width: 275px !important;
+      }
+      .carousel-track .video-card.is-portrait .video-frame {
+        height: auto !important;
+        aspect-ratio: 9 / 16;
+      }
+    }
+
+    /* Active mousedown click state */
+    .custom-cursor-follower.is-active {
+      transform: translate(-50%, -50%) scale(0.78);
+      border-color: #ff6b00;
+      background: rgba(255, 107, 0, 0.35);
+      box-shadow: 0 0 15px rgba(255, 107, 0, 0.6);
+    }
+    .custom-cursor-dot.is-active {
+      transform: translate(-50%, -50%) scale(1.4);
+    }
+
+    /* Disable custom cursor on mobile / touch screen */
+    @media (hover: none) or (pointer: coarse) {
+      .custom-cursor-dot,
+      .custom-cursor-follower {
+        display: none !important;
+      }
+      body {
+        cursor: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cinematic Cursor Elements -->
+  <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true">
+    <span class="custom-cursor-text" id="cursorText"></span>
+  </div>
+
+  <!-- Ambient Glow Effects -->
+  <div class="ambient-glow glow-amber"></div>
+  <div class="ambient-glow glow-indigo"></div>
+  <div class="ambient-glow glow-cyan"></div>
+
+  <!-- Header / Navigation -->
+  <header>
+    <a href="#home" class="brand-logo">
+      <div class="dot"></div>
+      <div class="title-text">FARHAN <span>SHUJOY</span></div>
+      <span class="brand-badge"><span id="typewriterText">Video Editor</span><span class="typewriter-cursor">|</span></span>
+    </a>
+    
+    <nav>
+      <a href="#home" class="active">Home</a>
+      <a href="#before-after">Before & After</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#contact" class="btn-collaborate">Let's collaborate</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <!-- Decorative Orange Fluted Acoustic Visualizer (Borderless, Breathing & Orange) -->
+      <div class="hero-fluted-wrap panel-left" aria-hidden="true">
+        <div class="hero-fluted-panel breathe-left">
+          <div class="fluted-container">
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-fluted-wrap panel-right" aria-hidden="true">
+        <div class="hero-fluted-panel breathe-right">
+          <div class="fluted-container">
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+            <div class="fluted-slat"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2-Second Cinematic Loading Cue with Typewriter Effect -->
+      <div class="hero-load-cue" id="heroLoadCue">
+        <div class="cue-spinner"></div>
+        <span class="cue-typewriter-text" id="cueText">Loading</span><span class="cue-cursor">|</span>
+      </div>
+
+      <!-- Split Layout Container -->
+      <div class="hero-split-container">
+        <!-- Left Column: Hero Information & CTAs -->
+        <div class="hero-left-content" id="heroLeftContent">
+          <h1 class="hero-title">
+            <span class="title-motion">BRINGING MOTION</span><br>
+            <span class="title-life">TO LIFE</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            I am <strong>Farhan Shujoy</strong>, Video Editor & Motion Designer.
+            I craft high-converting visual stories, commercial edits, and kinetic 3D motion graphics that captivate audiences.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn-play-reel">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+              Watch Projects Reel
+            </a>
+            <a href="#contact" class="btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+
+        <!-- Right Column: 3D Expensive SaaS Carousel Stack -->
+        <div class="hero-right-carousel" id="heroRightCarousel">
+          <!-- Ambient Glow Backdrop -->
+          <div class="saas-carousel-ambient-glow" id="saasAmbientGlow"></div>
+
+          <!-- 3D Perspective Stage -->
+          <div class="saas-3d-stage" id="saas3DStage">
+            <!-- Card 1: Ricky E-Commerce Breakdown -->
+            <div class="saas-card is-active" data-index="0" id="saasCard0">
+              <div class="saas-card-inner">
+                <div class="saas-card-notch">
+                  <button class="hero-sound-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">
+                    <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
+                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669363/shujoy-portfolio/wm98e2b0xhmhgshsq9hw.mp4"></video>
+                <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
+              </div>
+            </div>
+
+            <!-- Card 2: Podcast Reel 01 -->
+            <div class="saas-card is-right" data-index="1" id="saasCard1">
+              <div class="saas-card-inner">
+                <div class="saas-card-notch">
+                  <button class="hero-sound-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">
+                    <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
+                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669032/shujoy-portfolio/jxi5rjnmruo7hr6vqgvx.mp4"></video>
+                <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
+              </div>
+            </div>
+
+            <!-- Card 3: Mathew Reel -->
+            <div class="saas-card is-left" data-index="2" id="saasCard2">
+              <div class="saas-card-inner">
+                <div class="saas-card-notch">
+                  <button class="hero-sound-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">
+                    <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                    <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                  </button>
+                </div>
+                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669328/shujoy-portfolio/wuhnj2upxg10wiou5wlj.mp4"></video>
+                <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SaaS Carousel Navigation Controls -->
+          <div class="saas-nav-row">
+            <button class="saas-arrow-btn" id="saasPrevBtn" aria-label="Previous Showcase Reel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+
+            <div class="saas-dots-container" id="saasDots">
+              <button class="saas-dot active" data-index="0" aria-label="Go to Reel 1"></button>
+              <button class="saas-dot" data-index="1" aria-label="Go to Reel 2"></button>
+              <button class="saas-dot" data-index="2" aria-label="Go to Reel 3"></button>
+            </div>
+
+            <button class="saas-arrow-btn" id="saasNextBtn" aria-label="Next Showcase Reel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Before & After Transformation Section -->
+    <section id="before-after" class="before-after-section">
+      <div class="section-head reveal reveal-up">
+        <span class="section-pill reveal reveal-down">EDIT TRANSFORMATION</span>
+        <h2 class="reveal reveal-up delay-1">Before & After Breakdown</h2>
+        <p class="reveal reveal-up delay-2">Watch the raw footage transform into a high-retention commercial cut with cinematic color grading, kinetic sound design, and precision cuts.</p>
+      </div>
+
+      <div class="ba-player-container reveal reveal-scale delay-2">
+        <div class="ba-ambient-glow" aria-hidden="true"></div>
+
+        <div class="ba-player-window">
+          <!-- Window Header Bar -->
+          <div class="ba-window-header">
+            <div class="ba-window-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="ba-window-title">
+              <span class="ba-badge-pill">BEFORE / AFTER TIMELINE</span>
+              <span>Template Trey • Color Grade & Motion Cut</span>
+            </div>
+            <button class="ba-sound-btn" id="baSoundBtn" aria-label="Toggle Sound">
+              🔊 Unmute
+            </button>
+          </div>
+
+          <!-- Video Player Frame -->
+          <div class="ba-video-frame" id="baVideoFrame" title="Click to Play / Pause">
+            <video id="beforeAfterVideo" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669060/shujoy-portfolio/lhvr4minwfm5bkicg1dk.mp4" playsinline muted loop preload="metadata"></video>
+            
+            <div class="ba-center-play">▶</div>
+
+            <!-- Bottom Progress Line -->
+            <div class="ba-timeline-bar">
+              <div class="ba-timeline-fill" id="baTimeFill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars of Transformation -->
+      <div class="ba-grid-cards reveal reveal-up delay-3">
+        <div class="ba-card-item">
+          <div class="ba-card-icon">🎨</div>
+          <div class="ba-card-title">Color Grading & LUT</div>
+          <div class="ba-card-desc">Transforms flat, low-contrast log capture into rich, filmic commercial color with tailored hue separation.</div>
+        </div>
+        <div class="ba-card-item">
+          <div class="ba-card-icon">🔊</div>
+          <div class="ba-card-title">Spatial Sound Design</div>
+          <div class="ba-card-desc">Multi-track soundscapes engineered with low-end risers, impacts, whooshes, and crystal-clear audio mastering.</div>
+        </div>
+        <div class="ba-card-item">
+          <div class="ba-card-icon">⚡</div>
+          <div class="ba-card-title">Kinetic Motion & VFX</div>
+          <div class="ba-card-desc">Precision speed-ramping, camera zooms, and motion typography synchronized on every musical beat.</div>
+        </div>
+        <div class="ba-card-item">
+          <div class="ba-card-icon">📈</div>
+          <div class="ba-card-title">Retention Optimization</div>
+          <div class="ba-card-desc">Engineered to hook the audience in the first 3 seconds, eliminating drop-off and maximizing viewer watch-time.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects: Continuous Auto-Playing Video Carousel -->
+    <section id="projects" class="carousel-section">
+      <div class="section-head reveal reveal-up">
+        <span class="section-pill reveal reveal-down">Portfolio Showcase</span>
+        <h2 class="reveal reveal-up delay-1">Featured Video Works</h2>
+        <p class="reveal reveal-up delay-2">Continuous autoplaying carousel — when one finishes, the next reel automatically plays. You can also drag or swipe to explore.</p>
+      </div>
+
+      <div class="carousel-container">
+
+        <!-- Carousel Viewport & Track -->
+        <div class="carousel-viewport reveal reveal-scale delay-3" id="carouselViewport">
+          <div class="carousel-track" id="carouselTrack">
+            
+            <!-- Video 1 (Landscape 16:9) -->
+            <div class="video-card active is-landscape" data-index="0">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Commercial Cut</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Cinematic Brand Reel</h3>
+                  <span>Dynamic Cuts & Pacing</span>
+                </div>
+                <div class="card-tag">Premier Pro</div>
+              </div>
+            </div>
+
+            <!-- Video 2 (Landscape 16:9) -->
+            <div class="video-card is-landscape" data-index="1">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">3D Motion</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Kinetic 3D Product Visual</h3>
+                  <span>After Effects & C4D</span>
+                </div>
+                <div class="card-tag">After Effects</div>
+              </div>
+            </div>
+
+            <!-- Video 3 (Portrait 9:16) -->
+            <div class="video-card is-portrait" data-index="2">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668967/shujoy-portfolio/sdqbwp4txoepxewz1un1.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Agency Project</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Creative Agency Commercial</h3>
+                  <span>Cinex & The Blind Men</span>
+                </div>
+                <div class="card-tag">VFX & Grading</div>
+              </div>
+            </div>
+
+            <!-- Video 4 (Landscape 16:9) -->
+            <div class="video-card is-landscape" data-index="3">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668965/shujoy-portfolio/hr9lo4qh38aytpuvxu8b.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Short-Form</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>High-Converting Retention Reel</h3>
+                  <span>Debutify E-Commerce</span>
+                </div>
+                <div class="card-tag">Debutify</div>
+              </div>
+            </div>
+
+            <!-- Video 5 (Portrait 9:16) -->
+            <div class="video-card is-portrait" data-index="4">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668964/shujoy-portfolio/fg8ajptgcom9kkwujvhr.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Narrative Cut</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Sound Design & Audio Sync</h3>
+                  <span>Multi-Track Precision</span>
+                </div>
+                <div class="card-tag">Sound Design</div>
+              </div>
+            </div>
+
+            <!-- Video 6 (Landscape 16:9) -->
+            <div class="video-card is-landscape" data-index="5">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668962/shujoy-portfolio/msv2xdx4peqcdh9zueqr.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Typography</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Fast-Paced Motion Teaser</h3>
+                  <span>Kinetic Text & Transitions</span>
+                </div>
+                <div class="card-tag">Motion Graphics</div>
+              </div>
+            </div>
+
+            <!-- Video 7 (Landscape 16:9) -->
+            <div class="video-card is-landscape" data-index="6">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668960/shujoy-portfolio/ucgws1dyab4xrxg8gpae.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Product Demo</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>SaaS Demonstration Showcase</h3>
+                  <span>Product Walkthrough Cut</span>
+                </div>
+                <div class="card-tag">Product Demo</div>
+              </div>
+            </div>
+
+            <!-- Video 8 (Portrait 9:16) -->
+            <div class="video-card is-portrait" data-index="7">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668959/shujoy-portfolio/e6vsgekufsxgsp6cbbjm.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Broadcast</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Broadcast News & Media Edit</h3>
+                  <span>Bongo News BDC Archive</span>
+                </div>
+                <div class="card-tag">Broadcast</div>
+              </div>
+            </div>
+
+            <!-- Video 9 (Portrait 9:16) -->
+            <div class="video-card is-portrait" data-index="8">
+              <div class="video-frame">
+                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668956/shujoy-portfolio/lrqxutdce9wfzb7xzs0y.mp4" playsinline muted preload="metadata"></video>
+                <div class="video-overlay-controls">
+                  <div class="top-controls">
+                    <span class="video-badge">Finishing</span>
+                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
+                  </div>
+                  <div class="center-play-trigger" title="Play / Pause">▶</div>
+                  <div class="bottom-timeline-scrub">
+                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="video-card-info">
+                <div>
+                  <h3>Color Grade & Visual FX</h3>
+                  <span>DaVinci Resolve Grade</span>
+                </div>
+                <div class="card-tag">DaVinci Resolve</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Dot Indicators -->
+        <div class="carousel-dots reveal reveal-up delay-4" id="carouselDots">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Experience Section -->
+    <section id="experience" class="experience-section">
+      <div class="section-head reveal reveal-up">
+        <span class="section-pill reveal reveal-down">Career Journey</span>
+        <h2 class="reveal reveal-up delay-1">Work Experience</h2>
+        <p class="reveal reveal-up delay-2">Proven track record in high-impact video editing, broadcast production, and creative motion studios.</p>
+      </div>
+
+      <div class="experience-timeline">
+        
+        <!-- Experience 1 -->
+        <div class="exp-card reveal reveal-right delay-1">
+          <div class="exp-icon-box">
+            <span class="fallback-letter">🎬</span>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Video Editor & Motion design</h3>
+                <div class="exp-company">The Blind Men Productions · Full-time</div>
+              </div>
+              <span class="exp-badge">Present</span>
+            </div>
+            <div class="exp-meta">
+              <span>📅 Sep 2026 - Present</span>
+              <span>📍 Dhaka, Bangladesh · On-site</span>
+            </div>
+            <p class="exp-desc">
+              Leading visual storytelling, high-end commercial post-production, motion graphics development, and cinematic sequence cutting.
+            </p>
+            <div class="exp-skills-pill">
+              <span>💎 Adobe Premiere Pro</span>
+              <span>💎 Adobe After Effects</span>
+              <span>Motion Graphics</span>
+              <span>Color Grading</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div class="exp-card reveal reveal-left delay-2">
+          <div class="exp-icon-box">
+            <span class="fallback-letter">⚡</span>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Video editor & Motion design</h3>
+                <div class="exp-company">Cinex Creative Agency · Full-time</div>
+              </div>
+              <span class="exp-badge" style="color: #ff9e00; background: rgba(255, 158, 0, 0.15); border-color: rgba(255, 158, 0, 0.3);">Agency</span>
+            </div>
+            <div class="exp-meta">
+              <span>📅 May 2026 - Sep 2026 · 5 mos</span>
+              <span>📍 Dhaka, Bangladesh · Hybrid</span>
+            </div>
+            <p class="exp-desc">
+              Produced high-energy agency deliverables, client commercials, social campaign teasers, and 3D kinetic animation assets.
+            </p>
+            <div class="exp-skills-pill">
+              <span>Commercial Editing</span>
+              <span>Visual Effects</span>
+              <span>Social Media Reels</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 3 -->
+        <div class="exp-card reveal reveal-right delay-2">
+          <div class="exp-icon-box" style="background: #241442;">
+            <span class="fallback-letter">🦋</span>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Video Editor</h3>
+                <div class="exp-company">Debutify · Remote</div>
+              </div>
+              <span class="exp-badge" style="color: #a855f7; background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.3);">Remote</span>
+            </div>
+            <div class="exp-meta">
+              <span>📅 Jan 2026 - May 2026 · 5 mos</span>
+              <span>📍 Remote Work</span>
+            </div>
+            <p class="exp-desc">
+              Produced and edited high-converting video content, viral short-form content, software demonstrations, and animated explainer videos for international audiences.
+            </p>
+            <div class="exp-skills-pill">
+              <span>High-Converting Video</span>
+              <span>Short-form Content</span>
+              <span>Product Explainers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience 4 -->
+        <div class="exp-card reveal reveal-left delay-3">
+          <div class="exp-icon-box">
+            <span class="fallback-letter">📺</span>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">Video Editor</h3>
+                <div class="exp-company">Bongo News BDC · Media House</div>
+              </div>
+              <span class="exp-badge" style="color: #fbbf24; background: rgba(251, 191, 36, 0.15); border-color: rgba(251, 191, 36, 0.3);">Broadcast</span>
+            </div>
+            <div class="exp-meta">
+              <span>📅 Oct 2023 - 2024 · 4 mos</span>
+              <span>📍 Dhaka, Bangladesh</span>
+            </div>
+            <p class="exp-desc">
+              Edited and produced over 200 hours of video content, enhancing viewer engagement through precise cuts and pacing. Developed 20 commercials and 10 product demonstrations. Implemented advanced color correction and audio synchronization techniques, improving video quality by 25%.
+            </p>
+            <div class="exp-skills-pill">
+              <span>200+ Hours Produced</span>
+              <span>20 Commercials</span>
+              <span>Audio Synchronization</span>
+              <span>Color Correction (+25% Quality)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Software & Skills Badges Section (Figma Badges) -->
+    <section id="skills">
+      <div class="section-head reveal reveal-up">
+        <span class="section-pill reveal reveal-down">Toolkit & Expertise</span>
+        <h2 class="reveal reveal-up delay-1">Software & Creative Skills</h2>
+        <p class="reveal reveal-up delay-2">Industry-standard suites and techniques leveraged to bring every creative vision to life.</p>
+      </div>
+
+      <div class="skills-grid">
+        <!-- After Effects -->
+        <div class="software-card ae reveal reveal-right delay-1">
+          <div class="software-logo-badge badge-ae">Ae</div>
+          <h4>After Effects</h4>
+          <p>Motion Graphics, 2D/3D VFX, Kinetic Typography & Compositing</p>
+        </div>
+
+        <!-- Premiere Pro -->
+        <div class="software-card pr reveal reveal-down delay-2">
+          <div class="software-logo-badge badge-pr">Pr</div>
+          <h4>Premiere Pro</h4>
+          <p>Multi-Cam Editing, Pacing, Dynamic Storytelling & Final Assembly</p>
+        </div>
+
+        <!-- Cinema 4D -->
+        <div class="software-card c4d reveal reveal-up delay-3">
+          <div class="software-logo-badge badge-c4d">C4D</div>
+          <h4>Cinema 4D</h4>
+          <p>3D Animation, Product Rendering & Abstract Motion Loops</p>
+        </div>
+
+        <!-- Blender -->
+        <div class="software-card blender reveal reveal-down delay-4">
+          <div class="software-logo-badge badge-blender">Bl</div>
+          <h4>Blender</h4>
+          <p>3D Modeling, Realistic Lighting, Physics Simulations & Shading</p>
+        </div>
+
+        <!-- DaVinci Resolve -->
+        <div class="software-card davinci reveal reveal-left delay-5">
+          <div class="software-logo-badge badge-davinci">Da</div>
+          <h4>DaVinci Resolve</h4>
+          <p>Advanced Color Grading, Look Dev, Matching & Finishing</p>
+        </div>
+      </div>
+
+      <!-- Core Disciplines -->
+      <div class="skills-tags-wrap reveal reveal-up delay-3">
+        <div class="discipline-tag">🎬 Commercial Editing</div>
+        <div class="discipline-tag">✨ 3D Kinetic Motion</div>
+        <div class="discipline-tag">🎨 Color Grading & LUT Development</div>
+        <div class="discipline-tag">🔊 Sound Design & Mastering</div>
+        <div class="discipline-tag">⚡ Short-Form Viral Retention</div>
+        <div class="discipline-tag">📱 Social Media Ads & Explainers</div>
+        <div class="discipline-tag">📐 Keyframe Animation & Graph Editing</div>
+        <div class="discipline-tag">🔄 Seamless Transitions & Speed Ramping</div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="contact-card-main reveal reveal-scale">
+        <h2 class="reveal reveal-down delay-1">Got a project? Let's make it <span>cinematic.</span></h2>
+        <p class="reveal reveal-up delay-2">Whether you need a commercial showreel, high-retention video ads, or 3D motion design, I'm ready to bring your vision to reality.</p>
+
+        <div class="contact-links-grid">
+          <a href="https://www.linkedin.com/in/farhan-shujoy/" target="_blank" rel="noopener noreferrer" class="contact-pill-link link-linkedin reveal reveal-up delay-3">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            LinkedIn Profile
+          </a>
+
+          <button class="contact-pill-link btn-copy-email reveal reveal-left delay-5" id="copyEmailBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <span>contact.farhan035@gmail.com</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-copyright">
+      © 2026 Farhan Shujoy. Crafted for cinematic excellence.
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast-notice" id="toastNotice">Email copied to clipboard!</div>
+
+  <!-- Floating Back to Top / Home Button (Directly beneath "Let's collaborate" at right: 7%) -->
+  <button id="floatingHomeBtn" class="floating-home-btn" aria-label="Back to Top" title="Back to Home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Interactive Continuous Auto-Playing Video Carousel Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // ============================================================
+      // HERO 2-SECOND ENTRANCE & 3D SAAS VIDEO CAROUSEL SYSTEM
+      // ============================================================
+      const siteHeader = document.querySelector('header');
+      const heroLeft = document.getElementById('heroLeftContent');
+      const heroRight = document.getElementById('heroRightCarousel');
+      const heroLoadCue = document.getElementById('heroLoadCue');
+
+      const saasCards = [
+        document.getElementById('saasCard0'),
+        document.getElementById('saasCard1'),
+        document.getElementById('saasCard2')
+      ].filter(Boolean);
+
+      const saasPrevBtn = document.getElementById('saasPrevBtn');
+      const saasNextBtn = document.getElementById('saasNextBtn');
+      const saasDots = Array.from(document.querySelectorAll('.saas-dot'));
+      let saasActiveIndex = 0;
+      let saasAutoTimer = null;
+      let isHeroSoundMuted = true;
+
+      // Update 3D card layout and classes
+      function updateSaasCarousel(targetIndex) {
+        saasActiveIndex = (targetIndex + saasCards.length) % saasCards.length;
+
+        saasCards.forEach((card, idx) => {
+          const video = card.querySelector('video');
+          const timeFill = card.querySelector('.saas-timeline-fill');
+          card.classList.remove('is-active', 'is-right', 'is-left');
+
+          // Calculate circular relative position
+          const relPos = (idx - saasActiveIndex + saasCards.length) % saasCards.length;
+
+          if (relPos === 0) {
+            // Active center card
+            card.classList.add('is-active');
+            if (video) {
+              video.muted = isHeroSoundMuted;
+              video.play().catch(() => {});
+            }
+          } else if (relPos === 1) {
+            // Right tilted card
+            card.classList.add('is-right');
+            if (video) {
+              video.pause();
+            }
+            if (timeFill) timeFill.style.width = '0%';
+          } else {
+            // Left tilted card
+            card.classList.add('is-left');
+            if (video) {
+              video.pause();
+            }
+            if (timeFill) timeFill.style.width = '0%';
+          }
+        });
+
+        // Update dots
+        saasDots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === saasActiveIndex);
+        });
+
+        // Video auto-advances only when finished (no arbitrary timer)
+      }
+
+      function nextSaasSlide() {
+        updateSaasCarousel(saasActiveIndex + 1);
+      }
+
+      function prevSaasSlide() {
+        updateSaasCarousel(saasActiveIndex - 1);
+      }
+
+      // Event listeners for SaaS cards
+      saasCards.forEach((card, idx) => {
+        const video = card.querySelector('video');
+        const timeFill = card.querySelector('.saas-timeline-fill');
+        const soundBtn = card.querySelector('.hero-sound-btn');
+
+        // Progress bar updates
+        if (video && timeFill) {
+          video.addEventListener('timeupdate', () => {
+            if (card.classList.contains('is-active') && video.duration) {
+              const pct = (video.currentTime / video.duration) * 100;
+              timeFill.style.width = `${pct}%`;
+            }
+          });
+
+          // Auto-advance ONLY when video finishes completely
+          video.addEventListener('ended', () => {
+            if (card.classList.contains('is-active')) {
+              nextSaasSlide();
+            }
+          });
+        }
+
+        // Sound toggle button on card (Volume On / Off only)
+        if (soundBtn && video) {
+          soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isHeroSoundMuted = !isHeroSoundMuted;
+            video.muted = isHeroSoundMuted;
+
+            // Sync all sound buttons
+            document.querySelectorAll('.hero-sound-btn').forEach(btn => {
+              btn.classList.toggle('is-unmuted', !isHeroSoundMuted);
+            });
+          });
+        }
+
+        // Card click handling: side cards switch to active, active card DOES NOT pause/resume
+        card.addEventListener('click', () => {
+          if (card.classList.contains('is-right')) {
+            nextSaasSlide();
+          } else if (card.classList.contains('is-left')) {
+            prevSaasSlide();
+          }
+        });
+      });
+
+      if (saasNextBtn) saasNextBtn.addEventListener('click', nextSaasSlide);
+      if (saasPrevBtn) saasPrevBtn.addEventListener('click', prevSaasSlide);
+
+      saasDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => updateSaasCarousel(idx));
+      });
+
+      // Touch swipe support for mobile
+      const heroStage = document.getElementById('saas3DStage');
+      if (heroStage) {
+        let touchStartX = 0;
+        heroStage.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+        heroStage.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          const diff = touchEndX - touchStartX;
+          if (diff > 45) {
+            prevSaasSlide();
+          } else if (diff < -45) {
+            nextSaasSlide();
+          }
+        }, { passive: true });
+      }
+
+      // SCROLL AUTO-DISAPPEAR & AUTO-OFF SOUND/VIDEO
+      // Navbar enters after 2 seconds and remains fixed at top.
+      // Left and right hero parts retract on scroll down, and glide back in on scroll up to top.
+      let hasInitialEntranceCompleted = false;
+      const heroSectionEl = document.getElementById('home');
+      let isHeroDisappeared = false;
+
+      window.addEventListener('scroll', () => {
+        if (!hasInitialEntranceCompleted) return;
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY > 160 && !isHeroDisappeared) {
+          isHeroDisappeared = true;
+          if (heroSectionEl) heroSectionEl.classList.add('hero-scrolled-away');
+
+          // Left part slides back left out of view
+          if (heroLeft) heroLeft.classList.remove('is-entered');
+          // Right carousel slides back right out of view
+          if (heroRight) heroRight.classList.remove('is-entered');
+
+          // Auto-off: turn off sound and pause hero video
+          saasCards.forEach(c => {
+            const v = c.querySelector('video');
+            if (v) {
+              v.pause();
+              v.muted = true;
+            }
+          });
+          isHeroSoundMuted = true;
+          document.querySelectorAll('.hero-sound-btn').forEach(btn => {
+            btn.classList.remove('is-unmuted');
+          });
+        } else if (scrollY <= 110 && isHeroDisappeared) {
+          isHeroDisappeared = false;
+          if (heroSectionEl) heroSectionEl.classList.remove('hero-scrolled-away');
+
+          // Left part glides in from left
+          if (heroLeft) heroLeft.classList.add('is-entered');
+          // Right carousel glides in from right
+          if (heroRight) heroRight.classList.add('is-entered');
+
+          // Returning to top: resume active hero video
+          const activeCard = saasCards[saasActiveIndex];
+          if (activeCard) {
+            const v = activeCard.querySelector('video');
+            if (v) {
+              v.play().catch(() => {});
+            }
+          }
+        }
+      }, { passive: true });
+
+      // Typewriter animation on "Loading" cue
+      const cueTextEl = document.getElementById('cueText');
+      let typeTimer = null;
+      if (cueTextEl) {
+        const fullWord = "Loading...";
+        let charIdx = 0;
+        cueTextEl.textContent = "";
+
+        typeTimer = setInterval(() => {
+          if (charIdx <= fullWord.length) {
+            cueTextEl.textContent = fullWord.substring(0, charIdx);
+            charIdx++;
+          } else {
+            charIdx = 7; // Loop dots: "Loading", "Loading.", "Loading..", "Loading..."
+          }
+        }, 110);
+      }
+
+      // 2-SECOND ENTRANCE TRIGGER (ON RELOAD / LOAD)
+      // Exactly after 2 seconds, animate navbar down from top, and hero content into position.
+      // Navbar then stays fixed.
+      setTimeout(() => {
+        if (typeTimer) clearInterval(typeTimer);
+
+        if (heroLoadCue) {
+          heroLoadCue.classList.add('cue-fade-out');
+          setTimeout(() => {
+            if (heroLoadCue && heroLoadCue.parentNode) heroLoadCue.parentNode.removeChild(heroLoadCue);
+          }, 600);
+        }
+
+        hasInitialEntranceCompleted = true;
+        // Navbar enters with its top animation and stays fixed across the site
+        if (siteHeader) siteHeader.classList.add('is-entered');
+
+        const currentY = window.scrollY || window.pageYOffset;
+        if (currentY <= 110) {
+          if (heroLeft) heroLeft.classList.add('is-entered');
+          if (heroRight) heroRight.classList.add('is-entered');
+
+          // Initialize and play the active SaaS video
+          updateSaasCarousel(0);
+        } else {
+          isHeroDisappeared = true;
+          if (heroSectionEl) heroSectionEl.classList.add('hero-scrolled-away');
+        }
+      }, 2000);
+
+      // ============================================================
+      // BEFORE & AFTER TRANSFORMATION VIDEO PLAYER (TEMPLATE TREY)
+      // ============================================================
+      const baVideo = document.getElementById('beforeAfterVideo');
+      const baSoundBtn = document.getElementById('baSoundBtn');
+      const baTimeFill = document.getElementById('baTimeFill');
+      const baFrame = document.getElementById('baVideoFrame');
+      let isBaMuted = true;
+
+      if (baVideo) {
+        // Auto-play when scrolled into view, pause when scrolled away
+        const baObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              baVideo.muted = isBaMuted;
+              baVideo.play().catch(() => {});
+              if (baSoundBtn) {
+                baSoundBtn.classList.toggle('is-unmuted', !isBaMuted);
+                baSoundBtn.textContent = isBaMuted ? '🔊 Unmute' : '🔇 Mute';
+              }
+            } else {
+              baVideo.pause();
+              baVideo.muted = true;
+            }
+          });
+        }, { threshold: 0.25 });
+        baObserver.observe(baVideo);
+
+        // Progress bar updates
+        baVideo.addEventListener('timeupdate', () => {
+          if (baVideo.duration && baTimeFill) {
+            const pct = (baVideo.currentTime / baVideo.duration) * 100;
+            baTimeFill.style.width = `${pct}%`;
+          }
+        });
+
+        // Click to toggle play / pause
+        if (baFrame) {
+          baFrame.addEventListener('click', () => {
+            if (baVideo.paused) {
+              baVideo.play().catch(() => {});
+              baFrame.classList.remove('is-paused');
+            } else {
+              baVideo.pause();
+              baFrame.classList.add('is-paused');
+            }
+          });
+        }
+
+        // Toggle sound button
+        if (baSoundBtn) {
+          baSoundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isBaMuted = !isBaMuted;
+            baVideo.muted = isBaMuted;
+            baSoundBtn.classList.toggle('is-unmuted', !isBaMuted);
+            baSoundBtn.textContent = isBaMuted ? '🔊 Unmute' : '🔇 Mute';
+          });
+        }
+      }
+
+      // ============================================================
+      // PORTFOLIO FEATURED WORKS CAROUSEL
+      // ============================================================
+      const track = document.getElementById('carouselTrack');
+      const viewport = document.getElementById('carouselViewport');
+      const cards = Array.from(document.querySelectorAll('.video-card'));
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsContainer = document.getElementById('carouselDots');
+      const currentSlideDisplay = document.getElementById('currentSlideDisplay');
+
+      let currentIndex = 0;
+      let isGlobalMuted = true;
+      let isDragging = false;
+      let startPos = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+
+      // Build pagination dots
+      cards.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `dot-pill ${idx === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => {
+          goToSlide(idx);
+        });
+        dotsContainer.appendChild(dot);
+      });
+
+      const dots = Array.from(document.querySelectorAll('.dot-pill'));
+
+      // Function to align carousel so active card is centered
+      function updateCarouselPosition() {
+        const activeCard = cards[currentIndex];
+        if (!activeCard) return;
+
+        // Viewport center
+        const viewportCenter = viewport.offsetWidth / 2;
+        // Active card center relative to track
+        const cardCenter = activeCard.offsetLeft + (activeCard.offsetWidth / 2);
+        const targetOffset = viewportCenter - cardCenter;
+
+        track.style.transform = `translateX(${targetOffset}px)`;
+        currentTranslate = targetOffset;
+        prevTranslate = targetOffset;
+
+        // Update classes
+        cards.forEach((card, idx) => {
+          const video = card.querySelector('video');
+          const playTrigger = card.querySelector('.center-play-trigger');
+
+          if (idx === currentIndex) {
+            card.classList.add('active');
+            // Auto play active video
+            video.muted = isGlobalMuted;
+            video.play().catch(e => {
+              console.log('Autoplay deferred until user interaction', e);
+            });
+            if (playTrigger) playTrigger.textContent = '❚❚';
+            // Sync sound toggle button for active card
+            const activeSoundBtn = card.querySelector('.sound-toggle-btn');
+            if (activeSoundBtn) {
+              activeSoundBtn.classList.toggle('is-unmuted', !isGlobalMuted);
+              activeSoundBtn.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
+            }
+          } else {
+            card.classList.remove('active');
+            video.pause();
+            video.currentTime = 0; // reset
+            if (playTrigger) playTrigger.textContent = '▶';
+          }
+        });
+
+        // Update dots and counter
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+        if (currentSlideDisplay) {
+          currentSlideDisplay.textContent = String(currentIndex + 1).padStart(2, '0');
+        }
+      }
+
+      function goToSlide(index) {
+        if (index < 0) {
+          currentIndex = cards.length - 1;
+        } else if (index >= cards.length) {
+          currentIndex = 0;
+        } else {
+          currentIndex = index;
+        }
+        updateCarouselPosition();
+      }
+
+      // Next / Prev actions
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+      function prevSlide() {
+        goToSlide(currentIndex - 1);
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+      // VIDEO AUTO-ADVANCE: When active video finishes, automatically go to next video and play it!
+      cards.forEach((card, idx) => {
+        const video = card.querySelector('video');
+        const playTrigger = card.querySelector('.center-play-trigger');
+        const soundBtn = card.querySelector('.sound-toggle-btn');
+        const progressBar = card.querySelector('.video-progress-fill');
+
+        // When video ends -> auto jump to next video
+        video.addEventListener('ended', () => {
+          if (idx === currentIndex) {
+            nextSlide();
+          }
+        });
+
+        // Time update for progress fill
+        video.addEventListener('timeupdate', () => {
+          if (video.duration && progressBar) {
+            const pct = (video.currentTime / video.duration) * 100;
+            progressBar.style.width = pct + '%';
+          }
+        });
+
+        // Sound Toggle (Volume On / Off only - matches Before & After flow)
+        if (soundBtn) {
+          soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isGlobalMuted = !isGlobalMuted;
+            // apply to all videos & buttons
+            cards.forEach(c => {
+              const v = c.querySelector('video');
+              const b = c.querySelector('.sound-toggle-btn');
+              if (v) v.muted = isGlobalMuted;
+              if (b) {
+                b.classList.toggle('is-unmuted', !isGlobalMuted);
+                b.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
+              }
+            });
+            // Ensure currently active video plays with audio if unmuted
+            const activeCard = cards[currentIndex];
+            if (activeCard) {
+              const v = activeCard.querySelector('video');
+              if (v && v.paused) {
+                v.play().catch(() => {});
+              }
+            }
+          });
+        }
+
+        // Clicking a non-active card directly selects it
+        card.addEventListener('click', (e) => {
+          if (idx !== currentIndex && !isDragging) {
+            goToSlide(idx);
+          }
+        });
+      });
+
+      // DRAG & SWIPE CAPABILITY
+      let startX = 0;
+      let movedX = 0;
+
+      function onTouchStart(e) {
+        isDragging = true;
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        viewport.classList.add('is-dragging');
+        track.style.transition = 'none';
+      }
+
+      function onTouchMove(e) {
+        if (!isDragging) return;
+        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+        movedX = currentX - startX;
+        track.style.transform = `translateX(${currentTranslate + movedX}px)`;
+      }
+
+      function onTouchEnd() {
+        if (!isDragging) return;
+        isDragging = false;
+        viewport.classList.remove('is-dragging');
+        track.style.transition = 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)';
+
+        // Threshold for drag slide switch
+        if (movedX < -60) {
+          nextSlide();
+        } else if (movedX > 60) {
+          prevSlide();
+        } else {
+          updateCarouselPosition();
+        }
+        movedX = 0;
+      }
+
+      viewport.addEventListener('mousedown', onTouchStart);
+      window.addEventListener('mousemove', onTouchMove);
+      window.addEventListener('mouseup', onTouchEnd);
+
+      viewport.addEventListener('touchstart', onTouchStart, { passive: true });
+      viewport.addEventListener('touchmove', onTouchMove, { passive: true });
+      viewport.addEventListener('touchend', onTouchEnd);
+
+      // Keyboard arrow keys
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+      });
+
+      // Window resize re-centering
+      window.addEventListener('resize', () => {
+        updateCarouselPosition();
+      });
+
+      // Initial alignment
+      setTimeout(() => {
+        updateCarouselPosition();
+      }, 100);
+
+      // AUTO-OFF AUDIO ON SCROLL AWAY (PRESERVES USER SOUND PREFERENCE)
+      const projectsSectionEl = document.getElementById('projects');
+      if (projectsSectionEl && 'IntersectionObserver' in window) {
+        const projScrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting || entry.intersectionRatio < 0.15) {
+              // Scrolled away from section: pause and silence video so no audio leaks to other sections
+              cards.forEach(c => {
+                const v = c.querySelector('video');
+                if (v) {
+                  v.pause();
+                  v.muted = true;
+                }
+              });
+              // NOTE: Do NOT reset isGlobalMuted or buttons! The user's preference remains unmuted.
+            } else {
+              // Scrolled back into section: resume active video with user's chosen sound state!
+              const activeC = cards[currentIndex];
+              if (activeC) {
+                const v = activeC.querySelector('video');
+                if (v) {
+                  v.muted = isGlobalMuted;
+                  if (v.paused) {
+                    v.play().catch(() => {});
+                  }
+                }
+              }
+              // Restore buttons to match user's sound preference
+              document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
+                btn.classList.toggle('is-unmuted', !isGlobalMuted);
+                btn.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
+              });
+            }
+          });
+        }, { threshold: [0, 0.15] });
+        projScrollObserver.observe(projectsSectionEl);
+      }
+
+      // Copy Email Toast
+      const copyBtn = document.getElementById('copyEmailBtn');
+      const toast = document.getElementById('toastNotice');
+      if (copyBtn && toast) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('contact.farhan035@gmail.com').then(() => {
+            toast.classList.add('show');
+            setTimeout(() => {
+              toast.classList.remove('show');
+            }, 2500);
+          });
+        });
+      }
+      // Typewriter Animation for Role Badge
+      const typewriterEl = document.getElementById('typewriterText');
+      if (typewriterEl) {
+        const phrases = [
+          "Video Editor",
+          "Motion Designer",
+          "Video Editor & Motion Designer"
+        ];
+        let pIndex = 0;
+        let cIndex = phrases[0].length;
+        let isDeleting = true;
+
+        setTimeout(function runTypewriter() {
+          const currentPhrase = phrases[pIndex];
+
+          if (isDeleting) {
+            cIndex--;
+            typewriterEl.textContent = currentPhrase.substring(0, cIndex);
+            if (cIndex <= 0) {
+              isDeleting = false;
+              pIndex = (pIndex + 1) % phrases.length;
+              setTimeout(runTypewriter, 320);
+              return;
+            }
+            setTimeout(runTypewriter, 35);
+          } else {
+            cIndex++;
+            typewriterEl.textContent = currentPhrase.substring(0, cIndex);
+            if (cIndex >= currentPhrase.length) {
+              isDeleting = true;
+              setTimeout(runTypewriter, 3000); // 3 seconds display time for each title
+              return;
+            }
+            setTimeout(runTypewriter, 70);
+          }
+        }, 3000);
+      }
+
+      // ============================================================
+      // ULTRA-SMOOTH REVERSIBLE SCROLL REVEAL ANIMATIONS
+      // ============================================================
+      const revealItems = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          } else {
+            // When leaving viewport, smoothly remove in-view so it re-animates upon return
+            entry.target.classList.remove('in-view');
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -25px 0px'
+      });
+
+      revealItems.forEach(el => revealObserver.observe(el));
+
+      // Trigger initial animations for items in viewport on page load (Hero entrance)
+      const triggerInitialView = () => {
+        const windowHeight = window.innerHeight;
+        revealItems.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight * 0.92 && rect.bottom > 20) {
+            el.classList.add('in-view');
+          }
+        });
+      };
+      triggerInitialView();
+      setTimeout(triggerInitialView, 60);
+
+      // ScrollSpy: Dynamic active navbar link update
+      const navLinks = document.querySelectorAll('nav a');
+      const observedSections = document.querySelectorAll('section[id]');
+      window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+        const scrollPosition = window.scrollY + 220;
+        observedSections.forEach(sec => {
+          if (scrollPosition >= sec.offsetTop) {
+            currentSectionId = sec.getAttribute('id');
+          }
+        });
+        if (currentSectionId) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+              link.classList.add('active');
+            }
+          });
+        }
+      }, { passive: true });
+
+      // ============================================================
+      // LENIS ULTRA-SMOOTH MOMENTUM SCROLLING
+      // ============================================================
+      let lenis = null;
+      if (typeof Lenis !== 'undefined') {
+        lenis = new Lenis({
+          duration: 1.25,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1.0,
+          touchMultiplier: 2.0,
+          infinite: false,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Smooth scroll for anchor clicks (Navbar, CTA buttons, Back to top)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+              const targetEl = document.querySelector(targetId);
+              if (targetEl) {
+                e.preventDefault();
+                lenis.scrollTo(targetEl, {
+                  offset: -75,
+                  duration: 1.2,
+                  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                });
+              }
+            }
+          });
+        });
+
+        // Prevent jumping to home on reload: preserve hash or scroll position
+        if (window.location.hash) {
+          const targetEl = document.querySelector(window.location.hash);
+          if (targetEl) {
+            setTimeout(() => {
+              lenis.scrollTo(targetEl, { immediate: true, offset: -75 });
+            }, 70);
+          }
+        } else {
+          const savedPos = sessionStorage.getItem('portfolio_scroll_y');
+          if (savedPos && parseInt(savedPos, 10) > 80) {
+            setTimeout(() => {
+              lenis.scrollTo(parseInt(savedPos, 10), { immediate: true });
+            }, 70);
+          }
+        }
+
+        window.addEventListener('scroll', () => {
+          sessionStorage.setItem('portfolio_scroll_y', window.scrollY);
+        }, { passive: true });
+      }
+
+      // ============================================================
+      // FLOATING BACK TO TOP / HOME BUTTON (Directly beneath "Let's collaborate")
+      // ============================================================
+      const floatingHomeBtn = document.getElementById('floatingHomeBtn');
+      if (floatingHomeBtn) {
+        floatingHomeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(0, {
+              duration: 1.2,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        });
+
+        const updateFloatingBtnVisibility = () => {
+          const scrollY = window.scrollY || window.pageYOffset;
+          if (scrollY > 260) {
+            floatingHomeBtn.classList.add('is-visible');
+          } else {
+            floatingHomeBtn.classList.remove('is-visible');
+          }
+        };
+
+        window.addEventListener('scroll', updateFloatingBtnVisibility, { passive: true });
+        updateFloatingBtnVisibility();
+      }
+
+      // ============================================================
+      // CUSTOM CINEMATIC DUAL-STAGE CURSOR (LERP FOLLOWER)
+      // ============================================================
+      const cursorDot = document.getElementById('cursorDot');
+      const cursorFollower = document.getElementById('cursorFollower');
+      const cursorText = document.getElementById('cursorText');
+
+      if (cursorDot && cursorFollower && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        let mouseX = -100;
+        let mouseY = -100;
+        let followerX = -100;
+        let followerY = -100;
+        let isVisible = false;
+
+        window.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          cursorDot.style.left = `${mouseX}px`;
+          cursorDot.style.top = `${mouseY}px`;
+
+          if (!isVisible) {
+            cursorDot.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+            followerX = mouseX;
+            followerY = mouseY;
+            isVisible = true;
+          }
+        }, { passive: true });
+
+        // Hide when mouse leaves the document window
+        document.addEventListener('mouseleave', () => {
+          cursorDot.style.opacity = '0';
+          cursorFollower.style.opacity = '0';
+          isVisible = false;
+        });
+
+        // 60fps lerp loop for smooth organic lag
+        const lerp = (start, end, factor) => start + (end - start) * factor;
+
+        function animateFollower() {
+          followerX = lerp(followerX, mouseX, 0.18);
+          followerY = lerp(followerY, mouseY, 0.18);
+
+          cursorFollower.style.left = `${followerX}px`;
+          cursorFollower.style.top = `${followerY}px`;
+
+          requestAnimationFrame(animateFollower);
+        }
+        requestAnimationFrame(animateFollower);
+
+        // Click active state
+        window.addEventListener('mousedown', () => {
+          cursorFollower.classList.add('is-active');
+          cursorDot.classList.add('is-active');
+        });
+        window.addEventListener('mouseup', () => {
+          cursorFollower.classList.remove('is-active');
+          cursorDot.classList.remove('is-active');
+        });
+
+        // Interactive hover elements (buttons, links, pills, software cards)
+        const hoverTargets = document.querySelectorAll(
+          'a, button, .video-progress-bar, .dot-pill, .sound-toggle-btn, .software-card, .exp-card, .discipline-tag'
+        );
+        hoverTargets.forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursorFollower.classList.add('is-hovering');
+            cursorDot.classList.add('is-hovering');
+          });
+          el.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('is-hovering');
+            cursorDot.classList.remove('is-hovering');
+          });
+        });
+
+        // Video / Carousel hover elements: show cinematic "REEL" tag
+        // Video / Carousel hover elements: sleek glassmorphic focus ring (no REEL text)
+        const videoTargets = document.querySelectorAll('.video-frame, .carousel-viewport, .saas-3d-stage');
+        videoTargets.forEach(el => {
+          el.addEventListener('mouseenter', () => {
+            cursorFollower.classList.add('is-video-hover');
+            cursorDot.classList.add('is-video-hover');
+            if (cursorText) cursorText.textContent = '';
+          });
+          el.addEventListener('mouseleave', () => {
+            cursorFollower.classList.remove('is-video-hover');
+            cursorDot.classList.remove('is-video-hover');
+            if (cursorText) cursorText.textContent = '';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
