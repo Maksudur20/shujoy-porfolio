@@ -96,6 +96,11 @@
       transition: all 0.3s ease;
     }
 
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
     .brand-logo {
       display: flex;
       align-items: center;
@@ -135,10 +140,11 @@
       border: 1px solid rgba(255, 158, 0, 0.3);
       color: var(--accent-amber);
       font-weight: 600;
-      margin-left: 0.5rem;
       white-space: nowrap;
       min-height: 25px;
       line-height: 1.2;
+      cursor: default;
+      user-select: none;
     }
     .typewriter-cursor {
       display: inline-block;
@@ -2526,11 +2532,13 @@
 
   <!-- Header / Navigation -->
   <header>
-    <a href="#home" class="brand-logo">
-      <div class="dot"></div>
-      <div class="title-text">FARHAN <span>SHUJOY</span></div>
+    <div class="brand-group">
+      <a href="#home" class="brand-logo" aria-label="Farhan Shujoy Home">
+        <div class="dot"></div>
+        <div class="title-text">FARHAN <span>SHUJOY</span></div>
+      </a>
       <span class="brand-badge"><span id="typewriterText">Video Editor</span><span class="typewriter-cursor">|</span></span>
-    </a>
+    </div>
     
     <nav>
       <a href="#home" class="active">Home</a>
