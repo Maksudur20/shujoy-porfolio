@@ -667,12 +667,9 @@
       position: relative;
       overflow: hidden;
       padding: 1.5rem 0 2rem;
-      cursor: grab;
       user-select: none;
     }
-    .carousel-viewport.is-dragging {
-      cursor: grabbing;
-    }
+
 
     .carousel-track {
       display: flex;
@@ -787,7 +784,7 @@
       aspect-ratio: 16 / 9;
       background: #000;
       overflow: hidden;
-      cursor: pointer;
+      cursor: none !important;
     }
     .ba-video-frame video {
       width: 100%;
@@ -2322,11 +2319,12 @@
     /* CUSTOM CINEMATIC CURSOR                                      */
     /* ============================================================ */
     @media (hover: hover) and (pointer: fine) {
-      body {
-        cursor: none; /* Hide default cursor on desktop */
-      }
-      a, button, input, textarea, select, [role="button"], .video-frame, .dot-pill, .sound-toggle-btn, .center-play-trigger, .brand-badge, .typewriter-cursor {
-        cursor: none !important;
+      html,
+      body,
+      *,
+      *::before,
+      *::after {
+        cursor: none !important; /* Hide default OS cursor everywhere on desktop */
       }
     }
 
@@ -2474,7 +2472,7 @@
       background: #000;
     }
     .carousel-track .video-card {
-      cursor: default;
+      cursor: none !important;
     }
 
     @media (max-width: 768px) {
@@ -2512,7 +2510,11 @@
       .custom-cursor-follower {
         display: none !important;
       }
-      body {
+      html,
+      body,
+      *,
+      *::before,
+      *::after {
         cursor: auto !important;
       }
     }
@@ -4074,9 +4076,8 @@
           });
         });
 
-        // Video / Carousel hover elements: show cinematic "REEL" tag
         // Video / Carousel hover elements: sleek glassmorphic focus ring (no REEL text)
-        const videoTargets = document.querySelectorAll('.video-frame, .carousel-viewport, .saas-3d-stage');
+        const videoTargets = document.querySelectorAll('.video-frame, .carousel-viewport, .saas-3d-stage, .ba-video-frame, .video-card');
         videoTargets.forEach(el => {
           el.addEventListener('mouseenter', () => {
             cursorFollower.classList.add('is-video-hover');
