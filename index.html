@@ -99,12 +99,11 @@
     .brand-group {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
     }
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
       text-decoration: none;
       color: #fff;
     }
@@ -115,16 +114,24 @@
       background: var(--accent-amber);
       box-shadow: 0 0 12px var(--accent-amber);
       animation: pulseDot 2s infinite;
+      flex-shrink: 0;
     }
     @keyframes pulseDot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.6; transform: scale(1.2); }
+    }
+    .brand-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.18rem;
     }
     .brand-logo .title-text {
       font-family: 'Outfit', sans-serif;
       font-weight: 800;
       font-size: 1.25rem;
       letter-spacing: 0.5px;
+      line-height: 1.15;
     }
     .brand-logo .title-text span {
       color: var(--accent-amber);
@@ -132,16 +139,16 @@
     .brand-badge {
       display: inline-flex;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 0.3px;
-      padding: 0.2rem 0.65rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 6px;
       background: rgba(255, 158, 0, 0.12);
       border: 1px solid rgba(255, 158, 0, 0.3);
       color: var(--accent-amber);
       font-weight: 600;
       white-space: nowrap;
-      min-height: 25px;
+      min-height: 22px;
       line-height: 1.2;
       cursor: none !important;
       pointer-events: none !important;
@@ -1563,18 +1570,245 @@
       opacity: 1;
     }
 
-    /* Responsive */
+    /* ============================================================ */
+    /* ULTRA-SMOOTH MOBILE & TABLET RESPONSIVE SYSTEM               */
+    /* ============================================================ */
     @media (max-width: 900px) {
+      nav { display: none; }
+      header {
+        padding: 0.85rem 5%;
+      }
       .hero-title { font-size: 3.2rem; }
       .video-card { flex: 0 0 88vw; margin: 0 0.5rem; }
       .video-frame { height: 260px; }
-      nav { display: none; }
     }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4.8rem 5% 3.5rem;
+      }
+      .brand-logo .title-text {
+        font-size: 1.15rem;
+      }
+      .brand-badge {
+        font-size: 0.68rem;
+        padding: 0.12rem 0.5rem;
+        min-height: 20px;
+      }
+      .btn-collaborate {
+        padding: 0.52rem 1.05rem;
+        font-size: 0.82rem;
+      }
+      .section-head {
+        margin-bottom: 2.5rem;
+      }
+      .section-head h2 {
+        font-size: 2.2rem;
+      }
+      .section-head p {
+        font-size: 0.95rem;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.1rem;
+      }
+      .software-card {
+        padding: 1.5rem 1.1rem;
+      }
+      .software-logo-badge {
+        width: 52px;
+        height: 52px;
+        font-size: 1.2rem;
+        margin-bottom: 0.9rem;
+      }
+      .discipline-tag {
+        font-size: 0.82rem;
+        padding: 0.45rem 0.95rem;
+      }
+    }
+
     @media (max-width: 600px) {
-      .hero-title { font-size: 2.5rem; }
+      header {
+        padding: 0.72rem 4.5%;
+      }
+      .brand-logo .dot {
+        width: 8px;
+        height: 8px;
+      }
+      .brand-logo .title-text {
+        font-size: 1.05rem;
+        letter-spacing: 0.3px;
+      }
+      .brand-badge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.45rem;
+        min-height: 19px;
+      }
+      .btn-collaborate {
+        padding: 0.46rem 0.9rem;
+        font-size: 0.78rem;
+        gap: 0.3rem;
+      }
+      .hero-section {
+        padding-top: 5.6rem !important;
+        padding-bottom: 2.8rem !important;
+      }
+      .hero-title {
+        font-size: clamp(1.85rem, 8vw, 2.35rem) !important;
+        letter-spacing: -0.5px !important;
+        line-height: 1.1 !important;
+      }
+      .hero-subtitle {
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
+        padding: 0 0.2rem;
+        margin-bottom: 1.6rem !important;
+      }
+      .hero-cta-group {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        gap: 0.75rem;
+      }
+      .hero-cta-group .btn-play-reel,
+      .hero-cta-group .btn-secondary {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.4rem;
+        font-size: 0.92rem;
+      }
       .timeline-bar-mockup { display: none; }
-      .contact-card-main { padding: 2.2rem 1.5rem; }
-      .contact-card-main h2 { font-size: 2.1rem; }
+
+      /* SaaS 3D Stage on mobile */
+      .saas-3d-stage {
+        height: 380px !important;
+        max-width: 100%;
+      }
+      .saas-card {
+        width: 215px !important;
+        height: 360px !important;
+        border-radius: 20px !important;
+      }
+      .saas-card.is-right {
+        transform: translate3d(55px, 0, -28px) rotateY(-15deg) scale(0.88) !important;
+      }
+      .saas-card.is-left {
+        transform: translate3d(-55px, 0, -28px) rotateY(15deg) scale(0.88) !important;
+      }
+
+      /* Before & After window header on mobile */
+      .ba-window-header {
+        padding: 0.7rem 1rem;
+      }
+      .ba-window-title span:last-child {
+        display: none;
+      }
+      .ba-sound-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.74rem;
+      }
+      .ba-card-item {
+        padding: 1.2rem;
+      }
+
+      /* Experience Timeline cards on mobile */
+      .experience-timeline::before {
+        left: 20px;
+      }
+      .exp-card {
+        padding: 1.25rem 1rem;
+        gap: 1rem;
+      }
+      .exp-icon-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+      .exp-icon-box img,
+      .exp-icon-box .fallback-letter {
+        font-size: 1.1rem;
+      }
+      .exp-header {
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .exp-role-title {
+        font-size: 1.05rem;
+      }
+      .exp-date-pill {
+        font-size: 0.72rem;
+        padding: 0.15rem 0.5rem;
+      }
+      .exp-company-sub {
+        font-size: 0.82rem;
+      }
+      .exp-desc-list li {
+        font-size: 0.84rem;
+        line-height: 1.45;
+      }
+
+      /* Skills grid on mobile phones */
+      .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      /* Contact Section on mobile */
+      .contact-card-main {
+        padding: 2.2rem 1.25rem !important;
+        border-radius: 22px !important;
+      }
+      .contact-card-main h2 {
+        font-size: clamp(1.8rem, 6.5vw, 2.2rem) !important;
+        line-height: 1.15;
+      }
+      .contact-card-main p {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+      }
+      .contact-links-grid {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.85rem;
+      }
+      .contact-pill-link {
+        width: 100%;
+        justify-content: center;
+        padding: 0.85rem 1.2rem;
+        font-size: 0.9rem;
+      }
+      
+      /* Footer */
+      footer {
+        padding: 1.8rem 5%;
+        font-size: 0.82rem;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 400px) {
+      header {
+        padding: 0.65rem 4%;
+      }
+      .brand-logo .title-text {
+        font-size: 0.98rem;
+      }
+      .brand-badge {
+        font-size: 0.62rem;
+      }
+      .btn-collaborate {
+        padding: 0.42rem 0.75rem;
+        font-size: 0.74rem;
+      }
+      .saas-card {
+        width: 195px !important;
+        height: 330px !important;
+      }
+      .saas-3d-stage {
+        height: 350px !important;
+      }
     }
 
     /* ============================================================ */
@@ -2538,9 +2772,11 @@
     <div class="brand-group">
       <a href="#home" class="brand-logo" aria-label="Farhan Shujoy Home">
         <div class="dot"></div>
-        <div class="title-text">FARHAN <span>SHUJOY</span></div>
+        <div class="brand-text-col">
+          <div class="title-text">FARHAN <span>SHUJOY</span></div>
+          <span class="brand-badge"><span id="typewriterText">Video Editor</span><span class="typewriter-cursor">|</span></span>
+        </div>
       </a>
-      <span class="brand-badge"><span id="typewriterText">Video Editor</span><span class="typewriter-cursor">|</span></span>
     </div>
     
     <nav>
@@ -3918,7 +4154,7 @@
           gestureOrientation: 'vertical',
           smoothWheel: true,
           wheelMultiplier: 1.0,
-          touchMultiplier: 2.0,
+          touchMultiplier: 1.0,
           infinite: false,
         });
 
