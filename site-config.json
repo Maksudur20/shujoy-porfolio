@@ -13,14 +13,11 @@
     "textMuted": "#94a3b8",
     "textDim": "#64748b",
     "glowOrange": "rgba(255, 158, 0, 0.35)",
-    "glowIndigo": "rgba(255, 110, 0, 0.15)",
+    "glowIndigo": "rgba(255, 122, 0, 0.15)",
     "glowCyan": "rgba(255, 158, 0, 0.12)",
     "fontHeading": "Outfit",
     "fontBody": "Plus Jakarta Sans",
-    "fontAccent": "Space Grotesk",
-    "footerBg": "#07080c",
-    "footerText": "#64748b",
-    "footerFontSize": "0.95rem"
+    "fontAccent": "Space Grotesk"
   },
   "meta": {
     "title": "Farhan Shujoy | Video Editor & Motion Designer",
@@ -29,7 +26,12 @@
   "header": {
     "brandFirstName": "FARHAN",
     "brandLastName": "SHUJOY",
-    "typewriterWords": ["Video Editor", "Motion Designer", "3D Animator", "VFX Artist"],
+    "typewriterWords": [
+      "Video Editor",
+      "Motion Designer",
+      "3D Animator",
+      "VFX Artist"
+    ],
     "ctaText": "Let's collaborate",
     "ctaShortText": "Let's Talk",
     "ctaLink": "#contact"
@@ -93,73 +95,73 @@
     "description": "Continuous autoplaying carousel — when one finishes, the next reel automatically plays. You can also drag or swipe to explore.",
     "items": [
       {
-        "badge": "Commercial Cut",
         "title": "Cinematic Brand Reel",
         "subtitle": "Dynamic Cuts & Pacing",
+        "badge": "Commercial Cut",
         "tag": "Premier Pro",
         "aspect": "landscape",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
       },
       {
-        "badge": "3D Motion",
         "title": "Kinetic 3D Product Visual",
         "subtitle": "After Effects & C4D",
+        "badge": "3D Motion",
         "tag": "After Effects",
         "aspect": "landscape",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
       },
       {
-        "badge": "Agency Project",
         "title": "Creative Agency Commercial",
         "subtitle": "Cinex & The Blind Men",
+        "badge": "Agency Project",
         "tag": "VFX & Grading",
         "aspect": "portrait",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668967/shujoy-portfolio/sdqbwp4txoepxewz1un1.mp4"
       },
       {
-        "badge": "Short-Form",
         "title": "High-Converting Retention Reel",
         "subtitle": "Debutify E-Commerce",
+        "badge": "Short-Form",
         "tag": "Debutify",
         "aspect": "landscape",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668965/shujoy-portfolio/hr9lo4qh38aytpuvxu8b.mp4"
       },
       {
-        "badge": "Narrative Cut",
         "title": "Sound Design & Audio Sync",
         "subtitle": "Multi-Track Precision",
+        "badge": "Narrative Cut",
         "tag": "Sound Design",
         "aspect": "portrait",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668964/shujoy-portfolio/fg8ajptgcom9kkwujvhr.mp4"
       },
       {
-        "badge": "Typography",
         "title": "Fast-Paced Motion Teaser",
         "subtitle": "Kinetic Text & Transitions",
+        "badge": "Typography",
         "tag": "Motion Graphics",
         "aspect": "landscape",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668962/shujoy-portfolio/msv2xdx4peqcdh9zueqr.mp4"
       },
       {
-        "badge": "Product Demo",
         "title": "SaaS Demonstration Showcase",
         "subtitle": "Product Walkthrough Cut",
+        "badge": "Product Demo",
         "tag": "Product Demo",
         "aspect": "landscape",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668960/shujoy-portfolio/ucgws1dyab4xrxg8gpae.mp4"
       },
       {
-        "badge": "Broadcast",
         "title": "Broadcast News & Media Edit",
         "subtitle": "Bongo News BDC Archive",
+        "badge": "Broadcast",
         "tag": "Broadcast",
         "aspect": "portrait",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668959/shujoy-portfolio/e6vsgekufsxgsp6cbbjm.mp4"
       },
       {
-        "badge": "Finishing",
         "title": "Color Grade & Visual FX",
         "subtitle": "DaVinci Resolve Grade",
+        "badge": "Finishing",
         "tag": "DaVinci Resolve",
         "aspect": "portrait",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668956/shujoy-portfolio/lrqxutdce9wfzb7xzs0y.mp4"
@@ -180,7 +182,12 @@
         "date": "📅 Sep 2026 - Present",
         "location": "📍 Dhaka, Bangladesh · On-site",
         "desc": "Leading visual storytelling, high-end commercial post-production, motion graphics development, and cinematic sequence cutting.",
-        "skills": ["💎 Adobe Premiere Pro", "💎 Adobe After Effects", "Motion Graphics", "Color Grading"]
+        "skills": [
+          "💎 Adobe Premiere Pro",
+          "💎 Adobe After Effects",
+          "Motion Graphics",
+          "Color Grading"
+        ]
       },
       {
         "icon": "⚡",
@@ -191,29 +198,42 @@
         "date": "📅 May 2026 - Sep 2026 · 5 mos",
         "location": "📍 Dhaka, Bangladesh · Hybrid",
         "desc": "Produced high-energy agency deliverables, client commercials, social campaign teasers, and 3D kinetic animation assets.",
-        "skills": ["Commercial Editing", "Visual Effects", "Social Media Reels"]
+        "skills": [
+          "Commercial Editing",
+          "Visual Effects",
+          "Social Media Reels"
+        ]
       },
       {
         "icon": "🦋",
         "role": "Video Editor",
         "company": "Debutify · Remote",
         "badge": "Remote",
-        "badgeColor": "#a855f7",
+        "badgeColor": "#ff9e00",
         "date": "📅 Jan 2026 - May 2026 · 5 mos",
         "location": "📍 Remote Work",
         "desc": "Produced and edited high-converting video content, viral short-form content, software demonstrations, and animated explainer videos for international audiences.",
-        "skills": ["High-Converting Video", "Short-form Content", "Product Explainers"]
+        "skills": [
+          "High-Converting Video",
+          "Short-form Content",
+          "Product Explainers"
+        ]
       },
       {
         "icon": "📺",
         "role": "Video Editor",
         "company": "Bongo News BDC · Media House",
         "badge": "Broadcast",
-        "badgeColor": "#fbbf24",
+        "badgeColor": "#ff9e00",
         "date": "📅 Oct 2023 - 2024 · 4 mos",
         "location": "📍 Dhaka, Bangladesh",
         "desc": "Edited and produced over 200 hours of video content, enhancing viewer engagement through precise cuts and pacing. Developed 20 commercials and 10 product demonstrations. Implemented advanced color correction and audio synchronization techniques, improving video quality by 25%.",
-        "skills": ["200+ Hours Produced", "20 Commercials", "Audio Synchronization", "Color Correction (+25% Quality)"]
+        "skills": [
+          "200+ Hours Produced",
+          "20 Commercials",
+          "Audio Synchronization",
+          "Color Correction (+25% Quality)"
+        ]
       }
     ]
   },
@@ -264,21 +284,16 @@
     "email": "contact@farhanshujoy.com",
     "emailLink": "https://mail.google.com/mail/?view=cm&fs=1&to=contact@farhanshujoy.com",
     "linkedin": "https://www.linkedin.com/in/farhan-shujoy/",
-    "whatsapp": "",
     "youtube": "",
     "instagram": "",
     "twitter": "",
-    "behance": "",
-    "github": ""
+    "whatsapp": "",
+    "behance": ""
   },
   "footer": {
     "copyright": "© 2026 Farhan Shujoy. Crafted for cinematic excellence.",
-    "tagline": "Crafted for cinematic excellence.",
     "textColor": "#64748b",
     "bgColor": "transparent",
     "fontSize": "0.95rem"
-  },
-  "auth": {
-    "adminPassword": "thikase"
   }
 }
