@@ -345,32 +345,66 @@
   // Update Experience Timeline DOM
   function updateExperienceDOM(items) {
     const container = document.querySelector('.experience-timeline');
-    if (!container) return;
+    if (!container || !Array.isArray(items)) return;
 
-    container.innerHTML = items.map((item, idx) => `
-      <div class="exp-card reveal reveal-${idx % 2 === 0 ? 'right' : 'left'} delay-${(idx % 3) + 1}">
-        <div class="exp-icon-box">
-          <span class="fallback-letter">${item.icon || '🎬'}</span>
-        </div>
-        <div class="exp-content">
-          <div class="exp-header">
-            <div>
-              <h3 class="exp-role">${escapeHTML(item.role || '')}</h3>
-              <div class="exp-company">${escapeHTML(item.company || '')}</div>
+    const cards = container.querySelectorAll('.exp-card');
+    if (cards.length === items.length) {
+      // In-place update preserving DOM nodes and IntersectionObserver in-view state
+      items.forEach((item, idx) => {
+        const card = cards[idx];
+        if (!card) return;
+
+        const iconEl = card.querySelector('.fallback-letter');
+        const roleEl = card.querySelector('.exp-role');
+        const compEl = card.querySelector('.exp-company');
+        const badgeEl = card.querySelector('.exp-badge');
+        const metaEl = card.querySelector('.exp-meta');
+        const descEl = card.querySelector('.exp-desc');
+        const skillsEl = card.querySelector('.exp-skills-pill');
+
+        if (iconEl && item.icon) iconEl.textContent = item.icon;
+        if (roleEl && item.role) roleEl.textContent = item.role;
+        if (compEl && item.company) compEl.textContent = item.company;
+        if (badgeEl && item.badge) badgeEl.textContent = item.badge;
+        if (metaEl && (item.date || item.location)) {
+          metaEl.innerHTML = `<span>${escapeHTML(item.date || '')}</span><span>${escapeHTML(item.location || '')}</span>`;
+        }
+        if (descEl && item.desc) descEl.textContent = item.desc;
+        if (skillsEl && Array.isArray(item.skills)) {
+          skillsEl.innerHTML = item.skills.map(s => `<span>${escapeHTML(s)}</span>`).join('');
+        }
+      });
+    } else {
+      // Rebuild with in-view class to ensure visibility
+      container.innerHTML = items.map((item, idx) => `
+        <div class="exp-card reveal in-view reveal-${idx % 2 === 0 ? 'right' : 'left'} delay-${(idx % 3) + 1}">
+          <div class="exp-icon-box">
+            <span class="fallback-letter">${item.icon || '🎬'}</span>
+          </div>
+          <div class="exp-content">
+            <div class="exp-header">
+              <div>
+                <h3 class="exp-role">${escapeHTML(item.role || '')}</h3>
+                <div class="exp-company">${escapeHTML(item.company || '')}</div>
+              </div>
+              <span class="exp-badge">${escapeHTML(item.badge || 'Present')}</span>
             </div>
-            <span class="exp-badge">${escapeHTML(item.badge || 'Present')}</span>
-          </div>
-          <div class="exp-meta">
-            <span>${escapeHTML(item.date || '')}</span>
-            <span>${escapeHTML(item.location || '')}</span>
-          </div>
-          <p class="exp-desc">${escapeHTML(item.desc || '')}</p>
-          <div class="exp-skills-pill">
-            ${(item.skills || []).map(s => `<span>${escapeHTML(s)}</span>`).join('')}
+            <div class="exp-meta">
+              <span>${escapeHTML(item.date || '')}</span>
+              <span>${escapeHTML(item.location || '')}</span>
+            </div>
+            <p class="exp-desc">${escapeHTML(item.desc || '')}</p>
+            <div class="exp-skills-pill">
+              ${(item.skills || []).map(s => `<span>${escapeHTML(s)}</span>`).join('')}
+            </div>
           </div>
         </div>
-      </div>
-    `).join('');
+      `).join('');
+
+      if (window.reobserveRevealItems) {
+        window.reobserveRevealItems();
+      }
+    }
   }
 
   // Update Projects Carousel DOM

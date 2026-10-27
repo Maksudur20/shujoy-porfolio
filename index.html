@@ -4232,9 +4232,7 @@
       // ============================================================
       // ULTRA-SMOOTH REVERSIBLE SCROLL REVEAL ANIMATIONS
       // ============================================================
-      const revealItems = document.querySelectorAll('.reveal');
-
-      const revealObserver = new IntersectionObserver((entries) => {
+      window.revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('in-view');
@@ -4248,7 +4246,10 @@
         rootMargin: '0px 0px -25px 0px'
       });
 
-      revealItems.forEach(el => revealObserver.observe(el));
+      window.reobserveRevealItems = () => {
+        document.querySelectorAll('.reveal').forEach(el => window.revealObserver.observe(el));
+      };
+      window.reobserveRevealItems();
 
       // Trigger initial animations for items in viewport on page load (Hero entrance)
       const triggerInitialView = () => {
