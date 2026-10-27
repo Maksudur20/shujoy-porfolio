@@ -295,5 +295,22 @@
     "textColor": "#64748b",
     "bgColor": "transparent",
     "fontSize": "0.95rem"
-  }
+  },
+  "sectionsVisibility": {
+    "hero": true,
+    "beforeAfter": true,
+    "projects": true,
+    "experience": true,
+    "skills": true,
+    "contact": true,
+    "footer": true
+  },
+  "sectionOrder": [
+    "hero",
+    "beforeAfter",
+    "projects",
+    "experience",
+    "skills",
+    "contact"
+  ]
 }

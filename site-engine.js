@@ -177,17 +177,8 @@
       }
 
       // 3D SaaS Reels
-      if (Array.isArray(hr.saasReels)) {
-        hr.saasReels.forEach((reel, idx) => {
-          const card = document.getElementById(`saasCard${idx}`);
-          if (card) {
-            const vid = card.querySelector('video');
-            if (vid && reel.videoUrl && vid.getAttribute('src') !== reel.videoUrl) {
-              vid.setAttribute('src', reel.videoUrl);
-              vid.load();
-            }
-          }
-        });
+      if (Array.isArray(hr.saasReels) && hr.saasReels.length > 0) {
+        updateHeroReelsDOM(hr.saasReels);
       }
     }
 
@@ -340,6 +331,65 @@
         }
       }
     }
+
+    // K. SECTION VISIBILITY (Show/Hide)
+    if (cfg.sectionsVisibility) {
+      const secMap = {
+        hero: document.getElementById('home') || document.querySelector('.hero-section'),
+        beforeAfter: document.getElementById('before-after'),
+        projects: document.getElementById('projects'),
+        experience: document.getElementById('experience'),
+        skills: document.getElementById('skills'),
+        contact: document.getElementById('contact'),
+        footer: document.querySelector('footer')
+      };
+      const navMap = {
+        projects: document.querySelector('.nav-links a[href="#projects"]'),
+        experience: document.querySelector('.nav-links a[href="#experience"]'),
+        skills: document.querySelector('.nav-links a[href="#skills"]'),
+        contact: document.querySelector('.nav-links a[href="#contact"]')
+      };
+
+      Object.entries(cfg.sectionsVisibility).forEach(([sec, isVis]) => {
+        const el = secMap[sec];
+        if (el) {
+          if (isVis === false) {
+            el.style.setProperty('display', 'none', 'important');
+          } else {
+            el.style.removeProperty('display');
+          }
+        }
+        const navEl = navMap[sec];
+        if (navEl) {
+          if (isVis === false) {
+            navEl.style.setProperty('display', 'none', 'important');
+          } else {
+            navEl.style.removeProperty('display');
+          }
+        }
+      });
+    }
+
+    // L. SECTION ORDER (Drag & Drop Reordering)
+    if (Array.isArray(cfg.sectionOrder) && cfg.sectionOrder.length > 0) {
+      const secMap = {
+        hero: document.getElementById('home') || document.querySelector('.hero-section'),
+        beforeAfter: document.getElementById('before-after'),
+        projects: document.getElementById('projects'),
+        experience: document.getElementById('experience'),
+        skills: document.getElementById('skills'),
+        contact: document.getElementById('contact')
+      };
+      const main = document.querySelector('main');
+      if (main) {
+        cfg.sectionOrder.forEach(secKey => {
+          const el = secMap[secKey];
+          if (el && el.parentNode === main) {
+            main.appendChild(el);
+          }
+        });
+      }
+    }
   }
 
   // Update Experience Timeline DOM
@@ -472,6 +522,63 @@
 
       // Dispatch event for carousel re-bind if needed
       window.dispatchEvent(new CustomEvent('shujoy_carousel_rebuild'));
+    }
+  }
+
+  // Update Hero 3D SaaS Reels DOM
+  function updateHeroReelsDOM(reels) {
+    const stage = document.getElementById('saas3DStage') || document.querySelector('.saas-3d-stage');
+    const dotsWrap = document.getElementById('saasDots');
+    if (!stage || !Array.isArray(reels) || reels.length === 0) return;
+
+    const existingCards = stage.querySelectorAll('.saas-card');
+    if (existingCards.length === reels.length) {
+      reels.forEach((reel, idx) => {
+        const card = existingCards[idx];
+        const vid = card.querySelector('video');
+        if (vid && reel.videoUrl && vid.getAttribute('src') !== reel.videoUrl) {
+          vid.setAttribute('src', reel.videoUrl);
+          vid.load();
+        }
+      });
+      return;
+    }
+
+    // Reconstruct cards & dots if count changed
+    stage.innerHTML = '';
+    reels.forEach((reel, idx) => {
+      const card = document.createElement('div');
+      card.className = `saas-card ${idx === 0 ? 'is-active' : idx === 1 ? 'is-right' : 'is-left'}`;
+      card.dataset.index = idx;
+      card.id = `saasCard${idx}`;
+      card.innerHTML = `
+        <div class="saas-card-inner">
+          <div class="saas-card-notch">
+            <button class="hero-sound-btn" aria-label="Toggle Sound" title="Sound Mute/Unmute">
+              <svg class="icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            </button>
+          </div>
+          <video class="saas-card-video" playsinline muted preload="metadata" src="${escapeHTML(reel.videoUrl || '')}"></video>
+          <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
+        </div>
+      `;
+      stage.appendChild(card);
+    });
+
+    if (dotsWrap) {
+      dotsWrap.innerHTML = '';
+      reels.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = `saas-dot ${idx === 0 ? 'active' : ''}`;
+        dot.dataset.index = idx;
+        dot.setAttribute('aria-label', `Go to Reel ${idx + 1}`);
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    if (typeof window._refreshSaasCarousel === 'function') {
+      window._refreshSaasCarousel();
     }
   }
 

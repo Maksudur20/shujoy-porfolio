@@ -3645,21 +3645,17 @@
       const heroRight = document.getElementById('heroRightCarousel');
       const heroLoadCue = document.getElementById('heroLoadCue');
 
-      const saasCards = [
-        document.getElementById('saasCard0'),
-        document.getElementById('saasCard1'),
-        document.getElementById('saasCard2')
-      ].filter(Boolean);
-
+      let saasCards = Array.from(document.querySelectorAll('.saas-card'));
       const saasPrevBtn = document.getElementById('saasPrevBtn');
       const saasNextBtn = document.getElementById('saasNextBtn');
-      const saasDots = Array.from(document.querySelectorAll('.saas-dot'));
+      let saasDots = Array.from(document.querySelectorAll('.saas-dot'));
       let saasActiveIndex = 0;
       let saasAutoTimer = null;
       let isHeroSoundMuted = true;
 
       // Update 3D card layout and classes
       function updateSaasCarousel(targetIndex) {
+        if (!saasCards.length) return;
         saasActiveIndex = (targetIndex + saasCards.length) % saasCards.length;
 
         saasCards.forEach((card, idx) => {
@@ -3698,8 +3694,6 @@
         saasDots.forEach((dot, idx) => {
           dot.classList.toggle('active', idx === saasActiveIndex);
         });
-
-        // Video auto-advances only when finished (no arbitrary timer)
       }
 
       function nextSaasSlide() {
@@ -3710,59 +3704,69 @@
         updateSaasCarousel(saasActiveIndex - 1);
       }
 
-      // Event listeners for SaaS cards
-      saasCards.forEach((card, idx) => {
-        const video = card.querySelector('video');
-        const timeFill = card.querySelector('.saas-timeline-fill');
-        const soundBtn = card.querySelector('.hero-sound-btn');
+      // Dynamic Event listeners for SaaS cards
+      function bindSaasEventListeners() {
+        saasCards = Array.from(document.querySelectorAll('.saas-card'));
+        saasDots = Array.from(document.querySelectorAll('.saas-dot'));
 
-        // Progress bar updates
-        if (video && timeFill) {
-          video.addEventListener('timeupdate', () => {
-            if (card.classList.contains('is-active') && video.duration) {
-              const pct = (video.currentTime / video.duration) * 100;
-              timeFill.style.width = `${pct}%`;
-            }
-          });
+        saasCards.forEach((card, idx) => {
+          const video = card.querySelector('video');
+          const timeFill = card.querySelector('.saas-timeline-fill');
+          const soundBtn = card.querySelector('.hero-sound-btn');
 
-          // Auto-advance ONLY when video finishes completely
-          video.addEventListener('ended', () => {
-            if (card.classList.contains('is-active')) {
-              nextSaasSlide();
-            }
-          });
-        }
-
-        // Sound toggle button on card (Volume On / Off only)
-        if (soundBtn && video) {
-          soundBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isHeroSoundMuted = !isHeroSoundMuted;
-            video.muted = isHeroSoundMuted;
-
-            // Sync all sound buttons
-            document.querySelectorAll('.hero-sound-btn').forEach(btn => {
-              btn.classList.toggle('is-unmuted', !isHeroSoundMuted);
+          if (video && timeFill && !video._hasSaasListeners) {
+            video._hasSaasListeners = true;
+            video.addEventListener('timeupdate', () => {
+              if (card.classList.contains('is-active') && video.duration) {
+                const pct = (video.currentTime / video.duration) * 100;
+                timeFill.style.width = `${pct}%`;
+              }
             });
-          });
-        }
+            video.addEventListener('ended', () => {
+              if (card.classList.contains('is-active')) {
+                nextSaasSlide();
+              }
+            });
+          }
 
-        // Card click handling: side cards switch to active, active card DOES NOT pause/resume
-        card.addEventListener('click', () => {
-          if (card.classList.contains('is-right')) {
-            nextSaasSlide();
-          } else if (card.classList.contains('is-left')) {
-            prevSaasSlide();
+          if (soundBtn && video && !soundBtn._hasSoundListeners) {
+            soundBtn._hasSoundListeners = true;
+            soundBtn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              isHeroSoundMuted = !isHeroSoundMuted;
+              video.muted = isHeroSoundMuted;
+              document.querySelectorAll('.hero-sound-btn').forEach(btn => {
+                btn.classList.toggle('is-unmuted', !isHeroSoundMuted);
+              });
+            });
+          }
+
+          if (!card._hasClickListeners) {
+            card._hasClickListeners = true;
+            card.addEventListener('click', () => {
+              if (card.classList.contains('is-right')) {
+                nextSaasSlide();
+              } else if (card.classList.contains('is-left')) {
+                prevSaasSlide();
+              }
+            });
           }
         });
-      });
 
-      if (saasNextBtn) saasNextBtn.addEventListener('click', nextSaasSlide);
-      if (saasPrevBtn) saasPrevBtn.addEventListener('click', prevSaasSlide);
+        saasDots.forEach((dot, idx) => {
+          if (!dot._hasDotListeners) {
+            dot._hasDotListeners = true;
+            dot.addEventListener('click', () => updateSaasCarousel(idx));
+          }
+        });
+      }
 
-      saasDots.forEach((dot, idx) => {
-        dot.addEventListener('click', () => updateSaasCarousel(idx));
-      });
+      bindSaasEventListeners();
+
+      window._refreshSaasCarousel = function() {
+        bindSaasEventListeners();
+        updateSaasCarousel(0);
+      };
 
       // Touch swipe support for mobile
       const heroStage = document.getElementById('saas3DStage');

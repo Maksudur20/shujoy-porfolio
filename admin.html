@@ -179,15 +179,16 @@
     .nav-tab-item {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
+      gap: 0.65rem;
+      padding: 0.65rem 0.85rem;
       border-radius: 8px;
       color: var(--admin-text-muted);
       cursor: pointer;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: all 0.2s;
       user-select: none;
+      position: relative;
     }
     .nav-tab-item:hover {
       background: rgba(255, 255, 255, 0.04);
@@ -199,12 +200,89 @@
       color: var(--admin-primary);
       font-weight: 600;
     }
+    .nav-tab-item.is-dragging {
+      opacity: 0.3;
+      background: rgba(255, 158, 0, 0.2);
+    }
+    .nav-tab-item.drag-over-top {
+      border-top: 2px solid var(--admin-primary) !important;
+    }
+    .nav-tab-item.drag-over-bottom {
+      border-bottom: 2px solid var(--admin-primary) !important;
+    }
+    .nav-tab-item.section-hidden {
+      opacity: 0.52;
+    }
+    .nav-tab-item.section-hidden .nav-tab-title {
+      text-decoration: line-through;
+      color: var(--admin-text-dim);
+    }
+    .nav-drag-handle {
+      cursor: grab;
+      cursor: -webkit-grab;
+      color: var(--admin-text-dim);
+      font-size: 0.95rem;
+      line-height: 1;
+      padding: 0.2rem 0.1rem;
+      opacity: 0.4;
+      transition: opacity 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .nav-drag-handle:hover,
+    .nav-tab-item:hover .nav-drag-handle {
+      opacity: 1;
+      color: var(--admin-primary);
+    }
+    .nav-drag-handle:active {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+    }
+    .nav-tab-title {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .section-vis-btn {
+      background: transparent;
+      border: none;
+      color: var(--admin-text-dim);
+      cursor: pointer;
+      padding: 0.25rem 0.35rem;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      margin-left: auto;
+      font-size: 0.85rem;
+    }
+    .section-vis-btn:hover {
+      color: var(--admin-primary);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .section-vis-btn.is-hidden {
+      color: #ef4444;
+    }
+    .sec-vis-tag {
+      font-size: 0.62rem;
+      background: rgba(239, 68, 68, 0.18);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-right: 0.25rem;
+    }
     .nav-tab-icon {
       font-size: 1.15rem;
       width: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .sidebar-footer {
@@ -523,6 +601,101 @@
     .item-actions {
       display: flex;
       gap: 0.35rem;
+      flex-shrink: 0;
+    }
+    .item-header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+      min-width: 0;
+    }
+    .badge-title-input {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px dashed rgba(255, 255, 255, 0.22) !important;
+      border-radius: 6px !important;
+      padding: 0.25rem 0.55rem !important;
+      color: #fff !important;
+      font-size: 0.84rem !important;
+      font-weight: 600 !important;
+      max-width: 320px;
+      transition: all 0.2s;
+    }
+    .badge-title-input:focus {
+      background: rgba(15, 18, 28, 0.95) !important;
+      border: 1px solid var(--admin-primary) !important;
+      box-shadow: 0 0 10px var(--admin-primary-glow) !important;
+    }
+
+    /* Search Bar Component */
+    .item-search-bar-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      background: rgba(10, 12, 18, 0.75);
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      padding: 0.45rem 0.85rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .item-search-bar-wrap:focus-within {
+      border-color: var(--admin-primary);
+      box-shadow: 0 0 14px var(--admin-primary-glow);
+    }
+    .search-input-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex: 1;
+      position: relative;
+    }
+    .search-icon {
+      font-size: 0.95rem;
+      color: var(--admin-text-muted);
+      flex-shrink: 0;
+    }
+    .item-search-input {
+      background: transparent !important;
+      border: none !important;
+      padding: 0.35rem 0 !important;
+      color: #fff !important;
+      font-size: 0.88rem !important;
+      box-shadow: none !important;
+      width: 100%;
+    }
+    .item-search-input:focus {
+      box-shadow: none !important;
+    }
+    .search-clear-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: var(--admin-text-muted);
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.72rem;
+      line-height: 1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .search-clear-btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      color: #ef4444;
+    }
+    .search-results-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--admin-primary);
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.25);
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      white-space: nowrap;
     }
 
     /* Tag Editor Component */
@@ -657,46 +830,63 @@
   <div class="admin-container">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <ul class="nav-tabs">
+      <ul class="nav-tabs" id="sidebarNavTabs">
         <li class="nav-tab-item active" data-tab="theme">
+          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🎨</span>
-          <span>Colors & Theme</span>
+          <span class="nav-tab-title">Colors & Theme</span>
         </li>
         <li class="nav-tab-item" data-tab="typography">
+          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🔤</span>
-          <span>Typography & Fonts</span>
+          <span class="nav-tab-title">Typography & Fonts</span>
         </li>
-        <li class="nav-tab-item" data-tab="hero">
+        <li class="nav-tab-item" data-tab="hero" data-section="hero">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">⚡</span>
-          <span>Header & Hero</span>
+          <span class="nav-tab-title">Header & Hero</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="hero">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="beforeAfter">
+        <li class="nav-tab-item" data-tab="beforeAfter" data-section="beforeAfter">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🎬</span>
-          <span>Before & After</span>
+          <span class="nav-tab-title">Before & After</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="beforeAfter">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="projects">
+        <li class="nav-tab-item" data-tab="projects" data-section="projects">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">📁</span>
-          <span>Projects Carousel</span>
+          <span class="nav-tab-title">Projects Carousel</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="projects">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="experience">
+        <li class="nav-tab-item" data-tab="experience" data-section="experience">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">💼</span>
-          <span>Work Experience</span>
+          <span class="nav-tab-title">Work Experience</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="experience">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="skills">
+        <li class="nav-tab-item" data-tab="skills" data-section="skills">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🛠️</span>
-          <span>Skills & Software</span>
+          <span class="nav-tab-title">Skills & Software</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="skills">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="contact">
+        <li class="nav-tab-item" data-tab="contact" data-section="contact">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">📬</span>
-          <span>Contact & Socials</span>
+          <span class="nav-tab-title">Contact & Socials</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="contact">👁️</button>
         </li>
-        <li class="nav-tab-item" data-tab="footer">
+        <li class="nav-tab-item" data-tab="footer" data-section="footer">
+          <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🦶</span>
-          <span>Footer & SEO</span>
+          <span class="nav-tab-title">Footer & SEO</span>
+          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="footer">👁️</button>
         </li>
         <li class="nav-tab-item" data-tab="security">
+          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🔐</span>
-          <span>Password & Security</span>
+          <span class="nav-tab-title">Password & Security</span>
         </li>
       </ul>
 
@@ -1008,8 +1198,11 @@
 
           <!-- Hero 3D SaaS Reel Videos -->
           <div class="section-card">
-            <div class="section-card-title">Hero 3D SaaS Showcase Reel Cards (3 Videos)</div>
-            <div class="section-card-subtitle">These 3 reels rotate in the interactive 3D perspective stage in your hero right column.</div>
+            <div class="section-card-title">
+              <span>Hero 3D SaaS Showcase Reel Cards (<span id="heroReelsCount">3</span>)</span>
+              <button class="btn btn-outline-primary btn-sm" id="addHeroReelBtn">+ Add New Reel Card</button>
+            </div>
+            <div class="section-card-subtitle">These reels rotate in the interactive 3D perspective stage in your hero right column.</div>
             <div class="items-container" id="heroReelsContainer">
               <!-- Rendered via JS -->
             </div>
@@ -1098,6 +1291,17 @@
               <button class="btn btn-outline-primary btn-sm" id="addProjectBtn">+ Add New Project</button>
             </div>
             <div class="section-card-subtitle">Drag or reorder projects to decide what plays first.</div>
+
+            <!-- Project Real-time Search Box -->
+            <div class="item-search-bar-wrap">
+              <div class="search-input-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="projectSearchInput" class="item-search-input" placeholder="Search projects by title, client, badge, software tag...">
+                <button type="button" class="search-clear-btn" id="projectSearchClear" style="display:none;" title="Clear Search">✕</button>
+              </div>
+              <div class="search-results-pill" id="projectSearchResults" style="display:none;"></div>
+            </div>
+
             <div class="items-container" id="projectsContainer">
               <!-- Rendered via JS -->
             </div>
@@ -1136,6 +1340,17 @@
               <span>Timeline Positions (<span id="expCount">0</span>)</span>
               <button class="btn btn-outline-primary btn-sm" id="addExpBtn">+ Add Position</button>
             </div>
+
+            <!-- Experience Real-time Search Box -->
+            <div class="item-search-bar-wrap">
+              <div class="search-input-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="experienceSearchInput" class="item-search-input" placeholder="Search positions by role, company, location, skills, badge...">
+                <button type="button" class="search-clear-btn" id="experienceSearchClear" style="display:none;" title="Clear Search">✕</button>
+              </div>
+              <div class="search-results-pill" id="expSearchResults" style="display:none;"></div>
+            </div>
+
             <div class="items-container" id="experienceContainer">
               <!-- Rendered via JS -->
             </div>
@@ -1495,10 +1710,12 @@
     // Initialize
     document.addEventListener('DOMContentLoaded', async () => {
       setupTabSwitching();
+      setupSidebarReorderAndVisibility();
       setupColorPickerSync();
       setupPresetChips();
       setupPreviewControls();
       setupSecurityAndLogout();
+      setupSearchFilters();
       await loadInitialConfig();
     });
 
@@ -1633,6 +1850,16 @@
       setVal('footer_copyright', ft.copyright || '');
       syncSwatches();
 
+      // Sidebar Section Visibility & Order
+      if (cfg.sectionsVisibility) {
+        sidebarSectionsVisibility = { ...sidebarSectionsVisibility, ...cfg.sectionsVisibility };
+      }
+      if (Array.isArray(cfg.sectionOrder) && cfg.sectionOrder.length > 0) {
+        currentSectionOrder = [...cfg.sectionOrder];
+        applySavedSectionOrderToSidebar(currentSectionOrder);
+      }
+      updateSidebarVisibilityUI();
+
       updateFontPreview();
     }
 
@@ -1726,7 +1953,11 @@
           textColor: getVal('footer_textColor'),
           bgColor: getVal('footer_bgColor'),
           fontSize: getVal('footer_fontSize')
-        }
+        },
+        sectionsVisibility: { ...sidebarSectionsVisibility },
+        sectionOrder: Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
+          .map(t => t.dataset.tab)
+          .filter(t => ['hero', 'beforeAfter', 'projects', 'experience', 'skills', 'contact'].includes(t))
       };
 
       currentConfig = cfg;
@@ -1954,25 +2185,41 @@
       return typewriterTagsList;
     }
 
-    // Hero 3D SaaS Reels
+    function escapeAttr(str) {
+      if (!str || typeof str !== 'string') return '';
+      return str.replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    // Hero 3D SaaS Reels (Image 2: Add more cards option)
+    let heroReelsList = [];
     function renderHeroReels(reels) {
+      heroReelsList = [...reels];
+      const countEl = document.getElementById('heroReelsCount');
+      if (countEl) countEl.textContent = heroReelsList.length;
       const container = document.getElementById('heroReelsContainer');
       container.innerHTML = '';
-      reels.forEach((reel, idx) => {
+
+      heroReelsList.forEach((reel, idx) => {
         const card = document.createElement('div');
         card.className = 'item-card';
+        const roleLabel = idx === 0 ? 'Center Active' : idx === 1 ? 'Right Tilt' : idx === 2 ? 'Left Tilt' : `Queued Reel #${idx + 1}`;
         card.innerHTML = `
           <div class="item-card-header">
-            <span class="item-index-badge">Card #${idx + 1} (${idx === 0 ? 'Center Active' : idx === 1 ? 'Right Tilt' : 'Left Tilt'})</span>
+            <span class="item-index-badge">Card #${idx + 1} (${roleLabel})</span>
+            <div class="item-actions">
+              <button class="btn btn-secondary btn-sm" onclick="moveHeroReel(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button class="btn btn-secondary btn-sm" onclick="moveHeroReel(${idx}, 1)" ${idx === heroReelsList.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteHeroReel(${idx})" ${heroReelsList.length <= 1 ? 'disabled' : ''} title="Delete Card">🗑️</button>
+            </div>
           </div>
           <div class="form-grid">
             <div class="form-group">
               <label>Reel Title</label>
-              <input type="text" class="hero-reel-title" value="${reel.title || ''}">
+              <input type="text" class="hero-reel-title" data-idx="${idx}" value="${escapeAttr(reel.title || '')}">
             </div>
             <div class="form-group">
               <label>Video URL (.mp4 / Cloudinary)</label>
-              <input type="text" class="hero-reel-url" value="${reel.videoUrl || ''}">
+              <input type="text" class="hero-reel-url" data-idx="${idx}" value="${escapeAttr(reel.videoUrl || '')}">
             </div>
           </div>
         `;
@@ -1980,14 +2227,42 @@
       });
     }
 
+    window.moveHeroReel = (idx, direction) => {
+      const target = idx + direction;
+      if (target < 0 || target >= heroReelsList.length) return;
+      const item = heroReelsList.splice(idx, 1)[0];
+      heroReelsList.splice(target, 0, item);
+      renderHeroReels(heroReelsList);
+      syncLivePreview(collectConfigFromForm());
+    };
+
+    window.deleteHeroReel = (idx) => {
+      if (confirm('Delete this 3D showcase reel card?')) {
+        heroReelsList.splice(idx, 1);
+        renderHeroReels(heroReelsList);
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    const addHeroReelBtn = document.getElementById('addHeroReelBtn');
+    if (addHeroReelBtn) {
+      addHeroReelBtn.addEventListener('click', () => {
+        heroReelsList.push({
+          title: `Showcase Reel 0${heroReelsList.length + 1}`,
+          videoUrl: ""
+        });
+        renderHeroReels(heroReelsList);
+        syncLivePreview(collectConfigFromForm());
+      });
+    }
+
     function collectHeroReels() {
-      const titles = document.querySelectorAll('.hero-reel-title');
-      const urls = document.querySelectorAll('.hero-reel-url');
+      const cards = document.querySelectorAll('#heroReelsContainer .item-card');
       const reels = [];
-      titles.forEach((el, idx) => {
+      cards.forEach(card => {
         reels.push({
-          title: el.value,
-          videoUrl: urls[idx]?.value || ''
+          title: card.querySelector('.hero-reel-title')?.value || '',
+          videoUrl: card.querySelector('.hero-reel-url')?.value || ''
         });
       });
       return reels;
@@ -2007,15 +2282,15 @@
           <div class="form-grid">
             <div class="form-group" style="max-width:110px;">
               <label>Icon Emoji</label>
-              <input type="text" class="pillar-icon" value="${p.icon || '🎨'}">
+              <input type="text" class="pillar-icon" value="${escapeAttr(p.icon || '🎨')}">
             </div>
             <div class="form-group">
               <label>Pillar Title</label>
-              <input type="text" class="pillar-title" value="${p.title || ''}">
+              <input type="text" class="pillar-title" value="${escapeAttr(p.title || '')}">
             </div>
             <div class="form-group full-width">
               <label>Description</label>
-              <textarea class="pillar-desc" rows="2">${p.desc || ''}</textarea>
+              <textarea class="pillar-desc" rows="2">${escapeHTML(p.desc || '')}</textarea>
             </div>
           </div>
         `;
@@ -2038,20 +2313,32 @@
       return pillars;
     }
 
-    // Projects Carousel
+    // Projects Carousel (Image 3: Header Edit + Image 4: Real-time Search)
     let projectItemsList = [];
     function renderProjects(items) {
       projectItemsList = [...items];
-      document.getElementById('projectCount').textContent = projectItemsList.length;
+      const countEl = document.getElementById('projectCount');
+      if (countEl) countEl.textContent = projectItemsList.length;
       const container = document.getElementById('projectsContainer');
       container.innerHTML = '';
 
       projectItemsList.forEach((item, idx) => {
         const card = document.createElement('div');
-        card.className = 'item-card';
+        card.className = 'item-card project-item-card';
+        card.dataset.title = (item.title || '').toLowerCase();
+        card.dataset.sub = (item.subtitle || '').toLowerCase();
+        card.dataset.tag = (item.tag || '').toLowerCase();
+        card.dataset.badge = (item.badge || '').toLowerCase();
+        card.dataset.idx = idx;
+
         card.innerHTML = `
           <div class="item-card-header">
-            <span class="item-index-badge">🎬 Project #${idx + 1} - ${item.title || 'Untitled'}</span>
+            <div class="item-header-title-wrap">
+              <span class="item-index-badge">
+                🎬 Project #${idx + 1} – 
+                <input type="text" class="badge-title-input proj-header-title-input" data-idx="${idx}" value="${escapeAttr(item.title || 'Untitled')}" title="Click to edit project title directly">
+              </span>
+            </div>
             <div class="item-actions">
               <button class="btn btn-secondary btn-sm" onclick="moveProject(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
               <button class="btn btn-secondary btn-sm" onclick="moveProject(${idx}, 1)" ${idx === projectItemsList.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
@@ -2061,19 +2348,19 @@
           <div class="form-grid">
             <div class="form-group">
               <label>Project Title</label>
-              <input type="text" class="proj-title" data-idx="${idx}" value="${item.title || ''}">
+              <input type="text" class="proj-title" data-idx="${idx}" value="${escapeAttr(item.title || '')}">
             </div>
             <div class="form-group">
               <label>Subtitle / Client</label>
-              <input type="text" class="proj-sub" data-idx="${idx}" value="${item.subtitle || ''}">
+              <input type="text" class="proj-sub" data-idx="${idx}" value="${escapeAttr(item.subtitle || '')}">
             </div>
             <div class="form-group">
               <label>Badge Text</label>
-              <input type="text" class="proj-badge" data-idx="${idx}" value="${item.badge || 'Commercial Cut'}">
+              <input type="text" class="proj-badge" data-idx="${idx}" value="${escapeAttr(item.badge || 'Commercial Cut')}">
             </div>
             <div class="form-group">
               <label>Software Tag</label>
-              <input type="text" class="proj-tag" data-idx="${idx}" value="${item.tag || 'Premier Pro'}">
+              <input type="text" class="proj-tag" data-idx="${idx}" value="${escapeAttr(item.tag || 'Premier Pro')}">
             </div>
             <div class="form-group">
               <label>Aspect Ratio</label>
@@ -2084,26 +2371,85 @@
             </div>
             <div class="form-group full-width">
               <label>Video Stream URL (.mp4 / Cloudinary)</label>
-              <input type="text" class="proj-url" data-idx="${idx}" value="${item.videoUrl || ''}">
+              <input type="text" class="proj-url" data-idx="${idx}" value="${escapeAttr(item.videoUrl || '')}">
             </div>
           </div>
         `;
         container.appendChild(card);
       });
+
+      // Synchronize header title edit and form input edit
+      container.querySelectorAll('.proj-title').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const idx = e.target.dataset.idx;
+          const headerInput = container.querySelector(`.proj-header-title-input[data-idx="${idx}"]`);
+          if (headerInput) headerInput.value = e.target.value;
+          const card = container.querySelector(`.project-item-card[data-idx="${idx}"]`);
+          if (card) card.dataset.title = e.target.value.toLowerCase();
+        });
+      });
+      container.querySelectorAll('.proj-header-title-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const idx = e.target.dataset.idx;
+          const mainInput = container.querySelector(`.proj-title[data-idx="${idx}"]`);
+          if (mainInput) mainInput.value = e.target.value;
+          const card = container.querySelector(`.project-item-card[data-idx="${idx}"]`);
+          if (card) card.dataset.title = e.target.value.toLowerCase();
+          syncLivePreview(collectConfigFromForm());
+        });
+      });
+
+      // Apply existing search filter if active
+      applyProjectSearchFilter();
     }
 
-    document.getElementById('addProjectBtn').addEventListener('click', () => {
-      projectItemsList.push({
-        badge: "New Cut",
-        title: "New Featured Project",
-        subtitle: "Dynamic Edits",
-        tag: "Premiere Pro",
-        aspect: "landscape",
-        videoUrl: ""
+    function applyProjectSearchFilter() {
+      const searchInput = document.getElementById('projectSearchInput');
+      const clearBtn = document.getElementById('projectSearchClear');
+      const resultsPill = document.getElementById('projectSearchResults');
+      if (!searchInput) return;
+
+      const q = searchInput.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#projectsContainer .project-item-card');
+      if (!q) {
+        cards.forEach(c => c.style.display = '');
+        if (clearBtn) clearBtn.style.display = 'none';
+        if (resultsPill) resultsPill.style.display = 'none';
+        return;
+      }
+
+      if (clearBtn) clearBtn.style.display = 'flex';
+      let matched = 0;
+      cards.forEach(card => {
+        const text = `${card.dataset.title} ${card.dataset.sub} ${card.dataset.tag} ${card.dataset.badge}`;
+        if (text.includes(q)) {
+          card.style.display = '';
+          matched++;
+        } else {
+          card.style.display = 'none';
+        }
       });
-      renderProjects(projectItemsList);
-      syncLivePreview(collectConfigFromForm());
-    });
+      if (resultsPill) {
+        resultsPill.style.display = 'inline-block';
+        resultsPill.textContent = `Showing ${matched} of ${cards.length} projects`;
+      }
+    }
+
+    const addProjectBtn = document.getElementById('addProjectBtn');
+    if (addProjectBtn) {
+      addProjectBtn.addEventListener('click', () => {
+        projectItemsList.push({
+          badge: "New Cut",
+          title: `New Featured Project #${projectItemsList.length + 1}`,
+          subtitle: "Dynamic Edits",
+          tag: "Premiere Pro",
+          aspect: "landscape",
+          videoUrl: ""
+        });
+        renderProjects(projectItemsList);
+        syncLivePreview(collectConfigFromForm());
+      });
+    }
 
     window.moveProject = (idx, direction) => {
       const target = idx + direction;
@@ -2125,7 +2471,7 @@
     function collectProjects() {
       const cards = document.querySelectorAll('#projectsContainer .item-card');
       const items = [];
-      cards.forEach((card, idx) => {
+      cards.forEach(card => {
         items.push({
           title: card.querySelector('.proj-title')?.value || '',
           subtitle: card.querySelector('.proj-sub')?.value || '',
@@ -2138,80 +2484,152 @@
       return items;
     }
 
-    // Work Experience
+    // Work Experience (Image 5: Header Edit + Real-time Search)
     let experienceItemsList = [];
     function renderExperience(items) {
       experienceItemsList = [...items];
-      document.getElementById('expCount').textContent = experienceItemsList.length;
+      const countEl = document.getElementById('expCount');
+      if (countEl) countEl.textContent = experienceItemsList.length;
       const container = document.getElementById('experienceContainer');
       container.innerHTML = '';
 
       experienceItemsList.forEach((item, idx) => {
         const card = document.createElement('div');
-        card.className = 'item-card';
+        card.className = 'item-card exp-item-card';
+        card.dataset.role = (item.role || '').toLowerCase();
+        card.dataset.company = (item.company || '').toLowerCase();
+        card.dataset.loc = (item.location || '').toLowerCase();
+        card.dataset.badge = (item.badge || '').toLowerCase();
+        card.dataset.skills = ((item.skills || []).join(' ')).toLowerCase();
+        card.dataset.idx = idx;
+
         card.innerHTML = `
           <div class="item-card-header">
-            <span class="item-index-badge">💼 Position #${idx + 1} - ${item.company || 'Company'}</span>
+            <div class="item-header-title-wrap">
+              <span class="item-index-badge">
+                💼 Position #${idx + 1} – 
+                <input type="text" class="badge-title-input exp-header-title-input" data-idx="${idx}" value="${escapeAttr(item.company || item.role || 'Position')}" title="Click to edit position header directly">
+              </span>
+            </div>
             <div class="item-actions">
-              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>↑</button>
-              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, 1)" ${idx === experienceItemsList.length - 1 ? 'disabled' : ''}>↓</button>
-              <button class="btn btn-danger btn-sm" onclick="deleteExp(${idx})">🗑️</button>
+              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, 1)" ${idx === experienceItemsList.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteExp(${idx})" title="Delete Position">🗑️</button>
             </div>
           </div>
           <div class="form-grid">
             <div class="form-group" style="max-width:110px;">
               <label>Icon Emoji</label>
-              <input type="text" class="exp-icon" value="${item.icon || '🎬'}">
+              <input type="text" class="exp-icon" value="${escapeAttr(item.icon || '🎬')}">
             </div>
             <div class="form-group">
               <label>Job Role / Title</label>
-              <input type="text" class="exp-role" value="${item.role || ''}">
+              <input type="text" class="exp-role" data-idx="${idx}" value="${escapeAttr(item.role || '')}">
             </div>
             <div class="form-group">
               <label>Company & Work Type</label>
-              <input type="text" class="exp-company" value="${item.company || ''}">
+              <input type="text" class="exp-company" data-idx="${idx}" value="${escapeAttr(item.company || '')}">
             </div>
             <div class="form-group">
               <label>Badge Tag (e.g. Present / Remote)</label>
-              <input type="text" class="exp-badge" value="${item.badge || 'Present'}">
+              <input type="text" class="exp-badge" value="${escapeAttr(item.badge || 'Present')}">
             </div>
             <div class="form-group">
               <label>Date Range</label>
-              <input type="text" class="exp-date" value="${item.date || ''}">
+              <input type="text" class="exp-date" value="${escapeAttr(item.date || '')}">
             </div>
             <div class="form-group">
               <label>Location</label>
-              <input type="text" class="exp-loc" value="${item.location || ''}">
+              <input type="text" class="exp-loc" value="${escapeAttr(item.location || '')}">
             </div>
             <div class="form-group full-width">
               <label>Job Description</label>
-              <textarea class="exp-desc" rows="2">${item.desc || ''}</textarea>
+              <textarea class="exp-desc" rows="2">${escapeHTML(item.desc || '')}</textarea>
             </div>
             <div class="form-group full-width">
               <label>Skill Pills (Comma separated)</label>
-              <input type="text" class="exp-skills" value="${(item.skills || []).join(', ')}">
+              <input type="text" class="exp-skills" value="${escapeAttr((item.skills || []).join(', '))}">
             </div>
           </div>
         `;
         container.appendChild(card);
       });
+
+      // Synchronize header edit and company input
+      container.querySelectorAll('.exp-company').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const idx = e.target.dataset.idx;
+          const headerInput = container.querySelector(`.exp-header-title-input[data-idx="${idx}"]`);
+          if (headerInput) headerInput.value = e.target.value;
+          const card = container.querySelector(`.exp-item-card[data-idx="${idx}"]`);
+          if (card) card.dataset.company = e.target.value.toLowerCase();
+        });
+      });
+      container.querySelectorAll('.exp-header-title-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const idx = e.target.dataset.idx;
+          const compInput = container.querySelector(`.exp-company[data-idx="${idx}"]`);
+          if (compInput) compInput.value = e.target.value;
+          const card = container.querySelector(`.exp-item-card[data-idx="${idx}"]`);
+          if (card) card.dataset.company = e.target.value.toLowerCase();
+          syncLivePreview(collectConfigFromForm());
+        });
+      });
+
+      // Apply existing search filter if active
+      applyExperienceSearchFilter();
     }
 
-    document.getElementById('addExpBtn').addEventListener('click', () => {
-      experienceItemsList.push({
-        icon: "🎬",
-        role: "Video Editor & Motion Designer",
-        company: "New Agency · Full-time",
-        badge: "Full-time",
-        badgeColor: "#ff9e00",
-        date: "📅 2026 - Present",
-        location: "📍 Remote",
-        desc: "High-impact video editing, visual effects, and kinetic motion graphics.",
-        skills: ["Premiere Pro", "After Effects"]
+    function applyExperienceSearchFilter() {
+      const searchInput = document.getElementById('experienceSearchInput');
+      const clearBtn = document.getElementById('experienceSearchClear');
+      const resultsPill = document.getElementById('expSearchResults');
+      if (!searchInput) return;
+
+      const q = searchInput.value.trim().toLowerCase();
+      const cards = document.querySelectorAll('#experienceContainer .exp-item-card');
+      if (!q) {
+        cards.forEach(c => c.style.display = '');
+        if (clearBtn) clearBtn.style.display = 'none';
+        if (resultsPill) resultsPill.style.display = 'none';
+        return;
+      }
+
+      if (clearBtn) clearBtn.style.display = 'flex';
+      let matched = 0;
+      cards.forEach(card => {
+        const text = `${card.dataset.role} ${card.dataset.company} ${card.dataset.loc} ${card.dataset.badge} ${card.dataset.skills}`;
+        if (text.includes(q)) {
+          card.style.display = '';
+          matched++;
+        } else {
+          card.style.display = 'none';
+        }
       });
-      renderExperience(experienceItemsList);
-      syncLivePreview(collectConfigFromForm());
-    });
+      if (resultsPill) {
+        resultsPill.style.display = 'inline-block';
+        resultsPill.textContent = `Showing ${matched} of ${cards.length} positions`;
+      }
+    }
+
+    const addExpBtn = document.getElementById('addExpBtn');
+    if (addExpBtn) {
+      addExpBtn.addEventListener('click', () => {
+        experienceItemsList.push({
+          icon: "🎬",
+          role: "Video Editor & Motion Designer",
+          company: `Agency Position 0${experienceItemsList.length + 1}`,
+          badge: "Full-time",
+          badgeColor: "#ff9e00",
+          date: "📅 2026 - Present",
+          location: "📍 Remote",
+          desc: "High-impact video editing, visual effects, and kinetic motion graphics.",
+          skills: ["Premiere Pro", "After Effects"]
+        });
+        renderExperience(experienceItemsList);
+        syncLivePreview(collectConfigFromForm());
+      });
+    }
 
     window.moveExp = (idx, direction) => {
       const target = idx + direction;
@@ -2462,7 +2880,9 @@
     function setupTabSwitching() {
       const tabs = document.querySelectorAll('.nav-tab-item');
       tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+        tab.addEventListener('click', (e) => {
+          if (e.target.closest('.section-vis-btn')) return;
+
           tabs.forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
 
@@ -2472,6 +2892,186 @@
           if (targetPanel) targetPanel.classList.add('active');
         });
       });
+    }
+
+    // Sidebar Drag & Drop Reordering and Section Visibility Toggles (Image 1)
+    let sidebarSectionsVisibility = {
+      hero: true,
+      beforeAfter: true,
+      projects: true,
+      experience: true,
+      skills: true,
+      contact: true,
+      footer: true
+    };
+    let currentSectionOrder = [
+      'hero',
+      'beforeAfter',
+      'projects',
+      'experience',
+      'skills',
+      'contact'
+    ];
+
+    function setupSidebarReorderAndVisibility() {
+      const navList = document.getElementById('sidebarNavTabs');
+      if (!navList) return;
+
+      // Delegate Visibility Button Clicks
+      navList.addEventListener('click', (e) => {
+        const btn = e.target.closest('.section-vis-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        e.preventDefault();
+
+        const sec = btn.dataset.sec;
+        const currentVis = sidebarSectionsVisibility[sec] !== false;
+        const newVis = !currentVis;
+        sidebarSectionsVisibility[sec] = newVis;
+
+        updateSidebarVisibilityUI();
+        syncLivePreview(collectConfigFromForm());
+        showToast(newVis ? `👁️ "${sec}" section visible on site` : `🙈 "${sec}" section hidden on site`);
+      });
+
+      // Drag and Drop
+      let draggedItem = null;
+
+      navList.querySelectorAll('.nav-tab-item').forEach(item => {
+        item.setAttribute('draggable', 'true');
+
+        item.addEventListener('dragstart', (e) => {
+          draggedItem = item;
+          item.classList.add('is-dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', item.dataset.tab);
+        });
+
+        item.addEventListener('dragend', () => {
+          draggedItem = null;
+          navList.querySelectorAll('.nav-tab-item').forEach(i => {
+            i.classList.remove('is-dragging', 'drag-over-top', 'drag-over-bottom');
+          });
+        });
+
+        item.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          if (!draggedItem || draggedItem === item) return;
+
+          const rect = item.getBoundingClientRect();
+          const midY = rect.top + rect.height / 2;
+          if (e.clientY < midY) {
+            item.classList.add('drag-over-top');
+            item.classList.remove('drag-over-bottom');
+          } else {
+            item.classList.add('drag-over-bottom');
+            item.classList.remove('drag-over-top');
+          }
+        });
+
+        item.addEventListener('dragleave', () => {
+          item.classList.remove('drag-over-top', 'drag-over-bottom');
+        });
+
+        item.addEventListener('drop', (e) => {
+          e.preventDefault();
+          item.classList.remove('drag-over-top', 'drag-over-bottom');
+          if (!draggedItem || draggedItem === item) return;
+
+          const rect = item.getBoundingClientRect();
+          const midY = rect.top + rect.height / 2;
+          if (e.clientY < midY) {
+            navList.insertBefore(draggedItem, item);
+          } else {
+            navList.insertBefore(draggedItem, item.nextSibling);
+          }
+
+          // Extract new section order
+          const orderedTabs = Array.from(navList.querySelectorAll('.nav-tab-item'))
+            .map(t => t.dataset.tab)
+            .filter(t => ['hero', 'beforeAfter', 'projects', 'experience', 'skills', 'contact'].includes(t));
+          currentSectionOrder = orderedTabs;
+
+          syncLivePreview(collectConfigFromForm());
+          showToast('↕️ Section order updated & synced to live preview!');
+        });
+      });
+    }
+
+    function updateSidebarVisibilityUI() {
+      const navList = document.getElementById('sidebarNavTabs');
+      if (!navList) return;
+
+      Object.entries(sidebarSectionsVisibility).forEach(([sec, isVis]) => {
+        const item = navList.querySelector(`.nav-tab-item[data-tab="${sec}"]`);
+        const btn = navList.querySelector(`.section-vis-btn[data-sec="${sec}"]`);
+        if (!item || !btn) return;
+
+        const isHidden = isVis === false;
+        item.classList.toggle('section-hidden', isHidden);
+        btn.classList.toggle('is-hidden', isHidden);
+
+        let tag = item.querySelector('.sec-vis-tag');
+        if (isHidden) {
+          btn.innerHTML = '🙈';
+          btn.title = 'Click to Show this Section on Website';
+          if (!tag) {
+            tag = document.createElement('span');
+            tag.className = 'sec-vis-tag';
+            tag.textContent = 'Hidden';
+            item.insertBefore(tag, btn);
+          }
+        } else {
+          btn.innerHTML = '👁️';
+          btn.title = 'Click to Hide this Section on Website';
+          if (tag) tag.remove();
+        }
+      });
+    }
+
+    function applySavedSectionOrderToSidebar(order) {
+      if (!Array.isArray(order) || order.length === 0) return;
+      const navList = document.getElementById('sidebarNavTabs');
+      if (!navList) return;
+
+      order.forEach(tabKey => {
+        const item = navList.querySelector(`.nav-tab-item[data-tab="${tabKey}"]`);
+        if (item) {
+          navList.appendChild(item);
+        }
+      });
+      const footerItem = navList.querySelector('.nav-tab-item[data-tab="footer"]');
+      const securityItem = navList.querySelector('.nav-tab-item[data-tab="security"]');
+      if (footerItem) navList.appendChild(footerItem);
+      if (securityItem) navList.appendChild(securityItem);
+    }
+
+    function setupSearchFilters() {
+      const projInput = document.getElementById('projectSearchInput');
+      const projClear = document.getElementById('projectSearchClear');
+      if (projInput) {
+        projInput.addEventListener('input', applyProjectSearchFilter);
+        if (projClear) {
+          projClear.addEventListener('click', () => {
+            projInput.value = '';
+            applyProjectSearchFilter();
+            projInput.focus();
+          });
+        }
+      }
+
+      const expInput = document.getElementById('experienceSearchInput');
+      const expClear = document.getElementById('experienceSearchClear');
+      if (expInput) {
+        expInput.addEventListener('input', applyExperienceSearchFilter);
+        if (expClear) {
+          expClear.addEventListener('click', () => {
+            expInput.value = '';
+            applyExperienceSearchFilter();
+            expInput.focus();
+          });
+        }
+      }
     }
 
     function setupColorPickerSync() {
@@ -2681,7 +3281,24 @@
           textColor: "#64748b",
           bgColor: "#07080c",
           fontSize: "0.95rem"
-        }
+        },
+        sectionsVisibility: {
+          hero: true,
+          beforeAfter: true,
+          projects: true,
+          experience: true,
+          skills: true,
+          contact: true,
+          footer: true
+        },
+        sectionOrder: [
+          "hero",
+          "beforeAfter",
+          "projects",
+          "experience",
+          "skills",
+          "contact"
+        ]
       };
     }
   </script>
