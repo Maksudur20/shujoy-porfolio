@@ -2787,31 +2787,6 @@
       overflow: hidden;
     }
 
-    /* Video Cinema Play Badge (Revealed inside Follower on Video Hover) */
-    .video-cursor-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      opacity: 0;
-      visibility: hidden;
-      transform: scale(0.6);
-      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
-      color: #000;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 800;
-      font-size: 0.72rem;
-      letter-spacing: 1.2px;
-      white-space: nowrap;
-      user-select: none;
-      pointer-events: none;
-    }
-    .badge-play-icon {
-      width: 14px;
-      height: 14px;
-      flex-shrink: 0;
-    }
-
     /* Hovering interactive links & buttons */
     .custom-cursor-follower.is-hovering {
       width: 54px;
@@ -2830,47 +2805,6 @@
     }
     body.custom-cursor-active .custom-cursor-follower {
       opacity: 1 !important;
-    }
-
-    /* HOVER OVER ANY VIDEO: VIVID HIGH-CONTRAST CINEMA PLAY CURSOR */
-    .custom-cursor-pointer.is-video-hover,
-    body.custom-cursor-active .custom-cursor-pointer.is-video-hover {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(0.3) !important;
-    }
-    .custom-cursor-follower.is-video-hover {
-      width: 86px !important;
-      height: 86px !important;
-      border-radius: 50% !important;
-      border: 2.5px solid #ffffff !important;
-      background: linear-gradient(135deg, #ffb703 0%, #ff8500 100%) !important;
-      box-shadow: 0 0 45px rgba(255, 158, 0, 0.95), 0 10px 30px rgba(0, 0, 0, 0.75) !important;
-      opacity: 1 !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-    }
-    .custom-cursor-follower.is-video-hover .video-cursor-badge {
-      opacity: 1 !important;
-      visibility: visible !important;
-      transform: scale(1) !important;
-    }
-
-    /* Video controls (sound btn, timeline) inside video */
-    .custom-cursor-follower.is-video-control-hover {
-      width: 48px !important;
-      height: 48px !important;
-      background: rgba(255, 158, 0, 0.35) !important;
-      border: 2px solid #ff9e00 !important;
-      box-shadow: 0 0 25px rgba(255, 158, 0, 0.75) !important;
-    }
-    .custom-cursor-follower.is-video-control-hover .video-cursor-badge {
-      opacity: 0 !important;
-      visibility: hidden !important;
-    }
-    .custom-cursor-pointer.is-video-control-hover {
-      opacity: 1 !important;
-      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(1) !important;
     }
 
     /* Clean Featured Works Cards (Volume button only, clean video frame) */
@@ -2947,14 +2881,10 @@
     .custom-cursor-pointer.is-active .cursor-arrow-svg {
       transform: scale(0.85);
     }
-    .custom-cursor-follower.is-active:not(.is-video-hover) {
+    .custom-cursor-follower.is-active {
       transform: translate3d(var(--fx, -100px), var(--fy, -100px), 0) translate(-50%, -50%) scale(0.8) !important;
       border-color: #ff6b00 !important;
       background: rgba(255, 107, 0, 0.35) !important;
-    }
-    .custom-cursor-follower.is-active.is-video-hover {
-      transform: translate3d(var(--fx, -100px), var(--fy, -100px), 0) translate(-50%, -50%) scale(0.9) !important;
-      box-shadow: 0 0 50px rgba(255, 158, 0, 1), 0 10px 30px rgba(0, 0, 0, 0.8) !important;
     }
 
     /* Typing in forms: soften cursor */
@@ -2982,20 +2912,13 @@
 </head>
 <body>
 
-  <!-- Custom Cinematic Magnetic Arrow & Video Cursor Elements -->
+  <!-- Custom Cinematic Magnetic Arrow Cursor Elements -->
   <div class="custom-cursor-pointer" id="cursorPointer" aria-hidden="true">
     <svg class="cursor-arrow-svg" width="24" height="26" viewBox="0 0 24 26" fill="none">
       <path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="#ff9e00" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
     </svg>
   </div>
-  <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true">
-    <div class="video-cursor-badge" id="videoCursorBadge">
-      <svg class="badge-play-icon" viewBox="0 0 24 24" fill="currentColor">
-        <polygon points="7 4 20 12 7 20 7 4"></polygon>
-      </svg>
-      <span class="badge-text">PLAY</span>
-    </div>
-  </div>
+  <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true"></div>
   <div class="custom-cursor-ripple" id="cursorRipple" aria-hidden="true"></div>
 
   <!-- Ambient Glow Effects -->
@@ -4534,35 +4457,14 @@
           // DYNAMIC VIDEO HOVER DETECTION (Safe element checking across all videos & stages)
           const el = e.target && e.target.nodeType === 1 ? e.target : (e.target && e.target.parentElement ? e.target.parentElement : null);
           const videoTarget = el && el.closest ? el.closest('video, .video-card, .saas-card, .video-frame, .ba-video-frame, .carousel-track, .saas-3d-stage, .ba-container') : null;
-          const isVideoControl = el && el.closest ? el.closest('.sound-toggle-btn, .video-progress-bar, .saas-timeline, .bottom-timeline-scrub, .hero-sound-btn, .ba-sound-btn') : null;
-
-          if (videoTarget) {
-            if (isVideoControl) {
-              cursorFollower.classList.remove('is-video-hover');
-              cursorPointer.classList.remove('is-video-hover');
-              cursorFollower.classList.add('is-video-control-hover');
-              cursorPointer.classList.add('is-video-control-hover');
-            } else {
-              cursorFollower.classList.remove('is-video-control-hover');
-              cursorPointer.classList.remove('is-video-control-hover');
-              cursorFollower.classList.add('is-video-hover');
-              cursorPointer.classList.add('is-video-hover');
-            }
+          // Interactive link & button detection (including video sound buttons & controls)
+          const isInteractive = el && el.closest ? el.closest('a, button, input[type="submit"], input[type="button"], .btn, .dot-pill, .sound-toggle-btn, .hero-sound-btn, .ba-sound-btn, .video-progress-bar, .software-card, .exp-card, .discipline-tag, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge') : null;
+          if (isInteractive) {
+            cursorFollower.classList.add('is-hovering');
+            cursorPointer.classList.add('is-hovering');
           } else {
-            cursorFollower.classList.remove('is-video-hover');
-            cursorPointer.classList.remove('is-video-hover');
-            cursorFollower.classList.remove('is-video-control-hover');
-            cursorPointer.classList.remove('is-video-control-hover');
-
-            // Interactive link & button detection
-            const isInteractive = el && el.closest ? el.closest('a, button, input[type="submit"], input[type="button"], .btn, .dot-pill, .software-card, .exp-card, .discipline-tag, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge') : null;
-            if (isInteractive) {
-              cursorFollower.classList.add('is-hovering');
-              cursorPointer.classList.add('is-hovering');
-            } else {
-              cursorFollower.classList.remove('is-hovering');
-              cursorPointer.classList.remove('is-hovering');
-            }
+            cursorFollower.classList.remove('is-hovering');
+            cursorPointer.classList.remove('is-hovering');
           }
 
           // Form input typing detection
@@ -4617,11 +4519,7 @@
           document.documentElement.style.setProperty('--fy', `${followerY}px`);
 
           if (!isClicking) {
-            if (cursorFollower.classList.contains('is-video-hover')) {
-              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
-            } else {
-              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
-            }
+            cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
           }
 
           requestAnimationFrame(animateFollower);
