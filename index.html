@@ -4356,6 +4356,7 @@
       // Trigger initial animations for items in viewport on page load (Hero entrance)
       const triggerInitialView = () => {
         const windowHeight = window.innerHeight;
+        const revealItems = document.querySelectorAll('.reveal');
         revealItems.forEach(el => {
           const rect = el.getBoundingClientRect();
           if (rect.top < windowHeight * 0.92 && rect.bottom > 20) {
