@@ -2707,7 +2707,7 @@
     }
 
     /* ============================================================ */
-    /* CUSTOM CINEMATIC MAGNETIC CURSOR                             */
+    /* CUSTOM CINEMATIC DESIGNER ARROW & VIDEO PLAY CURSOR          */
     /* ============================================================ */
     body.custom-cursor-active,
     body.custom-cursor-active *:not(input):not(textarea):not(select):not([contenteditable="true"]) {
@@ -2720,41 +2720,58 @@
       cursor: text !important;
     }
 
-    .custom-cursor-dot {
+    /* Force all video surfaces to never show browser default cursor */
+    video,
+    .video-card,
+    .saas-card,
+    .video-frame,
+    .ba-video-frame,
+    .carousel-track,
+    .saas-3d-stage,
+    .ba-container {
+      cursor: none !important;
+    }
+
+    /* 1. Custom Aerodynamic Precision Arrow Pointer (Non-default stylized cursor) */
+    .custom-cursor-pointer {
       position: fixed;
       top: 0;
       left: 0;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: radial-gradient(circle, #ffffff 18%, #ffb326 65%, #ff7700 100%);
-      box-shadow: 0 0 10px rgba(255, 175, 50, 0.95), 0 0 20px rgba(255, 120, 0, 0.5);
+      width: 24px;
+      height: 26px;
       pointer-events: none;
-      z-index: 999999;
-      transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
-      will-change: transform;
-      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-                  background 0.25s ease,
-                  box-shadow 0.25s ease,
-                  opacity 0.25s ease;
+      z-index: 9999999;
+      transform: translate3d(-100px, -100px, 0);
+      margin-left: -2px;
+      margin-top: -2px;
+      will-change: transform, opacity;
       opacity: 0;
+      transition: opacity 0.25s ease;
+      filter: drop-shadow(0 0 10px rgba(255, 158, 0, 0.95)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
+    }
+    .cursor-arrow-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transform-origin: 2px 2px;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* 2. Frosted Magnetic Follower Halo & Video Cinema Play Badge */
     .custom-cursor-follower {
       position: fixed;
       top: 0;
       left: 0;
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 1.5px solid rgba(255, 175, 50, 0.6);
       background: radial-gradient(circle, rgba(255, 158, 0, 0.08) 0%, rgba(255, 110, 0, 0.02) 80%);
-      box-shadow: 0 0 22px rgba(255, 158, 0, 0.2), inset 0 0 10px rgba(255, 158, 0, 0.08);
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.18), inset 0 0 10px rgba(255, 158, 0, 0.08);
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
       pointer-events: none;
-      z-index: 999998;
+      z-index: 9999998;
       transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
       will-change: transform, width, height;
       transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2767,88 +2784,83 @@
       align-items: center;
       justify-content: center;
       opacity: 0;
+      overflow: hidden;
     }
 
-    .custom-cursor-ripple {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 175, 50, 0.85);
-      background: rgba(255, 158, 0, 0.12);
-      box-shadow: 0 0 25px rgba(255, 158, 0, 0.55);
-      pointer-events: none;
-      z-index: 999997;
-      transform: translate3d(-100px, -100px, 0) translate(-50%, -50%) scale(0.4);
+    /* Video Cinema Play Badge (Revealed inside Follower on Video Hover) */
+    .video-cursor-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
       opacity: 0;
-      will-change: transform, opacity;
-      transition: none;
-    }
-    .custom-cursor-ripple.animate-burst {
-      animation: cursorRippleBurst 0.55s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
-    }
-    @keyframes cursorRippleBurst {
-      0% {
-        opacity: 0.95;
-        transform: translate3d(var(--rx, 0), var(--ry, 0), 0) translate(-50%, -50%) scale(0.4);
-      }
-      100% {
-        opacity: 0;
-        transform: translate3d(var(--rx, 0), var(--ry, 0), 0) translate(-50%, -50%) scale(2.2);
-      }
-    }
-
-    .custom-cursor-text {
+      visibility: hidden;
+      transform: scale(0.6);
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
+      color: #000;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 0.72rem;
       letter-spacing: 1.2px;
-      color: #fff;
-      text-transform: uppercase;
-      opacity: 0;
-      transform: scale(0.7);
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      pointer-events: none;
       white-space: nowrap;
-      display: none;
+      user-select: none;
+      pointer-events: none;
+    }
+    .badge-play-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
     }
 
-    /* Hovering interactive links, buttons, pills, cards */
+    /* Hovering interactive links & buttons */
     .custom-cursor-follower.is-hovering {
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       border-color: rgba(255, 185, 60, 0.95);
-      background: radial-gradient(circle, rgba(255, 175, 50, 0.2) 0%, rgba(255, 120, 0, 0.08) 100%);
-      box-shadow: 0 0 32px rgba(255, 158, 0, 0.48), inset 0 0 16px rgba(255, 158, 0, 0.16);
+      background: radial-gradient(circle, rgba(255, 175, 50, 0.22) 0%, rgba(255, 120, 0, 0.08) 100%);
+      box-shadow: 0 0 32px rgba(255, 158, 0, 0.5), inset 0 0 16px rgba(255, 158, 0, 0.15);
     }
-    .custom-cursor-dot.is-hovering {
-      width: 5px;
-      height: 5px;
-      background: #ffffff;
-      box-shadow: 0 0 12px #ffffff, 0 0 22px var(--accent-amber);
+    .custom-cursor-pointer.is-hovering .cursor-arrow-svg {
+      transform: scale(1.18) rotate(-6deg);
     }
 
-    /* Video Reel or Carousel Media Hover */
-    .custom-cursor-follower.is-video-hover {
-      width: 62px;
-      height: 62px;
-      border: 2px solid rgba(255, 185, 50, 0.95);
-      background: radial-gradient(circle, rgba(255, 158, 0, 0.22) 0%, rgba(255, 110, 0, 0.06) 100%);
-      box-shadow: 0 0 35px rgba(255, 158, 0, 0.55), inset 0 0 18px rgba(255, 158, 0, 0.2);
+    /* HOVER OVER ANY VIDEO: VIVID HIGH-CONTRAST CINEMA PLAY CURSOR */
+    .custom-cursor-pointer.is-video-hover {
+      opacity: 0 !important;
+      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(0.4) !important;
     }
-    .custom-cursor-follower.is-video-hover .custom-cursor-text,
-    .custom-cursor-text {
-      display: none !important;
+    .custom-cursor-follower.is-video-hover {
+      width: 86px !important;
+      height: 86px !important;
+      border-radius: 50% !important;
+      border: 2.5px solid #ffffff !important;
+      background: linear-gradient(135deg, #ffb703 0%, #ff8500 100%) !important;
+      box-shadow: 0 0 45px rgba(255, 158, 0, 0.95), 0 10px 30px rgba(0, 0, 0, 0.75) !important;
+      opacity: 1 !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    .custom-cursor-follower.is-video-hover .video-cursor-badge {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: scale(1) !important;
+    }
+
+    /* Video controls (sound btn, timeline) inside video */
+    .custom-cursor-follower.is-video-control-hover {
+      width: 48px !important;
+      height: 48px !important;
+      background: rgba(255, 158, 0, 0.35) !important;
+      border: 2px solid #ff9e00 !important;
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.75) !important;
+    }
+    .custom-cursor-follower.is-video-control-hover .video-cursor-badge {
       opacity: 0 !important;
       visibility: hidden !important;
     }
-    .custom-cursor-dot.is-video-hover {
-      width: 6px;
-      height: 6px;
-      background: #ffffff;
-      box-shadow: 0 0 14px #ffffff, 0 0 24px var(--accent-amber);
+    .custom-cursor-pointer.is-video-control-hover {
+      opacity: 1 !important;
+      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(1) !important;
     }
 
     /* Clean Featured Works Cards (Volume button only, clean video frame) */
@@ -2922,30 +2934,28 @@
     }
 
     /* Active mousedown click state */
-    .custom-cursor-follower.is-active {
+    .custom-cursor-pointer.is-active .cursor-arrow-svg {
+      transform: scale(0.85);
+    }
+    .custom-cursor-follower.is-active:not(.is-video-hover) {
       transform: translate3d(var(--fx, -100px), var(--fy, -100px), 0) translate(-50%, -50%) scale(0.8) !important;
       border-color: #ff6b00 !important;
       background: rgba(255, 107, 0, 0.35) !important;
-      box-shadow: 0 0 25px rgba(255, 107, 0, 0.75) !important;
     }
-    .custom-cursor-dot.is-active {
-      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) translate(-50%, -50%) scale(1.35) !important;
-      background: #ffffff !important;
-      box-shadow: 0 0 16px #ffffff, 0 0 24px #ff6b00 !important;
+    .custom-cursor-follower.is-active.is-video-hover {
+      transform: translate3d(var(--fx, -100px), var(--fy, -100px), 0) translate(-50%, -50%) scale(0.9) !important;
+      box-shadow: 0 0 50px rgba(255, 158, 0, 1), 0 10px 30px rgba(0, 0, 0, 0.8) !important;
     }
 
     /* Typing in forms: soften cursor */
-    body.is-typing .custom-cursor-follower {
-      opacity: 0.15 !important;
-      transform: translate3d(var(--fx, -100px), var(--fy, -100px), 0) translate(-50%, -50%) scale(0.5);
-    }
-    body.is-typing .custom-cursor-dot {
-      opacity: 0.25 !important;
+    body.is-typing .custom-cursor-follower,
+    body.is-typing .custom-cursor-pointer {
+      opacity: 0.12 !important;
     }
 
     /* Disable custom cursor on mobile / touch screen */
     @media (hover: none) or (pointer: coarse) {
-      .custom-cursor-dot,
+      .custom-cursor-pointer,
       .custom-cursor-follower,
       .custom-cursor-ripple {
         display: none !important;
@@ -2962,10 +2972,26 @@
 </head>
 <body>
 
-  <!-- Custom Cinematic Magnetic Cursor Elements -->
-  <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <!-- Custom Cinematic Magnetic Arrow & Video Cursor Elements -->
+  <div class="custom-cursor-pointer" id="cursorPointer" aria-hidden="true">
+    <svg class="cursor-arrow-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
+      <path d="M2 2L9.5 22L13.5 13.5L20.5 10.5L2 2Z" fill="url(#cursorGrad)" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/>
+      <defs>
+        <linearGradient id="cursorGrad" x1="2" y1="2" x2="20.5" y2="22" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#ffb703"/>
+          <stop offset="0.6" stop-color="#ff9e00"/>
+          <stop offset="1" stop-color="#fb8500"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
   <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true">
-    <span class="custom-cursor-text" id="cursorText"></span>
+    <div class="video-cursor-badge" id="videoCursorBadge">
+      <svg class="badge-play-icon" viewBox="0 0 24 24" fill="currentColor">
+        <polygon points="6 4 20 12 6 20 6 4"></polygon>
+      </svg>
+      <span class="badge-text">PLAY</span>
+    </div>
   </div>
   <div class="custom-cursor-ripple" id="cursorRipple" aria-hidden="true"></div>
 
@@ -4467,13 +4493,13 @@
       }
 
       // ============================================================
-      // 3. NEXT-GEN CINEMATIC MAGNETIC CURSOR (GPU HARDWARE ACCELERATED)
+      // 3. NEXT-GEN CINEMATIC DESIGNER ARROW & VIDEO CURSOR
       // ============================================================
-      const cursorDot = document.getElementById('cursorDot');
+      const cursorPointer = document.getElementById('cursorPointer');
       const cursorFollower = document.getElementById('cursorFollower');
       const cursorRipple = document.getElementById('cursorRipple');
 
-      if (cursorDot && cursorFollower) {
+      if (cursorPointer && cursorFollower) {
         let mouseX = -100;
         let mouseY = -100;
         let followerX = -100;
@@ -4488,13 +4514,13 @@
           mouseX = e.clientX;
           mouseY = e.clientY;
 
-          cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+          cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
           document.documentElement.style.setProperty('--mx', `${mouseX}px`);
           document.documentElement.style.setProperty('--my', `${mouseY}px`);
 
           if (!isVisible) {
             document.body.classList.add('custom-cursor-active');
-            cursorDot.style.opacity = '1';
+            cursorPointer.style.opacity = '1';
             cursorFollower.style.opacity = '1';
             followerX = mouseX;
             followerY = mouseY;
@@ -4502,11 +4528,54 @@
             prevFollowerY = mouseY;
             isVisible = true;
           }
+
+          // DYNAMIC VIDEO HOVER DETECTION (Works over all videos, stages, cards & frames)
+          const videoTarget = e.target.closest('video, .video-card, .saas-card, .video-frame, .ba-video-frame, .carousel-track, .saas-3d-stage, .ba-container');
+          const isVideoControl = e.target.closest('.sound-toggle-btn, .video-progress-bar, .saas-timeline, .bottom-timeline-scrub, .hero-sound-btn, .ba-sound-btn');
+
+          if (videoTarget) {
+            if (isVideoControl) {
+              cursorFollower.classList.remove('is-video-hover');
+              cursorPointer.classList.remove('is-video-hover');
+              cursorFollower.classList.add('is-video-control-hover');
+              cursorPointer.classList.add('is-video-control-hover');
+            } else {
+              cursorFollower.classList.remove('is-video-control-hover');
+              cursorPointer.classList.remove('is-video-control-hover');
+              cursorFollower.classList.add('is-video-hover');
+              cursorPointer.classList.add('is-video-hover');
+            }
+          } else {
+            cursorFollower.classList.remove('is-video-hover');
+            cursorPointer.classList.remove('is-video-hover');
+            cursorFollower.classList.remove('is-video-control-hover');
+            cursorPointer.classList.remove('is-video-control-hover');
+
+            // Interactive link & button detection
+            const isInteractive = e.target.closest('a, button, input[type="submit"], input[type="button"], .btn, .dot-pill, .software-card, .exp-card, .discipline-tag, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge');
+            if (isInteractive) {
+              cursorFollower.classList.add('is-hovering');
+              cursorPointer.classList.add('is-hovering');
+            } else {
+              cursorFollower.classList.remove('is-hovering');
+              cursorPointer.classList.remove('is-hovering');
+            }
+          }
+
+          // Form input typing detection
+          const isInput = e.target.closest('input, textarea, select, [contenteditable="true"]');
+          if (isInput) {
+            document.body.classList.add('is-typing');
+          } else if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+            // Keep typing mode if element still has focus
+          } else {
+            document.body.classList.remove('is-typing');
+          }
         }, { passive: true });
 
         // Hide when mouse leaves document window
         document.addEventListener('mouseleave', () => {
-          cursorDot.style.opacity = '0';
+          cursorPointer.style.opacity = '0';
           cursorFollower.style.opacity = '0';
           document.body.classList.remove('custom-cursor-active');
           isVisible = false;
@@ -4514,21 +4583,20 @@
 
         document.addEventListener('mouseenter', () => {
           if (!isVisible && mouseX > 0 && mouseY > 0) {
-            cursorDot.style.opacity = '1';
+            cursorPointer.style.opacity = '1';
             cursorFollower.style.opacity = '1';
             document.body.classList.add('custom-cursor-active');
             isVisible = true;
           }
         });
 
-        // Buttery 60/120fps organic spring lerp loop with subtle inertia stretch
+        // Buttery organic spring lerp loop with velocity squash/stretch
         const lerp = (start, end, factor) => start + (end - start) * factor;
 
         function animateFollower() {
           followerX = lerp(followerX, mouseX, 0.16);
           followerY = lerp(followerY, mouseY, 0.16);
 
-          // Calculate movement velocity for organic fluid motion feel
           const vx = followerX - prevFollowerX;
           const vy = followerY - prevFollowerY;
           prevFollowerX = followerX;
@@ -4543,7 +4611,11 @@
           document.documentElement.style.setProperty('--fy', `${followerY}px`);
 
           if (!isClicking) {
-            cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+            if (cursorFollower.classList.contains('is-video-hover')) {
+              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+            } else {
+              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+            }
           }
 
           requestAnimationFrame(animateFollower);
@@ -4554,13 +4626,13 @@
         window.addEventListener('mousedown', (e) => {
           isClicking = true;
           cursorFollower.classList.add('is-active');
-          cursorDot.classList.add('is-active');
+          cursorPointer.classList.add('is-active');
 
           if (cursorRipple) {
             cursorRipple.style.setProperty('--rx', `${e.clientX}px`);
             cursorRipple.style.setProperty('--ry', `${e.clientY}px`);
             cursorRipple.classList.remove('animate-burst');
-            void cursorRipple.offsetWidth; // Force DOM reflow to trigger CSS keyframe burst
+            void cursorRipple.offsetWidth;
             cursorRipple.classList.add('animate-burst');
           }
         });
@@ -4568,56 +4640,8 @@
         window.addEventListener('mouseup', () => {
           isClicking = false;
           cursorFollower.classList.remove('is-active');
-          cursorDot.classList.remove('is-active');
+          cursorPointer.classList.remove('is-active');
         });
-
-        // Interactive hover targets: buttons, links, pills, software badges, cards, controls
-        const updateHoverListeners = () => {
-          const interactiveTargets = document.querySelectorAll(
-            'a, button, input[type="submit"], input[type="button"], .btn, .video-progress-bar, .dot-pill, .sound-toggle-btn, .software-card, .exp-card, .discipline-tag, .saas-card, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge'
-          );
-          interactiveTargets.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-              cursorFollower.classList.add('is-hovering');
-              cursorDot.classList.add('is-hovering');
-            });
-            el.addEventListener('mouseleave', () => {
-              cursorFollower.classList.remove('is-hovering');
-              cursorDot.classList.remove('is-hovering');
-            });
-          });
-
-          // Video / Media showcase hover targets
-          const videoTargets = document.querySelectorAll(
-            '.video-frame, .carousel-viewport, .saas-3d-stage, .ba-video-frame, .video-card'
-          );
-          videoTargets.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-              cursorFollower.classList.add('is-video-hover');
-              cursorDot.classList.add('is-video-hover');
-            });
-            el.addEventListener('mouseleave', () => {
-              cursorFollower.classList.remove('is-video-hover');
-              cursorDot.classList.remove('is-video-hover');
-            });
-          });
-
-          // Text Inputs & Forms: Dim follower and restore native text caret
-          const formInputs = document.querySelectorAll('input, textarea, select, [contenteditable="true"]');
-          formInputs.forEach(el => {
-            el.addEventListener('focus', () => document.body.classList.add('is-typing'));
-            el.addEventListener('blur', () => document.body.classList.remove('is-typing'));
-            el.addEventListener('mouseenter', () => document.body.classList.add('is-typing'));
-            el.addEventListener('mouseleave', () => {
-              if (document.activeElement !== el) {
-                document.body.classList.remove('is-typing');
-              }
-            });
-          });
-        };
-
-        updateHoverListeners();
-        window.addEventListener('site-config-applied', updateHoverListeners);
       }
     });
   </script>
