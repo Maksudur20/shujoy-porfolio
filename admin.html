@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Studio & Visual Customizer | Farhan Shujoy Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --admin-bg: #090a0f;
+      --admin-sidebar: #0f1118;
+      --admin-card: rgba(20, 24, 38, 0.75);
+      --admin-card-hover: rgba(26, 31, 50, 0.9);
+      --admin-border: rgba(255, 255, 255, 0.08);
+      --admin-border-focus: #ff9e00;
+      --admin-primary: #ff9e00;
+      --admin-primary-glow: rgba(255, 158, 0, 0.3);
+      --admin-text: #f8fafc;
+      --admin-text-muted: #94a3b8;
+      --admin-text-dim: #64748b;
+      --admin-danger: #ef4444;
+      --admin-success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      height: 68px;
+      background: rgba(15, 17, 24, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff9e00, #ff5e00);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px var(--admin-primary-glow);
+      font-weight: 800;
+      color: #000;
+      font-size: 1.1rem;
+    }
+    .brand-text h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--admin-primary);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9e00 0%, #ff6b00 100%);
+      color: #000;
+      box-shadow: 0 0 18px rgba(255, 158, 0, 0.35);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 0 25px rgba(255, 158, 0, 0.6);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--admin-border);
+      color: var(--admin-text);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .btn-outline-primary {
+      background: rgba(255, 158, 0, 0.08);
+      border-color: rgba(255, 158, 0, 0.3);
+      color: var(--admin-primary);
+    }
+    .btn-outline-primary:hover {
+      background: rgba(255, 158, 0, 0.18);
+      border-color: var(--admin-primary);
+    }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      border-radius: 6px;
+    }
+
+    /* Layout */
+    .admin-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 68px);
+      overflow: hidden;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 260px;
+      background: var(--admin-sidebar);
+      border-right: 1px solid var(--admin-border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .nav-tabs {
+      list-style: none;
+      padding: 1rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .nav-tab-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      color: var(--admin-text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .nav-tab-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--admin-text);
+    }
+    .nav-tab-item.active {
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.3);
+      color: var(--admin-primary);
+      font-weight: 600;
+    }
+    .nav-tab-icon {
+      font-size: 1.15rem;
+      width: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 1rem 1.2rem;
+      border-top: 1px solid var(--admin-border);
+      font-size: 0.78rem;
+      color: var(--admin-text-dim);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .sync-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--admin-success);
+      font-weight: 600;
+    }
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--admin-success);
+      box-shadow: 0 0 8px var(--admin-success);
+    }
+
+    /* Main Content Area */
+    .main-workspace {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .editor-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 2rem 2.5rem 5rem;
+    }
+
+    /* Live Preview Split Pane */
+    .preview-pane {
+      width: 48%;
+      border-left: 1px solid var(--admin-border);
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .preview-pane.hidden {
+      display: none;
+    }
+    .preview-header {
+      height: 44px;
+      background: rgba(15, 17, 24, 0.95);
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      font-size: 0.8rem;
+      color: var(--admin-text-muted);
+    }
+    .preview-device-pills {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .device-pill {
+      background: transparent;
+      border: 1px solid var(--admin-border);
+      color: var(--admin-text-muted);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .device-pill.active {
+      background: rgba(255, 158, 0, 0.15);
+      border-color: var(--admin-primary);
+      color: var(--admin-primary);
+    }
+    .preview-iframe-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #040508;
+      overflow: hidden;
+    }
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      transition: width 0.3s ease;
+    }
+    .preview-iframe.mobile-view {
+      width: 390px;
+      height: 94%;
+      border-radius: 24px;
+      border: 6px solid #222;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+    .preview-iframe.tablet-view {
+      width: 768px;
+      height: 95%;
+      border-radius: 16px;
+      border: 4px solid #222;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+
+    /* Tab Section Panels */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      margin-bottom: 2rem;
+    }
+    .panel-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .panel-header p {
+      color: var(--admin-text-muted);
+      font-size: 0.92rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Cards & Form Elements */
+    .section-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      margin-bottom: 1.6rem;
+      backdrop-filter: blur(12px);
+    }
+    .section-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .section-card-subtitle {
+      font-size: 0.82rem;
+      color: var(--admin-text-dim);
+      margin-bottom: 1.3rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--admin-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .field-hint {
+      font-size: 0.75rem;
+      color: var(--admin-text-dim);
+      margin-top: 0.2rem;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="number"],
+    textarea,
+    select {
+      background: rgba(10, 12, 18, 0.9);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--admin-primary);
+      box-shadow: 0 0 12px var(--admin-primary-glow);
+      background: rgba(15, 18, 28, 0.95);
+    }
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+      line-height: 1.5;
+    }
+
+    /* Color Input Controls */
+    .color-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .color-swatch-picker {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      cursor: pointer;
+      background: none;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .color-swatch-picker::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+    .color-swatch-picker::-webkit-color-swatch {
+      border-radius: 6px;
+      border: none;
+    }
+
+    /* Color Palette Presets */
+    .preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.8rem;
+      margin-bottom: 1.4rem;
+    }
+    .preset-chip {
+      background: rgba(10, 12, 18, 0.8);
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      transition: all 0.2s;
+    }
+    .preset-chip:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .preset-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .preset-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Item List Cards (Projects, Experience, Software) */
+    .items-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .item-card {
+      background: rgba(13, 16, 26, 0.95);
+      border: 1px solid var(--admin-border);
+      border-radius: 10px;
+      padding: 1.2rem;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .item-card:hover {
+      border-color: rgba(255, 158, 0, 0.3);
+    }
+    .item-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .item-index-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--admin-primary);
+    }
+    .item-actions {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    /* Tag Editor Component */
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      padding: 0.5rem;
+      background: rgba(10, 12, 18, 0.9);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      min-height: 44px;
+    }
+    .tag-chip {
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.3);
+      color: var(--admin-primary);
+      border-radius: 6px;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tag-remove-btn {
+      background: none;
+      border: none;
+      color: var(--admin-text-muted);
+      cursor: pointer;
+      font-size: 0.95rem;
+      line-height: 1;
+    }
+    .tag-remove-btn:hover {
+      color: var(--admin-danger);
+    }
+    .tag-input {
+      border: none !important;
+      background: transparent !important;
+      color: #fff !important;
+      box-shadow: none !important;
+      padding: 0.25rem 0.5rem !important;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 0.9rem 1.4rem;
+      border-radius: 10px;
+      background: rgba(15, 20, 32, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--admin-border);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      z-index: 1000;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .toast.success {
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);
+    }
+    .toast.error {
+      border-color: rgba(239, 68, 68, 0.4);
+      box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .preview-pane { display: none !important; }
+      .sidebar { width: 70px; }
+      .nav-tab-item span { display: none; }
+      .sidebar-footer { display: none; }
+      .editor-pane { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="brand">
+      <div class="brand-icon">FS</div>
+      <div class="brand-text">
+        <h1>FARHAN SHUJOY</h1>
+        <span>Admin Studio • Live Customizer</span>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="btn btn-secondary btn-sm" id="togglePreviewBtn" title="Toggle Side-by-Side Live Preview">
+        <span>👁️</span> <span class="hide-mobile">Live Preview</span>
+      </button>
+      <button class="btn btn-secondary btn-sm" id="resetBtn" title="Reset all changes to defaults">
+        <span>🔄</span> <span class="hide-mobile">Reset</span>
+      </button>
+      <button class="btn btn-outline-primary btn-sm" id="exportBtn" title="Download site-config.json">
+        <span>📥</span> <span class="hide-mobile">Export JSON</span>
+      </button>
+      <label class="btn btn-secondary btn-sm" style="margin:0; cursor:pointer;" title="Import site-config.json">
+        <span>📤</span> <span class="hide-mobile">Import</span>
+        <input type="file" id="importInput" accept=".json" style="display:none;">
+      </label>
+      <button class="btn btn-primary" id="saveBtn">
+        <span>💾</span> Save Changes
+      </button>
+      <a href="index.html" target="_blank" class="btn btn-secondary btn-sm" title="Open portfolio in new tab">
+        <span>↗️</span>
+      </a>
+      <button class="btn btn-danger btn-sm" id="logoutBtn" title="Lock & Logout of Admin Studio">
+        <span>🚪</span> <span class="hide-mobile">Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="nav-tabs">
+        <li class="nav-tab-item active" data-tab="theme">
+          <span class="nav-tab-icon">🎨</span>
+          <span>Colors & Theme</span>
+        </li>
+        <li class="nav-tab-item" data-tab="typography">
+          <span class="nav-tab-icon">🔤</span>
+          <span>Typography & Fonts</span>
+        </li>
+        <li class="nav-tab-item" data-tab="hero">
+          <span class="nav-tab-icon">⚡</span>
+          <span>Header & Hero</span>
+        </li>
+        <li class="nav-tab-item" data-tab="beforeAfter">
+          <span class="nav-tab-icon">🎬</span>
+          <span>Before & After</span>
+        </li>
+        <li class="nav-tab-item" data-tab="projects">
+          <span class="nav-tab-icon">📁</span>
+          <span>Projects Carousel</span>
+        </li>
+        <li class="nav-tab-item" data-tab="experience">
+          <span class="nav-tab-icon">💼</span>
+          <span>Work Experience</span>
+        </li>
+        <li class="nav-tab-item" data-tab="skills">
+          <span class="nav-tab-icon">🛠️</span>
+          <span>Skills & Software</span>
+        </li>
+        <li class="nav-tab-item" data-tab="contact">
+          <span class="nav-tab-icon">📬</span>
+          <span>Contact & Socials</span>
+        </li>
+        <li class="nav-tab-item" data-tab="footer">
+          <span class="nav-tab-icon">🦶</span>
+          <span>Footer & SEO</span>
+        </li>
+        <li class="nav-tab-item" data-tab="security">
+          <span class="nav-tab-icon">🔐</span>
+          <span>Password & Security</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="sync-status">
+          <div class="sync-dot"></div>
+          <span id="syncStatusText">Ready • Autosync Active</span>
+        </div>
+        <div>Changes apply instantly to live preview & localStorage.</div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+      <!-- Editor Form Pane -->
+      <div class="editor-pane">
+
+        <!-- ======================================================== -->
+        <!-- TAB 1: COLORS & THEME -->
+        <!-- ======================================================== -->
+        <section class="tab-panel active" id="tab-theme">
+          <div class="panel-header">
+            <h2>🎨 Colors & Theme Engine</h2>
+            <p>Customize every color, accent gradient, background tone, border, and glow across the entire site.</p>
+          </div>
+
+          <!-- Quick Palette Presets -->
+          <div class="section-card">
+            <div class="section-card-title">1-Click Theme Presets</div>
+            <div class="section-card-subtitle">Choose a curated cinematic color palette or create your custom look below.</div>
+            <div class="preset-grid">
+              <div class="preset-chip" data-preset="amber">
+                <div class="preset-circle" style="background:#ff9e00;"></div>
+                <div class="preset-title">Cyber Amber (Original)</div>
+              </div>
+              <div class="preset-chip" data-preset="neonCyan">
+                <div class="preset-circle" style="background:#06b6d4;"></div>
+                <div class="preset-title">Neon Cyan</div>
+              </div>
+              <div class="preset-chip" data-preset="violet">
+                <div class="preset-circle" style="background:#a855f7;"></div>
+                <div class="preset-title">Electric Violet</div>
+              </div>
+              <div class="preset-chip" data-preset="emerald">
+                <div class="preset-circle" style="background:#10b981;"></div>
+                <div class="preset-title">Matrix Emerald</div>
+              </div>
+              <div class="preset-chip" data-preset="crimson">
+                <div class="preset-circle" style="background:#ef4444;"></div>
+                <div class="preset-title">Crimson Reel</div>
+              </div>
+              <div class="preset-chip" data-preset="gold">
+                <div class="preset-circle" style="background:#eab308;"></div>
+                <div class="preset-title">Luxury Gold</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Primary & Accent Colors -->
+          <div class="section-card">
+            <div class="section-card-title">Accents & Brand Colors</div>
+            <div class="section-card-subtitle">These drive button glows, highlights, borders, and active cards.</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Primary Brand Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_primary_picker" value="#ff9e00">
+                  <input type="text" id="theme_primary" value="#ff9e00">
+                </div>
+                <div class="field-hint">Used for primary buttons, active tabs, and main glow highlights.</div>
+              </div>
+              <div class="form-group">
+                <label>Accent Amber / Highlight</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_accentAmber_picker" value="#ff9e00">
+                  <input type="text" id="theme_accentAmber" value="#ff9e00">
+                </div>
+                <div class="field-hint">Heading span colors, pulsing badge dots, and fluted panel glow.</div>
+              </div>
+              <div class="form-group">
+                <label>Secondary Accent (Purple / Orange)</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_accentPurple_picker" value="#ff7a00">
+                  <input type="text" id="theme_accentPurple" value="#ff7a00">
+                </div>
+                <div class="field-hint">Secondary gradients and ambient lighting accents.</div>
+              </div>
+              <div class="form-group">
+                <label>Accent Emerald / Status</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_accentEmerald_picker" value="#10b981">
+                  <input type="text" id="theme_accentEmerald" value="#10b981">
+                </div>
+                <div class="field-hint">Success badges, online status indicators.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backgrounds & Surfaces -->
+          <div class="section-card">
+            <div class="section-card-title">Dark Mode Backgrounds & Card Surfaces</div>
+            <div class="section-card-subtitle">Controls the deep blacks, surface cards, and borders.</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Main Body Background</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_bg_picker" value="#07080c">
+                  <input type="text" id="theme_bg" value="#07080c">
+                </div>
+                <div class="field-hint">Overall canvas backdrop color.</div>
+              </div>
+              <div class="form-group">
+                <label>Surface / Header Background</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_bgSurface_picker" value="#0f1118">
+                  <input type="text" id="theme_bgSurface" value="#0f1118">
+                </div>
+                <div class="field-hint">Navbar backdrop and elevated section surfaces.</div>
+              </div>
+              <div class="form-group">
+                <label>Card Glassmorphic Background</label>
+                <input type="text" id="theme_bgCard" value="rgba(20, 24, 36, 0.7)">
+                <div class="field-hint">Supports RGBA or HEX for glass translucency.</div>
+              </div>
+              <div class="form-group">
+                <label>Card Border Color</label>
+                <input type="text" id="theme_border" value="rgba(255, 255, 255, 0.08)">
+                <div class="field-hint">Subtle perimeter lines for glass cards.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text Colors & Glows -->
+          <div class="section-card">
+            <div class="section-card-title">Typography Colors & Ambient Glows</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Primary Text Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_text_picker" value="#f8fafc">
+                  <input type="text" id="theme_text" value="#f8fafc">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Muted Text Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_textMuted_picker" value="#94a3b8">
+                  <input type="text" id="theme_textMuted" value="#94a3b8">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Dim Text Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="theme_textDim_picker" value="#64748b">
+                  <input type="text" id="theme_textDim" value="#64748b">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Primary Ambient Glow (RGBA)</label>
+                <input type="text" id="theme_glowOrange" value="rgba(255, 158, 0, 0.35)">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 2: TYPOGRAPHY & FONTS -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-typography">
+          <div class="panel-header">
+            <h2>🔤 Typography & Font Style</h2>
+            <p>Select modern Google Fonts for headings, body text, and accents to change the personality of your site.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Font Families</div>
+            <div class="section-card-subtitle">Select from curated top-tier design typography.</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Heading Font Family</label>
+                <select id="theme_fontHeading">
+                  <option value="Outfit">Outfit (Clean, Modern, Geometric - Default)</option>
+                  <option value="Space Grotesk">Space Grotesk (Tech, Futuristic)</option>
+                  <option value="Plus Jakarta Sans">Plus Jakarta Sans (Sleek SaaS)</option>
+                  <option value="Inter">Inter (Ultra-Clean, Contemporary)</option>
+                  <option value="Montserrat">Montserrat (Bold, Punchy, Premium)</option>
+                  <option value="Poppins">Poppins (Friendly, Geometric)</option>
+                  <option value="Syne">Syne (High-Fashion, Avant-Garde)</option>
+                  <option value="Clash Display">Clash Display (High Impact, Editorial)</option>
+                  <option value="Playfair Display">Playfair Display (Luxury, Serif)</option>
+                </select>
+                <div class="field-hint">Used for Big Hero Title, Section Headings, and Logo.</div>
+              </div>
+
+              <div class="form-group">
+                <label>Body Font Family</label>
+                <select id="theme_fontBody">
+                  <option value="Plus Jakarta Sans">Plus Jakarta Sans (Default)</option>
+                  <option value="Inter">Inter</option>
+                  <option value="Outfit">Outfit</option>
+                  <option value="Roboto">Roboto</option>
+                  <option value="Poppins">Poppins</option>
+                  <option value="Open Sans">Open Sans</option>
+                </select>
+                <div class="field-hint">Used for paragraphs, card descriptions, and nav links.</div>
+              </div>
+
+              <div class="form-group">
+                <label>Accent / Monospace Font</label>
+                <select id="theme_fontAccent">
+                  <option value="Space Grotesk">Space Grotesk (Default)</option>
+                  <option value="Outfit">Outfit</option>
+                  <option value="Plus Jakarta Sans">Plus Jakarta Sans</option>
+                  <option value="Courier New">Monospace Courier</option>
+                </select>
+                <div class="field-hint">Used for badges, dates, and metric tags.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Typography Live Preview Sandbox -->
+          <div class="section-card">
+            <div class="section-card-title">Typography Live Sample</div>
+            <div style="background:rgba(0,0,0,0.5); padding:1.5rem; border-radius:8px; border:1px solid var(--admin-border);" id="fontPreviewSample">
+              <h3 style="font-family: var(--preview-font-heading, 'Outfit'); font-size:1.8rem; font-weight:800; margin-bottom:0.5rem;">
+                CRAFTING HIGH-IMPACT <span style="color:var(--admin-primary)">MOTION GRAPHICS</span>
+              </h3>
+              <p style="font-family: var(--preview-font-body, 'Plus Jakarta Sans'); color:var(--admin-text-muted); font-size:0.95rem; line-height:1.6;">
+                Sample body text showing readability, line spacing, and typographic tone. Every frame tells a story, and every transition keeps the audience hooked.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 3: HEADER & HERO -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-hero">
+          <div class="panel-header">
+            <h2>⚡ Header & Hero Section</h2>
+            <p>Customize your brand name, typewriter badge phrases, hero title, bio, and 3D SaaS showcase reels.</p>
+          </div>
+
+          <!-- Header / Brand -->
+          <div class="section-card">
+            <div class="section-card-title">Navigation Brand & Typewriter Badge</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Brand First Name</label>
+                <input type="text" id="header_brandFirstName" value="FARHAN">
+              </div>
+              <div class="form-group">
+                <label>Brand Last Name (Colored Accent)</label>
+                <input type="text" id="header_brandLastName" value="SHUJOY">
+              </div>
+              <div class="form-group full-width">
+                <label>Typewriter Rotating Badge Words</label>
+                <div class="tag-container" id="typewriterWordsContainer">
+                  <!-- Tag chips inserted via JS -->
+                  <input type="text" class="tag-input" id="typewriterWordInput" placeholder="+ Type role and press Enter...">
+                </div>
+                <div class="field-hint">Press Enter to add phrases like "Video Editor", "Motion Designer", "3D Generalist", etc.</div>
+              </div>
+              <div class="form-group">
+                <label>Nav Header CTA Button Text</label>
+                <input type="text" id="header_ctaText" value="Let's collaborate">
+              </div>
+              <div class="form-group">
+                <label>Nav Header CTA Short Text (Mobile)</label>
+                <input type="text" id="header_ctaShortText" value="Let's Talk">
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Main Content -->
+          <div class="section-card">
+            <div class="section-card-title">Hero Main Title & Subtitle Bio</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Hero Title Line 1</label>
+                <input type="text" id="hero_titleLine1" value="BRINGING MOTION">
+              </div>
+              <div class="form-group">
+                <label>Hero Title Line 2 (Accent Gradient)</label>
+                <input type="text" id="hero_titleLine2" value="TO LIFE">
+              </div>
+              <div class="form-group full-width">
+                <label>Hero Subtitle / Bio Paragraph</label>
+                <textarea id="hero_subtitle" rows="3">I am Farhan Shujoy, Video Editor & Motion Designer. I craft high-converting visual stories, commercial edits, and kinetic 3D motion graphics that captivate audiences.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Primary Button Text</label>
+                <input type="text" id="hero_btnReelText" value="Watch Projects Reel">
+              </div>
+              <div class="form-group">
+                <label>Primary Button Link</label>
+                <input type="text" id="hero_btnReelLink" value="#projects">
+              </div>
+              <div class="form-group">
+                <label>Secondary Button Text</label>
+                <input type="text" id="hero_btnContactText" value="Get In Touch">
+              </div>
+              <div class="form-group">
+                <label>Secondary Button Link</label>
+                <input type="text" id="hero_btnContactLink" value="#contact">
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero 3D SaaS Reel Videos -->
+          <div class="section-card">
+            <div class="section-card-title">Hero 3D SaaS Showcase Reel Cards (3 Videos)</div>
+            <div class="section-card-subtitle">These 3 reels rotate in the interactive 3D perspective stage in your hero right column.</div>
+            <div class="items-container" id="heroReelsContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 4: BEFORE & AFTER -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-beforeAfter">
+          <div class="panel-header">
+            <h2>🎬 Before & After Section</h2>
+            <p>Customize the transformation breakdown showcase, main video player URL, and the 4 transformation pillars.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Section Head & Player Config</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Section Pill Tag</label>
+                <input type="text" id="ba_pillText" value="EDIT TRANSFORMATION">
+              </div>
+              <div class="form-group">
+                <label>Section Heading</label>
+                <input type="text" id="ba_heading" value="Before & After Breakdown">
+              </div>
+              <div class="form-group full-width">
+                <label>Section Subtitle Description</label>
+                <textarea id="ba_description">Watch the raw footage transform into a high-retention commercial cut with cinematic color grading, kinetic sound design, and precision cuts.</textarea>
+              </div>
+              <div class="form-group full-width">
+                <label>Before & After Video URL (.mp4 / Cloudinary / direct link)</label>
+                <input type="text" id="ba_videoUrl" value="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669060/shujoy-portfolio/lhvr4minwfm5bkicg1dk.mp4">
+              </div>
+              <div class="form-group">
+                <label>Player Window Badge</label>
+                <input type="text" id="ba_badgeTitle" value="BEFORE / AFTER TIMELINE">
+              </div>
+              <div class="form-group">
+                <label>Player Window Subtitle</label>
+                <input type="text" id="ba_badgeSubtitle" value="Template Trey • Color Grade & Motion Cut">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 Pillars -->
+          <div class="section-card">
+            <div class="section-card-title">4 Transformation Pillars Cards</div>
+            <div class="section-card-subtitle">The 4 benefit cards beneath the Before & After video.</div>
+            <div class="items-container" id="baPillarsContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 5: PROJECTS CAROUSEL -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-projects">
+          <div class="panel-header">
+            <h2>📁 Featured Projects Video Carousel</h2>
+            <p>Add, edit, reorder, or delete portfolio projects. Change video links, titles, software tags, and aspect ratio.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Section Head</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Section Pill Tag</label>
+                <input type="text" id="projects_pillText" value="Portfolio Showcase">
+              </div>
+              <div class="form-group">
+                <label>Section Heading</label>
+                <input type="text" id="projects_heading" value="Featured Video Works">
+              </div>
+              <div class="form-group full-width">
+                <label>Section Description</label>
+                <textarea id="projects_description">Continuous autoplaying carousel — when one finishes, the next reel automatically plays. You can also drag or swipe to explore.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>Projects List (<span id="projectCount">0</span>)</span>
+              <button class="btn btn-outline-primary btn-sm" id="addProjectBtn">+ Add New Project</button>
+            </div>
+            <div class="section-card-subtitle">Drag or reorder projects to decide what plays first.</div>
+            <div class="items-container" id="projectsContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 6: WORK EXPERIENCE -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-experience">
+          <div class="panel-header">
+            <h2>💼 Work Experience Timeline</h2>
+            <p>Manage career history, client studios, agency positions, job roles, dates, and skill tags.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Section Head</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Section Pill Tag</label>
+                <input type="text" id="exp_pillText" value="Career Journey">
+              </div>
+              <div class="form-group">
+                <label>Section Heading</label>
+                <input type="text" id="exp_heading" value="Work Experience">
+              </div>
+              <div class="form-group full-width">
+                <label>Section Description</label>
+                <textarea id="exp_description">Proven track record in high-impact video editing, broadcast production, and creative motion studios.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>Timeline Positions (<span id="expCount">0</span>)</span>
+              <button class="btn btn-outline-primary btn-sm" id="addExpBtn">+ Add Position</button>
+            </div>
+            <div class="items-container" id="experienceContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 7: SKILLS & SOFTWARE -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-skills">
+          <div class="panel-header">
+            <h2>🛠️ Software & Creative Skills</h2>
+            <p>Customize your software cards (After Effects, Premiere, C4D, DaVinci) and discipline tags.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Section Head</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Section Pill Tag</label>
+                <input type="text" id="skills_pillText" value="Toolkit & Expertise">
+              </div>
+              <div class="form-group">
+                <label>Section Heading</label>
+                <input type="text" id="skills_heading" value="Software & Creative Skills">
+              </div>
+              <div class="form-group full-width">
+                <label>Section Description</label>
+                <textarea id="skills_description">Industry-standard suites and techniques leveraged to bring every creative vision to life.</textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Software Cards</div>
+            <div class="items-container" id="softwareContainer">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Core Disciplines & Techniques</div>
+            <div class="section-card-subtitle">Floating badges displayed at the bottom of the skills section.</div>
+            <div class="tag-container" id="disciplinesContainer">
+              <input type="text" class="tag-input" id="disciplineInput" placeholder="+ Type discipline tag & press Enter...">
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 8: CONTACT & SOCIALS -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-contact">
+          <div class="panel-header">
+            <h2>📬 Contact & Social Profiles</h2>
+            <p>Configure your contact heading, primary email address, copy-to-clipboard button, and social media links.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Contact Card Copy</div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Card Big Heading</label>
+                <input type="text" id="contact_heading" value="Got a project? Let's make it cinematic.">
+              </div>
+              <div class="form-group full-width">
+                <label>Card Subtitle</label>
+                <textarea id="contact_subtitle">Whether you need a commercial showreel, high-retention video ads, or 3D motion design, I'm ready to bring your vision to reality.</textarea>
+              </div>
+              <div class="form-group">
+                <label>Primary Email Address</label>
+                <input type="text" id="contact_email" value="contact@farhanshujoy.com">
+                <div class="field-hint">Used for copy button and display.</div>
+              </div>
+              <div class="form-group">
+                <label>Direct Email Link (Gmail Compose / mailto)</label>
+                <input type="text" id="contact_emailLink" value="https://mail.google.com/mail/?view=cm&fs=1&to=contact@farhanshujoy.com">
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Social Media Links</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>LinkedIn URL</label>
+                <input type="url" id="contact_linkedin" value="https://www.linkedin.com/in/farhan-shujoy/">
+              </div>
+              <div class="form-group">
+                <label>YouTube URL</label>
+                <input type="url" id="contact_youtube" placeholder="https://youtube.com/@yourchannel">
+              </div>
+              <div class="form-group">
+                <label>Instagram URL</label>
+                <input type="url" id="contact_instagram" placeholder="https://instagram.com/yourusername">
+              </div>
+              <div class="form-group">
+                <label>X / Twitter URL</label>
+                <input type="url" id="contact_twitter" placeholder="https://x.com/yourhandle">
+              </div>
+              <div class="form-group">
+                <label>WhatsApp Link / Number</label>
+                <input type="text" id="contact_whatsapp" placeholder="https://wa.me/yourphonenumber">
+              </div>
+              <div class="form-group">
+                <label>Behance URL</label>
+                <input type="url" id="contact_behance" placeholder="https://behance.net/yourprofile">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 9: FOOTER & SEO META -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-footer">
+          <div class="panel-header">
+            <h2>🦶 Footer & SEO Metadata</h2>
+            <p>Customize the footer font color, footer background, copyright notice, page title, and meta description.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Footer Appearance & Colors</div>
+            <div class="section-card-subtitle">Complete control over footer font color, size, and styling.</div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Footer Font Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="footer_textColor_picker" value="#64748b">
+                  <input type="text" id="footer_textColor" value="#64748b">
+                </div>
+                <div class="field-hint">Controls the text color of the footer copyright & tagline.</div>
+              </div>
+              <div class="form-group">
+                <label>Footer Background Color</label>
+                <div class="color-input-row">
+                  <input type="color" class="color-swatch-picker" id="footer_bgColor_picker" value="#07080c">
+                  <input type="text" id="footer_bgColor" value="#07080c">
+                </div>
+                <div class="field-hint">Hex or 'transparent'.</div>
+              </div>
+              <div class="form-group">
+                <label>Footer Font Size</label>
+                <input type="text" id="footer_fontSize" value="0.95rem">
+              </div>
+              <div class="form-group full-width">
+                <label>Footer Copyright Text</label>
+                <input type="text" id="footer_copyright" value="© 2026 Farhan Shujoy. Crafted for cinematic excellence.">
+              </div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">SEO & Browser Meta Tags</div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Page Title Tag (&lt;title&gt;)</label>
+                <input type="text" id="meta_title" value="Farhan Shujoy | Video Editor & Motion Designer">
+              </div>
+              <div class="form-group full-width">
+                <label>Page Meta Description</label>
+                <textarea id="meta_description">Portfolio of Farhan Shujoy - Video Editor & Motion Designer. Specialized in high-impact video editing, 3D motion graphics, and commercial storytelling.</textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB 10: PASSWORD & SECURITY -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-security">
+          <div class="panel-header">
+            <h2>🔐 Security & Admin Password</h2>
+            <p>Change your private login password. Default password is <code>thikase</code>.</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Secret Access Route Information</div>
+            <div class="section-card-subtitle" style="line-height:1.6;">
+              The public floating button on your website has been completely removed to keep this panel hidden from regular visitors.<br>
+              You can access this studio anytime via the secret URL: <br>
+              <strong style="color:var(--admin-primary); font-family:monospace; font-size:0.95rem;">/thikase1/thikase2/admin/login.com</strong>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">Change Admin Password</div>
+            <div class="section-card-subtitle">Enter your current password and your new desired password.</div>
+            
+            <form id="changePasswordForm">
+              <div class="form-grid" style="max-width: 520px;">
+                <div class="form-group full-width">
+                  <label>Current / Old Password</label>
+                  <input type="password" id="oldPasswordInput" placeholder="Enter current password..." required>
+                </div>
+                <div class="form-group full-width">
+                  <label>New Password</label>
+                  <input type="password" id="newPasswordInput" placeholder="Enter new password..." required>
+                </div>
+                <div class="form-group full-width">
+                  <label>Confirm New Password</label>
+                  <input type="password" id="confirmPasswordInput" placeholder="Re-enter new password..." required>
+                </div>
+                <div class="form-group full-width">
+                  <button type="submit" class="btn btn-primary" id="updatePasswordBtn" style="width:fit-content; margin-top:0.5rem;">
+                    <span>🔒</span> Update & Save New Password
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">🚀 GitHub Cloud Direct Auto-Sync (No Export/Download Needed!)</div>
+            <div class="section-card-subtitle" style="line-height:1.6;">
+              When configured, clicking <strong>"💾 Save Changes"</strong> automatically commits directly to your GitHub repository (<code style="color:var(--admin-primary)">Maksudur20/shujoy-porfolio</code>) via GitHub's official REST API.<br>
+              GitHub Pages will instantly rebuild & auto-update without needing manual JSON download or Git terminal commands!
+            </div>
+
+            <div class="form-grid" style="max-width: 600px;">
+              <div class="form-group full-width">
+                <label>GitHub Personal Access Token (PAT)</label>
+                <div class="input-wrapper">
+                  <input type="password" id="ghTokenInput" placeholder="github_pat_... or ghp_...">
+                </div>
+                <div class="field-hint">Token is stored safely in your private browser storage. Needs 'contents: write' permission.</div>
+              </div>
+              <div class="form-group">
+                <label>GitHub Repository</label>
+                <input type="text" id="ghRepoInput" value="Maksudur20/shujoy-porfolio">
+              </div>
+              <div class="form-group">
+                <label>Target Branch</label>
+                <input type="text" id="ghBranchInput" value="main">
+              </div>
+              <div class="form-group full-width" style="display:flex; flex-direction:row; gap:0.6rem; margin-top:0.3rem;">
+                <button type="button" class="btn btn-outline-primary btn-sm" id="saveGhSettingsBtn">
+                  <span>💾</span> Save Token
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="testGhSyncBtn">
+                  <span>⚡</span> Test Connection
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Live Preview Pane -->
+      <aside class="preview-pane" id="previewPane">
+        <div class="preview-header">
+          <div style="font-weight:600; display:flex; align-items:center; gap:0.4rem;">
+            <span>👁️</span> Real-Time Live Preview
+          </div>
+          <div class="preview-device-pills">
+            <button class="device-pill active" data-view="desktop">Desktop</button>
+            <button class="device-pill" data-view="tablet">Tablet</button>
+            <button class="device-pill" data-view="mobile">Mobile</button>
+          </div>
+        </div>
+        <div class="preview-iframe-wrap">
+          <iframe src="index.html" class="preview-iframe" id="previewIframe"></iframe>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="adminToast">
+    <span id="toastIcon">✅</span>
+    <span id="toastMessage">Changes saved successfully!</span>
+  </div>
+
+  <script>
+    // Immediate Session Authentication Guard
+    if (sessionStorage.getItem('shujoy_admin_auth') !== 'authenticated') {
+      window.location.replace('thikase1/thikase2/admin/login.html');
+    }
+
+    // ==============================================================
+    // CONFIGURATION STATE & CONTROLLER
+    // ==============================================================
+    let currentConfig = null;
+    let defaultBackupConfig = null;
+
+    // Built-in Theme Presets
+    const THEME_PRESETS = {
+      amber: {
+        primary: "#ff9e00",
+        accentAmber: "#ff9e00",
+        accentPurple: "#ff7a00",
+        accentEmerald: "#10b981",
+        bg: "#07080c",
+        bgSurface: "#0f1118",
+        bgCard: "rgba(20, 24, 36, 0.7)",
+        glowOrange: "rgba(255, 158, 0, 0.35)",
+        footerText: "#64748b"
+      },
+      neonCyan: {
+        primary: "#06b6d4",
+        accentAmber: "#06b6d4",
+        accentPurple: "#3b82f6",
+        accentEmerald: "#10b981",
+        bg: "#050b14",
+        bgSurface: "#0a1322",
+        bgCard: "rgba(10, 24, 45, 0.7)",
+        glowOrange: "rgba(6, 182, 212, 0.35)",
+        footerText: "#7dd3fc"
+      },
+      violet: {
+        primary: "#a855f7",
+        accentAmber: "#a855f7",
+        accentPurple: "#ec4899",
+        accentEmerald: "#06b6d4",
+        bg: "#090611",
+        bgSurface: "#130d22",
+        bgCard: "rgba(28, 16, 50, 0.7)",
+        glowOrange: "rgba(168, 85, 247, 0.35)",
+        footerText: "#c084fc"
+      },
+      emerald: {
+        primary: "#10b981",
+        accentAmber: "#10b981",
+        accentPurple: "#059669",
+        accentEmerald: "#34d399",
+        bg: "#050d0a",
+        bgSurface: "#0b1a14",
+        bgCard: "rgba(14, 38, 28, 0.7)",
+        glowOrange: "rgba(16, 185, 129, 0.35)",
+        footerText: "#6ee7b7"
+      },
+      crimson: {
+        primary: "#ef4444",
+        accentAmber: "#ef4444",
+        accentPurple: "#f97316",
+        accentEmerald: "#10b981",
+        bg: "#0f0607",
+        bgSurface: "#1f0c0f",
+        bgCard: "rgba(45, 16, 20, 0.7)",
+        glowOrange: "rgba(239, 68, 68, 0.35)",
+        footerText: "#fca5a5"
+      },
+      gold: {
+        primary: "#eab308",
+        accentAmber: "#eab308",
+        accentPurple: "#f59e0b",
+        accentEmerald: "#10b981",
+        bg: "#0c0a04",
+        bgSurface: "#1a1608",
+        bgCard: "rgba(38, 32, 12, 0.7)",
+        glowOrange: "rgba(234, 179, 8, 0.35)",
+        footerText: "#fde047"
+      }
+    };
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', async () => {
+      setupTabSwitching();
+      setupColorPickerSync();
+      setupPresetChips();
+      setupPreviewControls();
+      setupSecurityAndLogout();
+      await loadInitialConfig();
+    });
+
+    // Load initial config from Server or LocalStorage or Defaults
+    async function loadInitialConfig() {
+      try {
+        // Try local storage first
+        const local = localStorage.getItem('site_config_data');
+        if (local) {
+          currentConfig = JSON.parse(local);
+        } else {
+          // Fetch from site-config.json
+          const res = await fetch('site-config.json');
+          if (res.ok) {
+            currentConfig = await res.json();
+          }
+        }
+      } catch (e) {
+        console.warn('Could not fetch site-config.json:', e);
+      }
+
+      if (!currentConfig) {
+        // Fallback default
+        currentConfig = getFallbackConfig();
+      }
+
+      defaultBackupConfig = JSON.parse(JSON.stringify(currentConfig));
+      populateForm(currentConfig);
+      syncLivePreview(currentConfig);
+    }
+
+    // Populate all form elements from config
+    function populateForm(cfg) {
+      if (!cfg) return;
+
+      // Theme
+      const t = cfg.theme || {};
+      setVal('theme_primary', t.primary || '#ff9e00');
+      setVal('theme_accentAmber', t.accentAmber || '#ff9e00');
+      setVal('theme_accentPurple', t.accentPurple || '#ff7a00');
+      setVal('theme_accentEmerald', t.accentEmerald || '#10b981');
+      setVal('theme_bg', t.bg || '#07080c');
+      setVal('theme_bgSurface', t.bgSurface || '#0f1118');
+      setVal('theme_bgCard', t.bgCard || 'rgba(20, 24, 36, 0.7)');
+      setVal('theme_border', t.border || 'rgba(255, 255, 255, 0.08)');
+      setVal('theme_text', t.text || '#f8fafc');
+      setVal('theme_textMuted', t.textMuted || '#94a3b8');
+      setVal('theme_textDim', t.textDim || '#64748b');
+      setVal('theme_glowOrange', t.glowOrange || 'rgba(255, 158, 0, 0.35)');
+
+      setVal('theme_fontHeading', t.fontHeading || 'Outfit');
+      setVal('theme_fontBody', t.fontBody || 'Plus Jakarta Sans');
+      setVal('theme_fontAccent', t.fontAccent || 'Space Grotesk');
+
+      // Update color swatch pickers
+      syncSwatches();
+
+      // Meta
+      const m = cfg.meta || {};
+      setVal('meta_title', m.title || '');
+      setVal('meta_description', m.description || '');
+
+      // Header
+      const h = cfg.header || {};
+      setVal('header_brandFirstName', h.brandFirstName || 'FARHAN');
+      setVal('header_brandLastName', h.brandLastName || 'SHUJOY');
+      setVal('header_ctaText', h.ctaText || "Let's collaborate");
+      setVal('header_ctaShortText', h.ctaShortText || "Let's Talk");
+      renderTypewriterTags(h.typewriterWords || ["Video Editor", "Motion Designer", "3D Animator"]);
+
+      // Hero
+      const hr = cfg.hero || {};
+      setVal('hero_titleLine1', hr.titleLine1 || 'BRINGING MOTION');
+      setVal('hero_titleLine2', hr.titleLine2 || 'TO LIFE');
+      setVal('hero_subtitle', hr.subtitle || '');
+      setVal('hero_btnReelText', hr.btnReelText || 'Watch Projects Reel');
+      setVal('hero_btnReelLink', hr.btnReelLink || '#projects');
+      setVal('hero_btnContactText', hr.btnContactText || 'Get In Touch');
+      setVal('hero_btnContactLink', hr.btnContactLink || '#contact');
+      renderHeroReels(hr.saasReels || []);
+
+      // Before & After
+      const ba = cfg.beforeAfter || {};
+      setVal('ba_pillText', ba.pillText || 'EDIT TRANSFORMATION');
+      setVal('ba_heading', ba.heading || 'Before & After Breakdown');
+      setVal('ba_description', ba.description || '');
+      setVal('ba_videoUrl', ba.videoUrl || '');
+      setVal('ba_badgeTitle', ba.badgeTitle || 'BEFORE / AFTER TIMELINE');
+      setVal('ba_badgeSubtitle', ba.badgeSubtitle || '');
+      renderBaPillars(ba.pillars || []);
+
+      // Projects
+      const pr = cfg.projects || {};
+      setVal('projects_pillText', pr.pillText || 'Portfolio Showcase');
+      setVal('projects_heading', pr.heading || 'Featured Video Works');
+      setVal('projects_description', pr.description || '');
+      renderProjects(pr.items || []);
+
+      // Experience
+      const exp = cfg.experience || {};
+      setVal('exp_pillText', exp.pillText || 'Career Journey');
+      setVal('exp_heading', exp.heading || 'Work Experience');
+      setVal('exp_description', exp.description || '');
+      renderExperience(exp.items || []);
+
+      // Skills
+      const sk = cfg.skills || {};
+      setVal('skills_pillText', sk.pillText || 'Toolkit & Expertise');
+      setVal('skills_heading', sk.heading || 'Software & Creative Skills');
+      setVal('skills_description', sk.description || '');
+      renderSoftware(sk.software || []);
+      renderDisciplines(sk.disciplines || []);
+
+      // Contact
+      const ct = cfg.contact || {};
+      setVal('contact_heading', ct.heading || '');
+      setVal('contact_subtitle', ct.subtitle || '');
+      setVal('contact_email', ct.email || '');
+      setVal('contact_emailLink', ct.emailLink || '');
+      setVal('contact_linkedin', ct.linkedin || '');
+      setVal('contact_youtube', ct.youtube || '');
+      setVal('contact_instagram', ct.instagram || '');
+      setVal('contact_twitter', ct.twitter || '');
+      setVal('contact_whatsapp', ct.whatsapp || '');
+      setVal('contact_behance', ct.behance || '');
+
+      // Footer
+      const ft = cfg.footer || {};
+      setVal('footer_textColor', ft.textColor || '#64748b');
+      setVal('footer_bgColor', ft.bgColor || '#07080c');
+      setVal('footer_fontSize', ft.fontSize || '0.95rem');
+      setVal('footer_copyright', ft.copyright || '');
+      syncSwatches();
+
+      updateFontPreview();
+    }
+
+    // Helper: Collect current form data into clean config object
+    function collectConfigFromForm() {
+      const cfg = {
+        theme: {
+          primary: getVal('theme_primary'),
+          accentAmber: getVal('theme_accentAmber'),
+          accentPurple: getVal('theme_accentPurple'),
+          accentEmerald: getVal('theme_accentEmerald'),
+          bg: getVal('theme_bg'),
+          bgSurface: getVal('theme_bgSurface'),
+          bgCard: getVal('theme_bgCard'),
+          border: getVal('theme_border'),
+          borderHover: `rgba(${hexToRgb(getVal('theme_primary')) || '255, 158, 0'}, 0.4)`,
+          text: getVal('theme_text'),
+          textMuted: getVal('theme_textMuted'),
+          textDim: getVal('theme_textDim'),
+          glowOrange: getVal('theme_glowOrange'),
+          glowIndigo: `rgba(${hexToRgb(getVal('theme_accentPurple')) || '255, 110, 0'}, 0.15)`,
+          glowCyan: `rgba(${hexToRgb(getVal('theme_primary')) || '255, 158, 0'}, 0.12)`,
+          fontHeading: getVal('theme_fontHeading'),
+          fontBody: getVal('theme_fontBody'),
+          fontAccent: getVal('theme_fontAccent')
+        },
+        meta: {
+          title: getVal('meta_title'),
+          description: getVal('meta_description')
+        },
+        header: {
+          brandFirstName: getVal('header_brandFirstName'),
+          brandLastName: getVal('header_brandLastName'),
+          typewriterWords: getTypewriterWords(),
+          ctaText: getVal('header_ctaText'),
+          ctaShortText: getVal('header_ctaShortText'),
+          ctaLink: '#contact'
+        },
+        hero: {
+          titleLine1: getVal('hero_titleLine1'),
+          titleLine2: getVal('hero_titleLine2'),
+          subtitle: getVal('hero_subtitle'),
+          btnReelText: getVal('hero_btnReelText'),
+          btnReelLink: getVal('hero_btnReelLink'),
+          btnContactText: getVal('hero_btnContactText'),
+          btnContactLink: getVal('hero_btnContactLink'),
+          saasReels: collectHeroReels()
+        },
+        beforeAfter: {
+          pillText: getVal('ba_pillText'),
+          heading: getVal('ba_heading'),
+          description: getVal('ba_description'),
+          badgeTitle: getVal('ba_badgeTitle'),
+          badgeSubtitle: getVal('ba_badgeSubtitle'),
+          videoUrl: getVal('ba_videoUrl'),
+          pillars: collectBaPillars()
+        },
+        projects: {
+          pillText: getVal('projects_pillText'),
+          heading: getVal('projects_heading'),
+          description: getVal('projects_description'),
+          items: collectProjects()
+        },
+        experience: {
+          pillText: getVal('exp_pillText'),
+          heading: getVal('exp_heading'),
+          description: getVal('exp_description'),
+          items: collectExperience()
+        },
+        skills: {
+          pillText: getVal('skills_pillText'),
+          heading: getVal('skills_heading'),
+          description: getVal('skills_description'),
+          software: collectSoftware(),
+          disciplines: getDisciplinesList()
+        },
+        contact: {
+          heading: getVal('contact_heading'),
+          subtitle: getVal('contact_subtitle'),
+          email: getVal('contact_email'),
+          emailLink: getVal('contact_emailLink'),
+          linkedin: getVal('contact_linkedin'),
+          youtube: getVal('contact_youtube'),
+          instagram: getVal('contact_instagram'),
+          twitter: getVal('contact_twitter'),
+          whatsapp: getVal('contact_whatsapp'),
+          behance: getVal('contact_behance')
+        },
+        footer: {
+          copyright: getVal('footer_copyright'),
+          textColor: getVal('footer_textColor'),
+          bgColor: getVal('footer_bgColor'),
+          fontSize: getVal('footer_fontSize')
+        }
+      };
+
+      currentConfig = cfg;
+      return cfg;
+    }
+
+    // ==============================================================
+    // LIVE PREVIEW SYNC & MESSAGE PASSING
+    // ==============================================================
+    function syncLivePreview(cfg) {
+      const iframe = document.getElementById('previewIframe');
+      if (!iframe) return;
+
+      try {
+        if (iframe.contentWindow) {
+          iframe.contentWindow.postMessage({
+            type: 'SHUJOY_CONFIG_UPDATE',
+            config: cfg
+          }, '*');
+        }
+      } catch (err) {
+        // Cross-origin restriction if any
+      }
+
+      // Also save to localStorage for seamless persistence
+      localStorage.setItem('site_config_data', JSON.stringify(cfg));
+      updateFontPreview();
+    }
+
+    function updateFontPreview() {
+      const headingFont = getVal('theme_fontHeading') || 'Outfit';
+      const bodyFont = getVal('theme_fontBody') || 'Plus Jakarta Sans';
+      const sample = document.getElementById('fontPreviewSample');
+      if (sample) {
+        sample.style.setProperty('--preview-font-heading', headingFont);
+        sample.style.setProperty('--preview-font-body', bodyFont);
+      }
+    }
+
+    // Attach real-time input listeners to all inputs
+    document.querySelector('.editor-pane').addEventListener('input', () => {
+      const updated = collectConfigFromForm();
+      syncLivePreview(updated);
+    });
+
+    // UTF-8 to Base64 encoder for GitHub API
+    function utf8ToBase64(str) {
+      return window.btoa(unescape(encodeURIComponent(str)));
+    }
+
+    // Direct GitHub Commit via REST API
+    async function commitToGitHub(cfg) {
+      const token = (localStorage.getItem('shujoy_gh_token') || '').trim();
+      const repo = (localStorage.getItem('shujoy_gh_repo') || 'Maksudur20/shujoy-porfolio').trim();
+      const branch = (localStorage.getItem('shujoy_gh_branch') || 'main').trim();
+
+      if (!token) return { attempted: false };
+
+      try {
+        const fileUrl = `https://api.github.com/repos/${repo}/contents/site-config.json?ref=${branch}`;
+        
+        let sha = null;
+        const getRes = await fetch(fileUrl, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+        if (getRes.ok) {
+          const fileData = await getRes.json();
+          sha = fileData.sha;
+        }
+
+        const putUrl = `https://api.github.com/repos/${repo}/contents/site-config.json`;
+        const contentBase64 = utf8ToBase64(JSON.stringify(cfg, null, 2));
+
+        const bodyData = {
+          message: 'Update site-config.json via Admin Studio',
+          content: contentBase64,
+          branch: branch
+        };
+        if (sha) bodyData.sha = sha;
+
+        const putRes = await fetch(putUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(bodyData)
+        });
+
+        if (putRes.ok) {
+          return { attempted: true, success: true };
+        } else {
+          const errData = await putRes.json();
+          return { attempted: true, success: false, error: errData.message };
+        }
+      } catch (err) {
+        return { attempted: true, success: false, error: err.message };
+      }
+    }
+
+    // ==============================================================
+    // SAVE / EXPORT / IMPORT CONTROLS
+    // ==============================================================
+    document.getElementById('saveBtn').addEventListener('click', async () => {
+      const cfg = collectConfigFromForm();
+      syncLivePreview(cfg);
+
+      let savedToServer = false;
+      try {
+        const response = await fetch('/api/save-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(cfg, null, 2)
+        });
+        if (response.ok) {
+          savedToServer = true;
+        }
+      } catch (e) {
+        // Server might be static
+      }
+
+      // Check if GitHub auto-sync is configured
+      const ghResult = await commitToGitHub(cfg);
+
+      if (ghResult.attempted) {
+        if (ghResult.success) {
+          showToast('🚀 Committed directly to GitHub repo! Live site will update in ~30s!', 'success');
+        } else {
+          showToast(`⚠️ GitHub commit failed: ${ghResult.error}`, 'error');
+        }
+      } else if (savedToServer) {
+        showToast('✅ Saved permanently to site-config.json & Browser Storage!', 'success');
+      } else {
+        showToast('✅ Saved to Browser Storage! (Configure GitHub Token for 1-click cloud sync)', 'success');
+      }
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const cfg = collectConfigFromForm();
+      const blob = new Blob([JSON.stringify(cfg, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'site-config.json';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('📥 site-config.json exported!', 'success');
+    });
+
+    document.getElementById('importInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const imported = JSON.parse(event.target.result);
+          currentConfig = imported;
+          populateForm(imported);
+          syncLivePreview(imported);
+          showToast('📤 Configuration imported successfully!', 'success');
+        } catch (err) {
+          showToast('❌ Invalid JSON file!', 'error');
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to reset all customizations to original defaults?')) {
+        localStorage.removeItem('site_config_data');
+        currentConfig = JSON.parse(JSON.stringify(defaultBackupConfig));
+        populateForm(currentConfig);
+        syncLivePreview(currentConfig);
+        showToast('🔄 Reset to default configuration', 'success');
+      }
+    });
+
+    // ==============================================================
+    // RENDERERS & BUILDERS
+    // ==============================================================
+
+    // Typewriter Tags
+    let typewriterTagsList = [];
+    function renderTypewriterTags(tags) {
+      typewriterTagsList = [...tags];
+      const container = document.getElementById('typewriterWordsContainer');
+      const input = document.getElementById('typewriterWordInput');
+      container.querySelectorAll('.tag-chip').forEach(el => el.remove());
+
+      typewriterTagsList.forEach((tag, idx) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip';
+        chip.innerHTML = `${tag} <button type="button" class="tag-remove-btn" data-index="${idx}">×</button>`;
+        container.insertBefore(chip, input);
+      });
+    }
+
+    document.getElementById('typewriterWordsContainer').addEventListener('click', (e) => {
+      if (e.target.classList.contains('tag-remove-btn')) {
+        const idx = parseInt(e.target.dataset.index, 10);
+        typewriterTagsList.splice(idx, 1);
+        renderTypewriterTags(typewriterTagsList);
+        syncLivePreview(collectConfigFromForm());
+      }
+    });
+
+    document.getElementById('typewriterWordInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = e.target.value.trim();
+        if (val) {
+          typewriterTagsList.push(val);
+          e.target.value = '';
+          renderTypewriterTags(typewriterTagsList);
+          syncLivePreview(collectConfigFromForm());
+        }
+      }
+    });
+
+    function getTypewriterWords() {
+      return typewriterTagsList;
+    }
+
+    // Hero 3D SaaS Reels
+    function renderHeroReels(reels) {
+      const container = document.getElementById('heroReelsContainer');
+      container.innerHTML = '';
+      reels.forEach((reel, idx) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-index-badge">Card #${idx + 1} (${idx === 0 ? 'Center Active' : idx === 1 ? 'Right Tilt' : 'Left Tilt'})</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Reel Title</label>
+              <input type="text" class="hero-reel-title" value="${reel.title || ''}">
+            </div>
+            <div class="form-group">
+              <label>Video URL (.mp4 / Cloudinary)</label>
+              <input type="text" class="hero-reel-url" value="${reel.videoUrl || ''}">
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function collectHeroReels() {
+      const titles = document.querySelectorAll('.hero-reel-title');
+      const urls = document.querySelectorAll('.hero-reel-url');
+      const reels = [];
+      titles.forEach((el, idx) => {
+        reels.push({
+          title: el.value,
+          videoUrl: urls[idx]?.value || ''
+        });
+      });
+      return reels;
+    }
+
+    // Before & After Pillars
+    function renderBaPillars(pillars) {
+      const container = document.getElementById('baPillarsContainer');
+      container.innerHTML = '';
+      pillars.forEach((p, idx) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-index-badge">Pillar #${idx + 1}</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group" style="max-width:110px;">
+              <label>Icon Emoji</label>
+              <input type="text" class="pillar-icon" value="${p.icon || '🎨'}">
+            </div>
+            <div class="form-group">
+              <label>Pillar Title</label>
+              <input type="text" class="pillar-title" value="${p.title || ''}">
+            </div>
+            <div class="form-group full-width">
+              <label>Description</label>
+              <textarea class="pillar-desc" rows="2">${p.desc || ''}</textarea>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function collectBaPillars() {
+      const icons = document.querySelectorAll('.pillar-icon');
+      const titles = document.querySelectorAll('.pillar-title');
+      const descs = document.querySelectorAll('.pillar-desc');
+      const pillars = [];
+      icons.forEach((el, idx) => {
+        pillars.push({
+          icon: el.value,
+          title: titles[idx]?.value || '',
+          desc: descs[idx]?.value || ''
+        });
+      });
+      return pillars;
+    }
+
+    // Projects Carousel
+    let projectItemsList = [];
+    function renderProjects(items) {
+      projectItemsList = [...items];
+      document.getElementById('projectCount').textContent = projectItemsList.length;
+      const container = document.getElementById('projectsContainer');
+      container.innerHTML = '';
+
+      projectItemsList.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-index-badge">🎬 Project #${idx + 1} - ${item.title || 'Untitled'}</span>
+            <div class="item-actions">
+              <button class="btn btn-secondary btn-sm" onclick="moveProject(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up">↑</button>
+              <button class="btn btn-secondary btn-sm" onclick="moveProject(${idx}, 1)" ${idx === projectItemsList.length - 1 ? 'disabled' : ''} title="Move Down">↓</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteProject(${idx})" title="Delete Project">🗑️</button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Project Title</label>
+              <input type="text" class="proj-title" data-idx="${idx}" value="${item.title || ''}">
+            </div>
+            <div class="form-group">
+              <label>Subtitle / Client</label>
+              <input type="text" class="proj-sub" data-idx="${idx}" value="${item.subtitle || ''}">
+            </div>
+            <div class="form-group">
+              <label>Badge Text</label>
+              <input type="text" class="proj-badge" data-idx="${idx}" value="${item.badge || 'Commercial Cut'}">
+            </div>
+            <div class="form-group">
+              <label>Software Tag</label>
+              <input type="text" class="proj-tag" data-idx="${idx}" value="${item.tag || 'Premier Pro'}">
+            </div>
+            <div class="form-group">
+              <label>Aspect Ratio</label>
+              <select class="proj-aspect" data-idx="${idx}">
+                <option value="landscape" ${item.aspect === 'landscape' ? 'selected' : ''}>Landscape (16:9)</option>
+                <option value="portrait" ${item.aspect === 'portrait' ? 'selected' : ''}>Portrait (9:16)</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Video Stream URL (.mp4 / Cloudinary)</label>
+              <input type="text" class="proj-url" data-idx="${idx}" value="${item.videoUrl || ''}">
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('addProjectBtn').addEventListener('click', () => {
+      projectItemsList.push({
+        badge: "New Cut",
+        title: "New Featured Project",
+        subtitle: "Dynamic Edits",
+        tag: "Premiere Pro",
+        aspect: "landscape",
+        videoUrl: ""
+      });
+      renderProjects(projectItemsList);
+      syncLivePreview(collectConfigFromForm());
+    });
+
+    window.moveProject = (idx, direction) => {
+      const target = idx + direction;
+      if (target < 0 || target >= projectItemsList.length) return;
+      const item = projectItemsList.splice(idx, 1)[0];
+      projectItemsList.splice(target, 0, item);
+      renderProjects(projectItemsList);
+      syncLivePreview(collectConfigFromForm());
+    };
+
+    window.deleteProject = (idx) => {
+      if (confirm('Delete this project reel from carousel?')) {
+        projectItemsList.splice(idx, 1);
+        renderProjects(projectItemsList);
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    function collectProjects() {
+      const cards = document.querySelectorAll('#projectsContainer .item-card');
+      const items = [];
+      cards.forEach((card, idx) => {
+        items.push({
+          title: card.querySelector('.proj-title')?.value || '',
+          subtitle: card.querySelector('.proj-sub')?.value || '',
+          badge: card.querySelector('.proj-badge')?.value || '',
+          tag: card.querySelector('.proj-tag')?.value || '',
+          aspect: card.querySelector('.proj-aspect')?.value || 'landscape',
+          videoUrl: card.querySelector('.proj-url')?.value || ''
+        });
+      });
+      return items;
+    }
+
+    // Work Experience
+    let experienceItemsList = [];
+    function renderExperience(items) {
+      experienceItemsList = [...items];
+      document.getElementById('expCount').textContent = experienceItemsList.length;
+      const container = document.getElementById('experienceContainer');
+      container.innerHTML = '';
+
+      experienceItemsList.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-index-badge">💼 Position #${idx + 1} - ${item.company || 'Company'}</span>
+            <div class="item-actions">
+              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}>↑</button>
+              <button class="btn btn-secondary btn-sm" onclick="moveExp(${idx}, 1)" ${idx === experienceItemsList.length - 1 ? 'disabled' : ''}>↓</button>
+              <button class="btn btn-danger btn-sm" onclick="deleteExp(${idx})">🗑️</button>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="form-group" style="max-width:110px;">
+              <label>Icon Emoji</label>
+              <input type="text" class="exp-icon" value="${item.icon || '🎬'}">
+            </div>
+            <div class="form-group">
+              <label>Job Role / Title</label>
+              <input type="text" class="exp-role" value="${item.role || ''}">
+            </div>
+            <div class="form-group">
+              <label>Company & Work Type</label>
+              <input type="text" class="exp-company" value="${item.company || ''}">
+            </div>
+            <div class="form-group">
+              <label>Badge Tag (e.g. Present / Remote)</label>
+              <input type="text" class="exp-badge" value="${item.badge || 'Present'}">
+            </div>
+            <div class="form-group">
+              <label>Date Range</label>
+              <input type="text" class="exp-date" value="${item.date || ''}">
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" class="exp-loc" value="${item.location || ''}">
+            </div>
+            <div class="form-group full-width">
+              <label>Job Description</label>
+              <textarea class="exp-desc" rows="2">${item.desc || ''}</textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Skill Pills (Comma separated)</label>
+              <input type="text" class="exp-skills" value="${(item.skills || []).join(', ')}">
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById('addExpBtn').addEventListener('click', () => {
+      experienceItemsList.push({
+        icon: "🎬",
+        role: "Video Editor & Motion Designer",
+        company: "New Agency · Full-time",
+        badge: "Full-time",
+        badgeColor: "#ff9e00",
+        date: "📅 2026 - Present",
+        location: "📍 Remote",
+        desc: "High-impact video editing, visual effects, and kinetic motion graphics.",
+        skills: ["Premiere Pro", "After Effects"]
+      });
+      renderExperience(experienceItemsList);
+      syncLivePreview(collectConfigFromForm());
+    });
+
+    window.moveExp = (idx, direction) => {
+      const target = idx + direction;
+      if (target < 0 || target >= experienceItemsList.length) return;
+      const item = experienceItemsList.splice(idx, 1)[0];
+      experienceItemsList.splice(target, 0, item);
+      renderExperience(experienceItemsList);
+      syncLivePreview(collectConfigFromForm());
+    };
+
+    window.deleteExp = (idx) => {
+      if (confirm('Delete this career position?')) {
+        experienceItemsList.splice(idx, 1);
+        renderExperience(experienceItemsList);
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    function collectExperience() {
+      const cards = document.querySelectorAll('#experienceContainer .item-card');
+      const items = [];
+      cards.forEach(card => {
+        const skillsRaw = card.querySelector('.exp-skills')?.value || '';
+        const skillsArr = skillsRaw.split(',').map(s => s.trim()).filter(Boolean);
+        items.push({
+          icon: card.querySelector('.exp-icon')?.value || '🎬',
+          role: card.querySelector('.exp-role')?.value || '',
+          company: card.querySelector('.exp-company')?.value || '',
+          badge: card.querySelector('.exp-badge')?.value || 'Present',
+          badgeColor: '#ff9e00',
+          date: card.querySelector('.exp-date')?.value || '',
+          location: card.querySelector('.exp-loc')?.value || '',
+          desc: card.querySelector('.exp-desc')?.value || '',
+          skills: skillsArr
+        });
+      });
+      return items;
+    }
+
+    // Software Cards
+    function renderSoftware(softwareList) {
+      const container = document.getElementById('softwareContainer');
+      container.innerHTML = '';
+      softwareList.forEach((sw, idx) => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <div class="item-card-header">
+            <span class="item-index-badge">${sw.name}</span>
+          </div>
+          <div class="form-grid">
+            <div class="form-group" style="max-width:110px;">
+              <label>Logo Abbr</label>
+              <input type="text" class="sw-abbr" value="${sw.abbr || ''}">
+            </div>
+            <div class="form-group">
+              <label>Software Name</label>
+              <input type="text" class="sw-name" value="${sw.name || ''}">
+            </div>
+            <div class="form-group full-width">
+              <label>Short Description</label>
+              <input type="text" class="sw-desc" value="${sw.desc || ''}">
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function collectSoftware() {
+      const cards = document.querySelectorAll('#softwareContainer .item-card');
+      const items = [];
+      cards.forEach((card, idx) => {
+        const badges = ['badge-ae', 'badge-pr', 'badge-c4d', 'badge-davinci'];
+        items.push({
+          abbr: card.querySelector('.sw-abbr')?.value || '',
+          name: card.querySelector('.sw-name')?.value || '',
+          badgeClass: badges[idx] || 'badge-ae',
+          desc: card.querySelector('.sw-desc')?.value || ''
+        });
+      });
+      return items;
+    }
+
+    // Disciplines
+    let disciplinesList = [];
+    function renderDisciplines(list) {
+      disciplinesList = [...list];
+      const container = document.getElementById('disciplinesContainer');
+      const input = document.getElementById('disciplineInput');
+      container.querySelectorAll('.tag-chip').forEach(el => el.remove());
+
+      disciplinesList.forEach((tag, idx) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-chip';
+        chip.innerHTML = `${tag} <button type="button" class="tag-remove-btn" data-index="${idx}">×</button>`;
+        container.insertBefore(chip, input);
+      });
+    }
+
+    document.getElementById('disciplinesContainer').addEventListener('click', (e) => {
+      if (e.target.classList.contains('tag-remove-btn')) {
+        const idx = parseInt(e.target.dataset.index, 10);
+        disciplinesList.splice(idx, 1);
+        renderDisciplines(disciplinesList);
+        syncLivePreview(collectConfigFromForm());
+      }
+    });
+
+    document.getElementById('disciplineInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = e.target.value.trim();
+        if (val) {
+          disciplinesList.push(val);
+          e.target.value = '';
+          renderDisciplines(disciplinesList);
+          syncLivePreview(collectConfigFromForm());
+        }
+      }
+    });
+
+    function getDisciplinesList() {
+      return disciplinesList;
+    }
+
+    // ==============================================================
+    // UTILITIES & SETUP
+    // ==============================================================
+    function setVal(id, val) {
+      const el = document.getElementById(id);
+      if (el) el.value = val;
+    }
+    function getVal(id) {
+      const el = document.getElementById(id);
+      return el ? el.value : '';
+    }
+
+    function setupSecurityAndLogout() {
+      // Logout handler
+      const logoutBtn = document.getElementById('logoutBtn');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          sessionStorage.removeItem('shujoy_admin_auth');
+          sessionStorage.removeItem('shujoy_auth_time');
+          window.location.replace('thikase1/thikase2/admin/login.html');
+        });
+      }
+
+      // Password change form
+      const pwForm = document.getElementById('changePasswordForm');
+      if (pwForm) {
+        pwForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const oldPw = document.getElementById('oldPasswordInput').value.trim();
+          const newPw = document.getElementById('newPasswordInput').value.trim();
+          const confirmPw = document.getElementById('confirmPasswordInput').value.trim();
+
+          if (newPw !== confirmPw) {
+            showToast('❌ New passwords do not match!', 'error');
+            return;
+          }
+          if (newPw.length < 3) {
+            showToast('❌ Password must be at least 3 characters!', 'error');
+            return;
+          }
+
+          let updatedOnServer = false;
+          try {
+            const res = await fetch('/api/change-password', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ oldPassword: oldPw, newPassword: newPw })
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success) {
+                updatedOnServer = true;
+              } else {
+                showToast(`❌ ${data.error || 'Failed to update'}`, 'error');
+                return;
+              }
+            } else {
+              const err = await res.json();
+              showToast(`❌ ${err.error || 'Failed to update'}`, 'error');
+              return;
+            }
+          } catch (err) {
+            // Static host fallback
+          }
+
+          if (!currentConfig) currentConfig = {};
+          if (!currentConfig.auth) currentConfig.auth = {};
+          currentConfig.auth.adminPassword = newPw;
+          localStorage.setItem('site_config_data', JSON.stringify(currentConfig));
+
+          pwForm.reset();
+          showToast('🔒 Password changed successfully!', 'success');
+        });
+      }
+
+      // GitHub Token settings
+      const ghTokenInput = document.getElementById('ghTokenInput');
+      const ghRepoInput = document.getElementById('ghRepoInput');
+      const ghBranchInput = document.getElementById('ghBranchInput');
+      const saveGhBtn = document.getElementById('saveGhSettingsBtn');
+      const testGhBtn = document.getElementById('testGhSyncBtn');
+
+      if (ghTokenInput) {
+        ghTokenInput.value = localStorage.getItem('shujoy_gh_token') || '';
+        ghRepoInput.value = localStorage.getItem('shujoy_gh_repo') || 'Maksudur20/shujoy-porfolio';
+        ghBranchInput.value = localStorage.getItem('shujoy_gh_branch') || 'main';
+
+        saveGhBtn.addEventListener('click', () => {
+          localStorage.setItem('shujoy_gh_token', ghTokenInput.value.trim());
+          localStorage.setItem('shujoy_gh_repo', ghRepoInput.value.trim());
+          localStorage.setItem('shujoy_gh_branch', ghBranchInput.value.trim());
+          showToast('💾 GitHub credentials saved in browser!', 'success');
+        });
+
+        testGhBtn.addEventListener('click', async () => {
+          const token = ghTokenInput.value.trim();
+          const repo = ghRepoInput.value.trim();
+          if (!token) {
+            showToast('❌ Please enter a GitHub token first!', 'error');
+            return;
+          }
+          try {
+            const res = await fetch(`https://api.github.com/repos/${repo}`, {
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+              }
+            });
+            if (res.ok) {
+              const data = await res.json();
+              showToast(`✅ Connected to GitHub repository: ${data.full_name}!`, 'success');
+            } else {
+              showToast('❌ GitHub Token invalid or repository not found!', 'error');
+            }
+          } catch (e) {
+            showToast('❌ Connection error to api.github.com', 'error');
+          }
+        });
+      }
+    }
+
+    function setupTabSwitching() {
+      const tabs = document.querySelectorAll('.nav-tab-item');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const target = tab.dataset.tab;
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+          const targetPanel = document.getElementById(`tab-${target}`);
+          if (targetPanel) targetPanel.classList.add('active');
+        });
+      });
+    }
+
+    function setupColorPickerSync() {
+      const syncPairs = [
+        ['theme_primary', 'theme_primary_picker'],
+        ['theme_accentAmber', 'theme_accentAmber_picker'],
+        ['theme_accentPurple', 'theme_accentPurple_picker'],
+        ['theme_accentEmerald', 'theme_accentEmerald_picker'],
+        ['theme_bg', 'theme_bg_picker'],
+        ['theme_bgSurface', 'theme_bgSurface_picker'],
+        ['theme_text', 'theme_text_picker'],
+        ['theme_textMuted', 'theme_textMuted_picker'],
+        ['theme_textDim', 'theme_textDim_picker'],
+        ['footer_textColor', 'footer_textColor_picker'],
+        ['footer_bgColor', 'footer_bgColor_picker']
+      ];
+
+      syncPairs.forEach(([textId, pickerId]) => {
+        const textEl = document.getElementById(textId);
+        const pickerEl = document.getElementById(pickerId);
+        if (!textEl || !pickerEl) return;
+
+        pickerEl.addEventListener('input', () => {
+          textEl.value = pickerEl.value;
+          syncLivePreview(collectConfigFromForm());
+        });
+
+        textEl.addEventListener('input', () => {
+          if (textEl.value.startsWith('#') && textEl.value.length === 7) {
+            pickerEl.value = textEl.value;
+          }
+          syncLivePreview(collectConfigFromForm());
+        });
+      });
+    }
+
+    function syncSwatches() {
+      const syncPairs = [
+        ['theme_primary', 'theme_primary_picker'],
+        ['theme_accentAmber', 'theme_accentAmber_picker'],
+        ['theme_accentPurple', 'theme_accentPurple_picker'],
+        ['theme_accentEmerald', 'theme_accentEmerald_picker'],
+        ['theme_bg', 'theme_bg_picker'],
+        ['theme_bgSurface', 'theme_bgSurface_picker'],
+        ['theme_text', 'theme_text_picker'],
+        ['theme_textMuted', 'theme_textMuted_picker'],
+        ['theme_textDim', 'theme_textDim_picker'],
+        ['footer_textColor', 'footer_textColor_picker'],
+        ['footer_bgColor', 'footer_bgColor_picker']
+      ];
+      syncPairs.forEach(([textId, pickerId]) => {
+        const textEl = document.getElementById(textId);
+        const pickerEl = document.getElementById(pickerId);
+        if (textEl && pickerEl && textEl.value.startsWith('#') && textEl.value.length === 7) {
+          pickerEl.value = textEl.value;
+        }
+      });
+    }
+
+    function setupPresetChips() {
+      document.querySelectorAll('.preset-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const presetName = chip.dataset.preset;
+          const preset = THEME_PRESETS[presetName];
+          if (!preset) return;
+
+          Object.entries(preset).forEach(([k, v]) => {
+            const el = document.getElementById(`theme_${k}`);
+            if (el) el.value = v;
+          });
+          if (preset.footerText) {
+            setVal('footer_textColor', preset.footerText);
+          }
+
+          syncSwatches();
+          const cfg = collectConfigFromForm();
+          syncLivePreview(cfg);
+          showToast(`Applied ${chip.querySelector('.preset-title').textContent} palette!`, 'success');
+        });
+      });
+    }
+
+    function setupPreviewControls() {
+      const toggleBtn = document.getElementById('togglePreviewBtn');
+      const pane = document.getElementById('previewPane');
+      const iframe = document.getElementById('previewIframe');
+
+      toggleBtn.addEventListener('click', () => {
+        pane.classList.toggle('hidden');
+      });
+
+      document.querySelectorAll('.device-pill').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.device-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const view = btn.dataset.view;
+          iframe.classList.remove('mobile-view', 'tablet-view');
+          if (view === 'mobile') iframe.classList.add('mobile-view');
+          if (view === 'tablet') iframe.classList.add('tablet-view');
+        });
+      });
+    }
+
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('adminToast');
+      const msgEl = document.getElementById('toastMessage');
+      const iconEl = document.getElementById('toastIcon');
+
+      msgEl.textContent = msg;
+      iconEl.textContent = type === 'success' ? '✅' : '❌';
+      toast.className = `toast show ${type}`;
+
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function hexToRgb(hex) {
+      if (!hex || typeof hex !== 'string') return null;
+      hex = hex.replace('#', '');
+      if (hex.length === 3) {
+        hex = hex.split('').map(c => c + c).join('');
+      }
+      if (hex.length !== 6) return null;
+      const num = parseInt(hex, 16);
+      return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+    }
+
+    function getFallbackConfig() {
+      return {
+        theme: {
+          primary: "#ff9e00",
+          accentAmber: "#ff9e00",
+          accentPurple: "#ff7a00",
+          accentEmerald: "#10b981",
+          bg: "#07080c",
+          bgSurface: "#0f1118",
+          bgCard: "rgba(20, 24, 36, 0.7)",
+          border: "rgba(255, 255, 255, 0.08)",
+          text: "#f8fafc",
+          textMuted: "#94a3b8",
+          textDim: "#64748b",
+          glowOrange: "rgba(255, 158, 0, 0.35)",
+          fontHeading: "Outfit",
+          fontBody: "Plus Jakarta Sans",
+          fontAccent: "Space Grotesk"
+        },
+        meta: {
+          title: "Farhan Shujoy | Video Editor & Motion Designer",
+          description: "Portfolio of Farhan Shujoy"
+        },
+        header: {
+          brandFirstName: "FARHAN",
+          brandLastName: "SHUJOY",
+          typewriterWords: ["Video Editor", "Motion Designer", "3D Animator"],
+          ctaText: "Let's collaborate",
+          ctaShortText: "Let's Talk"
+        },
+        hero: {
+          titleLine1: "BRINGING MOTION",
+          titleLine2: "TO LIFE",
+          subtitle: "I am Farhan Shujoy, Video Editor & Motion Designer.",
+          btnReelText: "Watch Projects Reel",
+          btnReelLink: "#projects",
+          btnContactText: "Get In Touch",
+          btnContactLink: "#contact",
+          saasReels: []
+        },
+        beforeAfter: {
+          pillText: "EDIT TRANSFORMATION",
+          heading: "Before & After Breakdown",
+          description: "",
+          badgeTitle: "BEFORE / AFTER TIMELINE",
+          badgeSubtitle: "",
+          videoUrl: "",
+          pillars: []
+        },
+        projects: {
+          pillText: "Portfolio Showcase",
+          heading: "Featured Video Works",
+          description: "",
+          items: []
+        },
+        experience: {
+          pillText: "Career Journey",
+          heading: "Work Experience",
+          description: "",
+          items: []
+        },
+        skills: {
+          pillText: "Toolkit & Expertise",
+          heading: "Software & Creative Skills",
+          description: "",
+          software: [],
+          disciplines: []
+        },
+        contact: {
+          heading: "Got a project? Let's make it cinematic.",
+          subtitle: "",
+          email: "contact@farhanshujoy.com",
+          emailLink: "https://mail.google.com/mail/?view=cm&fs=1&to=contact@farhanshujoy.com"
+        },
+        footer: {
+          copyright: "© 2026 Farhan Shujoy. Crafted for cinematic excellence.",
+          textColor: "#64748b",
+          bgColor: "#07080c",
+          fontSize: "0.95rem"
+        }
+      };
+    }
+  </script>
+</body>
+</html>

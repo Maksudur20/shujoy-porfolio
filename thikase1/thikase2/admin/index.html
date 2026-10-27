@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    if (sessionStorage.getItem('shujoy_admin_auth') === 'authenticated') {
+      window.location.replace('../../../admin.html');
+    } else {
+      window.location.replace('login.html');
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

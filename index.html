@@ -12,6 +12,8 @@
 
   <!-- Lenis Momentum Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+  <!-- Dynamic Customizer & Config Engine -->
+  <script src="site-engine.js"></script>
 
   <style>
     :root {
@@ -30,6 +32,16 @@
       --glow-orange: rgba(255, 158, 0, 0.35);
       --glow-cyan: rgba(255, 120, 0, 0.25);
       --glow-purple: rgba(255, 80, 0, 0.25);
+
+      /* Dynamic Typography Tokens */
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-accent: 'Space Grotesk', sans-serif;
+
+      /* Dynamic Footer Tokens */
+      --footer-bg: #07080c;
+      --footer-color: #64748b;
+      --footer-font-size: 0.95rem;
     }
 
     * {
@@ -49,13 +61,17 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
       overflow-x: hidden;
       width: 100%;
       max-width: 100vw;
       min-height: 100vh;
       line-height: 1.6;
       position: relative;
+    }
+
+    h1, h2, h3, h4, .title-text, .hero-title {
+      font-family: var(--font-heading, 'Outfit', sans-serif);
     }
 
     /* Ambient Background Glows */
@@ -1546,15 +1562,15 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      color: var(--text-dim);
-      font-size: 0.85rem;
-      background: #050609;
+      color: var(--footer-color, var(--text-dim));
+      font-size: var(--footer-font-size, 0.85rem);
+      background: var(--footer-bg, #050609);
       position: relative;
       z-index: 10;
     }
     .footer-copyright {
-      color: var(--text-muted);
-      font-size: 0.88rem;
+      color: var(--footer-color, var(--text-muted));
+      font-size: var(--footer-font-size, 0.88rem);
       text-align: center;
       width: 100%;
     }
@@ -4173,24 +4189,29 @@
       // Typewriter Animation for Role Badge
       const typewriterEl = document.getElementById('typewriterText');
       if (typewriterEl) {
-        const phrases = [
+        const defaultPhrases = [
           "Video Editor",
           "Motion Designer",
           "Video Editor & Motion Designer"
         ];
         let pIndex = 0;
-        let cIndex = phrases[0].length;
+        let cIndex = defaultPhrases[0].length;
         let isDeleting = true;
 
         setTimeout(function runTypewriter() {
-          const currentPhrase = phrases[pIndex];
+          const activePhrases = (window._customTypewriterPhrases && window._customTypewriterPhrases.length > 0)
+            ? window._customTypewriterPhrases
+            : defaultPhrases;
+
+          if (pIndex >= activePhrases.length) pIndex = 0;
+          const currentPhrase = activePhrases[pIndex] || defaultPhrases[0];
 
           if (isDeleting) {
             cIndex--;
-            typewriterEl.textContent = currentPhrase.substring(0, cIndex);
+            typewriterEl.textContent = currentPhrase.substring(0, Math.max(0, cIndex));
             if (cIndex <= 0) {
               isDeleting = false;
-              pIndex = (pIndex + 1) % phrases.length;
+              pIndex = (pIndex + 1) % activePhrases.length;
               setTimeout(runTypewriter, 320);
               return;
             }

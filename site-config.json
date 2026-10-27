@@ -1,0 +1,284 @@
+{
+  "theme": {
+    "primary": "#ff9e00",
+    "accentAmber": "#ff9e00",
+    "accentPurple": "#ff7a00",
+    "accentEmerald": "#10b981",
+    "bg": "#07080c",
+    "bgSurface": "#0f1118",
+    "bgCard": "rgba(20, 24, 36, 0.7)",
+    "border": "rgba(255, 255, 255, 0.08)",
+    "borderHover": "rgba(255, 158, 0, 0.4)",
+    "text": "#f8fafc",
+    "textMuted": "#94a3b8",
+    "textDim": "#64748b",
+    "glowOrange": "rgba(255, 158, 0, 0.35)",
+    "glowIndigo": "rgba(255, 110, 0, 0.15)",
+    "glowCyan": "rgba(255, 158, 0, 0.12)",
+    "fontHeading": "Outfit",
+    "fontBody": "Plus Jakarta Sans",
+    "fontAccent": "Space Grotesk",
+    "footerBg": "#07080c",
+    "footerText": "#64748b",
+    "footerFontSize": "0.95rem"
+  },
+  "meta": {
+    "title": "Farhan Shujoy | Video Editor & Motion Designer",
+    "description": "Portfolio of Farhan Shujoy - Video Editor & Motion Designer. Specialized in high-impact video editing, 3D motion graphics, and commercial storytelling."
+  },
+  "header": {
+    "brandFirstName": "FARHAN",
+    "brandLastName": "SHUJOY",
+    "typewriterWords": ["Video Editor", "Motion Designer", "3D Animator", "VFX Artist"],
+    "ctaText": "Let's collaborate",
+    "ctaShortText": "Let's Talk",
+    "ctaLink": "#contact"
+  },
+  "hero": {
+    "titleLine1": "BRINGING MOTION",
+    "titleLine2": "TO LIFE",
+    "subtitle": "I am Farhan Shujoy, Video Editor & Motion Designer. I craft high-converting visual stories, commercial edits, and kinetic 3D motion graphics that captivate audiences.",
+    "btnReelText": "Watch Projects Reel",
+    "btnReelLink": "#projects",
+    "btnContactText": "Get In Touch",
+    "btnContactLink": "#contact",
+    "saasReels": [
+      {
+        "title": "Ricky E-Commerce Breakdown",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669363/shujoy-portfolio/wm98e2b0xhmhgshsq9hw.mp4"
+      },
+      {
+        "title": "Podcast Reel 01",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669032/shujoy-portfolio/jxi5rjnmruo7hr6vqgvx.mp4"
+      },
+      {
+        "title": "Mathew Reel",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669328/shujoy-portfolio/wuhnj2upxg10wiou5wlj.mp4"
+      }
+    ]
+  },
+  "beforeAfter": {
+    "pillText": "EDIT TRANSFORMATION",
+    "heading": "Before & After Breakdown",
+    "description": "Watch the raw footage transform into a high-retention commercial cut with cinematic color grading, kinetic sound design, and precision cuts.",
+    "badgeTitle": "BEFORE / AFTER TIMELINE",
+    "badgeSubtitle": "Template Trey • Color Grade & Motion Cut",
+    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669060/shujoy-portfolio/lhvr4minwfm5bkicg1dk.mp4",
+    "pillars": [
+      {
+        "icon": "🎨",
+        "title": "Color Grading & LUT",
+        "desc": "Transforms flat, low-contrast log capture into rich, filmic commercial color with tailored hue separation."
+      },
+      {
+        "icon": "🔊",
+        "title": "Spatial Sound Design",
+        "desc": "Multi-track soundscapes engineered with low-end risers, impacts, whooshes, and crystal-clear audio mastering."
+      },
+      {
+        "icon": "⚡",
+        "title": "Kinetic Motion & VFX",
+        "desc": "Precision speed-ramping, camera zooms, and motion typography synchronized on every musical beat."
+      },
+      {
+        "icon": "📈",
+        "title": "Retention Optimization",
+        "desc": "Engineered to hook the audience in the first 3 seconds, eliminating drop-off and maximizing viewer watch-time."
+      }
+    ]
+  },
+  "projects": {
+    "pillText": "Portfolio Showcase",
+    "heading": "Featured Video Works",
+    "description": "Continuous autoplaying carousel — when one finishes, the next reel automatically plays. You can also drag or swipe to explore.",
+    "items": [
+      {
+        "badge": "Commercial Cut",
+        "title": "Cinematic Brand Reel",
+        "subtitle": "Dynamic Cuts & Pacing",
+        "tag": "Premier Pro",
+        "aspect": "landscape",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
+      },
+      {
+        "badge": "3D Motion",
+        "title": "Kinetic 3D Product Visual",
+        "subtitle": "After Effects & C4D",
+        "tag": "After Effects",
+        "aspect": "landscape",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
+      },
+      {
+        "badge": "Agency Project",
+        "title": "Creative Agency Commercial",
+        "subtitle": "Cinex & The Blind Men",
+        "tag": "VFX & Grading",
+        "aspect": "portrait",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668967/shujoy-portfolio/sdqbwp4txoepxewz1un1.mp4"
+      },
+      {
+        "badge": "Short-Form",
+        "title": "High-Converting Retention Reel",
+        "subtitle": "Debutify E-Commerce",
+        "tag": "Debutify",
+        "aspect": "landscape",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668965/shujoy-portfolio/hr9lo4qh38aytpuvxu8b.mp4"
+      },
+      {
+        "badge": "Narrative Cut",
+        "title": "Sound Design & Audio Sync",
+        "subtitle": "Multi-Track Precision",
+        "tag": "Sound Design",
+        "aspect": "portrait",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668964/shujoy-portfolio/fg8ajptgcom9kkwujvhr.mp4"
+      },
+      {
+        "badge": "Typography",
+        "title": "Fast-Paced Motion Teaser",
+        "subtitle": "Kinetic Text & Transitions",
+        "tag": "Motion Graphics",
+        "aspect": "landscape",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668962/shujoy-portfolio/msv2xdx4peqcdh9zueqr.mp4"
+      },
+      {
+        "badge": "Product Demo",
+        "title": "SaaS Demonstration Showcase",
+        "subtitle": "Product Walkthrough Cut",
+        "tag": "Product Demo",
+        "aspect": "landscape",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668960/shujoy-portfolio/ucgws1dyab4xrxg8gpae.mp4"
+      },
+      {
+        "badge": "Broadcast",
+        "title": "Broadcast News & Media Edit",
+        "subtitle": "Bongo News BDC Archive",
+        "tag": "Broadcast",
+        "aspect": "portrait",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668959/shujoy-portfolio/e6vsgekufsxgsp6cbbjm.mp4"
+      },
+      {
+        "badge": "Finishing",
+        "title": "Color Grade & Visual FX",
+        "subtitle": "DaVinci Resolve Grade",
+        "tag": "DaVinci Resolve",
+        "aspect": "portrait",
+        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668956/shujoy-portfolio/lrqxutdce9wfzb7xzs0y.mp4"
+      }
+    ]
+  },
+  "experience": {
+    "pillText": "Career Journey",
+    "heading": "Work Experience",
+    "description": "Proven track record in high-impact video editing, broadcast production, and creative motion studios.",
+    "items": [
+      {
+        "icon": "🎬",
+        "role": "Video Editor & Motion design",
+        "company": "The Blind Men Productions · Full-time",
+        "badge": "Present",
+        "badgeColor": "#ff9e00",
+        "date": "📅 Sep 2026 - Present",
+        "location": "📍 Dhaka, Bangladesh · On-site",
+        "desc": "Leading visual storytelling, high-end commercial post-production, motion graphics development, and cinematic sequence cutting.",
+        "skills": ["💎 Adobe Premiere Pro", "💎 Adobe After Effects", "Motion Graphics", "Color Grading"]
+      },
+      {
+        "icon": "⚡",
+        "role": "Video editor & Motion design",
+        "company": "Cinex Creative Agency · Full-time",
+        "badge": "Agency",
+        "badgeColor": "#ff9e00",
+        "date": "📅 May 2026 - Sep 2026 · 5 mos",
+        "location": "📍 Dhaka, Bangladesh · Hybrid",
+        "desc": "Produced high-energy agency deliverables, client commercials, social campaign teasers, and 3D kinetic animation assets.",
+        "skills": ["Commercial Editing", "Visual Effects", "Social Media Reels"]
+      },
+      {
+        "icon": "🦋",
+        "role": "Video Editor",
+        "company": "Debutify · Remote",
+        "badge": "Remote",
+        "badgeColor": "#a855f7",
+        "date": "📅 Jan 2026 - May 2026 · 5 mos",
+        "location": "📍 Remote Work",
+        "desc": "Produced and edited high-converting video content, viral short-form content, software demonstrations, and animated explainer videos for international audiences.",
+        "skills": ["High-Converting Video", "Short-form Content", "Product Explainers"]
+      },
+      {
+        "icon": "📺",
+        "role": "Video Editor",
+        "company": "Bongo News BDC · Media House",
+        "badge": "Broadcast",
+        "badgeColor": "#fbbf24",
+        "date": "📅 Oct 2023 - 2024 · 4 mos",
+        "location": "📍 Dhaka, Bangladesh",
+        "desc": "Edited and produced over 200 hours of video content, enhancing viewer engagement through precise cuts and pacing. Developed 20 commercials and 10 product demonstrations. Implemented advanced color correction and audio synchronization techniques, improving video quality by 25%.",
+        "skills": ["200+ Hours Produced", "20 Commercials", "Audio Synchronization", "Color Correction (+25% Quality)"]
+      }
+    ]
+  },
+  "skills": {
+    "pillText": "Toolkit & Expertise",
+    "heading": "Software & Creative Skills",
+    "description": "Industry-standard suites and techniques leveraged to bring every creative vision to life.",
+    "software": [
+      {
+        "abbr": "Ae",
+        "name": "After Effects",
+        "badgeClass": "badge-ae",
+        "desc": "Motion Graphics, 2D/3D VFX, Kinetic Typography & Compositing"
+      },
+      {
+        "abbr": "Pr",
+        "name": "Premiere Pro",
+        "badgeClass": "badge-pr",
+        "desc": "Multi-Cam Editing, Pacing, Dynamic Storytelling & Final Assembly"
+      },
+      {
+        "abbr": "C4D",
+        "name": "Cinema 4D",
+        "badgeClass": "badge-c4d",
+        "desc": "3D Animation, Product Rendering & Abstract Motion Loops"
+      },
+      {
+        "abbr": "Da",
+        "name": "DaVinci Resolve",
+        "badgeClass": "badge-davinci",
+        "desc": "Advanced Color Grading, Look Dev, Matching & Finishing"
+      }
+    ],
+    "disciplines": [
+      "🎬 Commercial Editing",
+      "✨ 3D Kinetic Motion",
+      "🎨 Color Grading & LUT Development",
+      "🔊 Sound Design & Mastering",
+      "⚡ Short-Form Viral Retention",
+      "📱 Social Media Ads & Explainers",
+      "📐 Keyframe Animation & Graph Editing",
+      "🔄 Seamless Transitions & Speed Ramping"
+    ]
+  },
+  "contact": {
+    "heading": "Got a project? Let's make it cinematic.",
+    "subtitle": "Whether you need a commercial showreel, high-retention video ads, or 3D motion design, I'm ready to bring your vision to reality.",
+    "email": "contact@farhanshujoy.com",
+    "emailLink": "https://mail.google.com/mail/?view=cm&fs=1&to=contact@farhanshujoy.com",
+    "linkedin": "https://www.linkedin.com/in/farhan-shujoy/",
+    "whatsapp": "",
+    "youtube": "",
+    "instagram": "",
+    "twitter": "",
+    "behance": "",
+    "github": ""
+  },
+  "footer": {
+    "copyright": "© 2026 Farhan Shujoy. Crafted for cinematic excellence.",
+    "tagline": "Crafted for cinematic excellence.",
+    "textColor": "#64748b",
+    "bgColor": "transparent",
+    "fontSize": "0.95rem"
+  },
+  "auth": {
+    "adminPassword": "thikase"
+  }
+}
