@@ -48,7 +48,6 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
     }
 
     html {
@@ -56,6 +55,23 @@
       max-width: 100vw;
       overflow-x: hidden;
       width: 100%;
+      scroll-behavior: auto !important;
+    }
+
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
     }
 
     body {
@@ -2686,14 +2702,11 @@
     /* ============================================================ */
     /* CUSTOM CINEMATIC CURSOR                                      */
     /* ============================================================ */
-    @media (hover: hover) and (pointer: fine) {
-      html,
-      body,
-      *,
-      *::before,
-      *::after {
-        cursor: none !important; /* Hide default OS cursor everywhere on desktop */
-      }
+    body.custom-cursor-active,
+    body.custom-cursor-active *,
+    body.custom-cursor-active *::before,
+    body.custom-cursor-active *::after {
+      cursor: none !important;
     }
 
     .custom-cursor-dot {
@@ -4384,7 +4397,7 @@
       const cursorFollower = document.getElementById('cursorFollower');
       const cursorText = document.getElementById('cursorText');
 
-      if (cursorDot && cursorFollower && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      if (cursorDot && cursorFollower) {
         let mouseX = -100;
         let mouseY = -100;
         let followerX = -100;
@@ -4399,6 +4412,7 @@
           cursorDot.style.top = `${mouseY}px`;
 
           if (!isVisible) {
+            document.body.classList.add('custom-cursor-active');
             cursorDot.style.opacity = '1';
             cursorFollower.style.opacity = '1';
             followerX = mouseX;
@@ -4411,6 +4425,7 @@
         document.addEventListener('mouseleave', () => {
           cursorDot.style.opacity = '0';
           cursorFollower.style.opacity = '0';
+          document.body.classList.remove('custom-cursor-active');
           isVisible = false;
         });
 
