@@ -2824,10 +2824,20 @@
       transform: scale(1.18) rotate(-6deg);
     }
 
+    /* Active visibility */
+    body.custom-cursor-active .custom-cursor-pointer {
+      opacity: 1 !important;
+    }
+    body.custom-cursor-active .custom-cursor-follower {
+      opacity: 1 !important;
+    }
+
     /* HOVER OVER ANY VIDEO: VIVID HIGH-CONTRAST CINEMA PLAY CURSOR */
-    .custom-cursor-pointer.is-video-hover {
+    .custom-cursor-pointer.is-video-hover,
+    body.custom-cursor-active .custom-cursor-pointer.is-video-hover {
       opacity: 0 !important;
-      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(0.4) !important;
+      visibility: hidden !important;
+      transform: translate3d(var(--mx, -100px), var(--my, -100px), 0) scale(0.3) !important;
     }
     .custom-cursor-follower.is-video-hover {
       width: 86px !important;
@@ -2974,21 +2984,14 @@
 
   <!-- Custom Cinematic Magnetic Arrow & Video Cursor Elements -->
   <div class="custom-cursor-pointer" id="cursorPointer" aria-hidden="true">
-    <svg class="cursor-arrow-svg" width="22" height="24" viewBox="0 0 22 24" fill="none">
-      <path d="M2 2L9.5 22L13.5 13.5L20.5 10.5L2 2Z" fill="url(#cursorGrad)" stroke="#ffffff" stroke-width="1.6" stroke-linejoin="round"/>
-      <defs>
-        <linearGradient id="cursorGrad" x1="2" y1="2" x2="20.5" y2="22" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#ffb703"/>
-          <stop offset="0.6" stop-color="#ff9e00"/>
-          <stop offset="1" stop-color="#fb8500"/>
-        </linearGradient>
-      </defs>
+    <svg class="cursor-arrow-svg" width="24" height="26" viewBox="0 0 24 26" fill="none">
+      <path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="#ff9e00" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
     </svg>
   </div>
   <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true">
     <div class="video-cursor-badge" id="videoCursorBadge">
       <svg class="badge-play-icon" viewBox="0 0 24 24" fill="currentColor">
-        <polygon points="6 4 20 12 6 20 6 4"></polygon>
+        <polygon points="7 4 20 12 7 20 7 4"></polygon>
       </svg>
       <span class="badge-text">PLAY</span>
     </div>
@@ -4510,7 +4513,7 @@
         let isClicking = false;
 
         // Instant mouse tracking with GPU translate3d
-        window.addEventListener('mousemove', (e) => {
+        const onPointerMove = (e) => {
           mouseX = e.clientX;
           mouseY = e.clientY;
 
@@ -4520,8 +4523,6 @@
 
           if (!isVisible) {
             document.body.classList.add('custom-cursor-active');
-            cursorPointer.style.opacity = '1';
-            cursorFollower.style.opacity = '1';
             followerX = mouseX;
             followerY = mouseY;
             prevFollowerX = mouseX;
@@ -4529,9 +4530,10 @@
             isVisible = true;
           }
 
-          // DYNAMIC VIDEO HOVER DETECTION (Works over all videos, stages, cards & frames)
-          const videoTarget = e.target.closest('video, .video-card, .saas-card, .video-frame, .ba-video-frame, .carousel-track, .saas-3d-stage, .ba-container');
-          const isVideoControl = e.target.closest('.sound-toggle-btn, .video-progress-bar, .saas-timeline, .bottom-timeline-scrub, .hero-sound-btn, .ba-sound-btn');
+          // DYNAMIC VIDEO HOVER DETECTION (Safe element checking across all videos & stages)
+          const el = e.target && e.target.nodeType === 1 ? e.target : (e.target && e.target.parentElement ? e.target.parentElement : null);
+          const videoTarget = el && el.closest ? el.closest('video, .video-card, .saas-card, .video-frame, .ba-video-frame, .carousel-track, .saas-3d-stage, .ba-container') : null;
+          const isVideoControl = el && el.closest ? el.closest('.sound-toggle-btn, .video-progress-bar, .saas-timeline, .bottom-timeline-scrub, .hero-sound-btn, .ba-sound-btn') : null;
 
           if (videoTarget) {
             if (isVideoControl) {
@@ -4552,7 +4554,7 @@
             cursorPointer.classList.remove('is-video-control-hover');
 
             // Interactive link & button detection
-            const isInteractive = e.target.closest('a, button, input[type="submit"], input[type="button"], .btn, .dot-pill, .software-card, .exp-card, .discipline-tag, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge');
+            const isInteractive = el && el.closest ? el.closest('a, button, input[type="submit"], input[type="button"], .btn, .dot-pill, .software-card, .exp-card, .discipline-tag, .faq-item, .contact-card, .tab-btn, .service-card, .filter-btn, [role="button"], .carousel-arrow, .floating-home-btn, .social-icon-btn, .stat-badge') : null;
             if (isInteractive) {
               cursorFollower.classList.add('is-hovering');
               cursorPointer.classList.add('is-hovering');
@@ -4563,15 +4565,18 @@
           }
 
           // Form input typing detection
-          const isInput = e.target.closest('input, textarea, select, [contenteditable="true"]');
+          const isInput = el && el.closest ? el.closest('input, textarea, select, [contenteditable="true"]') : null;
           if (isInput) {
             document.body.classList.add('is-typing');
           } else if (document.activeElement && ['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
-            // Keep typing mode if element still has focus
+            // Keep typing mode if input has active focus
           } else {
             document.body.classList.remove('is-typing');
           }
-        }, { passive: true });
+        };
+
+        window.addEventListener('mousemove', onPointerMove, { passive: true });
+        window.addEventListener('pointermove', onPointerMove, { passive: true });
 
         // Hide when mouse leaves document window
         document.addEventListener('mouseleave', () => {
