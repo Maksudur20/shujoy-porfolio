@@ -93,14 +93,6 @@
     "description": "Continuous autoplaying carousel — when one finishes, the next reel automatically plays. You can also drag or swipe to explore.",
     "items": [
       {
-        "title": "Cinematic Brand Reel",
-        "subtitle": "Dynamic Cuts & Pacing",
-        "badge": "Commercial Cut",
-        "tag": "Premier Pro",
-        "aspect": "landscape",
-        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
-      },
-      {
         "title": "Kinetic 3D Product Visual",
         "subtitle": "After Effects & C4D",
         "badge": "3D Motion",
@@ -301,12 +293,14 @@
     "experience": true,
     "skills": true,
     "contact": true,
-    "footer": true
+    "footer": true,
+    "threeDVideo": true
   },
   "sectionOrder": [
     "hero",
     "beforeAfter",
     "projects",
+    "threeDVideo",
     "experience",
     "skills",
     "contact"
@@ -325,5 +319,40 @@
     "customUrl": "",
     "hideOnTouch": true,
     "activeOnVideos": true
-  }
+  },
+  "threeDVideo": {
+    "enabled": true,
+    "pillText": "3D MOTION & CGI",
+    "heading": "3D Video Editor & Motion Graphics",
+    "subtitle": "High-impact 3D visual spectacles, CGI animations, and cinematic simulations engineered with Cinema 4D, After Effects, and Unreal Engine.",
+    "badge": "Cinema 4D • Octane • After Effects",
+    "videoTitle": "Cinematic Visuals & 3D Motion",
+    "videoSubtitle": "Dynamic particle physics, character animation & commercial lighting",
+    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4",
+    "features": [
+      {
+        "icon": "🎬",
+        "title": "CGI & Character Animation",
+        "desc": "High-fidelity 3D modeling, character rigging, and cinematic camera choreography."
+      },
+      {
+        "icon": "✨",
+        "title": "Kinetic Particle Physics",
+        "desc": "Dynamic visual simulations, atmospheric dust, lighting, and volumetric depth."
+      },
+      {
+        "icon": "🔊",
+        "title": "Spatial Audio Integration",
+        "desc": "Punchy multi-layered sound design synchronized to every cut and motion."
+      },
+      {
+        "icon": "⚡",
+        "title": "Commercial-Grade Retention",
+        "desc": "Engineered for maximum viewer retention across commercials and brand reels."
+      }
+    ],
+    "ctaText": "Commission a 3D Project",
+    "ctaLink": "#contact"
+  },
+  "customSections": []
 }

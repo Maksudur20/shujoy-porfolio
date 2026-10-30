@@ -109,6 +109,8 @@
     // C. CUSTOM CURSOR SYSTEM
     if (cfg.cursor) {
       applyCursorConfig(cfg.cursor);
+    applyThreeDVideoConfig(cfg.threeDVideo);
+    applyCustomSectionsConfig(cfg.customSections);
     }
 
     // B. FOOTER STYLES
