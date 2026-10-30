@@ -12,31 +12,36 @@
 
   // 1. Initial Load
   async function initConfigEngine() {
-    let config = null;
+    let localConfig = null;
+    try {
+      const localData = localStorage.getItem('site_config_data');
+      if (localData) localConfig = JSON.parse(localData);
+    } catch (e) {
+      console.warn('[ConfigEngine] localStorage parse error:', e);
+    }
 
-    // 1. Always fetch fresh published site-config.json from server / GitHub
+    let remoteConfig = null;
     try {
       const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
       if (res.ok) {
-        config = await res.json();
-        try {
-          localStorage.setItem('site_config_data', JSON.stringify(config));
-        } catch (e) {}
+        remoteConfig = await res.json();
       }
     } catch (e) {
-      console.warn('[ConfigEngine] Could not fetch site-config.json, falling back:', e);
+      console.warn('[ConfigEngine] Could not fetch site-config.json:', e);
     }
 
-    // 2. Fallback to localStorage only if fetch failed (e.g. offline or file:// protocol)
-    if (!config) {
+    // Smart priority: if local config was saved more recently (within 15 minutes of edit),
+    // prioritize local changes so GitHub Pages deploy lag does not wipe fresh edits.
+    let config = null;
+    if (localConfig && localConfig._updatedAt && (!remoteConfig || !remoteConfig._updatedAt || localConfig._updatedAt > remoteConfig._updatedAt)) {
+      config = localConfig;
+    } else if (remoteConfig) {
+      config = remoteConfig;
       try {
-        const localData = localStorage.getItem('site_config_data');
-        if (localData) {
-          config = JSON.parse(localData);
-        }
-      } catch (e) {
-        console.warn('[ConfigEngine] localStorage parse error:', e);
-      }
+        localStorage.setItem('site_config_data', JSON.stringify(config));
+      } catch (e) {}
+    } else if (localConfig) {
+      config = localConfig;
     }
 
     if (config) {
@@ -351,6 +356,14 @@
         } else {
           tdSection.style.removeProperty('display');
         }
+
+        const pill = tdSection.querySelector('.section-pill');
+        const h2 = tdSection.querySelector('h2');
+        const p = tdSection.querySelector('.section-head p');
+        if (pill && cfg.threeDVideo.pillText) pill.textContent = cfg.threeDVideo.pillText;
+        if (h2 && cfg.threeDVideo.heading) h2.textContent = cfg.threeDVideo.heading;
+        if (p && cfg.threeDVideo.description) p.textContent = cfg.threeDVideo.description;
+
         const tdVid = tdSection.querySelector('video');
         if (tdVid && cfg.threeDVideo.videoUrl && tdVid.getAttribute('src') !== cfg.threeDVideo.videoUrl) {
           tdVid.setAttribute('src', cfg.threeDVideo.videoUrl);
@@ -374,6 +387,7 @@
       const navMap = {
         beforeAfter: document.querySelector('.nav-links a[href="#before-after"]'),
         projects: document.querySelector('.nav-links a[href="#projects"]'),
+        threeDVideo: document.querySelector('.nav-links a[href="#three-d-video"]'),
         experience: document.querySelector('.nav-links a[href="#experience"]'),
         skills: document.querySelector('.nav-links a[href="#skills"]'),
         contact: document.querySelector('.nav-links a[href="#contact"]')
