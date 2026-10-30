@@ -24,10 +24,10 @@
       console.warn('[ConfigEngine] localStorage parse error:', e);
     }
 
-    // Fallback to site-config.json
+    // Fallback to site-config.json (always fetch fresh without browser cache)
     if (!config) {
       try {
-        const res = await fetch('site-config.json');
+        const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
         if (res.ok) {
           config = await res.json();
         }

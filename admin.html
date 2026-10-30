@@ -1727,8 +1727,8 @@
         if (local) {
           currentConfig = JSON.parse(local);
         } else {
-          // Fetch from site-config.json
-          const res = await fetch('site-config.json');
+          // Fetch from site-config.json (bypass cache)
+          const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
           if (res.ok) {
             currentConfig = await res.json();
           }
