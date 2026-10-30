@@ -2564,6 +2564,15 @@
       transform: scale(1.1);
       box-shadow: 0 0 25px rgba(255, 158, 0, 0.4);
     }
+    .saas-arrow-btn {
+      position: relative;
+      z-index: 25;
+      pointer-events: auto;
+      user-select: none;
+    }
+    .saas-arrow-btn * {
+      pointer-events: none;
+    }
     .saas-arrow-btn svg {
       width: 18px;
       height: 18px;
@@ -3655,6 +3664,8 @@
 
       // Update 3D card layout and classes
       function updateSaasCarousel(targetIndex) {
+        saasCards = Array.from(document.querySelectorAll('.saas-card'));
+        saasDots = Array.from(document.querySelectorAll('.saas-dot'));
         if (!saasCards.length) return;
         saasActiveIndex = (targetIndex + saasCards.length) % saasCards.length;
 
@@ -3762,6 +3773,33 @@
       }
 
       bindSaasEventListeners();
+      // Bulletproof Arrow Button Navigation for Hero 3D SaaS Carousel
+      if (saasPrevBtn) {
+        saasPrevBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          prevSaasSlide();
+        });
+      }
+      if (saasNextBtn) {
+        saasNextBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          nextSaasSlide();
+        });
+      }
+
+      // Event delegation fallback
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('#saasPrevBtn')) {
+          e.preventDefault();
+          prevSaasSlide();
+        } else if (e.target.closest('#saasNextBtn')) {
+          e.preventDefault();
+          nextSaasSlide();
+        }
+      });
+
 
       window._refreshSaasCarousel = function() {
         bindSaasEventListeners();
