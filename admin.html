@@ -2032,17 +2032,27 @@
 
     // Direct GitHub Commit via REST API
     async function commitToGitHub(cfg) {
-      const token = (localStorage.getItem('shujoy_gh_token') || '').trim();
-      const repo = (localStorage.getItem('shujoy_gh_repo') || 'Maksudur20/shujoy-porfolio').trim();
-      const branch = (localStorage.getItem('shujoy_gh_branch') || 'main').trim();
+      const ghTokenEl = document.getElementById('ghTokenInput');
+      const ghRepoEl = document.getElementById('ghRepoInput');
+      const ghBranchEl = document.getElementById('ghBranchInput');
+
+      const token = ((ghTokenEl?.value || '').trim()) || ((localStorage.getItem('shujoy_gh_token') || '').trim());
+      const repo = ((ghRepoEl?.value || '').trim()) || ((localStorage.getItem('shujoy_gh_repo') || 'Maksudur20/shujoy-porfolio').trim());
+      const branch = ((ghBranchEl?.value || '').trim()) || ((localStorage.getItem('shujoy_gh_branch') || 'main').trim());
 
       if (!token) return { attempted: false };
 
+      // Ensure credentials are persisted in localStorage
+      localStorage.setItem('shujoy_gh_token', token);
+      localStorage.setItem('shujoy_gh_repo', repo);
+      localStorage.setItem('shujoy_gh_branch', branch);
+
       try {
-        const fileUrl = `https://api.github.com/repos/${repo}/contents/site-config.json?ref=${branch}`;
+        const fileUrl = `https://api.github.com/repos/${repo}/contents/site-config.json?ref=${branch}&_t=${Date.now()}`;
         
         let sha = null;
         const getRes = await fetch(fileUrl, {
+          cache: 'no-store',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/vnd.github.v3+json'
@@ -2051,6 +2061,11 @@
         if (getRes.ok) {
           const fileData = await getRes.json();
           sha = fileData.sha;
+        } else if (getRes.status === 401) {
+          return { attempted: true, success: false, error: 'Token is invalid or expired (401 Bad credentials)' };
+        } else if (getRes.status === 404) {
+          // File might not exist or repo is private and token lacks 'repo' permission
+          return { attempted: true, success: false, error: 'Repository or site-config.json not found (Token might need "repo" scope for private repos)' };
         }
 
         const putUrl = `https://api.github.com/repos/${repo}/contents/site-config.json`;
@@ -2077,7 +2092,7 @@
           return { attempted: true, success: true };
         } else {
           const errData = await putRes.json();
-          return { attempted: true, success: false, error: errData.message };
+          return { attempted: true, success: false, error: errData.message || 'GitHub update failed' };
         }
       } catch (err) {
         return { attempted: true, success: false, error: err.message };
@@ -2088,6 +2103,11 @@
     // SAVE / EXPORT / IMPORT CONTROLS
     // ==============================================================
     document.getElementById('saveBtn').addEventListener('click', async () => {
+      const saveBtn = document.getElementById('saveBtn');
+      const originalHtml = saveBtn.innerHTML;
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = `<span>⏳</span> Saving...`;
+
       const cfg = collectConfigFromForm();
       syncLivePreview(cfg);
 
@@ -2107,6 +2127,9 @@
 
       // Check if GitHub auto-sync is configured
       const ghResult = await commitToGitHub(cfg);
+
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = originalHtml;
 
       if (ghResult.attempted) {
         if (ghResult.success) {
