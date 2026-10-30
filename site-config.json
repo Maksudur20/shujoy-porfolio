@@ -298,12 +298,17 @@
     "hero": true,
     "beforeAfter": false,
     "projects": true,
+    "threeDVideo": true,
     "experience": true,
     "skills": true,
     "contact": true,
-    "footer": true,
-    "threeDVideo": true
+    "footer": true
   },
+  "threeDVideo": {
+    "enabled": true,
+    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
+  },
+  "customSections": [],
   "sectionOrder": [
     "hero",
     "beforeAfter",
@@ -327,10 +332,5 @@
     "customUrl": "",
     "hideOnTouch": true,
     "activeOnVideos": true
-  },
-  "threeDVideo": {
-    "enabled": true,
-    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
-  },
-  "customSections": []
+  }
 }
