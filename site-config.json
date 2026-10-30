@@ -297,8 +297,8 @@
   "sectionsVisibility": {
     "hero": true,
     "beforeAfter": false,
-    "projects": true,
-    "threeDVideo": false,
+    "projects": false,
+    "threeDVideo": true,
     "experience": true,
     "skills": true,
     "contact": true,
@@ -312,8 +312,8 @@
   "sectionOrder": [
     "hero",
     "beforeAfter",
-    "projects",
     "threeDVideo",
+    "projects",
     "experience",
     "skills",
     "contact"
