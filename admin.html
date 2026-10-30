@@ -2263,6 +2263,123 @@
       }
     };
 
+
+    // Dynamic Standalone Sections (Divs) State
+    let workingCustomSections = [];
+
+    function renderCustomDivsAdmin() {
+      const listEl = document.getElementById('customDivsList');
+      if (!listEl) return;
+
+      if (!workingCustomSections || workingCustomSections.length === 0) {
+        listEl.innerHTML = `
+          <div style="text-align:center; padding:2.5rem 1rem; border:1px dashed var(--admin-border); border-radius:var(--radius-md); color:var(--admin-text-muted);">
+            <div style="font-size:2rem; margin-bottom:0.5rem;">✨</div>
+            <div style="font-weight:600; color:#fff; margin-bottom:0.3rem;">No Custom Divs Added Yet</div>
+            <p style="font-size:0.85rem; margin-bottom:1rem;">Click the button above to create a new standalone section/div for your website.</p>
+            <button type="button" class="btn btn-outline-primary btn-sm" onclick="addNewCustomDivTemplate()">➕ Create New Section (Div)</button>
+          </div>
+        `;
+        return;
+      }
+
+      listEl.innerHTML = workingCustomSections.map((sec, idx) => `
+        <div class="section-card" style="margin-bottom:1.25rem; border:1px solid rgba(255,158,0,0.3);" data-div-idx="${idx}">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; padding-bottom:0.6rem; border-bottom:1px solid var(--admin-border);">
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <span class="badge" style="background:rgba(255,158,0,0.15); color:var(--admin-primary); font-weight:600;">Standalone Div #${idx + 1}</span>
+              <strong>${escapeHTML(sec.heading || 'Untitled Section Div')}</strong>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.6rem;">
+              <label style="display:flex; align-items:center; gap:0.4rem; font-size:0.85rem; cursor:pointer;">
+                <input type="checkbox" ${sec.enabled !== false ? 'checked' : ''} onchange="updateCustomDivField(${idx}, 'enabled', this.checked)">
+                <span>Active on Site</span>
+              </label>
+              <button type="button" class="btn btn-danger btn-sm" onclick="removeCustomDiv(${idx})" title="Delete Section">🗑️</button>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Section Pill Tag (Optional)</label>
+              <input type="text" value="${escapeHTML(sec.pillText || '')}" placeholder="e.g. SHOWCASE" oninput="updateCustomDivField(${idx}, 'pillText', this.value)">
+            </div>
+            <div class="form-group">
+              <label>Section Heading (Optional)</label>
+              <input type="text" value="${escapeHTML(sec.heading || '')}" placeholder="e.g. Special Project Feature" oninput="updateCustomDivField(${idx}, 'heading', this.value)">
+            </div>
+            <div class="form-group full-width">
+              <label>Section Subtitle / Description (Optional)</label>
+              <textarea rows="2" placeholder="Brief description..." oninput="updateCustomDivField(${idx}, 'subtitle', this.value)">${escapeHTML(sec.subtitle || '')}</textarea>
+            </div>
+            <div class="form-group full-width">
+              <label>Media Direct URL (MP4 Video or Image URL)</label>
+              <input type="text" value="${escapeHTML(sec.videoUrl || sec.imageUrl || '')}" placeholder="https://res.cloudinary.com/... or https://..." oninput="updateCustomDivMedia(${idx}, this.value)">
+              <div class="field-hint">Paste an MP4 video link or an image link. It will render in this standalone div.</div>
+            </div>
+            <div class="form-group">
+              <label>CTA Button Text (Optional)</label>
+              <input type="text" value="${escapeHTML(sec.ctaText || '')}" placeholder="e.g. Learn More" oninput="updateCustomDivField(${idx}, 'ctaText', this.value)">
+            </div>
+            <div class="form-group">
+              <label>CTA Button Link</label>
+              <input type="text" value="${escapeHTML(sec.ctaLink || '#contact')}" placeholder="#contact or URL" oninput="updateCustomDivField(${idx}, 'ctaLink', this.value)">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    window.addNewCustomDivTemplate = function() {
+      const newDiv = {
+        id: 'div-sec-' + Date.now(),
+        enabled: true,
+        pillText: 'NEW SECTION',
+        heading: 'Custom Showcase Div',
+        subtitle: 'Standalone div configured from Admin Studio.',
+        videoUrl: '',
+        imageUrl: '',
+        ctaText: 'Get In Touch',
+        ctaLink: '#contact'
+      };
+      workingCustomSections.push(newDiv);
+      renderCustomDivsAdmin();
+      syncLivePreview(collectConfigFromForm());
+    };
+
+    window.removeCustomDiv = function(idx) {
+      if (confirm('Delete this standalone section div?')) {
+        workingCustomSections.splice(idx, 1);
+        renderCustomDivsAdmin();
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    window.updateCustomDivField = function(idx, field, val) {
+      if (workingCustomSections[idx]) {
+        workingCustomSections[idx][field] = val;
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    window.updateCustomDivMedia = function(idx, url) {
+      if (workingCustomSections[idx]) {
+        if (url.match(/\.(mp4|webm|mov)(\?.*)?$/i) || url.includes('/video/upload/')) {
+          workingCustomSections[idx].videoUrl = url;
+          workingCustomSections[idx].imageUrl = '';
+        } else {
+          workingCustomSections[idx].imageUrl = url;
+          workingCustomSections[idx].videoUrl = '';
+        }
+        syncLivePreview(collectConfigFromForm());
+      }
+    };
+
+    function setupCustomDivsManager() {
+      const btn = document.getElementById('addNewCustomDivBtn');
+      if (btn) btn.addEventListener('click', window.addNewCustomDivTemplate);
+    }
+
     // Initialize
     document.addEventListener('DOMContentLoaded', async () => {
       setupTabSwitching();
@@ -2440,6 +2557,16 @@
       }
       updateSidebarVisibilityUI();
 
+      // 3D Video Standalone Div
+      const td = cfg.threeDVideo || {};
+      const tdEl = document.getElementById('threeD_enabled');
+      if (tdEl) tdEl.checked = (td.enabled !== false);
+      setVal('threeD_videoUrl', td.videoUrl || 'https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4');
+
+      // Custom Standalone Divs
+      workingCustomSections = Array.isArray(cfg.customSections) ? JSON.parse(JSON.stringify(cfg.customSections)) : [];
+      renderCustomDivsAdmin();
+
       // Custom Cursor Settings
       const c = cfg.cursor || {};
       const curEnabled = c.enabled !== false;
@@ -2575,7 +2702,7 @@
           enabled: document.getElementById('threeD_enabled') ? document.getElementById('threeD_enabled').checked : true,
           videoUrl: getVal('threeD_videoUrl') || 'https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4'
         },
-        customSections: workingCustomSections,
+        customSections: (typeof workingCustomSections !== 'undefined' && Array.isArray(workingCustomSections)) ? workingCustomSections : [],
         sectionOrder: Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
           .map(t => t.dataset.tab)
           .filter(t => ['hero', 'beforeAfter', 'projects', 'threeDVideo', 'experience', 'skills', 'contact'].includes(t)),
@@ -2720,41 +2847,45 @@
       const saveBtn = document.getElementById('saveBtn');
       const originalHtml = saveBtn.innerHTML;
       saveBtn.disabled = true;
-      saveBtn.innerHTML = `<span>⏳</span> Saving...`;
+      saveBtn.innerHTML = '<span>⏳</span> Saving...';
 
-      const cfg = collectConfigFromForm();
-      syncLivePreview(cfg);
-
-      let savedToServer = false;
       try {
-        const response = await fetch('/api/save-config', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(cfg, null, 2)
-        });
-        if (response.ok) {
-          savedToServer = true;
+        const cfg = collectConfigFromForm();
+        syncLivePreview(cfg);
+
+        let savedToServer = false;
+        try {
+          const response = await fetch('/api/save-config', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(cfg, null, 2)
+          });
+          if (response.ok) {
+            savedToServer = true;
+          }
+        } catch (e) {
+          // Static environment
         }
-      } catch (e) {
-        // Server might be static
-      }
 
-      // Check if GitHub auto-sync is configured
-      const ghResult = await commitToGitHub(cfg);
+        const ghResult = await commitToGitHub(cfg);
 
-      saveBtn.disabled = false;
-      saveBtn.innerHTML = originalHtml;
-
-      if (ghResult.attempted) {
-        if (ghResult.success) {
-          showToast('🚀 Committed directly to GitHub repo! Live site will update in ~30s!', 'success');
+        if (ghResult && ghResult.attempted) {
+          if (ghResult.success) {
+            showToast('🚀 Committed directly to GitHub repo! Live site will update in ~30s!', 'success');
+          } else {
+            showToast('⚠️ GitHub commit failed: ' + ghResult.error, 'error');
+          }
+        } else if (savedToServer) {
+          showToast('✅ Saved permanently to site-config.json & Browser Storage!', 'success');
         } else {
-          showToast(`⚠️ GitHub commit failed: ${ghResult.error}`, 'error');
+          showToast('✅ Saved to Browser Storage! (Configure GitHub Token for 1-click cloud sync)', 'success');
         }
-      } else if (savedToServer) {
-        showToast('✅ Saved permanently to site-config.json & Browser Storage!', 'success');
-      } else {
-        showToast('✅ Saved to Browser Storage! (Configure GitHub Token for 1-click cloud sync)', 'success');
+      } catch (err) {
+        console.error('Save error:', err);
+        showToast('❌ Error saving: ' + (err.message || err), 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = originalHtml;
       }
     });
 
