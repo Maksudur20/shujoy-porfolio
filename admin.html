@@ -791,53 +791,28 @@
     /* ============================================================ */
     /* CUSTOM CURSOR STUDIO STYLES                                  */
     /* ============================================================ */
+    .cursor-playground-canvas, .cursor-playground-canvas * { cursor: none !important; }
     .cursor-playground-canvas {
       position: relative;
-      height: 230px;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 158, 0, 0.06) 0%, rgba(10, 12, 18, 0.98) 100%);
-      border: 1.5px dashed rgba(255, 158, 0, 0.4);
+      height: 140px;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 158, 0, 0.05) 0%, rgba(10, 12, 18, 0.95) 100%);
+      border: 1px dashed rgba(255, 158, 0, 0.35);
       border-radius: var(--radius-md);
       overflow: hidden;
       margin-top: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: none !important;
-      user-select: none;
-    }
-    .cursor-playground-canvas,
-    .cursor-playground-canvas * {
-      cursor: none !important;
-    }
-    .playground-grid-backdrop {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: 24px 24px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      pointer-events: none;
-      z-index: 1;
-    }
-    .playground-items-container {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.85rem;
-      width: 100%;
-      padding: 1rem;
+      cursor: none;
     }
     .playground-items-row {
       display: flex;
       align-items: center;
       gap: 1.2rem;
+      z-index: 2;
       flex-wrap: wrap;
       justify-content: center;
+      padding: 1rem;
     }
     .playground-link {
       color: var(--admin-primary);
@@ -866,46 +841,8 @@
       font-size: 0.8rem;
       font-weight: 600;
     }
-    .playground-badge-pill {
-      background: rgba(255, 158, 0, 0.12);
-      border: 1px solid rgba(255, 158, 0, 0.3);
-      padding: 0.35rem 0.8rem;
-      border-radius: 999px;
-      color: var(--admin-primary);
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .playground-cta-pill {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      transition: all 0.2s;
-    }
-    .playground-cta-pill:hover {
-      background: rgba(255, 158, 0, 0.2);
-      border-color: var(--admin-primary);
-    }
-    .playground-coords-badge {
-      position: absolute;
-      bottom: 8px;
-      right: 12px;
-      font-size: 0.75rem;
-      font-family: monospace;
-      color: rgba(255, 158, 0, 0.85);
-      background: rgba(0, 0, 0, 0.75);
-      padding: 0.2rem 0.6rem;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 158, 0, 0.3);
-      pointer-events: none;
-      z-index: 4;
-    }
     .playground-mini-cursor-pointer {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 12px;
       height: 12px;
       pointer-events: none;
@@ -914,14 +851,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      will-change: transform;
-      opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: transform 0.05s linear;
     }
     .playground-mini-cursor-follower {
       position: absolute;
-      top: 0;
-      left: 0;
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -930,31 +863,13 @@
       pointer-events: none;
       transform: translate(-50%, -50%);
       z-index: 9;
-      opacity: 0;
-      transition: opacity 0.2s ease, width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, background 0.2s;
-      will-change: transform, width, height;
+      transition: width 0.25s, height 0.25s, transform 0.08s ease-out, border-color 0.2s, background 0.2s;
     }
     .playground-mini-cursor-follower.is-hovering {
+      width: 56px;
+      height: 56px;
       border-color: var(--admin-primary);
       background: radial-gradient(circle, rgba(255, 158, 0, 0.25) 0%, transparent 80%);
-    }
-
-    /* Custom Sections Builder Styles */
-    .custom-sec-card-item {
-      background: var(--admin-bg-surface);
-      border: 1px solid var(--admin-border);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      margin-bottom: 1.25rem;
-      position: relative;
-    }
-    .custom-sec-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--admin-border);
     }
 
     /* Preset Grid Cards */
@@ -1166,8 +1081,13 @@
         <li class="nav-tab-item" data-tab="threeDVideo" data-section="threeDVideo">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🎬</span>
-          <span class="nav-tab-title">3D Video Editor</span>
+          <span class="nav-tab-title">3D Video</span>
           <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="threeDVideo">👁️</button>
+        </li>
+        <li class="nav-tab-item" data-tab="customSections">
+          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
+          <span class="nav-tab-icon">✨</span>
+          <span class="nav-tab-title">➕ Add New Div</span>
         </li>
         <li class="nav-tab-item" data-tab="experience" data-section="experience">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
@@ -1894,114 +1814,55 @@
         <!-- ======================================================== -->
         <!-- TAB 6: WORK EXPERIENCE -->
         <!-- ======================================================== -->
+        
         <!-- ======================================================== -->
-        <!-- TAB: 3D VIDEO EDITOR SHOWCASE                            -->
+        <!-- TAB: 3D VIDEO STANDALONE DIV                             -->
         <!-- ======================================================== -->
         <section class="tab-panel" id="tab-threeDVideo">
           <div class="panel-header">
-            <h2>🎬 3D Video Editor & Motion Showcase</h2>
-            <p>Dedicated section featuring your 3D CGI visual reel, character animations, kinetic physics, and commercial simulations.</p>
+            <h2>🎬 3D Video Standalone Section</h2>
+            <p>Dedicated standalone div on the website containing your featured 3D video reel.</p>
           </div>
 
           <div class="section-card">
-            <div class="section-card-title">Main 3D Showcase Media & Headline</div>
+            <div class="section-card-title">3D Video Reel Settings</div>
             <div class="form-grid">
               <div class="form-group full-width">
                 <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer;">
                   <input type="checkbox" id="threeD_enabled" checked style="width:18px; height:18px; accent-color:var(--admin-primary); cursor:pointer;">
-                  <span><strong>Enable 3D Video Section on Portfolio</strong></span>
+                  <span><strong>Show 3D Video Div on Website</strong></span>
                 </label>
               </div>
 
-              <div class="form-group">
-                <label>Section Pill Tag</label>
-                <input type="text" id="threeD_pillText" value="3D MOTION & CGI">
-              </div>
-
-              <div class="form-group">
-                <label>Section Main Heading</label>
-                <input type="text" id="threeD_heading" value="3D Video Editor & Motion Graphics">
-              </div>
-
               <div class="form-group full-width">
-                <label>Section Subtitle</label>
-                <textarea id="threeD_subtitle" rows="2">High-impact 3D visual spectacles, CGI animations, and cinematic simulations engineered with Cinema 4D, After Effects, and Unreal Engine.</textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Video Badge / Tooling</label>
-                <input type="text" id="threeD_badge" value="Cinema 4D • Octane • After Effects">
-              </div>
-
-              <div class="form-group">
-                <label>Video Headline Title</label>
-                <input type="text" id="threeD_videoTitle" value="Cinematic Visuals & 3D Motion">
-              </div>
-
-              <div class="form-group full-width">
-                <label>Video Subtitle / Narrative</label>
-                <input type="text" id="threeD_videoSubtitle" value="Dynamic particle physics, character animation & commercial lighting">
-              </div>
-
-              <div class="form-group full-width">
-                <label>3D Video Showcase URL</label>
+                <label>3D Video Direct URL (MP4 / Cloudinary)</label>
                 <input type="text" id="threeD_videoUrl" value="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4">
-                <div class="field-hint">Featured video reel URL (MP4 / Cloudinary). Includes sound controls and timeline scrub.</div>
-              </div>
-
-              <div class="form-group">
-                <label>Call-To-Action Button Text</label>
-                <input type="text" id="threeD_ctaText" value="Commission a 3D Project">
-              </div>
-
-              <div class="form-group">
-                <label>Call-To-Action Link</label>
-                <input type="text" id="threeD_ctaLink" value="#contact">
+                <div class="field-hint">This video will play in its own dedicated, beautiful standalone div with sound and timeline controls.</div>
               </div>
             </div>
           </div>
+        </section>
 
-          <!-- Feature Cards Grid -->
+        <!-- ======================================================== -->
+        <!-- TAB: DYNAMIC NEW DIVS / SECTIONS BUILDER                 -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-customSections">
+          <div class="panel-header">
+            <h2>✨ Add New Section (Div) Builder</h2>
+            <p>Create new independent divs/sections on your portfolio. Each section you create here becomes its own standalone top-level div on the website (like Hero or Skills), completely independent!</p>
+          </div>
+
           <div class="section-card">
-            <div class="section-card-title">✨ 4 Key 3D Capabilities</div>
-            <div class="section-card-subtitle">These 4 cards display beneath the 3D video reel to outline your technical skillset.</div>
-
-            <div class="form-grid">
-              <div class="form-group">
-                <label>Feature 1 Icon & Title</label>
-                <div style="display:flex; gap:0.5rem;">
-                  <input type="text" id="threeD_f1_icon" value="🎬" style="width:60px; text-align:center;">
-                  <input type="text" id="threeD_f1_title" value="CGI & Character Animation">
-                </div>
-                <textarea id="threeD_f1_desc" rows="2" style="margin-top:0.4rem;">High-fidelity 3D modeling, character rigging, and cinematic camera choreography.</textarea>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+              <div>
+                <div class="section-card-title">Independent Sections (Divs)</div>
+                <div class="section-card-subtitle">Add as many standalone divs/sections as you need. They auto-sync to GitHub when saved.</div>
               </div>
+              <button type="button" class="btn btn-primary btn-sm" id="addNewCustomDivBtn">➕ Create New Div (Section)</button>
+            </div>
 
-              <div class="form-group">
-                <label>Feature 2 Icon & Title</label>
-                <div style="display:flex; gap:0.5rem;">
-                  <input type="text" id="threeD_f2_icon" value="✨" style="width:60px; text-align:center;">
-                  <input type="text" id="threeD_f2_title" value="Kinetic Particle Physics">
-                </div>
-                <textarea id="threeD_f2_desc" rows="2" style="margin-top:0.4rem;">Dynamic visual simulations, atmospheric dust, lighting, and volumetric depth.</textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Feature 3 Icon & Title</label>
-                <div style="display:flex; gap:0.5rem;">
-                  <input type="text" id="threeD_f3_icon" value="🔊" style="width:60px; text-align:center;">
-                  <input type="text" id="threeD_f3_title" value="Spatial Audio Integration">
-                </div>
-                <textarea id="threeD_f3_desc" rows="2" style="margin-top:0.4rem;">Punchy multi-layered sound design synchronized to every cut and motion.</textarea>
-              </div>
-
-              <div class="form-group">
-                <label>Feature 4 Icon & Title</label>
-                <div style="display:flex; gap:0.5rem;">
-                  <input type="text" id="threeD_f4_icon" value="⚡" style="width:60px; text-align:center;">
-                  <input type="text" id="threeD_f4_title" value="Commercial-Grade Retention">
-                </div>
-                <textarea id="threeD_f4_desc" rows="2" style="margin-top:0.4rem;">Engineered for maximum viewer retention across commercials and brand reels.</textarea>
-              </div>
+            <div id="customDivsList">
+              <!-- Rendered via JS -->
             </div>
           </div>
         </section>
@@ -2412,7 +2273,7 @@
       setupSecurityAndLogout();
       setupSearchFilters();
       setupCursorControls();
-      setupCustomSectionsManager();
+      setupCustomDivsManager();
       await loadInitialConfig();
     });
 
@@ -2579,40 +2440,6 @@
       }
       updateSidebarVisibilityUI();
 
-      // 3D Video Section
-      const td = cfg.threeDVideo || {};
-      const tdEnabledEl = document.getElementById('threeD_enabled');
-      if (tdEnabledEl) tdEnabledEl.checked = (td.enabled !== false);
-      setVal('threeD_pillText', td.pillText || '3D MOTION & CGI');
-      setVal('threeD_heading', td.heading || '3D Video Editor & Motion Graphics');
-      setVal('threeD_subtitle', td.subtitle || 'High-impact 3D visual spectacles, CGI animations, and cinematic simulations engineered with Cinema 4D, After Effects, and Unreal Engine.');
-      setVal('threeD_badge', td.badge || 'Cinema 4D • Octane • After Effects');
-      setVal('threeD_videoTitle', td.videoTitle || 'Cinematic Visuals & 3D Motion');
-      setVal('threeD_videoSubtitle', td.videoSubtitle || 'Dynamic particle physics, character animation & commercial lighting');
-      setVal('threeD_videoUrl', td.videoUrl || 'https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4');
-      setVal('threeD_ctaText', td.ctaText || 'Commission a 3D Project');
-      setVal('threeD_ctaLink', td.ctaLink || '#contact');
-
-      if (Array.isArray(td.features) && td.features.length >= 4) {
-        setVal('threeD_f1_icon', td.features[0].icon || '🎬');
-        setVal('threeD_f1_title', td.features[0].title || '');
-        setVal('threeD_f1_desc', td.features[0].desc || '');
-        setVal('threeD_f2_icon', td.features[1].icon || '✨');
-        setVal('threeD_f2_title', td.features[1].title || '');
-        setVal('threeD_f2_desc', td.features[1].desc || '');
-        setVal('threeD_f3_icon', td.features[2].icon || '🔊');
-        setVal('threeD_f3_title', td.features[2].title || '');
-        setVal('threeD_f3_desc', td.features[2].desc || '');
-        setVal('threeD_f4_icon', td.features[3].icon || '⚡');
-        setVal('threeD_f4_title', td.features[3].title || '');
-        setVal('threeD_f4_desc', td.features[3].desc || '');
-      }
-
-      // Custom Sections
-      workingCustomSections = Array.isArray(cfg.customSections) ? JSON.parse(JSON.stringify(cfg.customSections)) : [];
-      renderCustomSectionsAdmin();
-
-
       // Custom Cursor Settings
       const c = cfg.cursor || {};
       const curEnabled = c.enabled !== false;
@@ -2743,29 +2570,15 @@
           fontSize: getVal('footer_fontSize')
         },
         sectionsVisibility: { ...sidebarSectionsVisibility },
+        
+        threeDVideo: {
+          enabled: document.getElementById('threeD_enabled') ? document.getElementById('threeD_enabled').checked : true,
+          videoUrl: getVal('threeD_videoUrl') || 'https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4'
+        },
+        customSections: workingCustomSections,
         sectionOrder: Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
           .map(t => t.dataset.tab)
           .filter(t => ['hero', 'beforeAfter', 'projects', 'threeDVideo', 'experience', 'skills', 'contact'].includes(t)),
-
-        threeDVideo: {
-          enabled: document.getElementById('threeD_enabled') ? document.getElementById('threeD_enabled').checked : true,
-          pillText: getVal('threeD_pillText'),
-          heading: getVal('threeD_heading'),
-          subtitle: getVal('threeD_subtitle'),
-          badge: getVal('threeD_badge'),
-          videoTitle: getVal('threeD_videoTitle'),
-          videoSubtitle: getVal('threeD_videoSubtitle'),
-          videoUrl: getVal('threeD_videoUrl'),
-          ctaText: getVal('threeD_ctaText'),
-          ctaLink: getVal('threeD_ctaLink'),
-          features: [
-            { icon: getVal('threeD_f1_icon') || '🎬', title: getVal('threeD_f1_title'), desc: getVal('threeD_f1_desc') },
-            { icon: getVal('threeD_f2_icon') || '✨', title: getVal('threeD_f2_title'), desc: getVal('threeD_f2_desc') },
-            { icon: getVal('threeD_f3_icon') || '🔊', title: getVal('threeD_f3_title'), desc: getVal('threeD_f3_desc') },
-            { icon: getVal('threeD_f4_icon') || '⚡', title: getVal('threeD_f4_title'), desc: getVal('threeD_f4_desc') }
-          ]
-        },
-        customSections: workingCustomSections,
         cursor: {
           enabled: document.getElementById('cursor_enabled') ? document.getElementById('cursor_enabled').checked : true,
           style: getVal('cursor_style') || 'dot-circle',
@@ -4234,9 +4047,6 @@
         }
       }
 
-      let isClicking = false;
-      const pgCoords = document.getElementById('pgCoordsBadge');
-
       function animLoop() {
         if (isInsidePlayground) {
           const smoothing = smoothSlider ? parseFloat(smoothSlider.value) : 0.18;
@@ -4244,14 +4054,10 @@
           followerY += (targetY - followerY) * smoothing;
 
           if (pgPointer) {
-            pgPointer.style.transform = 'translate(' + targetX + 'px, ' + targetY + 'px) translate(-50%, -50%)';
+            pgPointer.style.transform = 'translate(' + targetX + 'px, ' + targetY + 'px)';
           }
           if (pgFollower) {
-            const scaleStr = isClicking ? ' scale(0.82)' : '';
-            pgFollower.style.transform = 'translate(' + followerX + 'px, ' + followerY + 'px) translate(-50%, -50%)' + scaleStr;
-          }
-          if (pgCoords) {
-            pgCoords.textContent = 'X: ' + Math.round(targetX) + 'px | Y: ' + Math.round(targetY) + 'px';
+            pgFollower.style.transform = 'translate(' + followerX + 'px, ' + followerY + 'px)';
           }
         }
         requestAnimationFrame(animLoop);
@@ -4269,9 +4075,6 @@
           if (pgPointer) pgPointer.style.opacity = '1';
           if (pgFollower) pgFollower.style.opacity = '1';
         });
-
-        playground.addEventListener('mousedown', () => { isClicking = true; });
-        window.addEventListener('mouseup', () => { isClicking = false; });
 
         playground.addEventListener('mousemove', (e) => {
           const rect = playground.getBoundingClientRect();
