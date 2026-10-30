@@ -14,25 +14,28 @@
   async function initConfigEngine() {
     let config = null;
 
-    // Check localStorage first
+    // 1. Always fetch fresh published site-config.json from server / GitHub
     try {
-      const localData = localStorage.getItem('site_config_data');
-      if (localData) {
-        config = JSON.parse(localData);
+      const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
+      if (res.ok) {
+        config = await res.json();
+        try {
+          localStorage.setItem('site_config_data', JSON.stringify(config));
+        } catch (e) {}
       }
     } catch (e) {
-      console.warn('[ConfigEngine] localStorage parse error:', e);
+      console.warn('[ConfigEngine] Could not fetch site-config.json, falling back:', e);
     }
 
-    // Fallback to site-config.json (always fetch fresh without browser cache)
+    // 2. Fallback to localStorage only if fetch failed (e.g. offline or file:// protocol)
     if (!config) {
       try {
-        const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
-        if (res.ok) {
-          config = await res.json();
+        const localData = localStorage.getItem('site_config_data');
+        if (localData) {
+          config = JSON.parse(localData);
         }
       } catch (e) {
-        console.warn('[ConfigEngine] Could not load site-config.json:', e);
+        console.warn('[ConfigEngine] localStorage parse error:', e);
       }
     }
 
@@ -339,18 +342,37 @@
       }
     }
 
+        // 3D VIDEO STANDALONE SECTION
+    if (cfg.threeDVideo) {
+      const tdSection = document.getElementById('three-d-video');
+      if (tdSection) {
+        if (cfg.threeDVideo.enabled === false) {
+          tdSection.style.setProperty('display', 'none', 'important');
+        } else {
+          tdSection.style.removeProperty('display');
+        }
+        const tdVid = tdSection.querySelector('video');
+        if (tdVid && cfg.threeDVideo.videoUrl && tdVid.getAttribute('src') !== cfg.threeDVideo.videoUrl) {
+          tdVid.setAttribute('src', cfg.threeDVideo.videoUrl);
+          tdVid.load();
+        }
+      }
+    }
+
     // K. SECTION VISIBILITY (Show/Hide)
     if (cfg.sectionsVisibility) {
       const secMap = {
         hero: document.getElementById('home') || document.querySelector('.hero-section'),
         beforeAfter: document.getElementById('before-after'),
         projects: document.getElementById('projects'),
+        threeDVideo: document.getElementById('three-d-video'),
         experience: document.getElementById('experience'),
         skills: document.getElementById('skills'),
         contact: document.getElementById('contact'),
         footer: document.querySelector('footer')
       };
       const navMap = {
+        beforeAfter: document.querySelector('.nav-links a[href="#before-after"]'),
         projects: document.querySelector('.nav-links a[href="#projects"]'),
         experience: document.querySelector('.nav-links a[href="#experience"]'),
         skills: document.querySelector('.nav-links a[href="#skills"]'),
@@ -383,6 +405,7 @@
         hero: document.getElementById('home') || document.querySelector('.hero-section'),
         beforeAfter: document.getElementById('before-after'),
         projects: document.getElementById('projects'),
+        threeDVideo: document.getElementById('three-d-video'),
         experience: document.getElementById('experience'),
         skills: document.getElementById('skills'),
         contact: document.getElementById('contact')

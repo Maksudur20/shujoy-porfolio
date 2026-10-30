@@ -3311,7 +3311,7 @@
               </div>
             </div>
 
-            <!-- Card 2: Podcast Reel 01 -->
+            <!-- Card 2: Showcase Reel 02 -->
             <div class="saas-card is-right" data-index="1" id="saasCard1">
               <div class="saas-card-inner">
                 <div class="saas-card-notch">
@@ -3320,12 +3320,12 @@
                     <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                   </button>
                 </div>
-                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669032/shujoy-portfolio/jxi5rjnmruo7hr6vqgvx.mp4"></video>
+                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/v1793377569/Reel_Saas_v2_kukc8r.mp4"></video>
                 <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
               </div>
             </div>
 
-            <!-- Card 3: Mathew Reel -->
+            <!-- Card 3: Showcase Reel 03 -->
             <div class="saas-card is-left" data-index="2" id="saasCard2">
               <div class="saas-card-inner">
                 <div class="saas-card-notch">
@@ -3334,7 +3334,7 @@
                     <svg class="icon-unmute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                   </button>
                 </div>
-                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669328/shujoy-portfolio/wuhnj2upxg10wiou5wlj.mp4"></video>
+                <video class="saas-card-video" playsinline muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/v1793380010/Ai_sign_Up_form_motin_graphic_compressed_amemgx.mp4"></video>
                 <div class="saas-card-timeline"><div class="saas-timeline-fill"></div></div>
               </div>
             </div>
@@ -3361,7 +3361,7 @@
     </section>
 
     <!-- Before & After Transformation Section -->
-    <section id="before-after" class="before-after-section">
+    <section id="before-after" class="before-after-section" style="display: none;">
       <div class="section-head reveal reveal-up">
         <span class="section-pill reveal reveal-down">EDIT TRANSFORMATION</span>
         <h2 class="reveal reveal-up delay-1">Before & After Breakdown</h2>
@@ -3661,6 +3661,29 @@
         <!-- Dot Indicators -->
         <div class="carousel-dots reveal reveal-up delay-4" id="carouselDots">
           <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Standalone 3D Video Editor Section -->
+    <section id="three-d-video" class="three-d-video-section">
+      <div class="three-d-container">
+        <div class="three-d-ambient-glow"></div>
+        <div class="three-d-video-frame" id="threeDVideoFrame">
+          <video id="threeDVideoPlayer" playsinline loop muted preload="metadata" src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"></video>
+          <div class="three-d-overlay">
+            <div class="three-d-top">
+              <button class="three-d-sound-btn" id="threeDSoundBtn" aria-label="Toggle Sound">
+                <svg class="icon-mute" style="width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+                <svg class="icon-unmute" style="width:14px;height:14px;display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <span class="three-d-sound-text">Unmute</span>
+              </button>
+            </div>
+            <div class="three-d-play-center" id="threeDPlayTrigger">▶</div>
+            <div class="three-d-bottom">
+              <div class="three-d-timeline-bar" id="threeDTimeline"><div class="three-d-timeline-fill" id="threeDTimelineFill"></div></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -4483,6 +4506,83 @@
         projScrollObserver.observe(projectsSectionEl);
       }
 
+      
+      // ============================================================
+      // 3D VIDEO STANDALONE PLAYER INTERACTIVITY
+      // ============================================================
+      function initThreeDVideoControls() {
+        const frame = document.getElementById('threeDVideoFrame');
+        const video = document.getElementById('threeDVideoPlayer');
+        const soundBtn = document.getElementById('threeDSoundBtn');
+        const timeFill = document.getElementById('threeDTimelineFill');
+        const timeline = document.getElementById('threeDTimeline');
+        if (!frame || !video) return;
+
+        let isThreeDMuted = true;
+        video.muted = true;
+
+        // Autoplay on view
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              video.muted = isThreeDMuted;
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+              video.muted = true;
+            }
+          });
+        }, { threshold: 0.25 });
+        obs.observe(frame);
+
+        // Sound toggle
+        if (soundBtn) {
+          soundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isThreeDMuted = !isThreeDMuted;
+            video.muted = isThreeDMuted;
+            const muteIcon = soundBtn.querySelector('.icon-mute');
+            const unmuteIcon = soundBtn.querySelector('.icon-unmute');
+            const text = soundBtn.querySelector('.three-d-sound-text');
+            if (muteIcon) muteIcon.style.display = isThreeDMuted ? 'inline-block' : 'none';
+            if (unmuteIcon) unmuteIcon.style.display = isThreeDMuted ? 'none' : 'inline-block';
+            if (text) text.textContent = isThreeDMuted ? 'Unmute' : 'Mute';
+          });
+        }
+
+        // Timeline progress
+        video.addEventListener('timeupdate', () => {
+          if (timeFill && video.duration) {
+            const pct = (video.currentTime / video.duration) * 100;
+            timeFill.style.width = pct + '%';
+          }
+        });
+
+        // Click on timeline to scrub
+        if (timeline) {
+          timeline.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const rect = timeline.getBoundingClientRect();
+            const clickPos = (e.clientX - rect.left) / rect.width;
+            if (video.duration) {
+              video.currentTime = clickPos * video.duration;
+            }
+          });
+        }
+
+        // Click frame to toggle play / pause
+        frame.addEventListener('click', () => {
+          if (video.paused) {
+            video.play().catch(() => {});
+            frame.classList.remove('is-paused');
+          } else {
+            video.pause();
+            frame.classList.add('is-paused');
+          }
+        });
+      }
+      initThreeDVideoControls();
+
       // Copy Email Toast
       const copyBtn = document.getElementById('copyEmailBtn');
       const toast = document.getElementById('toastNotice');
@@ -4726,7 +4826,7 @@
           mouseX = e.clientX;
           mouseY = e.clientY;
 
-          cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+          cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
           document.documentElement.style.setProperty('--mx', `${mouseX}px`);
           document.documentElement.style.setProperty('--my', `${mouseY}px`);
 

@@ -843,6 +843,8 @@
     }
     .playground-mini-cursor-pointer {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 12px;
       height: 12px;
       pointer-events: none;
@@ -855,6 +857,8 @@
     }
     .playground-mini-cursor-follower {
       position: absolute;
+      top: 0;
+      left: 0;
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -2397,19 +2401,23 @@
     // Load initial config from Server or LocalStorage or Defaults
     async function loadInitialConfig() {
       try {
-        // Try local storage first
-        const local = localStorage.getItem('site_config_data');
-        if (local) {
-          currentConfig = JSON.parse(local);
+        // Always fetch latest authoritative config from site-config.json first
+        const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
+        if (res.ok) {
+          currentConfig = await res.json();
+          try {
+            localStorage.setItem('site_config_data', JSON.stringify(currentConfig));
+          } catch (e) {}
         } else {
-          // Fetch from site-config.json (bypass cache)
-          const res = await fetch('site-config.json?v=' + Date.now(), { cache: 'no-store' });
-          if (res.ok) {
-            currentConfig = await res.json();
-          }
+          const local = localStorage.getItem('site_config_data');
+          if (local) currentConfig = JSON.parse(local);
         }
       } catch (e) {
-        console.warn('Could not fetch site-config.json:', e);
+        console.warn('Could not fetch site-config.json, falling back to local:', e);
+        try {
+          const local = localStorage.getItem('site_config_data');
+          if (local) currentConfig = JSON.parse(local);
+        } catch (err) {}
       }
 
       const fb = getFallbackConfig();
@@ -4185,10 +4193,10 @@
           followerY += (targetY - followerY) * smoothing;
 
           if (pgPointer) {
-            pgPointer.style.transform = 'translate(' + targetX + 'px, ' + targetY + 'px)';
+            pgPointer.style.transform = 'translate3d(' + targetX + 'px, ' + targetY + 'px, 0) translate(-50%, -50%)';
           }
           if (pgFollower) {
-            pgFollower.style.transform = 'translate(' + followerX + 'px, ' + followerY + 'px)';
+            pgFollower.style.transform = 'translate3d(' + followerX + 'px, ' + followerY + 'px, 0) translate(-50%, -50%)';
           }
         }
         requestAnimationFrame(animLoop);
