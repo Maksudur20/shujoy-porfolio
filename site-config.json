@@ -296,7 +296,7 @@
   },
   "sectionsVisibility": {
     "hero": true,
-    "beforeAfter": true,
+    "beforeAfter": false,
     "projects": true,
     "threeDVideo": true,
     "experience": true,
@@ -311,11 +311,12 @@
     "description": "Commercial 3D product simulation, dynamic camera pacing, and kinetic CGI visual storytelling.",
     "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
   },
+  "_updatedAt": 1793403546090,
   "customSections": [],
   "sectionOrder": [
     "hero",
-    "beforeAfter",
     "threeDVideo",
+    "beforeAfter",
     "projects",
     "experience",
     "skills",
@@ -335,6 +336,5 @@
     "customUrl": "",
     "hideOnTouch": true,
     "activeOnVideos": true
-  },
-  "_updatedAt": 1793402861558
+  }
 }
