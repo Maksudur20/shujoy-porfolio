@@ -101,14 +101,6 @@
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668955/shujoy-portfolio/l806eyqktjdlrrfiqeux.mp4"
       },
       {
-        "title": "Kinetic 3D Product Visual",
-        "subtitle": "After Effects & C4D",
-        "badge": "3D Motion",
-        "tag": "After Effects",
-        "aspect": "landscape",
-        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
-      },
-      {
         "title": "Creative Agency Commercial",
         "subtitle": "Cinex & The Blind Men",
         "badge": "Agency Project",
@@ -296,7 +288,7 @@
   },
   "sectionsVisibility": {
     "hero": true,
-    "beforeAfter": false,
+    "beforeAfter": true,
     "projects": true,
     "threeDVideo": true,
     "experience": true,
@@ -311,12 +303,12 @@
     "description": "Commercial 3D product simulation, dynamic camera pacing, and kinetic CGI visual storytelling.",
     "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
   },
-  "_updatedAt": 1793403546090,
+  "_updatedAt": 1793403594577,
   "customSections": [],
   "sectionOrder": [
     "hero",
-    "threeDVideo",
     "beforeAfter",
+    "threeDVideo",
     "projects",
     "experience",
     "skills",
