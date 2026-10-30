@@ -52,10 +52,6 @@
       {
         "title": "Podcast Reel 01",
         "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669032/shujoy-portfolio/jxi5rjnmruo7hr6vqgvx.mp4"
-      },
-      {
-        "title": "Mathew Reel",
-        "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792669328/shujoy-portfolio/wuhnj2upxg10wiou5wlj.mp4"
       }
     ]
   },
@@ -298,7 +294,7 @@
   },
   "sectionsVisibility": {
     "hero": true,
-    "beforeAfter": true,
+    "beforeAfter": false,
     "projects": true,
     "experience": true,
     "skills": true,
