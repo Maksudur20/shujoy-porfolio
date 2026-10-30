@@ -2741,8 +2741,146 @@
       cursor: none !important;
     }
 
-    /* 1. Custom Aerodynamic Precision Arrow Pointer (Non-default stylized cursor) */
+
+    /* DYNAMIC CURSOR CSS VARIABLES & STYLES */
+    :root {
+      --cursor-primary: #ff9e00;
+      --cursor-ring-color: rgba(255, 158, 0, 0.45);
+      --cursor-dot-size: 6px;
+      --cursor-ring-size: 36px;
+      --cursor-ring-border: 1.5px;
+      --cursor-hover-scale: 1.6;
+      --cursor-blend-mode: normal;
+    }
+
+    /* Base Pointer Container */
     .custom-cursor-pointer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      z-index: 9999999;
+      transform: translate3d(-100px, -100px, 0);
+      margin-left: -12px;
+      margin-top: -12px;
+      will-change: transform, opacity;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Variant: Center Dot (Dot & Circle, Fluid Dot, Viewfinder, etc.) */
+    .cursor-center-dot {
+      width: var(--cursor-dot-size, 6px);
+      height: var(--cursor-dot-size, 6px);
+      border-radius: 50%;
+      background: var(--cursor-primary, #ff9e00);
+      box-shadow: 0 0 10px var(--cursor-primary, #ff9e00), 0 0 3px #ffffff;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s, width 0.22s, height 0.22s;
+    }
+    .custom-cursor-pointer.is-hovering .cursor-center-dot {
+      transform: scale(1.35);
+      box-shadow: 0 0 16px var(--cursor-primary, #ff9e00), 0 0 6px #ffffff;
+    }
+
+    /* Variant: Crosshair Reticle */
+    .cursor-crosshair-reticle {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      pointer-events: none;
+    }
+    .crosshair-center-dot {
+      position: absolute;
+      top: 11px;
+      left: 11px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--cursor-primary, #ff9e00);
+      box-shadow: 0 0 8px var(--cursor-primary, #ff9e00);
+    }
+    .crosshair-line {
+      position: absolute;
+      background: var(--cursor-primary, #ff9e00);
+      box-shadow: 0 0 6px var(--cursor-primary, #ff9e00);
+    }
+    .line-v-top { top: 0; left: 12px; width: 2px; height: 7px; }
+    .line-v-bot { bottom: 0; left: 12px; width: 2px; height: 7px; }
+    .line-h-left { left: 0; top: 12px; width: 7px; height: 2px; }
+    .line-h-right { right: 0; top: 12px; width: 7px; height: 2px; }
+
+    /* Variant: Camera Viewfinder Corners */
+    .viewfinder-corner {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-color: var(--cursor-primary, #ff9e00);
+      border-style: solid;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .vf-tl { top: 3px; left: 3px; border-width: 2px 0 0 2px; }
+    .vf-tr { top: 3px; right: 3px; border-width: 2px 2px 0 0; }
+    .vf-bl { bottom: 3px; left: 3px; border-width: 0 0 2px 2px; }
+    .vf-br { bottom: 3px; right: 3px; border-width: 0 2px 2px 0; }
+    .custom-cursor-follower.is-hovering .vf-tl { transform: translate(-4px, -4px); }
+    .custom-cursor-follower.is-hovering .vf-tr { transform: translate(4px, -4px); }
+    .custom-cursor-follower.is-hovering .vf-bl { transform: translate(-4px, 4px); }
+    .custom-cursor-follower.is-hovering .vf-br { transform: translate(4px, 4px); }
+
+    /* Variant: Custom Image / SVG */
+    .custom-cursor-img {
+      max-width: 32px;
+      max-height: 32px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px var(--cursor-primary, #ff9e00));
+    }
+
+    /* Style Customization for Follower */
+    body[data-cursor-style="fluid-dot"] .custom-cursor-follower {
+      border: none !important;
+      background: radial-gradient(circle, var(--cursor-ring-color, rgba(255, 158, 0, 0.45)) 0%, transparent 70%) !important;
+      box-shadow: 0 0 24px var(--cursor-ring-color, rgba(255, 158, 0, 0.45)) !important;
+    }
+    body[data-cursor-style="difference-ring"] .custom-cursor-follower {
+      mix-blend-mode: difference !important;
+      background: #ffffff !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    body[data-cursor-style="difference-ring"] .cursor-center-dot {
+      background: #ffffff !important;
+      box-shadow: none !important;
+    }
+    body[data-cursor-style="neon-pulse"] .custom-cursor-follower {
+      animation: neonPulseAnim 1.8s infinite ease-out;
+    }
+    @keyframes neonPulseAnim {
+      0% { box-shadow: 0 0 0 0 var(--cursor-primary, #ff9e00), inset 0 0 10px var(--cursor-primary, #ff9e00); }
+      70% { box-shadow: 0 0 0 16px transparent, inset 0 0 2px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent, inset 0 0 0 transparent; }
+    }
+
+    /* System Default / Disabled */
+    body[data-cursor-enabled="false"] .custom-cursor-pointer,
+    body[data-cursor-enabled="false"] .custom-cursor-follower,
+    body[data-cursor-enabled="false"] .custom-cursor-ripple,
+    body[data-cursor-style="system"] .custom-cursor-pointer,
+    body[data-cursor-style="system"] .custom-cursor-follower,
+    body[data-cursor-style="system"] .custom-cursor-ripple {
+      display: none !important;
+    }
+    body[data-cursor-enabled="false"],
+    body[data-cursor-enabled="false"] *,
+    body[data-cursor-style="system"],
+    body[data-cursor-style="system"] * {
+      cursor: auto !important;
+    }
+
       position: fixed;
       top: 0;
       left: 0;
@@ -2771,12 +2909,13 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 36px;
-      height: 36px;
+      width: var(--cursor-ring-size, 36px);
+      height: var(--cursor-ring-size, 36px);
       border-radius: 50%;
-      border: 1.5px solid rgba(255, 175, 50, 0.6);
+      border: var(--cursor-ring-border, 1.5px) solid var(--cursor-ring-color, rgba(255, 175, 50, 0.6));
       background: radial-gradient(circle, rgba(255, 158, 0, 0.08) 0%, rgba(255, 110, 0, 0.02) 80%);
       box-shadow: 0 0 20px rgba(255, 158, 0, 0.18), inset 0 0 10px rgba(255, 158, 0, 0.08);
+      mix-blend-mode: var(--cursor-blend-mode, normal);
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
       pointer-events: none;
@@ -2921,11 +3060,9 @@
 </head>
 <body>
 
-  <!-- Custom Cinematic Magnetic Arrow Cursor Elements -->
+  <!-- Custom Cinematic Magnetic Cursor Elements -->
   <div class="custom-cursor-pointer" id="cursorPointer" aria-hidden="true">
-    <svg class="cursor-arrow-svg" width="24" height="26" viewBox="0 0 24 26" fill="none">
-      <path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="#ff9e00" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
-    </svg>
+    <div class="cursor-center-dot"></div>
   </div>
   <div class="custom-cursor-follower" id="cursorFollower" aria-hidden="true"></div>
   <div class="custom-cursor-ripple" id="cursorRipple" aria-hidden="true"></div>
@@ -4544,8 +4681,8 @@
         const lerp = (start, end, factor) => start + (end - start) * factor;
 
         function animateFollower() {
-          followerX = lerp(followerX, mouseX, 0.16);
-          followerY = lerp(followerY, mouseY, 0.16);
+          followerX = lerp(followerX, mouseX, window._cursorSmoothing || 0.18);
+          followerY = lerp(followerY, mouseY, window._cursorSmoothing || 0.18);
 
           const vx = followerX - prevFollowerX;
           const vy = followerY - prevFollowerY;

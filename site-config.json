@@ -310,5 +310,20 @@
     "experience",
     "skills",
     "contact"
-  ]
+  ],
+  "cursor": {
+    "enabled": true,
+    "style": "dot-circle",
+    "primaryColor": "#ff9e00",
+    "ringColor": "rgba(255, 158, 0, 0.45)",
+    "dotSize": 6,
+    "ringSize": 36,
+    "ringBorder": 1.5,
+    "smoothing": 0.18,
+    "hoverScale": 1.6,
+    "blendMode": "normal",
+    "customUrl": "",
+    "hideOnTouch": true,
+    "activeOnVideos": true
+  }
 }

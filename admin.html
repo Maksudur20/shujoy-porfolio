@@ -787,6 +787,219 @@
       .sidebar-footer { display: none; }
       .editor-pane { padding: 1.5rem 1rem; }
     }
+
+    /* ============================================================ */
+    /* CUSTOM CURSOR STUDIO STYLES                                  */
+    /* ============================================================ */
+    .cursor-playground-canvas {
+      position: relative;
+      height: 140px;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 158, 0, 0.05) 0%, rgba(10, 12, 18, 0.95) 100%);
+      border: 1px dashed rgba(255, 158, 0, 0.35);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-top: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none;
+    }
+    .playground-items-row {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      z-index: 2;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .playground-link {
+      color: var(--admin-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .playground-link:hover {
+      text-decoration: underline;
+    }
+    .playground-tag {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: #fff;
+    }
+    .playground-video-chip {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 158, 0, 0.4);
+      padding: 0.35rem 0.8rem;
+      border-radius: var(--radius-sm);
+      color: var(--admin-primary);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .playground-mini-cursor-pointer {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.05s linear;
+    }
+    .playground-mini-cursor-follower {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 158, 0, 0.5);
+      background: radial-gradient(circle, rgba(255, 158, 0, 0.1) 0%, transparent 80%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9;
+      transition: width 0.25s, height 0.25s, transform 0.08s ease-out, border-color 0.2s, background 0.2s;
+    }
+    .playground-mini-cursor-follower.is-hovering {
+      width: 56px;
+      height: 56px;
+      border-color: var(--admin-primary);
+      background: radial-gradient(circle, rgba(255, 158, 0, 0.25) 0%, transparent 80%);
+    }
+
+    /* Preset Grid Cards */
+    .cursor-preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .cursor-preset-card {
+      position: relative;
+      background: var(--admin-bg-surface);
+      border: 1.5px solid var(--admin-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cursor-preset-card:hover {
+      border-color: rgba(255, 158, 0, 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .cursor-preset-card.active {
+      border-color: var(--admin-primary);
+      background: linear-gradient(145deg, rgba(255, 158, 0, 0.08) 0%, var(--admin-bg-surface) 100%);
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.25);
+    }
+    .cursor-preset-badge {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: var(--admin-primary);
+      color: #000;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .cursor-preset-preview {
+      height: 60px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .preview-dot-circle-ring {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--admin-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 10px rgba(255, 158, 0, 0.4);
+    }
+    .preview-dot-circle-center {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--admin-primary);
+      box-shadow: 0 0 6px #fff;
+    }
+    .preview-fluid-orb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--admin-primary);
+      box-shadow: 0 0 20px var(--admin-primary), 0 0 6px #fff;
+    }
+    .preview-crosshair {
+      position: relative;
+      width: 24px;
+      height: 24px;
+    }
+    .px-dot { position:absolute; width:4px; height:4px; border-radius:50%; background:var(--admin-primary); top:10px; left:10px; }
+    .px-line { position:absolute; background:var(--admin-primary); }
+    .px-vt { top:0; left:11px; width:2px; height:6px; }
+    .px-vb { bottom:0; left:11px; width:2px; height:6px; }
+    .px-hl { left:0; top:11px; width:6px; height:2px; }
+    .px-hr { right:0; top:11px; width:6px; height:2px; }
+    .preview-viewfinder { position:relative; width:26px; height:26px; }
+    .pv-dot { position:absolute; width:4px; height:4px; border-radius:50%; background:var(--admin-primary); top:11px; left:11px; }
+    .pv-tl, .pv-tr, .pv-bl, .pv-br { position:absolute; width:6px; height:6px; border-color:var(--admin-primary); border-style:solid; }
+    .pv-tl { top:2px; left:2px; border-width:2px 0 0 2px; }
+    .pv-tr { top:2px; right:2px; border-width:2px 2px 0 0; }
+    .pv-bl { bottom:2px; left:2px; border-width:0 0 2px 2px; }
+    .pv-br { bottom:2px; right:2px; border-width:0 2px 2px 0; }
+    .preview-diff-ring {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+    .preview-neon-ring {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid #00f0ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 12px #00f0ff;
+    }
+    .preview-neon-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 6px #fff;
+    }
+    .cursor-preset-info h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+      color: #fff;
+    }
+    .cursor-preset-info p {
+      font-size: 0.8rem;
+      color: var(--admin-text-muted);
+      line-height: 1.4;
+      margin: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -840,6 +1053,11 @@
           <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🔤</span>
           <span class="nav-tab-title">Typography & Fonts</span>
+        </li>
+        <li class="nav-tab-item" data-tab="cursor">
+          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
+          <span class="nav-tab-icon">🎯</span>
+          <span class="nav-tab-title">Custom Cursor</span>
         </li>
         <li class="nav-tab-item" data-tab="hero" data-section="hero">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
@@ -1117,6 +1335,279 @@
               <p style="font-family: var(--preview-font-body, 'Plus Jakarta Sans'); color:var(--admin-text-muted); font-size:0.95rem; line-height:1.6;">
                 Sample body text showing readability, line spacing, and typographic tone. Every frame tells a story, and every transition keeps the audience hooked.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================== -->
+        <!-- TAB: CUSTOM CURSOR STUDIO -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-cursor">
+          <div class="panel-header">
+            <h2>🎯 Custom Cursor Studio</h2>
+            <p>Select from curated cinematic cursor styles (including the Dot & Circle reticle), customize colors, size, smoothing inertia, or use a custom graphic.</p>
+          </div>
+
+          <!-- Interactive Test Playground Card -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>🎮 Interactive Cursor Playground</span>
+              <span class="badge" style="background:rgba(255,158,0,0.15); color:var(--admin-primary); border:1px solid rgba(255,158,0,0.3); padding:0.25rem 0.6rem; border-radius:999px; font-size:0.75rem;">Test in Real-Time</span>
+            </div>
+            <div class="section-card-subtitle">Move your mouse inside this canvas to preview how your selected cursor looks, tracks, and expands over buttons, links, and video frames.</div>
+            
+            <div class="cursor-playground-canvas" id="adminCursorPlayground">
+              <div class="playground-items-row">
+                <button type="button" class="btn btn-primary btn-sm">Hover Button</button>
+                <button type="button" class="btn btn-outline-primary btn-sm">Accent Button</button>
+                <a href="javascript:void(0)" class="playground-link">Interactive Text Link ↗</a>
+                <span class="playground-tag">💎 Motion Tag</span>
+                <div class="playground-video-chip">
+                  <span>▶ Video Surface</span>
+                </div>
+              </div>
+              <div class="playground-mini-cursor-pointer" id="pgPointer"><div class="cursor-center-dot"></div></div>
+              <div class="playground-mini-cursor-follower" id="pgFollower"></div>
+            </div>
+          </div>
+
+          <!-- Curated Presets Grid -->
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>✨ 1-Click Curated Presets</span>
+            </div>
+            <div class="section-card-subtitle">Choose a professionally designed motion cursor. Click any preset to instantly apply and test it.</div>
+
+            <div class="cursor-preset-grid" id="cursorPresetGrid">
+              <!-- 1. Dot & Circle (User Favorite) -->
+              <div class="cursor-preset-card active" data-style="dot-circle">
+                <div class="cursor-preset-badge">★ Favorite</div>
+                <div class="cursor-preset-preview">
+                  <div class="preview-dot-circle-ring">
+                    <div class="preview-dot-circle-center"></div>
+                  </div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>🎯 Cinema Dot & Circle</h4>
+                  <p>Classic film reticle: smooth precision center dot inside an expanding halo ring.</p>
+                </div>
+              </div>
+
+              <!-- 2. Fluid Glow Dot -->
+              <div class="cursor-preset-card" data-style="fluid-dot">
+                <div class="cursor-preset-preview">
+                  <div class="preview-fluid-orb"></div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>✨ Fluid Glow Dot</h4>
+                  <p>Minimalist luminous accent dot with a soft ambient trailing glow aura.</p>
+                </div>
+              </div>
+
+              <!-- 3. Aerodynamic Arrow -->
+              <div class="cursor-preset-card" data-style="arrow">
+                <div class="cursor-preset-preview">
+                  <svg width="22" height="24" viewBox="0 0 24 26" fill="none">
+                    <path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="#ff9e00" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>📐 Aerodynamic Arrow</h4>
+                  <p>Stylized futuristic golden precision arrow pointer with magnetic follower ring.</p>
+                </div>
+              </div>
+
+              <!-- 4. Video Editor Crosshair -->
+              <div class="cursor-preset-card" data-style="crosshair">
+                <div class="cursor-preset-preview">
+                  <div class="preview-crosshair">
+                    <div class="px-dot"></div>
+                    <div class="px-line px-vt"></div>
+                    <div class="px-line px-vb"></div>
+                    <div class="px-line px-hl"></div>
+                    <div class="px-line px-hr"></div>
+                  </div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>➕ Editor Crosshair</h4>
+                  <p>Precision video editing reticle inspired by Premiere Pro & After Effects scrubbers.</p>
+                </div>
+              </div>
+
+              <!-- 5. Cinema Viewfinder -->
+              <div class="cursor-preset-card" data-style="viewfinder">
+                <div class="cursor-preset-preview">
+                  <div class="preview-viewfinder">
+                    <div class="pv-dot"></div>
+                    <div class="pv-tl"></div>
+                    <div class="pv-tr"></div>
+                    <div class="pv-bl"></div>
+                    <div class="pv-br"></div>
+                  </div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>🎥 Cinema Viewfinder</h4>
+                  <p>Camera focus brackets [ • ] that smoothly lock inward when hovering interactive elements.</p>
+                </div>
+              </div>
+
+              <!-- 6. Inverted Difference Ring -->
+              <div class="cursor-preset-card" data-style="difference-ring">
+                <div class="cursor-preset-preview">
+                  <div class="preview-diff-ring"></div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>🌓 Inverted Negative Ring</h4>
+                  <p>High-contrast difference blend mode ring that dynamically inverts colors beneath it.</p>
+                </div>
+              </div>
+
+              <!-- 7. Neon Cyber Radar -->
+              <div class="cursor-preset-card" data-style="neon-pulse">
+                <div class="cursor-preset-preview">
+                  <div class="preview-neon-ring">
+                    <div class="preview-neon-dot"></div>
+                  </div>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>💫 Neon Cyber Radar</h4>
+                  <p>Concentric pulsing neon rings with rhythmic radar animation.</p>
+                </div>
+              </div>
+
+              <!-- 8. Custom Graphic / SVG -->
+              <div class="cursor-preset-card" data-style="custom">
+                <div class="cursor-preset-preview">
+                  <span style="font-size:1.6rem;">🖼️</span>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>🖼️ Custom Image / SVG</h4>
+                  <p>Use your own graphic or logo file by providing an image URL or SVG link below.</p>
+                </div>
+              </div>
+
+              <!-- 9. System Default -->
+              <div class="cursor-preset-card" data-style="system">
+                <div class="cursor-preset-preview">
+                  <span style="font-size:1.6rem;">🖱️</span>
+                </div>
+                <div class="cursor-preset-info">
+                  <h4>🖱️ System Default Cursor</h4>
+                  <p>Disable all custom cursors and restore the browser's native OS mouse pointer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fine-Tuning Properties Card -->
+          <div class="section-card">
+            <div class="section-card-title">🛠️ Cursor Fine-Tuning & Custom Properties</div>
+            <div class="section-card-subtitle">Adjust color shades, dot/ring diameter, follower smoothing delay, and hover magnification.</div>
+
+            <div class="form-grid">
+              <!-- Master Toggle -->
+              <div class="form-group full-width">
+                <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer;">
+                  <input type="checkbox" id="cursor_enabled" checked style="width:18px; height:18px; accent-color:var(--admin-primary); cursor:pointer;">
+                  <span><strong>Enable Custom Cursor on Website</strong></span>
+                </label>
+              </div>
+
+              <!-- Hidden Style Value -->
+              <input type="hidden" id="cursor_style" value="dot-circle">
+
+              <!-- Primary Color -->
+              <div class="form-group">
+                <label>Primary Accent Color</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="cursor_primaryColor_picker" value="#ff9e00">
+                  <input type="text" id="cursor_primaryColor" value="#ff9e00">
+                </div>
+              </div>
+
+              <!-- Ring Color -->
+              <div class="form-group">
+                <label>Ring & Glow Color</label>
+                <div class="color-input-wrapper">
+                  <input type="color" id="cursor_ringColor_picker" value="#ff9e00">
+                  <input type="text" id="cursor_ringColor" value="rgba(255, 158, 0, 0.45)">
+                </div>
+              </div>
+
+              <!-- Center Dot Size -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
+                  <label>Center Dot Size</label>
+                  <span id="cursor_dotSize_val" style="color:var(--admin-primary); font-weight:600; font-size:0.85rem;">6px</span>
+                </div>
+                <input type="range" id="cursor_dotSize" min="2" max="16" step="1" value="6" style="width:100%; accent-color:var(--admin-primary);">
+              </div>
+
+              <!-- Outer Ring Size -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
+                  <label>Outer Ring Diameter</label>
+                  <span id="cursor_ringSize_val" style="color:var(--admin-primary); font-weight:600; font-size:0.85rem;">36px</span>
+                </div>
+                <input type="range" id="cursor_ringSize" min="16" max="64" step="2" value="36" style="width:100%; accent-color:var(--admin-primary);">
+              </div>
+
+              <!-- Ring Border Width -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
+                  <label>Ring Border Width</label>
+                  <span id="cursor_ringBorder_val" style="color:var(--admin-primary); font-weight:600; font-size:0.85rem;">1.5px</span>
+                </div>
+                <input type="range" id="cursor_ringBorder" min="1" max="4" step="0.5" value="1.5" style="width:100%; accent-color:var(--admin-primary);">
+              </div>
+
+              <!-- Follower Smoothing -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
+                  <label>Follower Smoothing (Inertia)</label>
+                  <span id="cursor_smoothing_val" style="color:var(--admin-primary); font-weight:600; font-size:0.85rem;">Smooth (0.18)</span>
+                </div>
+                <input type="range" id="cursor_smoothing" min="0.08" max="0.35" step="0.01" value="0.18" style="width:100%; accent-color:var(--admin-primary);">
+              </div>
+
+              <!-- Hover Scale Multiplier -->
+              <div class="form-group">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.3rem;">
+                  <label>Hover Scale Expansion</label>
+                  <span id="cursor_hoverScale_val" style="color:var(--admin-primary); font-weight:600; font-size:0.85rem;">1.6x</span>
+                </div>
+                <input type="range" id="cursor_hoverScale" min="1.1" max="2.5" step="0.1" value="1.6" style="width:100%; accent-color:var(--admin-primary);">
+              </div>
+
+              <!-- Blend Mode -->
+              <div class="form-group">
+                <label>Color Blend Mode</label>
+                <select id="cursor_blendMode">
+                  <option value="normal" selected>Normal</option>
+                  <option value="difference">Difference (Invert)</option>
+                  <option value="screen">Screen (Luminescent)</option>
+                  <option value="overlay">Overlay</option>
+                </select>
+              </div>
+
+              <!-- Custom SVG/Image URL -->
+              <div class="form-group full-width" id="customUrlFormGroup">
+                <label>Custom Cursor Graphic URL (PNG, SVG, or Data URI)</label>
+                <input type="text" id="cursor_customUrl" placeholder="https://example.com/cursor.svg or data:image/svg+xml;...">
+                <div class="field-hint">Used when "Custom Image / SVG" preset is selected, or to override the pointer center graphic.</div>
+              </div>
+
+              <!-- Additional Options -->
+              <div class="form-group full-width" style="display:flex; gap:2rem; flex-wrap:wrap; margin-top:0.4rem;">
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                  <input type="checkbox" id="cursor_hideOnTouch" checked style="width:16px; height:16px; accent-color:var(--admin-primary); cursor:pointer;">
+                  <span>Auto-disable on Mobile / Touch Screens</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                  <input type="checkbox" id="cursor_activeOnVideos" checked style="width:16px; height:16px; accent-color:var(--admin-primary); cursor:pointer;">
+                  <span>Keep custom cursor visible over video reels</span>
+                </label>
+              </div>
             </div>
           </div>
         </section>
@@ -1716,6 +2207,7 @@
       setupPreviewControls();
       setupSecurityAndLogout();
       setupSearchFilters();
+      setupCursorControls();
       await loadInitialConfig();
     });
 
@@ -1882,6 +2374,41 @@
       }
       updateSidebarVisibilityUI();
 
+      // Custom Cursor Settings
+      const c = cfg.cursor || {};
+      const curEnabled = c.enabled !== false;
+      const curStyle = c.style || 'dot-circle';
+      const cEnabledEl = document.getElementById('cursor_enabled');
+      if (cEnabledEl) cEnabledEl.checked = curEnabled;
+      setVal('cursor_style', curStyle);
+
+      const presetCards = document.querySelectorAll('#cursorPresetGrid .cursor-preset-card');
+      presetCards.forEach(card => {
+        if (card.dataset.style === curStyle) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+
+      setVal('cursor_primaryColor', c.primaryColor || '#ff9e00');
+      setVal('cursor_primaryColor_picker', c.primaryColor || '#ff9e00');
+      setVal('cursor_ringColor', c.ringColor || 'rgba(255, 158, 0, 0.45)');
+      setVal('cursor_dotSize', c.dotSize !== undefined ? c.dotSize : 6);
+      setVal('cursor_ringSize', c.ringSize !== undefined ? c.ringSize : 36);
+      setVal('cursor_ringBorder', c.ringBorder !== undefined ? c.ringBorder : 1.5);
+      setVal('cursor_smoothing', c.smoothing !== undefined ? c.smoothing : 0.18);
+      setVal('cursor_hoverScale', c.hoverScale !== undefined ? c.hoverScale : 1.6);
+      setVal('cursor_blendMode', c.blendMode || 'normal');
+      setVal('cursor_customUrl', c.customUrl || '');
+      const cTouchEl = document.getElementById('cursor_hideOnTouch');
+      if (cTouchEl) cTouchEl.checked = (c.hideOnTouch !== false);
+      const cVidEl = document.getElementById('cursor_activeOnVideos');
+      if (cVidEl) cVidEl.checked = (c.activeOnVideos !== false);
+
+      if (window._updateCursorSliderLabels) window._updateCursorSliderLabels();
+      if (window._updateCursorPlayground) window._updateCursorPlayground();
+
       updateFontPreview();
     }
 
@@ -1979,7 +2506,22 @@
         sectionsVisibility: { ...sidebarSectionsVisibility },
         sectionOrder: Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
           .map(t => t.dataset.tab)
-          .filter(t => ['hero', 'beforeAfter', 'projects', 'experience', 'skills', 'contact'].includes(t))
+          .filter(t => ['hero', 'beforeAfter', 'projects', 'experience', 'skills', 'contact'].includes(t)),
+        cursor: {
+          enabled: document.getElementById('cursor_enabled') ? document.getElementById('cursor_enabled').checked : true,
+          style: getVal('cursor_style') || 'dot-circle',
+          primaryColor: getVal('cursor_primaryColor') || '#ff9e00',
+          ringColor: getVal('cursor_ringColor') || 'rgba(255, 158, 0, 0.45)',
+          dotSize: parseFloat(getVal('cursor_dotSize')) || 6,
+          ringSize: parseFloat(getVal('cursor_ringSize')) || 36,
+          ringBorder: parseFloat(getVal('cursor_ringBorder')) || 1.5,
+          smoothing: parseFloat(getVal('cursor_smoothing')) || 0.18,
+          hoverScale: parseFloat(getVal('cursor_hoverScale')) || 1.6,
+          blendMode: getVal('cursor_blendMode') || 'normal',
+          customUrl: getVal('cursor_customUrl') || '',
+          hideOnTouch: document.getElementById('cursor_hideOnTouch') ? document.getElementById('cursor_hideOnTouch').checked : true,
+          activeOnVideos: document.getElementById('cursor_activeOnVideos') ? document.getElementById('cursor_activeOnVideos').checked : true
+        }
       };
 
       currentConfig = cfg;
@@ -3132,6 +3674,361 @@
       }
     }
 
+
+    // ==============================================================
+    // CUSTOM CURSOR STUDIO CONTROLS & PLAYGROUND
+    // ==============================================================
+    const CURSOR_PRESETS = {
+      'dot-circle': {
+        style: 'dot-circle',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.45)',
+        dotSize: 6,
+        ringSize: 36,
+        ringBorder: 1.5,
+        smoothing: 0.18,
+        hoverScale: 1.6,
+        blendMode: 'normal'
+      },
+      'fluid-dot': {
+        style: 'fluid-dot',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.5)',
+        dotSize: 10,
+        ringSize: 28,
+        ringBorder: 1,
+        smoothing: 0.22,
+        hoverScale: 1.8,
+        blendMode: 'screen'
+      },
+      'arrow': {
+        style: 'arrow',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.35)',
+        dotSize: 8,
+        ringSize: 38,
+        ringBorder: 1.5,
+        smoothing: 0.16,
+        hoverScale: 1.5,
+        blendMode: 'normal'
+      },
+      'crosshair': {
+        style: 'crosshair',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.4)',
+        dotSize: 4,
+        ringSize: 40,
+        ringBorder: 1.5,
+        smoothing: 0.12,
+        hoverScale: 1.4,
+        blendMode: 'normal'
+      },
+      'viewfinder': {
+        style: 'viewfinder',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.6)',
+        dotSize: 4,
+        ringSize: 42,
+        ringBorder: 2,
+        smoothing: 0.15,
+        hoverScale: 1.3,
+        blendMode: 'normal'
+      },
+      'difference-ring': {
+        style: 'difference-ring',
+        primaryColor: '#ffffff',
+        ringColor: '#ffffff',
+        dotSize: 6,
+        ringSize: 40,
+        ringBorder: 2,
+        smoothing: 0.2,
+        hoverScale: 1.8,
+        blendMode: 'difference'
+      },
+      'neon-pulse': {
+        style: 'neon-pulse',
+        primaryColor: '#ff7a00',
+        ringColor: 'rgba(255, 122, 0, 0.6)',
+        dotSize: 8,
+        ringSize: 44,
+        ringBorder: 2,
+        smoothing: 0.18,
+        hoverScale: 1.7,
+        blendMode: 'screen'
+      },
+      'custom': {
+        style: 'custom',
+        primaryColor: '#ff9e00',
+        ringColor: 'rgba(255, 158, 0, 0.4)',
+        dotSize: 6,
+        ringSize: 36,
+        ringBorder: 1.5,
+        smoothing: 0.18,
+        hoverScale: 1.5,
+        blendMode: 'normal'
+      },
+      'system': {
+        style: 'system',
+        primaryColor: '#ff9e00',
+        ringColor: 'transparent',
+        dotSize: 0,
+        ringSize: 0,
+        ringBorder: 0,
+        smoothing: 0.18,
+        hoverScale: 1,
+        blendMode: 'normal'
+      }
+    };
+
+    function setupCursorControls() {
+      const cards = document.querySelectorAll('#cursorPresetGrid .cursor-preset-card');
+      const styleInput = document.getElementById('cursor_style');
+      const enabledCheckbox = document.getElementById('cursor_enabled');
+      const primaryInput = document.getElementById('cursor_primaryColor');
+      const primaryPicker = document.getElementById('cursor_primaryColor_picker');
+      const ringInput = document.getElementById('cursor_ringColor');
+      const ringPicker = document.getElementById('cursor_ringColor_picker');
+      const dotSlider = document.getElementById('cursor_dotSize');
+      const ringSlider = document.getElementById('cursor_ringSize');
+      const borderSlider = document.getElementById('cursor_ringBorder');
+      const smoothSlider = document.getElementById('cursor_smoothing');
+      const hoverSlider = document.getElementById('cursor_hoverScale');
+      const blendSelect = document.getElementById('cursor_blendMode');
+      const customUrlInput = document.getElementById('cursor_customUrl');
+      const touchCheckbox = document.getElementById('cursor_hideOnTouch');
+      const videoCheckbox = document.getElementById('cursor_activeOnVideos');
+
+      function updateSliderLabels() {
+        if (dotSlider && document.getElementById('cursor_dotSize_val')) {
+          document.getElementById('cursor_dotSize_val').textContent = dotSlider.value + 'px';
+        }
+        if (ringSlider && document.getElementById('cursor_ringSize_val')) {
+          document.getElementById('cursor_ringSize_val').textContent = ringSlider.value + 'px';
+        }
+        if (borderSlider && document.getElementById('cursor_ringBorder_val')) {
+          document.getElementById('cursor_ringBorder_val').textContent = borderSlider.value + 'px';
+        }
+        if (smoothSlider && document.getElementById('cursor_smoothing_val')) {
+          document.getElementById('cursor_smoothing_val').textContent = 'Smooth (' + smoothSlider.value + ')';
+        }
+        if (hoverSlider && document.getElementById('cursor_hoverScale_val')) {
+          document.getElementById('cursor_hoverScale_val').textContent = hoverSlider.value + 'x';
+        }
+      }
+
+      if (primaryPicker && primaryInput) {
+        primaryPicker.addEventListener('input', () => {
+          primaryInput.value = primaryPicker.value;
+          updatePlaygroundStyles();
+          syncLivePreview(collectConfigFromForm());
+        });
+        primaryInput.addEventListener('input', () => {
+          if (primaryInput.value.startsWith('#') && primaryInput.value.length === 7) {
+            primaryPicker.value = primaryInput.value;
+          }
+          updatePlaygroundStyles();
+          syncLivePreview(collectConfigFromForm());
+        });
+      }
+
+      if (ringPicker && ringInput) {
+        ringPicker.addEventListener('input', () => {
+          const hex = ringPicker.value;
+          const rgb = hexToRgb(hex) || '255, 158, 0';
+          ringInput.value = 'rgba(' + rgb + ', 0.45)';
+          updatePlaygroundStyles();
+          syncLivePreview(collectConfigFromForm());
+        });
+        ringInput.addEventListener('input', () => {
+          if (ringInput.value.startsWith('#') && ringInput.value.length === 7) {
+            ringPicker.value = ringInput.value;
+          }
+          updatePlaygroundStyles();
+          syncLivePreview(collectConfigFromForm());
+        });
+      }
+
+      [dotSlider, ringSlider, borderSlider, smoothSlider, hoverSlider, blendSelect, customUrlInput, enabledCheckbox, touchCheckbox, videoCheckbox].forEach(el => {
+        if (el) {
+          el.addEventListener('input', () => {
+            updateSliderLabels();
+            updatePlaygroundStyles();
+            syncLivePreview(collectConfigFromForm());
+          });
+          el.addEventListener('change', () => {
+            updateSliderLabels();
+            updatePlaygroundStyles();
+            syncLivePreview(collectConfigFromForm());
+          });
+        }
+      });
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          const styleKey = card.dataset.style;
+          if (styleInput) styleInput.value = styleKey;
+
+          const preset = CURSOR_PRESETS[styleKey];
+          if (preset) {
+            if (preset.primaryColor) {
+              primaryInput.value = preset.primaryColor;
+              if (preset.primaryColor.startsWith('#')) primaryPicker.value = preset.primaryColor;
+            }
+            if (preset.ringColor) {
+              ringInput.value = preset.ringColor;
+            }
+            if (preset.dotSize !== undefined) dotSlider.value = preset.dotSize;
+            if (preset.ringSize !== undefined) ringSlider.value = preset.ringSize;
+            if (preset.ringBorder !== undefined) borderSlider.value = preset.ringBorder;
+            if (preset.smoothing !== undefined) smoothSlider.value = preset.smoothing;
+            if (preset.hoverScale !== undefined) hoverSlider.value = preset.hoverScale;
+            if (preset.blendMode) blendSelect.value = preset.blendMode;
+          }
+
+          updateSliderLabels();
+          updatePlaygroundStyles();
+          syncLivePreview(collectConfigFromForm());
+        });
+      });
+
+      const playground = document.getElementById('adminCursorPlayground');
+      const pgPointer = document.getElementById('pgPointer');
+      const pgFollower = document.getElementById('pgFollower');
+
+      let targetX = 0, targetY = 0;
+      let followerX = 0, followerY = 0;
+      let isInsidePlayground = false;
+      let isHoveringInteractive = false;
+
+      function renderPlaygroundPointerShape(style) {
+        if (!pgPointer) return;
+        if (style === 'arrow') {
+          pgPointer.innerHTML = '<svg width="18" height="20" viewBox="0 0 24 26" fill="none"><path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="var(--pg-primary, #ff9e00)" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+        } else if (style === 'crosshair') {
+          pgPointer.innerHTML = '<div style="width:20px;height:20px;position:relative;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;background:var(--pg-primary,#ff9e00);border-radius:50%;"></div><div style="position:absolute;top:0;left:50%;width:1.5px;height:6px;background:var(--pg-primary,#ff9e00);transform:translateX(-50%);"></div><div style="position:absolute;bottom:0;left:50%;width:1.5px;height:6px;background:var(--pg-primary,#ff9e00);transform:translateX(-50%);"></div><div style="position:absolute;left:0;top:50%;height:1.5px;width:6px;background:var(--pg-primary,#ff9e00);transform:translateY(-50%);"></div><div style="position:absolute;right:0;top:50%;height:1.5px;width:6px;background:var(--pg-primary,#ff9e00);transform:translateY(-50%);"></div></div>';
+        } else if (style === 'viewfinder') {
+          pgPointer.innerHTML = '<div style="position:relative;width:24px;height:24px;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:4px;height:4px;background:var(--pg-primary,#ff9e00);border-radius:50%;"></div><div style="position:absolute;top:0;left:0;width:6px;height:6px;border-top:1.5px solid var(--pg-primary,#ff9e00);border-left:1.5px solid var(--pg-primary,#ff9e00);"></div><div style="position:absolute;top:0;right:0;width:6px;height:6px;border-top:1.5px solid var(--pg-primary,#ff9e00);border-right:1.5px solid var(--pg-primary,#ff9e00);"></div><div style="position:absolute;bottom:0;left:0;width:6px;height:6px;border-bottom:1.5px solid var(--pg-primary,#ff9e00);border-left:1.5px solid var(--pg-primary,#ff9e00);"></div><div style="position:absolute;bottom:0;right:0;width:6px;height:6px;border-bottom:1.5px solid var(--pg-primary,#ff9e00);border-right:1.5px solid var(--pg-primary,#ff9e00);"></div></div>';
+        } else if (style === 'custom' && customUrlInput && customUrlInput.value) {
+          pgPointer.innerHTML = '<img src="' + customUrlInput.value + '" style="width:24px;height:24px;object-fit:contain;pointer-events:none;" alt="Cursor">';
+        } else if (style === 'system') {
+          pgPointer.innerHTML = '';
+        } else {
+          pgPointer.innerHTML = '<div class="cursor-center-dot"></div>';
+        }
+      }
+
+      function updatePlaygroundStyles() {
+        if (!playground) return;
+        const style = styleInput ? styleInput.value : 'dot-circle';
+        const isEnabled = enabledCheckbox ? enabledCheckbox.checked : true;
+        const primary = primaryInput ? primaryInput.value : '#ff9e00';
+        const ring = ringInput ? ringInput.value : 'rgba(255,158,0,0.45)';
+        const dotSize = dotSlider ? dotSlider.value : 6;
+        const ringSize = ringSlider ? ringSlider.value : 36;
+        const ringBorder = borderSlider ? borderSlider.value : 1.5;
+        const hoverScale = hoverSlider ? hoverSlider.value : 1.6;
+        const blendMode = blendSelect ? blendSelect.value : 'normal';
+
+        playground.style.setProperty('--pg-primary', primary);
+        playground.style.setProperty('--pg-ring-color', ring);
+        playground.style.setProperty('--pg-dot-size', dotSize + 'px');
+        playground.style.setProperty('--pg-ring-size', ringSize + 'px');
+        playground.style.setProperty('--pg-ring-border', ringBorder + 'px');
+        playground.style.setProperty('--pg-hover-scale', hoverScale);
+        playground.style.setProperty('--pg-blend-mode', blendMode);
+
+        if (!isEnabled || style === 'system') {
+          playground.style.cursor = 'default';
+          if (pgPointer) pgPointer.style.display = 'none';
+          if (pgFollower) pgFollower.style.display = 'none';
+        } else {
+          playground.style.cursor = 'none';
+          if (pgPointer) pgPointer.style.display = 'flex';
+          if (pgFollower) pgFollower.style.display = 'block';
+        }
+
+        renderPlaygroundPointerShape(style);
+
+        if (pgFollower) {
+          pgFollower.style.borderColor = ring;
+          pgFollower.style.borderWidth = ringBorder + 'px';
+          pgFollower.style.mixBlendMode = blendMode;
+          const currentSize = isHoveringInteractive ? (ringSize * hoverScale) : ringSize;
+          pgFollower.style.width = currentSize + 'px';
+          pgFollower.style.height = currentSize + 'px';
+        }
+
+        const dotEl = pgPointer ? pgPointer.querySelector('.cursor-center-dot') : null;
+        if (dotEl) {
+          dotEl.style.width = dotSize + 'px';
+          dotEl.style.height = dotSize + 'px';
+          dotEl.style.background = primary;
+        }
+      }
+
+      function animLoop() {
+        if (isInsidePlayground) {
+          const smoothing = smoothSlider ? parseFloat(smoothSlider.value) : 0.18;
+          followerX += (targetX - followerX) * smoothing;
+          followerY += (targetY - followerY) * smoothing;
+
+          if (pgPointer) {
+            pgPointer.style.transform = 'translate(' + targetX + 'px, ' + targetY + 'px)';
+          }
+          if (pgFollower) {
+            pgFollower.style.transform = 'translate(' + followerX + 'px, ' + followerY + 'px)';
+          }
+        }
+        requestAnimationFrame(animLoop);
+      }
+      animLoop();
+
+      if (playground) {
+        playground.addEventListener('mouseenter', (e) => {
+          isInsidePlayground = true;
+          const rect = playground.getBoundingClientRect();
+          targetX = e.clientX - rect.left;
+          targetY = e.clientY - rect.top;
+          followerX = targetX;
+          followerY = targetY;
+          if (pgPointer) pgPointer.style.opacity = '1';
+          if (pgFollower) pgFollower.style.opacity = '1';
+        });
+
+        playground.addEventListener('mousemove', (e) => {
+          const rect = playground.getBoundingClientRect();
+          targetX = e.clientX - rect.left;
+          targetY = e.clientY - rect.top;
+          isHoveringInteractive = !!e.target.closest('button, a, .playground-tag, .playground-video-chip');
+          if (pgFollower) {
+            const ringSize = ringSlider ? parseFloat(ringSlider.value) : 36;
+            const hoverScale = hoverSlider ? parseFloat(hoverSlider.value) : 1.6;
+            const s = isHoveringInteractive ? (ringSize * hoverScale) : ringSize;
+            pgFollower.style.width = s + 'px';
+            pgFollower.style.height = s + 'px';
+            if (isHoveringInteractive) {
+              pgFollower.classList.add('is-hovering');
+            } else {
+              pgFollower.classList.remove('is-hovering');
+            }
+          }
+        });
+
+        playground.addEventListener('mouseleave', () => {
+          isInsidePlayground = false;
+          if (pgPointer) pgPointer.style.opacity = '0';
+          if (pgFollower) pgFollower.style.opacity = '0';
+        });
+      }
+
+      window._updateCursorPlayground = updatePlaygroundStyles;
+      window._updateCursorSliderLabels = updateSliderLabels;
+      updateSliderLabels();
+      updatePlaygroundStyles();
+    }
+
     function setupColorPickerSync() {
       const syncPairs = [
         ['theme_primary', 'theme_primary_picker'],
@@ -3567,6 +4464,21 @@
           skills: true,
           contact: true,
           footer: true
+        },
+        cursor: {
+          enabled: true,
+          style: "dot-circle",
+          primaryColor: "#ff9e00",
+          ringColor: "rgba(255, 158, 0, 0.45)",
+          dotSize: 6,
+          ringSize: 36,
+          ringBorder: 1.5,
+          smoothing: 0.18,
+          hoverScale: 1.6,
+          blendMode: "normal",
+          customUrl: "",
+          hideOnTouch: true,
+          activeOnVideos: true
         },
         sectionOrder: [
           "hero",

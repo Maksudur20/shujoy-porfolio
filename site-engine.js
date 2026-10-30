@@ -106,6 +106,11 @@
       }
     }
 
+    // C. CUSTOM CURSOR SYSTEM
+    if (cfg.cursor) {
+      applyCursorConfig(cfg.cursor);
+    }
+
     // B. FOOTER STYLES
     if (cfg.footer) {
       const ft = cfg.footer;
@@ -602,6 +607,60 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  // Apply Custom Cursor Configuration
+  function applyCursorConfig(c) {
+    if (!c) return;
+    const body = document.body;
+    const root = document.documentElement;
+
+    const enabled = c.enabled !== false;
+    body.dataset.cursorEnabled = enabled ? 'true' : 'false';
+    const style = c.style || 'dot-circle';
+    body.dataset.cursorStyle = style;
+
+    if (c.primaryColor) root.style.setProperty('--cursor-primary', c.primaryColor);
+    if (c.ringColor) root.style.setProperty('--cursor-ring-color', c.ringColor);
+    if (c.dotSize) root.style.setProperty('--cursor-dot-size', c.dotSize + 'px');
+    if (c.ringSize) root.style.setProperty('--cursor-ring-size', c.ringSize + 'px');
+    if (c.ringBorder) root.style.setProperty('--cursor-ring-border', c.ringBorder + 'px');
+    if (c.hoverScale) root.style.setProperty('--cursor-hover-scale', c.hoverScale);
+    if (c.blendMode) root.style.setProperty('--cursor-blend-mode', c.blendMode);
+
+    window._cursorSmoothing = typeof c.smoothing === 'number' ? c.smoothing : 0.18;
+
+    const pointer = document.getElementById('cursorPointer');
+    const follower = document.getElementById('cursorFollower');
+    if (!pointer || !follower) return;
+
+    if (!enabled || style === 'system') {
+      body.classList.remove('custom-cursor-active');
+      pointer.style.display = 'none';
+      follower.style.display = 'none';
+      return;
+    }
+
+    pointer.style.display = '';
+    follower.style.display = '';
+
+    if (style === 'arrow') {
+      pointer.innerHTML = '<svg class="cursor-arrow-svg" width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M2.5 2.5L10 23L14 14.5L21.5 11.5L2.5 2.5Z" fill="' + (c.primaryColor || '#ff9e00') + '" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+      follower.innerHTML = '';
+    } else if (style === 'crosshair') {
+      pointer.innerHTML = '<div class="cursor-crosshair-reticle"><div class="crosshair-center-dot"></div><div class="crosshair-line line-v-top"></div><div class="crosshair-line line-v-bot"></div><div class="crosshair-line line-h-left"></div><div class="crosshair-line line-h-right"></div></div>';
+      follower.innerHTML = '';
+    } else if (style === 'viewfinder') {
+      pointer.innerHTML = '<div class="cursor-center-dot"></div>';
+      follower.innerHTML = '<div class="viewfinder-corner vf-tl"></div><div class="viewfinder-corner vf-tr"></div><div class="viewfinder-corner vf-bl"></div><div class="viewfinder-corner vf-br"></div>';
+    } else if (style === 'custom' && c.customUrl) {
+      pointer.innerHTML = '<img src="' + c.customUrl + '" alt="cursor" class="custom-cursor-img" />';
+      follower.innerHTML = '';
+    } else {
+      // dot-circle, fluid-dot, difference-ring, neon-pulse
+      pointer.innerHTML = '<div class="cursor-center-dot"></div>';
+      follower.innerHTML = '';
+    }
   }
 
   // Expose global method
