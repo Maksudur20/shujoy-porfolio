@@ -312,8 +312,8 @@
   "sectionOrder": [
     "hero",
     "beforeAfter",
-    "projects",
     "threeDVideo",
+    "projects",
     "experience",
     "skills",
     "contact"
