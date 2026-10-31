@@ -298,20 +298,20 @@
   },
   "threeDVideo": {
     "enabled": true,
+    "autoplay": true,
+    "loop": true,
+    "fit": "cover",
     "pillText": "3D MOTION & CGI",
     "heading": "3D Video Editor & Motion Design",
     "description": "Commercial 3D product simulation, dynamic camera pacing, and kinetic CGI visual storytelling.",
-    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4",
-    "autoplay": true,
-    "loop": true,
-    "fit": "cover"
+    "videoUrl": "https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4"
   },
-  "_updatedAt": 1793403603522,
+  "_updatedAt": 1793406791525,
   "customSections": [],
   "sectionOrder": [
     "hero",
-    "beforeAfter",
     "threeDVideo",
+    "beforeAfter",
     "projects",
     "experience",
     "skills",
