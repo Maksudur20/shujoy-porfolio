@@ -512,32 +512,26 @@
   // Update Projects Carousel DOM
   function updateProjectsCarouselDOM(items) {
     const track = document.getElementById('carouselTrack');
-    if (!track) return;
+    if (!track || !Array.isArray(items)) return;
 
-    // Check if count or contents changed
     const currentCards = track.querySelectorAll('.video-card');
     if (currentCards.length === items.length) {
-      // Just update attributes to preserve play state
       items.forEach((item, idx) => {
         const card = currentCards[idx];
         if (!card) return;
 
-        // Aspect
         card.classList.remove('is-landscape', 'is-portrait');
         card.classList.add(item.aspect === 'portrait' ? 'is-portrait' : 'is-landscape');
 
-        // Video
         const vid = card.querySelector('video');
         if (vid && item.videoUrl && vid.getAttribute('src') !== item.videoUrl) {
           vid.setAttribute('src', item.videoUrl);
-          vid.load();
+          if (typeof vid.load === 'function') vid.load();
         }
 
-        // Badge
         const badge = card.querySelector('.video-badge');
         if (badge && item.badge) badge.textContent = item.badge;
 
-        // Title & Subtitle
         const title = card.querySelector('.video-card-info h3');
         const subtitle = card.querySelector('.video-card-info span');
         const tag = card.querySelector('.card-tag');
@@ -546,7 +540,6 @@
         if (tag && item.tag) tag.textContent = item.tag;
       });
     } else {
-      // Re-render track items
       track.innerHTML = items.map((item, idx) => `
         <div class="video-card ${idx === 0 ? 'active' : ''} ${item.aspect === 'portrait' ? 'is-portrait' : 'is-landscape'}" data-index="${idx}">
           <div class="video-frame">
@@ -572,12 +565,14 @@
         </div>
       `).join('');
 
-      // Dispatch event for carousel re-bind if needed
+      // Re-initialize carousel controller with new DOM nodes
+      if (typeof window.initPortfolioCarousel === 'function') {
+        window.initPortfolioCarousel();
+      }
       window.dispatchEvent(new CustomEvent('shujoy_carousel_rebuild'));
     }
   }
 
-  // Update Hero 3D SaaS Reels DOM
   function updateHeroReelsDOM(reels) {
     const stage = document.getElementById('saas3DStage') || document.querySelector('.saas-3d-stage');
     const dotsWrap = document.getElementById('saasDots');

@@ -3541,7 +3541,7 @@
         <!-- Carousel Viewport & Track -->
         <div class="carousel-viewport reveal reveal-scale delay-3" id="carouselViewport">
           <div class="carousel-track" id="carouselTrack">
-            
+
             <!-- Video 1 (Landscape 16:9) -->
             <div class="video-card active is-landscape" data-index="0">
               <div class="video-frame">
@@ -3566,32 +3566,8 @@
               </div>
             </div>
 
-            <!-- Video 2 (Landscape 16:9) -->
-            <div class="video-card is-landscape" data-index="1">
-              <div class="video-frame">
-                <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668958/shujoy-portfolio/z1ffnmhnxgnzfaiitvgk.mp4" playsinline muted preload="metadata"></video>
-                <div class="video-overlay-controls">
-                  <div class="top-controls">
-                    <span class="video-badge">3D Motion</span>
-                    <button class="sound-toggle-btn" aria-label="Toggle Audio">🔊 Unmute</button>
-                  </div>
-                  <div class="center-play-trigger" title="Play / Pause">▶</div>
-                  <div class="bottom-timeline-scrub">
-                    <div class="video-progress-bar"><div class="video-progress-fill"></div></div>
-                  </div>
-                </div>
-              </div>
-              <div class="video-card-info">
-                <div>
-                  <h3>Kinetic 3D Product Visual</h3>
-                  <span>After Effects & C4D</span>
-                </div>
-                <div class="card-tag">After Effects</div>
-              </div>
-            </div>
-
-            <!-- Video 3 (Portrait 9:16) -->
-            <div class="video-card is-portrait" data-index="2">
+            <!-- Video 2 (Portrait 9:16) -->
+            <div class="video-card  is-portrait" data-index="1">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668967/shujoy-portfolio/sdqbwp4txoepxewz1un1.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3614,8 +3590,8 @@
               </div>
             </div>
 
-            <!-- Video 4 (Landscape 16:9) -->
-            <div class="video-card is-landscape" data-index="3">
+            <!-- Video 3 (Landscape 16:9) -->
+            <div class="video-card  is-landscape" data-index="2">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668965/shujoy-portfolio/hr9lo4qh38aytpuvxu8b.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3638,8 +3614,8 @@
               </div>
             </div>
 
-            <!-- Video 5 (Portrait 9:16) -->
-            <div class="video-card is-portrait" data-index="4">
+            <!-- Video 4 (Portrait 9:16) -->
+            <div class="video-card  is-portrait" data-index="3">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668964/shujoy-portfolio/fg8ajptgcom9kkwujvhr.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3662,8 +3638,8 @@
               </div>
             </div>
 
-            <!-- Video 6 (Landscape 16:9) -->
-            <div class="video-card is-landscape" data-index="5">
+            <!-- Video 5 (Landscape 16:9) -->
+            <div class="video-card  is-landscape" data-index="4">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668962/shujoy-portfolio/msv2xdx4peqcdh9zueqr.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3686,8 +3662,8 @@
               </div>
             </div>
 
-            <!-- Video 7 (Landscape 16:9) -->
-            <div class="video-card is-landscape" data-index="6">
+            <!-- Video 6 (Landscape 16:9) -->
+            <div class="video-card  is-landscape" data-index="5">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668960/shujoy-portfolio/ucgws1dyab4xrxg8gpae.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3710,8 +3686,8 @@
               </div>
             </div>
 
-            <!-- Video 8 (Portrait 9:16) -->
-            <div class="video-card is-portrait" data-index="7">
+            <!-- Video 7 (Portrait 9:16) -->
+            <div class="video-card  is-portrait" data-index="6">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668959/shujoy-portfolio/e6vsgekufsxgsp6cbbjm.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3734,8 +3710,8 @@
               </div>
             </div>
 
-            <!-- Video 9 (Portrait 9:16) -->
-            <div class="video-card is-portrait" data-index="8">
+            <!-- Video 8 (Portrait 9:16) -->
+            <div class="video-card  is-portrait" data-index="7">
               <div class="video-frame">
                 <video src="https://res.cloudinary.com/cloud-storage1/video/upload/q_auto,f_auto/v1792668956/shujoy-portfolio/lrqxutdce9wfzb7xzs0y.mp4" playsinline muted preload="metadata"></video>
                 <div class="video-overlay-controls">
@@ -3757,7 +3733,6 @@
                 <div class="card-tag">DaVinci Resolve</div>
               </div>
             </div>
-
           </div>
         </div>
 
@@ -4335,16 +4310,15 @@
 
         // Click to toggle play / pause
         if (baFrame) {
-          baFrame.addEventListener('click', () => {
-            if (baVideo.paused) {
-              baVideo.play().catch(() => {});
-              baFrame.classList.remove('is-paused');
-            } else {
-              baVideo.pause();
-              baFrame.classList.add('is-paused');
-            }
-          });
-        }
+        baFrame.addEventListener('click', (e) => {
+          if (e.target.closest('#baSoundBtn')) return;
+          // Never stop on click! If paused, play; if playing, keep playing.
+          if (baVideo.paused) {
+            baVideo.play().catch(() => {});
+            baFrame.classList.remove('is-paused');
+          }
+        });
+      }
 
         // Toggle sound button
         if (baSoundBtn) {
@@ -4359,260 +4333,245 @@
       }
 
       // ============================================================
-      // PORTFOLIO FEATURED WORKS CAROUSEL
+      // PORTFOLIO FEATURED WORKS CAROUSEL CONTROLLER
       // ============================================================
-      const track = document.getElementById('carouselTrack');
-      const viewport = document.getElementById('carouselViewport');
-      const cards = Array.from(document.querySelectorAll('.video-card'));
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-      const dotsContainer = document.getElementById('carouselDots');
-      const currentSlideDisplay = document.getElementById('currentSlideDisplay');
-
-      let currentIndex = 0;
       let isGlobalMuted = true;
       let isDragging = false;
       let startPos = 0;
       let currentTranslate = 0;
       let prevTranslate = 0;
+      let currentIndex = 0;
 
-      // Build pagination dots
-      cards.forEach((_, idx) => {
-        const dot = document.createElement('div');
-        dot.className = `dot-pill ${idx === 0 ? 'active' : ''}`;
-        dot.addEventListener('click', () => {
-          goToSlide(idx);
-        });
-        dotsContainer.appendChild(dot);
-      });
+      function initPortfolioCarousel() {
+        const track = document.getElementById('carouselTrack');
+        const viewport = document.getElementById('carouselViewport');
+        const dotsContainer = document.getElementById('carouselDots');
+        const currentSlideDisplay = document.getElementById('currentSlideDisplay');
+        if (!track || !viewport) return;
 
-      const dots = Array.from(document.querySelectorAll('.dot-pill'));
+        const cards = Array.from(track.querySelectorAll('.video-card'));
+        if (cards.length === 0) return;
 
-      // Function to align carousel so active card is centered
-      function updateCarouselPosition() {
-        const activeCard = cards[currentIndex];
-        if (!activeCard) return;
+        // Reset index bounds
+        if (currentIndex >= cards.length) currentIndex = 0;
 
-        // Viewport center
-        const viewportCenter = viewport.offsetWidth / 2;
-        // Active card center relative to track
-        const cardCenter = activeCard.offsetLeft + (activeCard.offsetWidth / 2);
-        const targetOffset = viewportCenter - cardCenter;
-
-        track.style.transform = `translateX(${targetOffset}px)`;
-        currentTranslate = targetOffset;
-        prevTranslate = targetOffset;
-
-        // Update classes
-        cards.forEach((card, idx) => {
-          const video = card.querySelector('video');
-          const playTrigger = card.querySelector('.center-play-trigger');
-
-          if (idx === currentIndex) {
-            card.classList.add('active');
-            // Auto play active video
-            video.muted = isGlobalMuted;
-            video.play().catch(e => {
-              console.log('Autoplay deferred until user interaction', e);
-            });
-            if (playTrigger) playTrigger.textContent = '❚❚';
-            // Sync sound toggle button for active card
-            const activeSoundBtn = card.querySelector('.sound-toggle-btn');
-            if (activeSoundBtn) {
-              activeSoundBtn.classList.toggle('is-unmuted', !isGlobalMuted);
-              activeSoundBtn.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
-            }
-          } else {
-            card.classList.remove('active');
-            video.pause();
-            video.currentTime = 0; // reset
-            if (playTrigger) playTrigger.textContent = '▶';
-          }
-        });
-
-        // Update dots and counter
-        dots.forEach((dot, idx) => {
-          dot.classList.toggle('active', idx === currentIndex);
-        });
-        if (currentSlideDisplay) {
-          currentSlideDisplay.textContent = String(currentIndex + 1).padStart(2, '0');
-        }
-      }
-
-      function goToSlide(index) {
-        if (index < 0) {
-          currentIndex = cards.length - 1;
-        } else if (index >= cards.length) {
-          currentIndex = 0;
-        } else {
-          currentIndex = index;
-        }
-        updateCarouselPosition();
-      }
-
-      // Next / Prev actions
-      function nextSlide() {
-        goToSlide(currentIndex + 1);
-      }
-      function prevSlide() {
-        goToSlide(currentIndex - 1);
-      }
-
-      if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-      if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-
-      // VIDEO AUTO-ADVANCE: When active video finishes, automatically go to next video and play it!
-      cards.forEach((card, idx) => {
-        const video = card.querySelector('video');
-        const playTrigger = card.querySelector('.center-play-trigger');
-        const soundBtn = card.querySelector('.sound-toggle-btn');
-        const progressBar = card.querySelector('.video-progress-fill');
-
-        // When video ends -> auto jump to next video
-        video.addEventListener('ended', () => {
-          if (idx === currentIndex) {
-            nextSlide();
-          }
-        });
-
-        // Time update for progress fill
-        video.addEventListener('timeupdate', () => {
-          if (video.duration && progressBar) {
-            const pct = (video.currentTime / video.duration) * 100;
-            progressBar.style.width = pct + '%';
-          }
-        });
-
-        // Sound Toggle (Volume On / Off only - matches Before & After flow)
-        if (soundBtn) {
-          soundBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isGlobalMuted = !isGlobalMuted;
-            // apply to all videos & buttons
-            cards.forEach(c => {
-              const v = c.querySelector('video');
-              const b = c.querySelector('.sound-toggle-btn');
-              if (v) v.muted = isGlobalMuted;
-              if (b) {
-                b.classList.toggle('is-unmuted', !isGlobalMuted);
-                b.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
-              }
-            });
-            // Ensure currently active video plays with audio if unmuted
-            const activeCard = cards[currentIndex];
-            if (activeCard) {
-              const v = activeCard.querySelector('video');
-              if (v && v.paused) {
-                v.play().catch(() => {});
-              }
-            }
+        // Build pagination dots
+        if (dotsContainer) {
+          dotsContainer.innerHTML = '';
+          cards.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.className = 'dot-pill ' + (idx === currentIndex ? 'active' : '');
+            dot.onclick = (e) => {
+              e.stopPropagation();
+              goToSlide(idx);
+            };
+            dotsContainer.appendChild(dot);
           });
         }
 
-        // Clicking a non-active card directly selects it
-        card.addEventListener('click', (e) => {
-          if (idx !== currentIndex && !isDragging) {
-            goToSlide(idx);
+        const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.dot-pill')) : [];
+
+        function updateCarouselPosition() {
+          const activeCard = cards[currentIndex];
+          if (!activeCard) return;
+
+          const viewportCenter = viewport.offsetWidth / 2;
+          const cardCenter = activeCard.offsetLeft + (activeCard.offsetWidth / 2);
+          const targetOffset = viewportCenter - cardCenter;
+
+          track.style.transform = 'translateX(' + targetOffset + 'px)';
+          currentTranslate = targetOffset;
+          prevTranslate = targetOffset;
+
+          cards.forEach((card, idx) => {
+            const video = card.querySelector('video');
+            if (idx === currentIndex) {
+              card.classList.add('active');
+              if (video) {
+                video.muted = isGlobalMuted;
+                video.play().catch(() => {});
+              }
+              const activeSoundBtn = card.querySelector('.sound-toggle-btn');
+              if (activeSoundBtn) {
+                activeSoundBtn.classList.toggle('is-unmuted', !isGlobalMuted);
+                activeSoundBtn.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
+              }
+            } else {
+              card.classList.remove('active');
+              if (video) {
+                video.pause();
+                video.currentTime = 0;
+              }
+            }
+          });
+
+          dots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === currentIndex);
+          });
+          if (currentSlideDisplay) {
+            currentSlideDisplay.textContent = String(currentIndex + 1).padStart(2, '0');
           }
-        });
-      });
+        }
 
-      // DRAG & SWIPE CAPABILITY
-      let startX = 0;
-      let movedX = 0;
-
-      function onTouchStart(e) {
-        isDragging = true;
-        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        viewport.classList.add('is-dragging');
-        track.style.transition = 'none';
-      }
-
-      function onTouchMove(e) {
-        if (!isDragging) return;
-        const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
-        movedX = currentX - startX;
-        track.style.transform = `translateX(${currentTranslate + movedX}px)`;
-      }
-
-      function onTouchEnd() {
-        if (!isDragging) return;
-        isDragging = false;
-        viewport.classList.remove('is-dragging');
-        track.style.transition = 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)';
-
-        // Threshold for drag slide switch
-        if (movedX < -60) {
-          nextSlide();
-        } else if (movedX > 60) {
-          prevSlide();
-        } else {
+        function goToSlide(index) {
+          if (index < 0) {
+            currentIndex = cards.length - 1;
+          } else if (index >= cards.length) {
+            currentIndex = 0;
+          } else {
+            currentIndex = index;
+          }
           updateCarouselPosition();
         }
-        movedX = 0;
-      }
 
-      viewport.addEventListener('mousedown', onTouchStart);
-      window.addEventListener('mousemove', onTouchMove);
-      window.addEventListener('mouseup', onTouchEnd);
+        function nextSlide() { goToSlide(currentIndex + 1); }
+        function prevSlide() { goToSlide(currentIndex - 1); }
 
-      viewport.addEventListener('touchstart', onTouchStart, { passive: true });
-      viewport.addEventListener('touchmove', onTouchMove, { passive: true });
-      viewport.addEventListener('touchend', onTouchEnd);
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        if (prevBtn) {
+          prevBtn.onclick = (e) => { e.stopPropagation(); prevSlide(); };
+        }
+        if (nextBtn) {
+          nextBtn.onclick = (e) => { e.stopPropagation(); nextSlide(); };
+        }
 
-      // Keyboard arrow keys
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') nextSlide();
-        if (e.key === 'ArrowLeft') prevSlide();
-      });
+        // Attach listeners to all video cards
+        cards.forEach((card, idx) => {
+          const video = card.querySelector('video');
+          const soundBtn = card.querySelector('.sound-toggle-btn');
+          const progressBar = card.querySelector('.video-progress-fill');
 
-      // Window resize re-centering
-      window.addEventListener('resize', () => {
-        updateCarouselPosition();
-      });
+          if (video) {
+            video.onended = () => {
+              if (idx === currentIndex) {
+                nextSlide();
+              }
+            };
 
-      // Initial alignment
-      setTimeout(() => {
-        updateCarouselPosition();
-      }, 100);
+            video.ontimeupdate = () => {
+              if (video.duration && progressBar) {
+                const pct = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = pct + '%';
+              }
+            };
+          }
 
-      // AUTO-OFF AUDIO ON SCROLL AWAY (PRESERVES USER SOUND PREFERENCE)
-      const projectsSectionEl = document.getElementById('projects');
-      if (projectsSectionEl && 'IntersectionObserver' in window) {
-        const projScrollObserver = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (!entry.isIntersecting || entry.intersectionRatio < 0.15) {
-              // Scrolled away from section: pause and silence video so no audio leaks to other sections
+          if (soundBtn) {
+            soundBtn.onclick = (e) => {
+              e.stopPropagation();
+              isGlobalMuted = !isGlobalMuted;
               cards.forEach(c => {
                 const v = c.querySelector('video');
-                if (v) {
-                  v.pause();
-                  v.muted = true;
+                const b = c.querySelector('.sound-toggle-btn');
+                if (v) v.muted = isGlobalMuted;
+                if (b) {
+                  b.classList.toggle('is-unmuted', !isGlobalMuted);
+                  b.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
                 }
               });
-              // NOTE: Do NOT reset isGlobalMuted or buttons! The user's preference remains unmuted.
+              const activeCard = cards[currentIndex];
+              if (activeCard) {
+                const v = activeCard.querySelector('video');
+                if (v && v.paused) v.play().catch(() => {});
+              }
+            };
+          }
+
+          // Card click: switch to slide if inactive; if already active, never stop!
+          card.onclick = (e) => {
+            if (isDragging) return;
+            if (e.target.closest('.sound-toggle-btn')) return;
+            if (idx !== currentIndex) {
+              goToSlide(idx);
             } else {
-              // Scrolled back into section: resume active video with user's chosen sound state!
-              const activeC = cards[currentIndex];
-              if (activeC) {
-                const v = activeC.querySelector('video');
-                if (v) {
-                  v.muted = isGlobalMuted;
-                  if (v.paused) {
+              if (video && video.paused) {
+                video.play().catch(() => {});
+              }
+            }
+          };
+        });
+
+        // Drag handlers
+        let startX = 0;
+        let movedX = 0;
+
+        function onTouchStart(e) {
+          if (e.target.closest('.sound-toggle-btn') || e.target.closest('.dot-pill') || e.target.closest('#prevBtn') || e.target.closest('#nextBtn')) return;
+          isDragging = true;
+          startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+          viewport.classList.add('is-dragging');
+          track.style.transition = 'none';
+        }
+
+        function onTouchMove(e) {
+          if (!isDragging) return;
+          const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+          movedX = currentX - startX;
+          track.style.transform = 'translateX(' + (currentTranslate + movedX) + 'px)';
+        }
+
+        function onTouchEnd() {
+          if (!isDragging) return;
+          isDragging = false;
+          viewport.classList.remove('is-dragging');
+          track.style.transition = 'transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          if (movedX < -60) {
+            nextSlide();
+          } else if (movedX > 60) {
+            prevSlide();
+          } else {
+            updateCarouselPosition();
+          }
+          movedX = 0;
+        }
+
+        viewport.onmousedown = onTouchStart;
+        window.onmousemove = onTouchMove;
+        window.onmouseup = onTouchEnd;
+
+        viewport.ontouchstart = onTouchStart;
+        viewport.ontouchmove = onTouchMove;
+        viewport.ontouchend = onTouchEnd;
+
+        window.onresize = () => updateCarouselPosition();
+
+        // Initial alignment & playback trigger
+        setTimeout(() => {
+          updateCarouselPosition();
+        }, 120);
+
+        // Section visibility auto-play
+        const projectsSectionEl = document.getElementById('projects');
+        if (projectsSectionEl && 'IntersectionObserver' in window) {
+          const projScrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (!entry.isIntersecting || entry.intersectionRatio < 0.15) {
+                cards.forEach(c => {
+                  const v = c.querySelector('video');
+                  if (v) {
+                    v.pause();
+                    v.muted = true;
+                  }
+                });
+              } else {
+                const activeC = cards[currentIndex];
+                if (activeC) {
+                  const v = activeC.querySelector('video');
+                  if (v) {
+                    v.muted = isGlobalMuted;
                     v.play().catch(() => {});
                   }
                 }
               }
-              // Restore buttons to match user's sound preference
-              document.querySelectorAll('.sound-toggle-btn').forEach(btn => {
-                btn.classList.toggle('is-unmuted', !isGlobalMuted);
-                btn.textContent = isGlobalMuted ? '🔊 Unmute' : '🔇 Mute';
-              });
-            }
-          });
-        }, { threshold: [0, 0.15] });
-        projScrollObserver.observe(projectsSectionEl);
+            });
+          }, { threshold: [0, 0.15] });
+          projScrollObserver.observe(projectsSectionEl);
+        }
       }
+
+      window.initPortfolioCarousel = initPortfolioCarousel;
+      initPortfolioCarousel();
 
       
       // ============================================================
@@ -4691,12 +4650,10 @@
         // Click frame to toggle play / pause
         frame.addEventListener('click', (e) => {
           if (e.target.closest('#threeDSoundBtn') || e.target.closest('#threeDTimeline')) return;
+          // Never stop on click! If paused, resume; if playing, keep playing!
           if (video.paused) {
             video.play().catch(() => {});
             frame.classList.remove('is-paused');
-          } else {
-            video.pause();
-            frame.classList.add('is-paused');
           }
         });
       }
