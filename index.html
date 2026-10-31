@@ -3150,36 +3150,7 @@
       transform: translateY(-1px);
     }
     .three-d-play-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9);
-      width: 72px;
-      height: 72px;
-      background: rgba(10, 12, 18, 0.78);
-      border: 1.5px solid rgba(255, 158, 0, 0.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      color: var(--primary, #ff9e00);
-      opacity: 0;
-      pointer-events: auto;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 35px rgba(255, 158, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.8);
-    }
-    .three-d-play-center:hover {
-      transform: translate(-50%, -50%) scale(1.08);
-      border-color: var(--primary, #ff9e00);
-      box-shadow: 0 0 45px rgba(255, 158, 0, 0.45);
-    }
-    .three-d-video-frame:hover .three-d-play-center,
-    .three-d-video-frame.is-paused .three-d-play-center {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      display: none !important;
     }
     .three-d-bottom {
       pointer-events: auto;
@@ -3762,7 +3733,6 @@
                 <span class="three-d-sound-text">Unmute</span>
               </button>
             </div>
-            <div class="three-d-play-center" id="threeDPlayTrigger">▶</div>
             <div class="three-d-bottom">
               <div class="three-d-timeline-bar" id="threeDTimeline"><div class="three-d-timeline-fill" id="threeDTimelineFill"></div></div>
             </div>

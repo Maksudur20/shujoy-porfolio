@@ -744,7 +744,6 @@
                           <span>🔊</span> <span class="three-d-sound-text">${cs.autoplay !== false ? 'Unmute' : 'Mute'}</span>
                         </button>
                       </div>
-                      <div class="three-d-play-center" onclick="const v=this.closest('.three-d-video-frame').querySelector('video'); if(v.paused){ v.play(); this.closest('.three-d-video-frame').classList.remove('is-paused'); } else { v.pause(); this.closest('.three-d-video-frame').classList.add('is-paused'); }">▶</div>
                     </div>
                   </div>
                 ` : `
