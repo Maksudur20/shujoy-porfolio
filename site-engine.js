@@ -359,12 +359,6 @@
     if (cfg.threeDVideo) {
       const tdSection = document.getElementById('three-d-video');
       if (tdSection) {
-        if (cfg.threeDVideo.enabled === false) {
-          tdSection.style.setProperty('display', 'none', 'important');
-        } else {
-          tdSection.style.removeProperty('display');
-        }
-
         const pill = tdSection.querySelector('.section-pill');
         const h2 = tdSection.querySelector('h2');
         const p = tdSection.querySelector('.section-head p');
@@ -381,7 +375,7 @@
     }
 
     // K. SECTION VISIBILITY (Show/Hide)
-    if (cfg.sectionsVisibility) {
+    if (cfg.sectionsVisibility || cfg.threeDVideo) {
       const secMap = {
         hero: document.getElementById('home') || document.querySelector('.hero-section'),
         beforeAfter: document.getElementById('before-after'),
@@ -393,32 +387,57 @@
         footer: document.querySelector('footer')
       };
       const navMap = {
-        beforeAfter: document.querySelector('.nav-links a[href="#before-after"]'),
-        projects: document.querySelector('.nav-links a[href="#projects"]'),
-        threeDVideo: document.querySelector('.nav-links a[href="#three-d-video"]'),
-        experience: document.querySelector('.nav-links a[href="#experience"]'),
-        skills: document.querySelector('.nav-links a[href="#skills"]'),
-        contact: document.querySelector('.nav-links a[href="#contact"]')
+        hero: document.querySelector('header nav a[href="#home"], nav a[href="#home"]'),
+        beforeAfter: document.querySelector('header nav a[href="#before-after"], nav a[href="#before-after"]'),
+        projects: document.querySelector('header nav a[href="#projects"], nav a[href="#projects"]'),
+        threeDVideo: document.querySelector('header nav a[href="#three-d-video"], nav a[href="#three-d-video"]'),
+        experience: document.querySelector('header nav a[href="#experience"], nav a[href="#experience"]'),
+        skills: document.querySelector('header nav a[href="#skills"], nav a[href="#skills"]'),
+        contact: document.querySelector('header nav a[href="#contact"], nav a[href="#contact"]')
       };
 
-      Object.entries(cfg.sectionsVisibility).forEach(([sec, isVis]) => {
+      const visConfig = Object.assign({}, cfg.sectionsVisibility || {});
+      if (cfg.threeDVideo && typeof cfg.threeDVideo.enabled === 'boolean') {
+        visConfig.threeDVideo = cfg.threeDVideo.enabled && (visConfig.threeDVideo !== false);
+      }
+
+      Object.keys(secMap).forEach(sec => {
         const el = secMap[sec];
+        const isVis = visConfig[sec] !== false;
         if (el) {
-          if (isVis === false) {
+          if (!isVis) {
             el.style.setProperty('display', 'none', 'important');
           } else {
             el.style.removeProperty('display');
+            el.style.display = '';
           }
         }
         const navEl = navMap[sec];
         if (navEl) {
-          if (isVis === false) {
+          if (!isVis) {
             navEl.style.setProperty('display', 'none', 'important');
           } else {
             navEl.style.removeProperty('display');
+            navEl.style.display = '';
           }
         }
       });
+
+      // Also handle custom sections visibility
+      if (Array.isArray(cfg.customSections)) {
+        cfg.customSections.forEach(cs => {
+          const el = document.getElementById(cs.id);
+          if (el) {
+            const isVis = (visConfig[cs.id] !== false) && (cs.enabled !== false);
+            if (!isVis) {
+              el.style.setProperty('display', 'none', 'important');
+            } else {
+              el.style.removeProperty('display');
+              el.style.display = '';
+            }
+          }
+        });
+      }
     }
 
     // L. SECTION ORDER (Drag & Drop Reordering)
@@ -441,6 +460,10 @@
           }
         });
       }
+    }
+
+    if (typeof window.reobserveRevealItems === 'function') {
+      window.reobserveRevealItems();
     }
   }
 

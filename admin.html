@@ -243,38 +243,73 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .section-vis-btn {
-      background: transparent;
-      border: none;
+    .nav-tab-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .sec-move-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--admin-text-dim);
       cursor: pointer;
-      padding: 0.25rem 0.35rem;
-      border-radius: 5px;
-      display: flex;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.62rem;
+      line-height: 1;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.15s ease;
+      opacity: 0.7;
+    }
+    .sec-move-btn:hover {
+      opacity: 1;
+      color: var(--admin-primary);
+      border-color: rgba(255, 158, 0, 0.4);
+      background: rgba(255, 158, 0, 0.12);
+    }
+    .sec-move-btn:active {
+      transform: scale(0.92);
+    }
+    .section-vis-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--admin-text-dim);
+      cursor: pointer;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
       flex-shrink: 0;
-      margin-left: auto;
-      font-size: 0.85rem;
     }
     .section-vis-btn:hover {
       color: var(--admin-primary);
-      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 158, 0, 0.4);
+      background: rgba(255, 158, 0, 0.12);
     }
     .section-vis-btn.is-hidden {
       color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.4);
+      background: rgba(239, 68, 68, 0.15);
     }
     .sec-vis-tag {
-      font-size: 0.62rem;
+      font-size: 0.58rem;
       background: rgba(239, 68, 68, 0.18);
       color: #f87171;
       border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 0.1rem 0.35rem;
-      border-radius: 4px;
+      padding: 1px 4px;
+      border-radius: 3px;
       text-transform: uppercase;
       font-weight: 700;
-      margin-right: 0.25rem;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
     }
     .nav-tab-icon {
       font-size: 1.15rem;
@@ -1060,75 +1095,108 @@
     <aside class="sidebar">
       <ul class="nav-tabs" id="sidebarNavTabs">
         <li class="nav-tab-item active" data-tab="theme">
-          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🎨</span>
           <span class="nav-tab-title">Colors & Theme</span>
         </li>
         <li class="nav-tab-item" data-tab="typography">
-          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🔤</span>
           <span class="nav-tab-title">Typography & Fonts</span>
         </li>
         <li class="nav-tab-item" data-tab="cursor">
-          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🎯</span>
           <span class="nav-tab-title">Custom Cursor</span>
         </li>
+        <li class="nav-tab-item" data-tab="customSections">
+          <span class="nav-tab-icon">✨</span>
+          <span class="nav-tab-title">➕ Add New Div</span>
+        </li>
+        <li class="nav-tab-item" data-tab="sectionOrder">
+          <span class="nav-tab-icon">↕️</span>
+          <span class="nav-tab-title">Section Order</span>
+        </li>
+
+        <!-- Reorderable Section Tabs -->
         <li class="nav-tab-item" data-tab="hero" data-section="hero">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">⚡</span>
           <span class="nav-tab-title">Header & Hero</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="hero">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="hero" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="hero" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="hero">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="beforeAfter" data-section="beforeAfter">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🎬</span>
           <span class="nav-tab-title">Before & After</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="beforeAfter">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="beforeAfter" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="beforeAfter" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="beforeAfter">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="projects" data-section="projects">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">📁</span>
           <span class="nav-tab-title">Projects Carousel</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="projects">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="projects" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="projects" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="projects">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="threeDVideo" data-section="threeDVideo">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🎬</span>
           <span class="nav-tab-title">3D Video</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="threeDVideo">👁️</button>
-        </li>
-        <li class="nav-tab-item" data-tab="customSections">
-          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
-          <span class="nav-tab-icon">✨</span>
-          <span class="nav-tab-title">➕ Add New Div</span>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="threeDVideo" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="threeDVideo" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="threeDVideo">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="experience" data-section="experience">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">💼</span>
           <span class="nav-tab-title">Work Experience</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="experience">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="experience" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="experience" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="experience">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="skills" data-section="skills">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🛠️</span>
           <span class="nav-tab-title">Skills & Software</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="skills">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="skills" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="skills" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="skills">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="contact" data-section="contact">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">📬</span>
           <span class="nav-tab-title">Contact & Socials</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="contact">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="sec-move-btn" data-sec="contact" data-dir="-1" title="Move Up">▲</button>
+            <button type="button" class="sec-move-btn" data-sec="contact" data-dir="1" title="Move Down">▼</button>
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="contact">👁️</button>
+          </div>
         </li>
+
+        <!-- Bottom Fixed Tabs -->
         <li class="nav-tab-item" data-tab="footer" data-section="footer">
           <span class="nav-drag-handle" title="Drag to reorder section">⠿</span>
           <span class="nav-tab-icon">🦶</span>
           <span class="nav-tab-title">Footer & SEO</span>
-          <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="footer">👁️</button>
+          <div class="nav-tab-actions">
+            <button type="button" class="section-vis-btn" title="Toggle Section Visibility" data-sec="footer">👁️</button>
+          </div>
         </li>
         <li class="nav-tab-item" data-tab="security">
-          <span class="nav-drag-handle" title="Drag to reorder tab">⠿</span>
           <span class="nav-tab-icon">🔐</span>
           <span class="nav-tab-title">Password & Security</span>
         </li>
@@ -1641,6 +1709,28 @@
         <!-- ======================================================== -->
         <!-- TAB 3: HEADER & HERO -->
         <!-- ======================================================== -->
+        <!-- ======================================================== -->
+        <!-- TAB: SECTION ORDER & LAYOUT -->
+        <!-- ======================================================== -->
+        <section class="tab-panel" id="tab-sectionOrder">
+          <div class="panel-header">
+            <h2>↕️ Website Section Order & Layout</h2>
+            <p>Reorder which section appears first, second, third, etc. on your website. You can also reorder using the ▲ and ▼ buttons directly on the sidebar items!</p>
+          </div>
+
+          <div class="section-card">
+            <div class="section-card-title">
+              <span>Section Sequence & Visibility Controls</span>
+            </div>
+            <div class="section-card-subtitle">
+              Click <strong>⬆️ Move Up</strong> or <strong>⬇️ Move Down</strong> to change position, or toggle visibility with 👁️ / 🙈. Then click <strong>Save Changes</strong> to publish.
+            </div>
+            <div id="sectionOrderListContainer" style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
+              <!-- Generated by renderSectionOrderManager() -->
+            </div>
+          </div>
+        </section>
+
         <section class="tab-panel" id="tab-hero">
           <div class="panel-header">
             <h2>⚡ Header & Hero Section</h2>
@@ -1724,18 +1814,7 @@
               <!-- Rendered via JS -->
             </div>
           </div>
-                  <!-- Website Section Order & Layout -->
-          <div class="section-card">
-            <div class="section-card-title">
-              <span>↕️ Website Section Order & Layout</span>
-            </div>
-            <div class="section-card-subtitle">
-              Reorder which section appears first, second, third, etc. on your website. Click <strong>⬆️ Move Up</strong> or <strong>⬇️ Move Down</strong> to change the order, and then click <strong>Save Changes</strong>.
-            </div>
-            <div id="sectionOrderListContainer" style="display:flex; flex-direction:column; gap:0.6rem; margin-top:1rem;">
-              <!-- Generated by renderSectionOrderManager() -->
-            </div>
-          </div>
+                  
         </section>
 
         <!-- ======================================================== -->
@@ -2781,9 +2860,11 @@
         },
         _updatedAt: Date.now(),
         customSections: (typeof workingCustomSections !== 'undefined' && Array.isArray(workingCustomSections)) ? workingCustomSections : [],
-        sectionOrder: Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
-          .map(t => t.dataset.tab)
-          .filter(t => ['hero', 'beforeAfter', 'projects', 'threeDVideo', 'experience', 'skills', 'contact'].includes(t)),
+        sectionOrder: (Array.isArray(currentSectionOrder) && currentSectionOrder.length > 0)
+          ? [...currentSectionOrder]
+          : Array.from(document.querySelectorAll('#sidebarNavTabs .nav-tab-item'))
+              .map(t => t.dataset.tab)
+              .filter(t => ['hero', 'beforeAfter', 'projects', 'threeDVideo', 'experience', 'skills', 'contact'].includes(t)),
         cursor: {
           enabled: document.getElementById('cursor_enabled') ? document.getElementById('cursor_enabled').checked : true,
           style: getVal('cursor_style') || 'dot-circle',
@@ -3781,7 +3862,7 @@
       const tabs = document.querySelectorAll('.nav-tab-item');
       tabs.forEach(tab => {
         tab.addEventListener('click', (e) => {
-          if (e.target.closest('.section-vis-btn')) return;
+          if (e.target.closest('.section-vis-btn') || e.target.closest('.sec-move-btn')) return;
 
           tabs.forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
@@ -3794,7 +3875,7 @@
       });
     }
 
-    // Sidebar Drag & Drop Reordering and Section Visibility Toggles (Image 1)
+    // Sidebar Drag & Drop Reordering and Section Visibility Toggles
     let sidebarSectionsVisibility = {
       hero: true,
       beforeAfter: true,
@@ -3809,36 +3890,78 @@
       'hero',
       'beforeAfter',
       'projects',
+      'threeDVideo',
       'experience',
       'skills',
       'contact'
     ];
 
+    const SECTION_LABELS = {
+      hero: { icon: '⚡', title: 'Header & Hero' },
+      beforeAfter: { icon: '🎬', title: 'Before & After' },
+      projects: { icon: '📁', title: 'Projects Carousel' },
+      threeDVideo: { icon: '🎬', title: '3D Video Editor' },
+      experience: { icon: '💼', title: 'Work Experience' },
+      skills: { icon: '🛠️', title: 'Skills & Software' },
+      contact: { icon: '📬', title: 'Contact & Socials' }
+    };
+
     function setupSidebarReorderAndVisibility() {
       const navList = document.getElementById('sidebarNavTabs');
       if (!navList) return;
 
-      // Delegate Visibility Button Clicks
+      // Handle mini Up/Down move buttons and Visibility Toggle clicks
       navList.addEventListener('click', (e) => {
-        const btn = e.target.closest('.section-vis-btn');
-        if (!btn) return;
-        e.stopPropagation();
-        e.preventDefault();
+        const moveBtn = e.target.closest('.sec-move-btn');
+        if (moveBtn) {
+          e.stopPropagation();
+          e.preventDefault();
+          const sec = moveBtn.dataset.sec;
+          const dir = parseInt(moveBtn.dataset.dir, 10);
+          const currentIdx = currentSectionOrder.indexOf(sec);
+          if (currentIdx !== -1) {
+            moveSectionOrder(currentIdx, dir);
+          }
+          return;
+        }
 
-        const sec = btn.dataset.sec;
-        const currentVis = sidebarSectionsVisibility[sec] !== false;
-        const newVis = !currentVis;
-        sidebarSectionsVisibility[sec] = newVis;
+        const visBtn = e.target.closest('.section-vis-btn');
+        if (visBtn) {
+          e.stopPropagation();
+          e.preventDefault();
+          const sec = visBtn.dataset.sec;
+          const currentVis = sidebarSectionsVisibility[sec] !== false;
+          const newVis = !currentVis;
+          sidebarSectionsVisibility[sec] = newVis;
 
-        updateSidebarVisibilityUI();
-        syncLivePreview(collectConfigFromForm());
-        showToast(newVis ? `👁️ "${sec}" section visible on site` : `🙈 "${sec}" section hidden on site`);
+          if (sec === 'threeDVideo') {
+            const tdEl = document.getElementById('threeD_enabled');
+            if (tdEl) tdEl.checked = newVis;
+          }
+
+          updateSidebarVisibilityUI();
+          renderSectionOrderManager();
+          syncLivePreview(collectConfigFromForm());
+          showToast(newVis ? '👁️ "' + (SECTION_LABELS[sec]?.title || sec) + '" section visible on site' : '🙈 "' + (SECTION_LABELS[sec]?.title || sec) + '" section hidden on site');
+          return;
+        }
       });
+
+      // Synchronize 3D Video tab checkbox with sidebar eye
+      const tdEl = document.getElementById('threeD_enabled');
+      if (tdEl) {
+        tdEl.addEventListener('change', () => {
+          sidebarSectionsVisibility.threeDVideo = tdEl.checked;
+          updateSidebarVisibilityUI();
+          renderSectionOrderManager();
+          syncLivePreview(collectConfigFromForm());
+        });
+      }
 
       // Drag and Drop
       let draggedItem = null;
 
-      navList.querySelectorAll('.nav-tab-item').forEach(item => {
+      navList.querySelectorAll('.nav-tab-item[data-section]').forEach(item => {
         item.setAttribute('draggable', 'true');
 
         item.addEventListener('dragstart', (e) => {
@@ -3905,8 +4028,8 @@
       if (!navList) return;
 
       Object.entries(sidebarSectionsVisibility).forEach(([sec, isVis]) => {
-        const item = navList.querySelector(`.nav-tab-item[data-tab="${sec}"]`);
-        const btn = navList.querySelector(`.section-vis-btn[data-sec="${sec}"]`);
+        const item = navList.querySelector('.nav-tab-item[data-tab="' + sec + '"]');
+        const btn = navList.querySelector('.section-vis-btn[data-sec="' + sec + '"]');
         if (!item || !btn) return;
 
         const isHidden = isVis === false;
@@ -3921,7 +4044,8 @@
             tag = document.createElement('span');
             tag.className = 'sec-vis-tag';
             tag.textContent = 'Hidden';
-            item.insertBefore(tag, btn);
+            const actionsDiv = item.querySelector('.nav-tab-actions') || item;
+            actionsDiv.insertBefore(tag, btn);
           }
         } else {
           btn.innerHTML = '👁️';
@@ -3931,17 +4055,6 @@
       });
     }
 
-    
-    const SECTION_LABELS = {
-      hero: { icon: '⚡', title: 'Header & Hero' },
-      beforeAfter: { icon: '🎬', title: 'Before & After' },
-      projects: { icon: '📁', title: 'Projects Carousel' },
-      threeDVideo: { icon: '🎬', title: '3D Video Editor' },
-      experience: { icon: '💼', title: 'Work Experience' },
-      skills: { icon: '🛠️', title: 'Skills & Software' },
-      contact: { icon: '📬', title: 'Contact & Socials' }
-    };
-
     function renderSectionOrderManager() {
       const container = document.getElementById('sectionOrderListContainer');
       if (!container) return;
@@ -3950,7 +4063,6 @@
         ? currentSectionOrder.filter(k => SECTION_LABELS[k])
         : ['hero', 'beforeAfter', 'projects', 'threeDVideo', 'experience', 'skills', 'contact'];
 
-      // Ensure threeDVideo is present
       if (!validOrder.includes('threeDVideo')) {
         const pIdx = validOrder.indexOf('projects');
         if (pIdx !== -1) validOrder.splice(pIdx + 1, 0, 'threeDVideo');
@@ -3970,6 +4082,7 @@
               <span style="font-size:0.75rem; padding:2px 8px; border-radius:999px; background:${isVis ? 'rgba(16,185,129,0.15)' : 'rgba(239,68,68,0.15)'}; color:${isVis ? '#10b981' : '#ef4444'}; font-weight:600;">${isVis ? 'Visible' : 'Hidden'}</span>
             </div>
             <div style="display:flex; align-items:center; gap:0.4rem;">
+              <button type="button" class="btn btn-secondary btn-sm" onclick="toggleSectionFromManager('${key}')" title="Toggle Visibility">${isVis ? '👁️ Visible' : '🙈 Hidden'}</button>
               <button type="button" class="btn btn-secondary btn-sm" onclick="moveSectionOrder(${idx}, -1)" ${idx === 0 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} title="Move Up">⬆️ Move Up</button>
               <button type="button" class="btn btn-secondary btn-sm" onclick="moveSectionOrder(${idx}, 1)" ${idx === validOrder.length - 1 ? 'disabled style="opacity:0.3; cursor:not-allowed;"' : ''} title="Move Down">⬇️ Move Down</button>
             </div>
@@ -3978,18 +4091,35 @@
       }).join('');
     }
 
+    window.toggleSectionFromManager = function(key) {
+      const currentVis = sidebarSectionsVisibility[key] !== false;
+      const newVis = !currentVis;
+      sidebarSectionsVisibility[key] = newVis;
+
+      if (key === 'threeDVideo') {
+        const tdEl = document.getElementById('threeD_enabled');
+        if (tdEl) tdEl.checked = newVis;
+      }
+
+      updateSidebarVisibilityUI();
+      renderSectionOrderManager();
+      syncLivePreview(collectConfigFromForm());
+      showToast(newVis ? '👁️ "' + (SECTION_LABELS[key]?.title || key) + '" section visible on site' : '🙈 "' + (SECTION_LABELS[key]?.title || key) + '" section hidden on site');
+    };
+
     window.moveSectionOrder = function(idx, direction) {
       const targetIdx = idx + direction;
       if (targetIdx < 0 || targetIdx >= currentSectionOrder.length) return;
 
-      const temp = currentSectionOrder[idx];
-      currentSectionOrder[idx] = currentSectionOrder[targetIdx];
-      currentSectionOrder[targetIdx] = temp;
+      const movingItem = currentSectionOrder[idx];
+      const targetItem = currentSectionOrder[targetIdx];
+      currentSectionOrder[idx] = targetItem;
+      currentSectionOrder[targetIdx] = movingItem;
 
       applySavedSectionOrderToSidebar(currentSectionOrder);
       renderSectionOrderManager();
       syncLivePreview(collectConfigFromForm());
-      showToast('↕️ Section order updated & synced to live preview!');
+      showToast('↕️ Moved "' + (SECTION_LABELS[movingItem]?.title || movingItem) + '" ' + (direction < 0 ? 'up' : 'down') + '!');
     };
 
     function applySavedSectionOrderToSidebar(order) {
@@ -3999,16 +4129,24 @@
         if (pIdx !== -1) order.splice(pIdx + 1, 0, 'threeDVideo');
         else order.push('threeDVideo');
       }
-      if (!Array.isArray(order) || order.length === 0) return;
       const navList = document.getElementById('sidebarNavTabs');
       if (!navList) return;
 
+      const sectionOrderTab = navList.querySelector('.nav-tab-item[data-tab="sectionOrder"]');
+      let insertAfter = sectionOrderTab || navList.querySelector('.nav-tab-item[data-tab="customSections"]');
+
       order.forEach(tabKey => {
-        const item = navList.querySelector(`.nav-tab-item[data-tab="${tabKey}"]`);
+        const item = navList.querySelector('.nav-tab-item[data-tab="' + tabKey + '"]');
         if (item) {
-          navList.appendChild(item);
+          if (insertAfter && insertAfter.nextSibling) {
+            navList.insertBefore(item, insertAfter.nextSibling);
+          } else {
+            navList.appendChild(item);
+          }
+          insertAfter = item;
         }
       });
+
       const footerItem = navList.querySelector('.nav-tab-item[data-tab="footer"]');
       const securityItem = navList.querySelector('.nav-tab-item[data-tab="security"]');
       if (footerItem) navList.appendChild(footerItem);
