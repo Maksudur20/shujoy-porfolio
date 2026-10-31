@@ -116,9 +116,17 @@
 
     // C. CUSTOM CURSOR SYSTEM
     if (cfg.cursor) {
-      applyCursorConfig(cfg.cursor);
-    applyThreeDVideoConfig(cfg.threeDVideo);
-    applyCustomSectionsConfig(cfg.customSections);
+      try { applyCursorConfig(cfg.cursor); } catch (e) { console.warn('applyCursorConfig error:', e); }
+    }
+
+    // D. 3D VIDEO STANDALONE SECTION
+    if (cfg.threeDVideo) {
+      try { applyThreeDVideoConfig(cfg.threeDVideo); } catch (e) { console.warn('applyThreeDVideoConfig error:', e); }
+    }
+
+    // E. CUSTOM SECTIONS
+    if (Array.isArray(cfg.customSections)) {
+      try { applyCustomSectionsConfig(cfg.customSections); } catch (e) { console.warn('applyCustomSectionsConfig error:', e); }
     }
 
     // B. FOOTER STYLES
@@ -646,6 +654,64 @@
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;')
       .replace(/'/g, '&#039;');
+  }
+
+  // Apply 3D Video Section Configuration
+  function applyThreeDVideoConfig(td) {
+    if (!td) return;
+    const sec = document.getElementById('three-d-video');
+    if (!sec) return;
+
+    if (td.enabled === false) {
+      sec.style.setProperty('display', 'none', 'important');
+    } else {
+      sec.style.removeProperty('display');
+    }
+
+    const pill = sec.querySelector('#threeDPillText') || sec.querySelector('.section-pill');
+    if (pill && td.pillText) pill.textContent = td.pillText;
+
+    const heading = sec.querySelector('#threeDHeading') || sec.querySelector('h2');
+    if (heading && td.heading) heading.textContent = td.heading;
+
+    const desc = sec.querySelector('#threeDDescription') || sec.querySelector('.section-head p');
+    if (desc && td.description) desc.textContent = td.description;
+
+    const video = sec.querySelector('#threeDVideoPlayer') || sec.querySelector('video');
+    if (video && td.videoUrl) {
+      const currentSrc = video.getAttribute('src');
+      if (currentSrc !== td.videoUrl) {
+        video.src = td.videoUrl;
+        video.load();
+      }
+    }
+  }
+
+  // Apply Custom Dynamic Sections Configuration
+  function applyCustomSectionsConfig(sections) {
+    if (!Array.isArray(sections)) return;
+    const main = document.querySelector('main');
+    if (!main) return;
+
+    sections.forEach(cs => {
+      if (!cs || !cs.id) return;
+      let sec = document.getElementById(cs.id);
+      if (!sec) {
+        sec = document.createElement('section');
+        sec.id = cs.id;
+        sec.className = 'custom-user-section ' + (cs.extraClass || '');
+        sec.setAttribute('data-custom-section', 'true');
+        main.appendChild(sec);
+      }
+      if (cs.enabled === false) {
+        sec.style.setProperty('display', 'none', 'important');
+      } else {
+        sec.style.removeProperty('display');
+      }
+      if (typeof cs.html === 'string') {
+        sec.innerHTML = cs.html;
+      }
+    });
   }
 
   // Apply Custom Cursor Configuration

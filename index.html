@@ -2762,9 +2762,8 @@
       height: 24px;
       pointer-events: none;
       z-index: 9999999;
-      transform: translate3d(-100px, -100px, 0);
-      margin-left: -12px;
-      margin-top: -12px;
+      transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+      margin: 0 !important;
       will-change: transform, opacity;
       opacity: 0;
       transition: opacity 0.25s ease;
@@ -2881,19 +2880,10 @@
       cursor: auto !important;
     }
 
-      position: fixed;
-      top: 0;
-      left: 0;
+      body[data-cursor-style="arrow"] .custom-cursor-pointer {
       width: 24px;
       height: 26px;
-      pointer-events: none;
-      z-index: 9999999;
-      transform: translate3d(-100px, -100px, 0);
-      margin-left: -2px;
-      margin-top: -2px;
-      will-change: transform, opacity;
-      opacity: 0;
-      transition: opacity 0.25s ease;
+      margin: 0 !important;
       filter: drop-shadow(0 0 10px rgba(255, 158, 0, 0.95)) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
     }
     .cursor-arrow-svg {
@@ -4832,7 +4822,12 @@
           mouseX = e.clientX;
           mouseY = e.clientY;
 
-          cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+          const isArrow = document.body.dataset.cursorStyle === 'arrow';
+          if (isArrow) {
+            cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-2px, -2px)`;
+          } else {
+            cursorPointer.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+          }
           document.documentElement.style.setProperty('--mx', `${mouseX}px`);
           document.documentElement.style.setProperty('--my', `${mouseY}px`);
 
@@ -4910,7 +4905,11 @@
           document.documentElement.style.setProperty('--fy', `${followerY}px`);
 
           if (!isClicking) {
-            cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+            if (speed < 0.5) {
+              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%)`;
+            } else {
+              cursorFollower.style.transform = `translate3d(${followerX}px, ${followerY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+            }
           }
 
           requestAnimationFrame(animateFollower);

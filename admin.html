@@ -849,11 +849,20 @@
       height: 12px;
       pointer-events: none;
       transform: translate(-50%, -50%);
+      margin: 0 !important;
       z-index: 10;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.05s linear;
+    }
+    .playground-mini-cursor-pointer .cursor-center-dot {
+      width: var(--pg-dot-size, 6px);
+      height: var(--pg-dot-size, 6px);
+      border-radius: 50% !important;
+      background: var(--pg-primary, #ff9e00);
+      box-shadow: 0 0 10px var(--pg-primary, #ff9e00), 0 0 3px #ffffff;
+      margin: 0 !important;
+      display: block;
     }
     .playground-mini-cursor-follower {
       position: absolute;
@@ -866,8 +875,9 @@
       background: radial-gradient(circle, rgba(255, 158, 0, 0.1) 0%, transparent 80%);
       pointer-events: none;
       transform: translate(-50%, -50%);
+      margin: 0 !important;
       z-index: 9;
-      transition: width 0.25s, height 0.25s, transform 0.08s ease-out, border-color 0.2s, background 0.2s;
+      transition: width 0.25s, height 0.25s, border-color 0.2s, background 0.2s;
     }
     .playground-mini-cursor-follower.is-hovering {
       width: 56px;
@@ -4309,7 +4319,12 @@
           followerY += (targetY - followerY) * smoothing;
 
           if (pgPointer) {
-            pgPointer.style.transform = 'translate3d(' + targetX + 'px, ' + targetY + 'px, 0) translate(-50%, -50%)';
+            const isArrow = styleInput && styleInput.value === 'arrow';
+            if (isArrow) {
+              pgPointer.style.transform = 'translate3d(' + targetX + 'px, ' + targetY + 'px, 0) translate(-2px, -2px)';
+            } else {
+              pgPointer.style.transform = 'translate3d(' + targetX + 'px, ' + targetY + 'px, 0) translate(-50%, -50%)';
+            }
           }
           if (pgFollower) {
             pgFollower.style.transform = 'translate3d(' + followerX + 'px, ' + followerY + 'px, 0) translate(-50%, -50%)';
