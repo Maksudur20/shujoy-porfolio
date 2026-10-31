@@ -2735,6 +2735,7 @@
     .saas-card,
     .video-frame,
     .ba-video-frame,
+    .three-d-video-frame,
     .carousel-track,
     .saas-3d-stage,
     .ba-container {
@@ -3051,25 +3052,31 @@
     /* 3D VIDEO STANDALONE DIV SECTION STYLES                       */
     /* ============================================================ */
     .three-d-video-section {
-      padding: 4.5rem 1.5rem;
+      padding: 6.5rem 7% 5rem;
       position: relative;
       overflow: hidden;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 158, 0, 0.04) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 20%, rgba(255, 158, 0, 0.05) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
     }
     .three-d-container {
       max-width: 1100px;
       margin: 0 auto;
       position: relative;
+      z-index: 2;
+    }
+    .three-d-container .section-head {
+      margin-bottom: 3.2rem;
+      text-align: center;
     }
     .three-d-ambient-glow {
       position: absolute;
-      top: 50%;
+      top: 55%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 80%;
-      height: 70%;
+      width: 90%;
+      height: 80%;
       background: radial-gradient(ellipse at center, rgba(255, 158, 0, 0.22) 0%, rgba(255, 122, 0, 0.06) 50%, transparent 70%);
-      filter: blur(65px);
+      filter: blur(80px);
       pointer-events: none;
       z-index: 0;
     }
@@ -3077,25 +3084,25 @@
       position: relative;
       z-index: 1;
       width: 100%;
-      padding-top: 56.25%; /* 16:9 Aspect Ratio */
-      border-radius: var(--radius-lg, 24px);
+      aspect-ratio: 16 / 9;
+      border-radius: 22px;
       overflow: hidden;
       background: #000;
-      border: 1.5px solid rgba(255, 158, 0, 0.45);
-      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 158, 0, 0.2);
+      border: 1.5px solid rgba(255, 158, 0, 0.38);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 158, 0, 0.16);
       cursor: pointer;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.3s;
     }
     .three-d-video-frame:hover {
-      box-shadow: 0 30px 85px rgba(0, 0, 0, 0.9), 0 0 55px rgba(255, 158, 0, 0.3);
+      border-color: rgba(255, 158, 0, 0.7);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 65px rgba(255, 158, 0, 0.28);
     }
     .three-d-video-frame video {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
+      background: #000;
     }
     .three-d-overlay {
       position: absolute;
@@ -3107,49 +3114,154 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 1.25rem;
-      background: linear-gradient(180deg, rgba(0,0,0,0.45) 0%, transparent 20%, transparent 80%, rgba(0,0,0,0.7) 100%);
+      padding: 1.5rem;
+      background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 22%, transparent 75%, rgba(0,0,0,0.85) 100%);
+      z-index: 2;
     }
     .three-d-top {
       display: flex;
       justify-content: flex-end;
       pointer-events: auto;
     }
-    .three-d-bottom {
-      pointer-events: auto;
+    .three-d-sound-btn {
+      background: rgba(10, 12, 18, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      padding: 0.45rem 1.05rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .three-d-sound-btn:hover,
+    .three-d-sound-btn.is-unmuted {
+      background: var(--primary, #ff9e00);
+      color: #000;
+      border-color: var(--primary, #ff9e00);
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.45);
+      transform: translateY(-1px);
     }
     .three-d-play-center {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 64px;
-      height: 64px;
-      background: rgba(0, 0, 0, 0.65);
-      border: 1.5px solid rgba(255, 158, 0, 0.6);
+      transform: translate(-50%, -50%) scale(0.9);
+      width: 72px;
+      height: 72px;
+      background: rgba(10, 12, 18, 0.78);
+      border: 1.5px solid rgba(255, 158, 0, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       color: var(--primary, #ff9e00);
       opacity: 0;
       pointer-events: auto;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 0 35px rgba(255, 158, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.8);
+    }
+    .three-d-play-center:hover {
+      transform: translate(-50%, -50%) scale(1.08);
+      border-color: var(--primary, #ff9e00);
+      box-shadow: 0 0 45px rgba(255, 158, 0, 0.45);
     }
     .three-d-video-frame:hover .three-d-play-center,
     .three-d-video-frame.is-paused .three-d-play-center {
       opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .three-d-bottom {
+      pointer-events: auto;
+      width: 100%;
+    }
+    .three-d-timeline-bar {
+      position: relative;
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: height 0.2s ease;
+    }
+    .three-d-timeline-bar:hover {
+      height: 8px;
+    }
+    .three-d-timeline-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary, #ff9e00), #ff7a00);
+      box-shadow: 0 0 12px rgba(255, 158, 0, 0.85);
+      border-radius: 999px;
+      transition: width 0.1s linear;
     }
 
-    /* Custom Div Sections */
-    .custom-div-section {
-      padding: 5rem 1.5rem;
+    /* ============================================================ */
+    /* STANDALONE CUSTOM USER DIV SECTIONS STYLES                   */
+    /* ============================================================ */
+    .custom-user-section {
+      padding: 6.5rem 7% 5rem;
       position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 20%, rgba(255, 158, 0, 0.04) 0%, transparent 70%);
+      border-bottom: 1px solid var(--border);
     }
-    .custom-div-container {
+    .custom-user-container {
       max-width: 1100px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .custom-user-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 1.5rem;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.65), inset 0 0 20px rgba(255, 255, 255, 0.02);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .custom-user-card:hover {
+      border-color: rgba(255, 158, 0, 0.35);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 158, 0, 0.12);
+    }
+    .custom-user-image-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .custom-user-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .custom-user-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 85%;
+      height: 75%;
+      background: radial-gradient(ellipse at center, rgba(255, 158, 0, 0.16) 0%, transparent 70%);
+      filter: blur(75px);
+      pointer-events: none;
+      z-index: 0;
     }
 
   </style>
@@ -4521,15 +4633,24 @@
         const obs = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
-              video.muted = isThreeDMuted;
-              video.play().catch(() => {});
+              if (window._threeDAutoplay !== false) {
+                video.muted = isThreeDMuted;
+                video.play().catch(() => {});
+                frame.classList.remove('is-paused');
+              } else {
+                frame.classList.add('is-paused');
+              }
             } else {
               video.pause();
               video.muted = true;
+              frame.classList.add('is-paused');
             }
           });
         }, { threshold: 0.25 });
         obs.observe(frame);
+
+        video.addEventListener('play', () => frame.classList.remove('is-paused'));
+        video.addEventListener('pause', () => frame.classList.add('is-paused'));
 
         // Sound toggle
         if (soundBtn) {
@@ -4543,6 +4664,7 @@
             if (muteIcon) muteIcon.style.display = isThreeDMuted ? 'inline-block' : 'none';
             if (unmuteIcon) unmuteIcon.style.display = isThreeDMuted ? 'none' : 'inline-block';
             if (text) text.textContent = isThreeDMuted ? 'Unmute' : 'Mute';
+            soundBtn.classList.toggle('is-unmuted', !isThreeDMuted);
           });
         }
 
@@ -4567,7 +4689,8 @@
         }
 
         // Click frame to toggle play / pause
-        frame.addEventListener('click', () => {
+        frame.addEventListener('click', (e) => {
+          if (e.target.closest('#threeDSoundBtn') || e.target.closest('#threeDTimeline')) return;
           if (video.paused) {
             video.play().catch(() => {});
             frame.classList.remove('is-paused');

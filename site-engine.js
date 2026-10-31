@@ -677,23 +677,35 @@
     const desc = sec.querySelector('#threeDDescription') || sec.querySelector('.section-head p');
     if (desc && td.description) desc.textContent = td.description;
 
+    window._threeDAutoplay = (td.autoplay !== false);
+
     const video = sec.querySelector('#threeDVideoPlayer') || sec.querySelector('video');
-    if (video && td.videoUrl) {
-      const currentSrc = video.getAttribute('src');
-      if (currentSrc !== td.videoUrl) {
-        video.src = td.videoUrl;
-        video.load();
+    const frame = sec.querySelector('#threeDVideoFrame');
+    if (video) {
+      if (td.videoUrl) {
+        const currentSrc = (video.getAttribute && video.getAttribute('src')) || video.src;
+        if (currentSrc !== td.videoUrl) {
+          video.src = td.videoUrl;
+          if (typeof video.load === 'function') video.load();
+        }
+      }
+      video.loop = (td.loop !== false);
+      if (td.fit) {
+        video.style.objectFit = td.fit;
+      }
+      if (td.autoplay === false) {
+        video.pause();
+        if (frame) frame.classList.add('is-paused');
       }
     }
   }
 
-  // Apply Custom Dynamic Sections Configuration
   function applyCustomSectionsConfig(sections) {
     if (!Array.isArray(sections)) return;
     const main = document.querySelector('main');
     if (!main) return;
 
-    sections.forEach(cs => {
+    sections.forEach((cs) => {
       if (!cs || !cs.id) return;
       let sec = document.getElementById(cs.id);
       if (!sec) {
@@ -708,13 +720,56 @@
       } else {
         sec.style.removeProperty('display');
       }
-      if (typeof cs.html === 'string') {
+
+      if (typeof cs.html === 'string' && cs.html.trim().length > 0) {
         sec.innerHTML = cs.html;
+      } else {
+        const isVideo = cs.videoUrl || (cs.imageUrl && (cs.imageUrl.endsWith('.mp4') || cs.imageUrl.includes('/video/upload/')));
+        const mediaUrl = cs.videoUrl || cs.imageUrl || '';
+        const hasMedia = !!mediaUrl;
+
+        sec.innerHTML = `
+          <div class="custom-user-container">
+            ${(cs.pillText || cs.heading || cs.subtitle) ? `
+              <div class="section-head reveal reveal-up">
+                ${cs.pillText ? `<span class="section-pill reveal reveal-down">${escapeHTML(cs.pillText)}</span>` : ''}
+                ${cs.heading ? `<h2 class="reveal reveal-up delay-1">${escapeHTML(cs.heading)}</h2>` : ''}
+                ${cs.subtitle ? `<p class="reveal reveal-up delay-2">${escapeHTML(cs.subtitle)}</p>` : ''}
+              </div>
+            ` : ''}
+            <div class="custom-user-glow"></div>
+            ${hasMedia ? `
+              <div class="custom-user-card">
+                ${isVideo ? `
+                  <div class="three-d-video-frame">
+                    <video src="${escapeHTML(mediaUrl)}" playsinline loop ${cs.autoplay !== false ? 'autoplay muted' : ''} preload="metadata"></video>
+                    <div class="three-d-overlay">
+                      <div class="three-d-top">
+                        <button class="three-d-sound-btn" aria-label="Toggle Sound" onclick="const v=this.closest('.three-d-video-frame').querySelector('video'); v.muted=!v.muted; this.querySelector('.three-d-sound-text').textContent = v.muted ? 'Unmute' : 'Mute';">
+                          <span>🔊</span> <span class="three-d-sound-text">${cs.autoplay !== false ? 'Unmute' : 'Mute'}</span>
+                        </button>
+                      </div>
+                      <div class="three-d-play-center" onclick="const v=this.closest('.three-d-video-frame').querySelector('video'); if(v.paused){ v.play(); this.closest('.three-d-video-frame').classList.remove('is-paused'); } else { v.pause(); this.closest('.three-d-video-frame').classList.add('is-paused'); }">▶</div>
+                    </div>
+                  </div>
+                ` : `
+                  <div class="custom-user-image-frame">
+                    <img src="${escapeHTML(mediaUrl)}" alt="${escapeHTML(cs.heading || 'Showcase Image')}" loading="lazy">
+                  </div>
+                `}
+              </div>
+            ` : ''}
+            ${cs.ctaText ? `
+              <div style="text-align:center; margin-top:2.5rem;">
+                <a href="${escapeHTML(cs.ctaLink || '#contact')}" class="btn btn-primary" style="padding:0.9rem 2.2rem; font-size:1rem; font-weight:700;">${escapeHTML(cs.ctaText)}</a>
+              </div>
+            ` : ''}
+          </div>
+        `;
       }
     });
   }
 
-  // Apply Custom Cursor Configuration
   function applyCursorConfig(c) {
     if (!c) return;
     const body = document.body;

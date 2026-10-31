@@ -1853,11 +1853,28 @@
           <div class="section-card">
             <div class="section-card-title">3D Video Reel Settings</div>
             <div class="form-grid">
-              <div class="form-group full-width">
+              <div class="form-group full-width" style="display:flex; flex-wrap:wrap; gap:1.5rem; background:rgba(255,158,0,0.04); padding:1rem 1.25rem; border-radius:var(--radius-md); border:1px solid rgba(255,158,0,0.2);">
                 <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer;">
                   <input type="checkbox" id="threeD_enabled" checked style="width:18px; height:18px; accent-color:var(--admin-primary); cursor:pointer;">
                   <span><strong>Show 3D Video Div on Website</strong></span>
                 </label>
+                <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer;">
+                  <input type="checkbox" id="threeD_autoplay" checked style="width:18px; height:18px; accent-color:var(--admin-primary); cursor:pointer;">
+                  <span><strong>⚡ Auto-Play Video on Scroll</strong></span>
+                </label>
+                <label style="display:flex; align-items:center; gap:0.6rem; cursor:pointer;">
+                  <input type="checkbox" id="threeD_loop" checked style="width:18px; height:18px; accent-color:var(--admin-primary); cursor:pointer;">
+                  <span><strong>🔁 Loop Video</strong></span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label>Video Framing / Fit Mode</label>
+                <select id="threeD_fit" style="width:100%;">
+                  <option value="cover">Fill & Expand (Cover - Edge-to-Edge)</option>
+                  <option value="contain">Contain (Full Aspect - Never Crop)</option>
+                </select>
+                <div class="field-hint">Choose "Cover" for edge-to-edge cinematic fill, or "Contain" to guarantee no text/graphics are cropped.</div>
               </div>
 
               <div class="form-group">
@@ -2607,6 +2624,11 @@
       const td = cfg.threeDVideo || {};
       const tdEl = document.getElementById('threeD_enabled');
       if (tdEl) tdEl.checked = (td.enabled !== false);
+      const tdAuto = document.getElementById('threeD_autoplay');
+      if (tdAuto) tdAuto.checked = (td.autoplay !== false);
+      const tdLoop = document.getElementById('threeD_loop');
+      if (tdLoop) tdLoop.checked = (td.loop !== false);
+      setVal('threeD_fit', td.fit || 'cover');
       setVal('threeD_pillText', td.pillText || '3D MOTION & CGI');
       setVal('threeD_heading', td.heading || '3D Video Editor & Motion Design');
       setVal('threeD_description', td.description || 'Commercial 3D product simulation, dynamic camera pacing, and kinetic CGI visual storytelling.');
@@ -2749,6 +2771,9 @@
         
         threeDVideo: {
           enabled: document.getElementById('threeD_enabled') ? document.getElementById('threeD_enabled').checked : true,
+          autoplay: document.getElementById('threeD_autoplay') ? document.getElementById('threeD_autoplay').checked : true,
+          loop: document.getElementById('threeD_loop') ? document.getElementById('threeD_loop').checked : true,
+          fit: getVal('threeD_fit') || 'cover',
           pillText: getVal('threeD_pillText') || '3D MOTION & CGI',
           heading: getVal('threeD_heading') || '3D Video Editor & Motion Design',
           description: getVal('threeD_description') || 'Commercial 3D product simulation, dynamic camera pacing, and kinetic CGI visual storytelling.',
